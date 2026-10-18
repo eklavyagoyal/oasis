@@ -1,10 +1,20 @@
-// World picker: where in Ukraine the tile is, its real terrain (AWS Terrarium) and real infrastructure (OSM Overpass). Keyless.
+// World picker: deterministic Ukraine site, real terrain (AWS Terrarium), and best-effort OSM infrastructure.
 import UKR from './ukraine.json';
 import { rng, M_PER_DEG } from './seed.js';
 
 // mirrorworld/config.py UKRAINE = (lat_min, lat_max, lon_min, lon_max). ponytail: bbox, the border is ukraine.json.
 export const UKRAINE_BBOX = { south: 44.0, north: 52.5, west: 22.0, east: 40.5 };
 export const ukraineOutline = () => UKR.geometry.coordinates;  // rings of [lon, lat]
+export const TERRAIN_SOURCE = {
+  name: 'AWS Terrain Tiles (Terrarium)',
+  url: 'https://s3.amazonaws.com/elevation-tiles-prod/terrarium/',
+  credit: 'AWS Terrain Tiles / Terrarium encoding; zoom 12 sampled to the requested grid; not a 30 m precision claim.',
+};
+export const OSM_SOURCE = {
+  name: 'OpenStreetMap contributors',
+  url: 'https://www.openstreetmap.org/copyright',
+  endpoints: ['https://overpass-api.de/api/interpreter', 'https://overpass.private.coffee/api/interpreter'],
+};
 
 function inside(lon, lat, ring) {  // even-odd ray casting
   let c = false;
@@ -14,16 +24,20 @@ function inside(lon, lat, ring) {  // even-odd ray casting
   }
   return c;
 }
-const inUkraine = (lon, lat) => inside(lon, lat, ukraineOutline()[0]);
+export function containsUkraine(lon, lat) {
+  const g = UKR.geometry;
+  const polygons = g.type === 'MultiPolygon' ? g.coordinates : [g.coordinates];
+  return polygons.some((rings) => inside(lon, lat, rings[0]) && !rings.slice(1).some((ring) => inside(lon, lat, ring)));
+}
 
 // Uniform in lon/lat inside the border (rejection sampling), deterministic per world seed.
 export function randomSite(worldSeed) {
   const r = rng(worldSeed, 'site'), b = UKRAINE_BBOX;
   for (let k = 0; k < 10000; k++) {
     const lon = r.range(b.west, b.east), lat = r.range(b.south, b.north);
-    if (inUkraine(lon, lat)) return { lat: +lat.toFixed(5), lon: +lon.toFixed(5) };
+    if (containsUkraine(lon, lat)) return { lat: +lat.toFixed(5), lon: +lon.toFixed(5) };
   }
-  return { lat: 49.37, lon: 31.2 };
+  throw new Error('Could not select a deterministic point inside the bundled Ukraine outline.');
 }
 
 const bboxAround = (lat, lon, km) => {
@@ -74,9 +88,7 @@ export async function loadTerrain(lat, lon, sizeKm, n = 181, z = 12) {
   return { ...b, nx: n, ny: n, h };
 }
 
-// ---- features: real infrastructure from OpenStreetMap (Overpass). Never throws. ----
-// Main instance first, then a mirror (overpass-api.de answers 406/429 when busy or rate-limiting).
-const OVERPASS = ['https://overpass-api.de/api/interpreter', 'https://overpass.private.coffee/api/interpreter'];
+// ---- features: mapped infrastructure from OpenStreetMap (Overpass). Throws on source failure. ----
 export async function loadFeatures(T) {
   const bb = `${T.south},${T.west},${T.north},${T.east}`;
   const q = `[out:json][timeout:8];(
@@ -87,26 +99,29 @@ nwr["man_made"~"^(mast|tower)$"]["tower:type"="communication"](${bb});
 nwr["amenity"="fuel"](${bb});
 );out center 200;`;
   const ac = new AbortController(), t = setTimeout(() => ac.abort(), 8000);
+  let lastError = null;
   try {
-    let res;
-    for (const url of OVERPASS) {  // one shared 8 s budget
-      res = await fetch(url, { method: 'POST', body: new URLSearchParams({ data: q }), signal: ac.signal });
-      if (res.ok) break;
-    }
-    if (!res.ok) throw new Error(`Overpass HTTP ${res.status}`);
     const typeOf = (g) => g.power === 'substation' ? 'substation' : g.bridge === 'yes' ? 'bridge' : g.place ? 'village'
       : g.amenity === 'fuel' ? 'fuel_depot' : g['tower:type'] === 'communication' ? 'comms_mast' : null;
-    const out = [], per = {};
-    for (const e of (await res.json()).elements || []) {
-      const type = typeOf(e.tags || {}), lat = e.lat ?? e.center?.lat, lon = e.lon ?? e.center?.lon;
-      if (!type || lat == null || (per[type] = (per[type] || 0) + 1) > 10) continue;  // max 10 per type keeps the mix
-      out.push({ type, lat, lon, name: e.tags.name || e.tags['name:en'] || '' });
-      if (out.length >= 40) break;
+    for (const url of OSM_SOURCE.endpoints) {
+      try {
+        const res = await fetch(url, { method: 'POST', body: new URLSearchParams({ data: q }), signal: ac.signal });
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const body = await res.json(), out = [], per = {};
+        for (const e of body.elements || []) {
+          const type = typeOf(e.tags || {}), lat = e.lat ?? e.center?.lat, lon = e.lon ?? e.center?.lon;
+          if (!type || !Number.isFinite(lat) || !Number.isFinite(lon) || (per[type] = (per[type] || 0) + 1) > 10) continue;
+          const osm = { type: e.type, id: e.id, url: `https://www.openstreetmap.org/${e.type}/${e.id}` };
+          out.push({ type, lat, lon, name: e.tags.name || e.tags['name:en'] || '', osm });
+          if (out.length >= 40) break;
+        }
+        return out;
+      } catch (err) {
+        lastError = err;
+        if (ac.signal.aborted) break;
+      }
     }
-    return out;
-  } catch (err) {
-    console.warn('loadFeatures: Overpass failed, falling back to procedural assets', err);
-    return [];
+    throw new Error(`OpenStreetMap Overpass unavailable: ${lastError?.message || 'request failed'}`);
   } finally {
     clearTimeout(t);
   }

@@ -20,13 +20,27 @@ async function tx(store, mode, fn) {
   });
 }
 
-export const worldId = (worldSeed, tileKm) => `w${worldSeed}-${tileKm}km`;
+export const worldId = (worldSeed, tileKm, options = {}) => {
+  const mode = options.terrainMode || 'live';
+  const fixed = `d${options.defence === false ? 0 : 1}r${options.radar === false ? 0 : 1}a${options.acoustic === false ? 0 : 1}`;
+  const fingerprint = options.fingerprint ? `-${options.fingerprint}` : '';
+  return `w${worldSeed}-${tileKm}km-${mode}-${fixed}${fingerprint}`;
+};
 export const runId = (wId, scenarioSeed, ts = Date.now()) => `${wId}/s${scenarioSeed}-${ts}`;
 
-export const saveWorld = (w) => tx('worlds', 'readwrite', (s) => s.put(w));
+export const saveWorld = (w) => tx('worlds', 'readwrite', (s) => s.add(w));
 export const saveRun = (r) => tx('runs', 'readwrite', (s) => s.put(r));
+export const getWorld = (id) => tx('worlds', 'readonly', (s) => s.get(id));
+export const getRun = (id) => tx('runs', 'readonly', (s) => s.get(id));
 export const listWorlds = () => tx('worlds', 'readonly', (s) => s.getAll());
 export const listRuns = (wId) => tx('runs', 'readonly', (s) => (wId ? s.index('worldId').getAll(wId) : s.getAll()));
+export async function findWorld(options) {
+  const worlds = await listWorlds();
+  const matches = worlds.filter((w) => ['worldSeed', 'tileKm', 'terrainMode', 'defence', 'radar', 'acoustic']
+    .every((key) => w.cfg?.[key] === options[key]));
+  if (matches.length > 1) throw new Error('More than one saved world matches these fixed options; pass the intended snapshot explicitly.');
+  return matches[0];
+}
 export async function counts() {
   const [worlds, runs] = await Promise.all([tx('worlds', 'readonly', (s) => s.count()), tx('runs', 'readonly', (s) => s.count())]);
   return { worlds, runs };
