@@ -60,7 +60,7 @@ export function createEntry({ onGenerate, onReplay, onExport, getCounts, onBaked
         <button class="oasis-button oasis-button-primary" id="enter-simulation" type="button">ENTER SIMULATION <span aria-hidden="true">↗</span></button>
         <button class="oasis-button oasis-button-secondary" id="replay-hero" type="button">REPLAY HERO</button>
       </div>
-      <div class="oasis-provenance"><span class="oasis-provenance-line"></span><span>Browser simulation · simplified tracks, detection and damage · not real recordings or operational guidance.</span></div>
+      <div class="oasis-provenance"><span class="oasis-provenance-line"></span><span>Physics-engine scenarios over real terrain · every record traceable to its cause · synthetic data, not operational guidance.</span></div>
       <p class="oasis-action-status" id="oasis-action-status" role="status" aria-live="polite" hidden></p>
     </main>
 
