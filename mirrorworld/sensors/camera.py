@@ -53,8 +53,8 @@ def _params(sensor):
         raise ValueError(f"camera {sensor.id}: jpeg_quality must be in [10, 100], got {p['jpeg_quality']!r}")
     if float(p["assumed_agl_m"]) < 0:
         raise ValueError(f"camera {sensor.id}: assumed_agl_m must be >= 0, got {p['assumed_agl_m']!r}")
-    if p["cue"] != "rf" and not str(p["cue"]).startswith("truth:"):
-        raise ValueError(f"camera {sensor.id}: cue must be 'rf' or 'truth:<object_id>', got {p['cue']!r}")
+    if p["cue"] not in ("rf", "radar") and not str(p["cue"]).startswith(("truth:", "radar:")):
+        raise ValueError(f"camera {sensor.id}: cue must be rf, radar[:<id>] or truth:<object_id>, got {p['cue']!r}")
     return p
 
 
@@ -318,7 +318,19 @@ def _burn_in(im, stamp, fov_deg, dets):
 
 
 # --- plan / run --------------------------------------------------------
-def _load_fixes(ctx):
+def _load_cues(p, ctx):
+    """Cue points (t, lat, lon, fix_id, sig_class[, alt_msl_m]): RF crossed-bearing fixes, or confirmed radar
+    track updates, which carry altitude and ~10x better position, so the narrow camera can actually frame.
+    The radar sensor must come before this camera in the scenario's sensor list."""
+    if str(p["cue"]).startswith("radar"):
+        rid = p["cue"].split(":", 1)[1] if ":" in p["cue"] else next(
+            (s.id for s in ctx.cfg.sensors if s.type == "radar"), None)
+        path = ctx.out / "sensors" / str(rid) / "tracks.csv"
+        if rid is None or not path.exists():
+            raise FileNotFoundError(f"camera radar cue needs {path} (list the radar before the camera)")
+        tr = pd.read_csv(path)
+        tr = tr[tr["state"] == "CONFIRMED"].sort_values("t")
+        return tr.assign(fix_id=tr["track_id"].astype(str), sig_class=tr["class"].astype(str)).reset_index(drop=True)
     path = ctx.out / "fused" / "fixes.csv"
     if not path.exists():
         raise FileNotFoundError(
@@ -332,7 +344,7 @@ def _plan(p, sensor, ctx, fixes):
     grid = np.arange(0.0, ctx.cfg.duration_s, 1.0 / p["fps"])
     alive = ctx.alive(sensor, grid)
     out = []
-    if p["cue"] == "rf":
+    if not p["cue"].startswith("truth:"):
         all_t = fixes["t"].to_numpy()
         air = fixes[~fixes["sig_class"].isin(GROUND_CLASSES)]
         air_t = air["t"].to_numpy()
@@ -363,11 +375,12 @@ def _plan(p, sensor, ctx, fixes):
 
 def _point(p, ctx, cam, t, fix):
     """Camera az/el: at the fix's ground height + assumed_agl_m (rf cue) or the true object."""
-    if p["cue"] == "rf":
+    if not p["cue"].startswith("truth:"):
         fx, fy = ctx.world.to_xy(fix["lat"], fix["lon"])
         gh = ctx.world.height(float(fx), float(fy))
         dx, dy = float(fx) - cam[0], float(fy) - cam[1]
-        el = math.degrees(math.atan2(gh + p["assumed_agl_m"] - cam[2], math.hypot(dx, dy)))
+        z = float(fix["alt_msl_m"]) if "alt_msl_m" in fix and np.isfinite(fix["alt_msl_m"]) else gh + p["assumed_agl_m"]
+        el = math.degrees(math.atan2(z - cam[2], math.hypot(dx, dy)))
         return math.degrees(math.atan2(dx, dy)) % 360.0, el, str(fix["fix_id"])
     oid = p["cue"][len("truth:"):]
     st = ctx.state(oid, t)
@@ -407,7 +420,7 @@ def run(sensors, ctx):
         f_px = focal_px(p["width"], p["fov_deg"])
         vis_km = ctx.cfg.weather.visibility_km
         cam_agl = cam[2] - ctx.world.height(cam[0], cam[1])
-        fixes = _load_fixes(ctx) if p["cue"] == "rf" else None
+        fixes = None if p["cue"].startswith("truth:") else _load_cues(p, ctx)
         plan = _plan(p, s, ctx, fixes)
         _, hel, dstar = horizon_profile(ctx.world, cam)
         step = 360.0 / hel.size
