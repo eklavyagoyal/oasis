@@ -49,7 +49,7 @@
 #oasis-entry .oasis-control { min-height: 32px; padding: 0 12px; border: 1px solid transparent; border-radius: 8px; background: transparent; color: #8a8a92; cursor: pointer; font: 10px 'JetBrains Mono', monospace; letter-spacing: .14em; }
 #oasis-entry .oasis-control.is-active { border-color: rgba(212,175,55,.45); background: rgba(212,175,55,.1); color: var(--oasis-gold-light); box-shadow: 0 0 12px rgba(212,175,55,.12); }
 #oasis-entry .oasis-control-divider { width: 1px; height: 18px; margin: 0 4px; background: var(--oasis-line); }
-#oasis-entry .oasis-map-readout { position: absolute; z-index: 2; right: 3%; bottom: 18px; max-width: 380px; color: #777; text-align: right; font: 9px 'JetBrains Mono', monospace; letter-spacing: .1em; }
+#oasis-entry .oasis-map-readout { position: absolute; z-index: 2; right: 3%; bottom: 40px; max-width: 380px; color: #777; text-align: right; font: 9px 'JetBrains Mono', monospace; letter-spacing: .1em; }
 #oasis-entry .oasis-map-state { color: var(--oasis-cyan); }
 #oasis-entry .oasis-map-credit { display: none; }
 #oasis-entry #oasis-map-warning { max-width: 380px; color: #ff9c91; margin: 6px 0 0; }

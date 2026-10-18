@@ -251,7 +251,7 @@ export function createEntry({ onGenerate, onReplay, onExport, getCounts, onBaked
         container: $('#oasis-map'),
         style: MAP_STYLE,
         center: [31.2, 25],
-        zoom: 1.8,
+        zoom: 2.0,
         minZoom: 1.4,
         projection: { type: 'globe' },
         maxZoom: 17,

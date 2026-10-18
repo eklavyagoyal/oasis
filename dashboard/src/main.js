@@ -216,7 +216,9 @@ function start(data, { skipOpening = false, onFrame = null, createOverlay = null
   $("#map-coordinates").textContent =
     `${data.scenario.area.lat.toFixed(4)}° N / ${data.scenario.area.lon.toFixed(4)}° E`;
   $("#data-count").textContent =
-    `${summary.detections.toLocaleString()} RECORDS · SEED-REPLAY`;
+    data.game
+      ? `${data.game.record.tracks.length.toLocaleString()} TRUTH ROWS · ${data.game.record.detections.length} MODEL INTERVALS`
+      : `${summary.detections.toLocaleString()} SYNTHETIC RF RECORDS`;
   $("#system-state").textContent = data.game
     ? "BROWSER MODEL · SYNTHETIC TRACKS / ESTIMATED HP"
     : "PYTHON SENSOR MODEL · SYNTHETIC RECORDINGS";
