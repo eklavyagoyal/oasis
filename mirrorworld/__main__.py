@@ -115,6 +115,8 @@ def _run(argv: list[str]) -> None:
     timings: dict[str, float] = {}
     t0 = time.perf_counter()
     cfg = config.load(args.yaml)
+    if not any(s.type == "rf_df" for s in cfg.sensors):  # the brief: every scenario includes the signal trace
+        raise SystemExit(f"{args.yaml}: every scenario must include the signal trace — add at least one rf_df sensor")
     timings["load"] = time.perf_counter() - t0
 
     t0 = time.perf_counter()
