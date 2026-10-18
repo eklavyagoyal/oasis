@@ -115,7 +115,7 @@ export function validateData(value) {
       typeof o.id !== "string" ||
       ids.has(o.id) ||
       typeof o.type !== "string" ||
-      !["drone", "bird", "operator", "emitter"].includes(o.kind) ||
+      !["drone", "bird", "operator", "emitter", "site", "response"].includes(o.kind) ||
       !["hostile", "friendly", "neutral", "unknown"].includes(o.side)
     )
       fail("object identity/type");
@@ -151,7 +151,7 @@ export function validateData(value) {
     for (const [key, count, min] of [
       ["cls", d.classes.length, 0],
       ["obj", d.objects.length, -1],
-      ["link", d.links.length, 0],
+      ["link", d.links.length, -1],  // -1 = no link (detector false alarm)
       ["label", d.labels.length, 0],
     ]) {
       if (rf[key].some((i) => !Number.isInteger(i) || i < min || i >= count))

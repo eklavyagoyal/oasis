@@ -4,10 +4,20 @@ const C = window.Cesium;
 export const color = (hex, alpha = 1) =>
   C.Color.fromCssColorString(hex).withAlpha(alpha);
 export const ll = (lon, lat, alt) => C.Cartesian3.fromDegrees(lon, lat, alt);
-export const palette = Object.fromEntries(Object.entries({
-  system: 'accent', rf: 'signal', hostile: 'hostile', friendly: 'friendly',
-  neutral: 'neutral', unknown: 'text', truth: 'truth', void: 'void', surface: 'surface', muted: 'text-2',
-}).map(([key, value]) => [key, theme(value)]));
+export const palette = Object.fromEntries(
+  Object.entries({
+    system: "accent",
+    rf: "signal",
+    hostile: "hostile",
+    friendly: "friendly",
+    neutral: "neutral",
+    unknown: "text",
+    truth: "truth",
+    void: "void",
+    surface: "surface",
+    muted: "text-2",
+  }).map(([key, value]) => [key, theme(value)]),
+);
 
 export function createGlobe(data, notify) {
   C.Ion.defaultAccessToken = "";
@@ -76,9 +86,26 @@ export function createGlobe(data, notify) {
   if (scene.sun) scene.sun.show = false;
   if (scene.moon) scene.moon.show = false;
   scene.highDynamicRange = true;
-  const bloom = scene.postProcessStages.bloom;
-  bloom.enabled = true;
-  Object.assign(bloom.uniforms, {contrast: 180, brightness: -0.35, delta: 1, sigma: 2, stepSize: 1});
+  // A narrow luminance/saturation gate keeps bloom off the landscape and dark glass.
+  scene.postProcessStages.add(
+    new C.PostProcessStage({
+      name: "oasis-signal-bloom",
+      fragmentShader: `uniform sampler2D colorTexture;
+      in vec2 v_textureCoordinates;
+      void main() {
+        vec4 base = texture(colorTexture, v_textureCoordinates);
+        vec3 glow = vec3(0.0);
+        vec2 pixel = 1.6 / czm_viewport.zw;
+        for (int x=-1; x<=1; x++) for (int y=-1; y<=1; y++) {
+          vec3 c = texture(colorTexture, v_textureCoordinates + vec2(float(x),float(y))*pixel).rgb;
+          float hi = max(c.r,max(c.g,c.b));
+          float lo = min(c.r,min(c.g,c.b));
+          glow += c * smoothstep(0.82,1.0,hi) * smoothstep(0.3,0.65,hi-lo);
+        }
+        out_FragColor = vec4(base.rgb + glow * 0.018,base.a);
+      }`,
+    }),
+  );
   scene.postProcessStages.fxaa.enabled = true;
   scene.light = new C.SunLight({ intensity: 1.5 });
   scene.shadowMap.maximumDistance = 40000;
@@ -109,20 +136,17 @@ export function createGlobe(data, notify) {
     island.east,
     island.north,
   );
-  // No clipping: the surrounding landscape renders as dimmed, out-of-focus context around the sector.
+  // The world is never cut out: the sector is the focus, the landscape around it stays visible.
   let imagery,
-    imageryGeneration = 0;
+    imageryGeneration = 0,
+    imageryNatural = true,
+    solarGrade = 1;
   function setImagery(osm, natural) {
     const generation = ++imageryGeneration;
     viewer.imageryLayers.removeAll();
     imagery = null;
-    if (!osm) {  // context: the real landscape beyond the sector, dimmed so the focus area reads first
-      const ctx = viewer.imageryLayers.addImageryProvider(new C.UrlTemplateImageryProvider({
-        url: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
-        credit: new C.Credit('Esri, Maxar, Earthstar Geographics', true), maximumLevel: 18,
-      }));
-      ctx.brightness = 0.42; ctx.saturation = 0.3; ctx.contrast = 1.1; ctx.gamma = 1.1;
-    }
+    earthLayer = null;
+    ensureContext(state0Island);
     const texture = g.texture;
     const attach = (provider) => {
       if (viewer.isDestroyed() || generation !== imageryGeneration) return;
@@ -130,41 +154,73 @@ export function createGlobe(data, notify) {
       provider.errorEvent.addEventListener(() => {
         if (generation !== imageryGeneration || notified) return;
         notified = true;
-        notify('Basemap unavailable. Terrain remains loaded; retry the basemap control.', 8000);
-        document.querySelector('#system-state').textContent = 'IMAGERY DEGRADED · DEM ACTIVE';
+        notify(
+          "Basemap unavailable. Terrain remains loaded; retry the basemap control.",
+          8000,
+        );
+        document.querySelector("#system-state").textContent =
+          "IMAGERY DEGRADED · DEM ACTIVE";
       });
-      imagery = viewer.imageryLayers.addImageryProvider(provider);  // on top of the dimmed context
+      imagery = viewer.imageryLayers.addImageryProvider(provider);  // sector texture above the dimmed context
       styleImagery(natural);
     };
     if (texture && !osm) {
-      C.SingleTileImageryProvider.fromUrl(texture.src, {
-        rectangle: C.Rectangle.fromDegrees(texture.west, texture.south, texture.east, texture.north),
-        credit: new C.Credit(escapeHTML(texture.credit), true),
-      }).then(attach).catch(error => {
-        if (viewer.isDestroyed() || generation !== imageryGeneration) return;
-        notify(`Baked terrain image failed: ${error.message}`, 10000);
-        document.querySelector('#system-state').textContent = 'TEXTURE UNAVAILABLE · DEM ACTIVE';
-      });
+      fetch(texture.src, { signal: AbortSignal.timeout(15000) })
+        .then(async (response) => {
+          if (!response.ok) throw new Error(`HTTP ${response.status}`);
+          const objectURL = URL.createObjectURL(await response.blob());
+          try {
+            return await C.SingleTileImageryProvider.fromUrl(objectURL, {
+              rectangle: C.Rectangle.fromDegrees(
+                texture.west,
+                texture.south,
+                texture.east,
+                texture.north,
+              ),
+              credit: new C.Credit(escapeHTML(texture.credit), true),
+            });
+          } finally {
+            URL.revokeObjectURL(objectURL);
+          }
+        })
+        .then(attach)
+        .catch((error) => {
+          if (viewer.isDestroyed() || generation !== imageryGeneration) return;
+          notify(`Baked terrain image failed: ${error.message}`, 10000);
+          document.querySelector("#system-state").textContent =
+            "TEXTURE UNAVAILABLE · DEM ACTIVE";
+        });
     } else {
-      attach(new C.UrlTemplateImageryProvider({
-        url: osm ? 'https://tile.openstreetmap.org/{z}/{x}/{y}.png'
-          : 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
-        credit: new C.Credit(osm ? '© OpenStreetMap contributors' : 'Esri, Maxar, Earthstar Geographics', true),
-        maximumLevel: osm ? 19 : 18,
-      }));
+      attach(
+        new C.UrlTemplateImageryProvider({
+          url: osm
+            ? "https://tile.openstreetmap.org/{z}/{x}/{y}.png"
+            : "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
+          credit: new C.Credit(
+            osm
+              ? "© OpenStreetMap contributors"
+              : "Esri, Maxar, Earthstar Geographics",
+            true,
+          ),
+          maximumLevel: osm ? 19 : 18,
+        }),
+      );
     }
   }
   function styleImagery(natural) {
+    imageryNatural = natural;
     if (!imagery) return;
-    imagery.brightness = natural ? 1.35 : 0.85;
+    imagery.brightness = (natural ? 1.02 : 0.72) * solarGrade;
     imagery.saturation = natural ? 0.92 : 0.35;
     imagery.contrast = natural ? 1.08 : 1.2;
     imagery.gamma = 1.15;
     scene.requestRender();
   }
   // Lift displayed geometry with the terrain; all readouts retain physical heights.
-  const displayHeight = (lon, lat, alt) => alt + heightAt(g, lon, lat) * (scene.verticalExaggeration - 1);
-  const position = (lon, lat, alt) => ll(lon, lat, displayHeight(lon, lat, alt));
+  const displayHeight = (lon, lat, alt) =>
+    alt + heightAt(g, lon, lat) * (scene.verticalExaggeration - 1);
+  const position = (lon, lat, alt) =>
+    ll(lon, lat, displayHeight(lon, lat, alt));
   const decorations = new C.CustomDataSource("terrain frame");
   viewer.dataSources.add(decorations);
   const corners = [
@@ -203,6 +259,37 @@ export function createGlobe(data, notify) {
       }),
     },
   });
+  const pool = scene.primitives.add(
+    new C.Primitive({
+      geometryInstances: new C.GeometryInstance({
+        geometry: new C.EllipseGeometry({
+          center: ll(area.lon, area.lat, -1150),
+          semiMajorAxis: area.size_km * 900,
+          semiMinorAxis: area.size_km * 900,
+          height: -1150,
+          vertexFormat:
+            C.MaterialAppearance.MaterialSupport.TEXTURED.vertexFormat,
+        }),
+      }),
+      appearance: new C.MaterialAppearance({
+        flat: true,
+        translucent: true,
+        material: new C.Material({
+          fabric: {
+            uniforms: { glow: color(palette.neutral, 0.06) },
+            source: `czm_material czm_getMaterial(czm_materialInput materialInput) {
+          czm_material material = czm_getDefaultMaterial(materialInput);
+          float falloff = max(0.0, 1.0 - length(materialInput.st * 2.0 - 1.0));
+          material.diffuse = glow.rgb;
+          material.alpha = glow.a * falloff * falloff;
+          return material;
+        }`,
+          },
+        }),
+      }),
+      asynchronous: false,
+    }),
+  );
   const mesh = scene.primitives.add(new C.PolylineCollection());
   const lonSpan = g.east - g.west,
     latSpan = g.north - g.south;
@@ -223,7 +310,7 @@ export function createGlobe(data, notify) {
         positions,
         width: 1,
         material: C.Material.fromType("Color", {
-          color: color(palette.system, 0.035),
+          color: color(palette.neutral, 0.035),
         }),
       });
     }
@@ -235,7 +322,7 @@ export function createGlobe(data, notify) {
     duration = 1.4,
     heading = -18,
     pitch = -48,
-    range = size_km * 1650,
+    range = size_km * 2150,
   ) {
     viewer.trackedEntity = undefined;
     if (orbiting) {
@@ -278,12 +365,30 @@ export function createGlobe(data, notify) {
       },
     );
   }
+  let earthLayer,
+    state0Island = true,
+    openingGeneration = 0;
+  function ensureContext(island) {
+    // Real imagery for the whole landscape, dimmed while the sector is in focus so it reads first.
+    if (!earthLayer) {
+      earthLayer = viewer.imageryLayers.addImageryProvider(new C.UrlTemplateImageryProvider({
+        url: "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
+        credit: new C.Credit("Esri, Maxar, Earthstar Geographics", true),
+        maximumLevel: 18,
+      }), 0);
+    }
+    earthLayer.brightness = island ? 0.42 : 1.0;
+    earthLayer.saturation = island ? 0.3 : 1.0;
+    earthLayer.contrast = island ? 1.1 : 1.0;
+  }
   function setIsland(value) {
-    // Never cut the world out: the full landscape always renders (dimmed context imagery outside
-    // the sector); "island" only toggles the sector frame and slab decorations.
+    state0Island = value;
     scene.globe.cartographicLimitRectangle = C.Rectangle.MAX_VALUE;
+    ensureContext(value);
+    if (value) openingGeneration++;
     decorations.show = value;
     mesh.show = value;
+    pool.show = value;
     scene.requestRender();
   }
   function setContours(value) {
@@ -305,15 +410,35 @@ export function createGlobe(data, notify) {
     displayHeight,
     setRelief(value) {
       scene.verticalExaggeration = value;
-      wall.wall.maximumHeights = boundary.map(p => p[2] * value);
-      rim.polyline.positions = boundary.map(([lon, lat, h]) => position(lon, lat, h + 4));
+      wall.wall.maximumHeights = boundary.map((p) => p[2] * value);
+      rim.polyline.positions = boundary.map(([lon, lat, h]) =>
+        position(lon, lat, h + 4),
+      );
       scene.requestRender();
     },
     opening() {
       setIsland(false);
-      viewer.camera.setView({destination: ll(lon - 15, lat - 7, 19_000_000)});
-      viewer.camera.flyTo({destination: ll(lon, lat, 700_000), duration: reducedMotion() ? 0 : 3.4,
-        easingFunction: C.EasingFunction.QUINTIC_IN_OUT});
+      const generation = ++openingGeneration;
+      C.TileMapServiceImageryProvider.fromUrl(
+        C.buildModuleUrl("Assets/Textures/NaturalEarthII"),
+      )
+        .then((provider) => {
+          if (!viewer.isDestroyed() && generation === openingGeneration) {
+            earthLayer = viewer.imageryLayers.addImageryProvider(provider, 0);
+            earthLayer.brightness = 0.65;
+            scene.requestRender();
+          }
+        })
+        .catch((error) => {
+          if (!viewer.isDestroyed())
+            notify(`Opening globe imagery unavailable: ${error.message}`);
+        });
+      viewer.camera.setView({ destination: ll(lon - 15, lat - 7, 19_000_000) });
+      viewer.camera.flyTo({
+        destination: ll(lon, lat, 700_000),
+        duration: reducedMotion() ? 0 : 3.4,
+        easingFunction: C.EasingFunction.QUINTIC_IN_OUT,
+      });
     },
     home,
     flyTo,
@@ -325,7 +450,7 @@ export function createGlobe(data, notify) {
         new C.HeadingPitchRange(
           C.Math.toRadians(heading),
           C.Math.toRadians(-46),
-          size_km * 1650,
+          size_km * 2150,
         ),
       );
       scene.requestRender();
@@ -348,10 +473,17 @@ export function createGlobe(data, notify) {
         lat,
         lon,
       );
+      // The baked image already includes DEM shading; this exposure grade follows the real sun.
+      const nextGrade =
+        0.75 + 0.25 * Math.max(0, Math.min(1, (elevation + 2) / 22));
+      if (Math.abs(solarGrade - nextGrade) > 0.001) {
+        solarGrade = nextGrade;
+        styleImagery(imageryNatural);
+      }
       scene.light.color = C.Color.lerp(
         color(palette.rf),
         C.Color.WHITE,
-        Math.max(0, Math.min(1, elevation / 22)),
+        Math.max(0.78, Math.min(1, elevation / 22)),
         new C.Color(),
       );
       scene.requestRender();

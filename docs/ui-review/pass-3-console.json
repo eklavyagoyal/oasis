@@ -1,0 +1,22 @@
+[
+  {
+    "type": "info",
+    "message": "MIRROR WORLD dataset {scenario: ros-valley, objects: 15, sensors: 10, detections: 25092, fixes: 1342}"
+  },
+  {
+    "type": "warning",
+    "message": "[.WebGL-0x12c0043cc00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels"
+  },
+  {
+    "type": "warning",
+    "message": "[.WebGL-0x12c0043cc00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels"
+  },
+  {
+    "type": "warning",
+    "message": "[.WebGL-0x12c0043cc00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels"
+  },
+  {
+    "type": "warning",
+    "message": "[.WebGL-0x12c0043cc00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels (this message will no longer repeat)"
+  }
+]

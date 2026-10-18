@@ -78,6 +78,9 @@ const check = (message) => {
 };
 try {
   await page.goto(url, { waitUntil: "load" });
+  await expect(page.locator("#opening")).toBeHidden({ timeout: 15000 });
+  await expect(page.locator(".brand")).toHaveText("OASIS");
+  await expect(page.locator("#exaggeration-value")).toHaveText("RELIEF ×2.5");
   await expect(page.locator("#system-state")).toContainText("WORLD LOADED");
   await expect(page.locator("#clock")).toContainText("14:02:07");
   await expect(page.locator("#feed-image")).toBeVisible();
@@ -94,6 +97,21 @@ try {
     "DENSITY / ALL SIGNALS",
   );
   await expect(page.locator("#layer-truth")).toBeDisabled();
+  await page.evaluate(() => {
+    window.__originalPick = Cesium.Scene.prototype.pick;
+    Cesium.Scene.prototype.pick = () => ({
+      id: { type: "fix", index: 0 },
+      primitive: {},
+    });
+  });
+  await page.locator("#globe canvas").click({ position: { x: 500, y: 300 } });
+  await page.evaluate(() => {
+    Cesium.Scene.prototype.pick = window.__originalPick;
+  });
+  await expect(page.locator("#inspector-panel")).toBeVisible();
+  await expect(page.locator("#inspector")).toContainText("POSITION FIX / 1");
+  await expect(page.locator("#inspector")).not.toContainText("MAVIC_1");
+  await page.locator('[data-feed="camera"]').click();
   await page.locator('[data-mode="god"]').click();
   await expect(page.locator("#feed-state")).toContainText("NO SIGNAL");
   await expect(page.locator("#event-ticker")).toContainText(
@@ -104,6 +122,18 @@ try {
   );
   await page.locator('[data-mode="delta"]').click();
   check("Operator hides answer-key truth; God mode hides sensor observations");
+  for (const [time, value] of [
+    ["09:00:00", "—"],
+    ["14:02:07", "120m"],
+  ]) {
+    await page.locator("#command-open").click();
+    await page.locator("#command-input").fill(`jump ${time}`);
+    await page.locator("#command-input").press("Enter");
+    await expect(page.locator("#stat-agl")).toHaveText(value);
+  }
+  check(
+    "fix picking opens the inspector; telemetry recovers after an inactive interval",
+  );
   await page.locator("#command-open").click();
   await page.locator("#command-input").fill("jump 14:14:40");
   await page.locator("#command-input").press("Enter");
@@ -139,11 +169,60 @@ try {
     "Play scenario",
   );
   check("keyboard seek, playback and speed controls");
+  await page.keyboard.press("h");
+  await expect(page.locator("#cinema-exit")).toBeVisible();
+  await expect(page.locator(".topbar")).toBeHidden();
+  await page.keyboard.press("h");
+  await expect(page.locator(".topbar")).toBeVisible();
+  await page.locator("#layers-toggle").click();
+  await expect(page.locator("#layers-card")).toBeVisible();
+  await page.locator("#layers-close").click();
+  await page.locator("#tab-inspector").click();
+  await expect(page.locator("#inspector-panel")).toBeVisible();
+  await page.locator('[data-feed="iq"]').click();
+  check("Cinema shortcut, collapsible layers and six-tab observation deck");
+  await page.locator('[data-feed="satellite"]').click();
+  await expect(page.locator("#satellite-inset")).toBeVisible();
+  await page.waitForFunction(
+    () => document.querySelector("#satellite-zoom").naturalWidth > 0,
+  );
+  await expect(page.locator("#satellite-zoom")).toHaveAttribute(
+    "src",
+    /_zoom\./,
+  );
+  await page.locator('[data-mode="god"]').click();
+  await expect(page.locator("#satellite-inset")).toBeHidden();
+  await page.locator('[data-mode="delta"]').click();
+  check(
+    "recorded satellite detail loads with its chip and is hidden in God mode",
+  );
+  await page.locator("#command-open").click();
+  await page.locator("#command-input").fill("opening");
+  await page.locator("#command-input").press("Enter");
+  await expect(page.locator("#opening")).toBeVisible();
+  await expect(page.locator(".opening-title")).toHaveCSS("opacity", "1", {
+    timeout: 8000,
+  });
+  await expect(page.locator("#opening")).toBeHidden({ timeout: 8000 });
+  await expect(page.locator(".topbar")).toBeVisible();
+  assert.notEqual(
+    await page.evaluate(() => document.activeElement?.id),
+    "layers-toggle",
+  );
+  await page.locator("#command-open").click();
+  await page.locator("#command-input").fill("opening");
+  await page.locator("#command-input").press("Enter");
+  await page.keyboard.press("Escape");
+  await expect(page.locator("#opening")).toBeHidden();
+  await expect(page.locator("#layers-toggle")).toBeFocused();
+  check(
+    "opening reaches its title, completes without stealing focus and can be skipped",
+  );
   await page.locator("#present-start").click();
   await expect(page.locator("#presentation")).toBeVisible();
   for (let i = 1; i <= 10; i++) {
     await expect(page.locator("#beat-number")).toHaveText(
-      `${String(i).padStart(2, "0")} / 10`,
+      `${String(i).padStart(2, "0")}/ 10 CHAPTERS`,
     );
     if (i < 10) await page.locator("#present-next").click();
   }
@@ -155,15 +234,19 @@ try {
       .replace(/;$/, ""),
   );
   await expect(page.locator("#audit-panel")).toContainText(
-    deployed.audit ? deployed.audit.checks[0].name : "AUDIT NOT SUPPLIED",
+    deployed.audit
+      ? deployed.audit.checks[0].name.replaceAll("_", " ")
+      : "AUDIT NOT SUPPLIED",
+  );
+  await expect(page.locator("#beat-stat")).toContainText(
+    deployed.audit ? `${deployed.audit.summary.pass}/` : "NOT SUPPLIED",
   );
   await page.keyboard.press("Escape");
   await expect(page.locator("#presentation")).toBeHidden();
   check(
     "all ten PRESENT beats, truthful missing-data captions, exit restores replay",
   );
-  await page.locator('[data-tab="feeds"]').click();
-  await page.locator('[data-feed="camera"]').click();
+  await page.locator('[data-feed="microphone"]').click();
   await expect(page.locator("#feed-empty-message")).toHaveText(
     "No capture in this dataset",
   );
@@ -222,6 +305,7 @@ try {
     t: 18400,
     src: "./sensors/MIC1/browser-fixture.wav",
   });
+  imported.media = imported.media.filter((m) => m.sensor !== "EO1");
   imported.media.push({
     sensor: "EO1",
     kind: "image",
@@ -286,7 +370,6 @@ try {
     "Test-only fixture.",
   );
   check("valid scenario replacement and audit PASS/FAIL/SKIP/baseline details");
-  await page.locator('[data-tab="feeds"]').click();
   await page.locator('[data-feed="camera"]').click();
   await expect(page.locator("#feed-state")).toHaveText("MISSING MEDIA");
   await expect(page.locator("#feed-empty-message")).toHaveText(
@@ -341,6 +424,10 @@ try {
     "none",
   );
   await page.locator("#play").click();
+  await page.locator("#command-open").click();
+  await page.locator("#command-input").fill("opening");
+  await page.locator("#command-input").press("Enter");
+  await expect(page.locator("#opening")).toBeHidden();
   check(
     "reduced-motion preference stops decorative CSS animation and IQ cursor motion",
   );

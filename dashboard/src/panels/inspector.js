@@ -1,3 +1,5 @@
+import { countTo } from "../motion.js";
+import { theme } from "../theme.js";
 import { sample, heightAt, upperBound, escapeHTML as esc } from "../data.js";
 const $ = (s) => document.querySelector(s);
 export function createInspector(state, onSelect) {
@@ -56,16 +58,20 @@ export function createInspector(state, onSelect) {
       prev = sample(object, state.t - 1);
     $("#object-inactive").hidden = !!p;
     if (p) {
-      $("#stat-agl").innerHTML =
-        `${Math.round(p.alt - heightAt(data.terrain, p.lon, p.lat))}<small>m</small>`;
-      $("#stat-masl").innerHTML = `${Math.round(p.alt)}<small>m</small>`;
+      countTo(
+        $("#stat-agl"),
+        p.alt - heightAt(data.terrain, p.lon, p.lat),
+        0,
+        "m",
+      );
+      countTo($("#stat-masl"), p.alt, 0, "m");
       const speed = prev
         ? Math.hypot(
             (p.lat - prev.lat) * 111320,
             (p.lon - prev.lon) * 111320 * Math.cos((p.lat * Math.PI) / 180),
           )
         : 0;
-      $("#stat-speed").innerHTML = `${speed.toFixed(1)}<small>m/s</small>`;
+      countTo($("#stat-speed"), speed, 1, "m/s");
     } else
       for (const id of ["#stat-agl", "#stat-speed", "#stat-masl"])
         $(id).textContent = "—";
@@ -86,7 +92,7 @@ export function createInspector(state, onSelect) {
     const X = (t) => ((t - t0) / (t1 - t0)) * (width - 2 * pad) + pad,
       Y = (p) => height - 8 - ((p - y0) / (y1 - y0)) * (height - 17);
     ctx.lineWidth = 1;
-    ctx.strokeStyle = "#263540";
+    ctx.strokeStyle = theme("hairline");
     ctx.setLineDash([2, 4]);
     for (const val of [-110, -80, -50]) {
       ctx.beginPath();
@@ -98,7 +104,7 @@ export function createInspector(state, onSelect) {
     let ri = 0;
     const statuses = [];
     for (const [id, rows] of Object.entries(entries)) {
-      const c = ri++ === 0 ? "#39e6ff" : "#ffb000";
+      const c = ri++ === 0 ? theme("signal") : theme("text-2");
       const times = rows.map((r) => r.t),
         start = Math.max(0, upperBound(times, t0) - 1),
         end = upperBound(times, Math.min(t1, state.t));
@@ -139,7 +145,7 @@ export function createInspector(state, onSelect) {
         `<span class="${dead ? "down" : visible === false ? "nlos" : ""}"><i></i>${esc(id)} ${status}</span>`,
       );
     }
-    ctx.strokeStyle = "#d8e2ec55";
+    ctx.strokeStyle = theme("text-3");
     ctx.beginPath();
     ctx.moveTo(X(state.t), 0);
     ctx.lineTo(X(state.t), height);

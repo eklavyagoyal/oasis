@@ -17,11 +17,39 @@ export function createPresentation(state, globe, actions) {
       data.media.some(
         (m) => data.sensors.find((s) => s.id === m.sensor)?.type === type,
       );
+  const satellite = data.media.find(
+    (m) => data.sensors.find((s) => s.id === m.sensor)?.type === "satellite",
+  );
+  const terrainLoss = data.audit?.checks.find(
+    (c) => c.id === "terrain_shadow",
+  )?.value;
+  const fixError = (id, t) => {
+    const oi = data.objects.findIndex((o) => o.id === id);
+    const i =
+      oi < 0
+        ? -1
+        : data.fixes.t.findLastIndex(
+            (time, index) => time <= t && data.fixes.obj[index] === oi,
+          );
+    return i >= 0 && Number.isFinite(data.fixes.err[i])
+      ? `${Math.round(data.fixes.err[i])} m`
+      : "—";
+  };
+  const fiberIndex = data.objects.findIndex((o) => o.id === "fpv_fiber_1");
+  const fiberRecords =
+    fiberIndex < 0
+      ? null
+      : Object.values(data.rf).reduce(
+          (total, r) => total + r.obj.filter((i) => i === fiberIndex).length,
+          0,
+        );
+  const auditScore = (a) =>
+    `${a.summary.pass}/${a.summary.pass + a.summary.fail + a.summary.skip}`;
   const beats = [
     {
       title: "One world. Real terrain.",
       text: "The world comes first. Every sensor observes the same landscape, weather and moving objects.",
-      stat: `${data.terrain.nx} × ${data.terrain.ny} DEM SAMPLES`,
+      stat: [`${data.terrain.nx} × ${data.terrain.ny}`, "DEM SAMPLES"],
       t: event(/occlusion/, 19180),
       mode: "god",
       wide: true,
@@ -29,7 +57,7 @@ export function createPresentation(state, globe, actions) {
     {
       title: "The landscape decides what is visible.",
       text: "The red terrain is hidden from the selected receiver at 40 metres above ground. Visibility is computed from this exact elevation model.",
-      stat: `${rf.length} DIRECTION FINDERS · 40 m AGL`,
+      stat: ["40 m AGL", `${rf.length} DIRECTION FINDERS`],
       t: event(/occlusion/, 19180),
       mode: "delta",
       shadow: true,
@@ -40,9 +68,9 @@ export function createPresentation(state, globe, actions) {
       text: hasMedia("satellite")
         ? "The recorded satellite chip shares the scenario clock. Compare the sensor image with the actual flight path."
         : "No satellite capture was supplied in this dataset. The morning truth track is available; the satellite feed remains NO SIGNAL.",
-      stat: hasMedia("satellite")
-        ? "TIME-SYNCHRONIZED SATELLITE CAPTURE"
-        : "SATELLITE FEED / NOT SUPPLIED",
+      stat: satellite
+        ? [timeLabel(data, satellite.t), "SATELLITE CAPTURE / UTC"]
+        : ["—", "SATELLITE FEED / NOT SUPPLIED"],
       t: event(/satellite|sentinel/i, 699),
       mode: "delta",
       feed: "satellite",
@@ -51,7 +79,10 @@ export function createPresentation(state, globe, actions) {
     {
       title: "An observation is not a position.",
       text: "Measured bearings cross to produce a fix. Delta mode connects that estimate to the object that actually produced the signal.",
-      stat: "WHITE = TRUTH · AMBER = OBSERVATION",
+      stat: [
+        fixError("mavic_1", Math.min(18427, duration)),
+        "FIX ERROR AT CHAPTER START",
+      ],
       t: Math.min(18427, duration),
       mode: "delta",
       object: "mavic_1",
@@ -60,7 +91,10 @@ export function createPresentation(state, globe, actions) {
     {
       title: "Behind the ridge.",
       text: "The receiver’s terrain shadow intersects the flight path. Power and detection records show what the receiver could actually observe.",
-      stat: "LINE OF SIGHT IS A PHYSICS RESULT",
+      stat: [
+        Number.isFinite(terrainLoss) ? `+${terrainLoss.toFixed(1)} dB` : "—",
+        "AUDIT NLOS − LOS EXCESS",
+      ],
       t: event(/occlusion.*RF2|RF2.*terrain/i, 19180) + 15,
       mode: "delta",
       object: "mavic_1",
@@ -73,10 +107,12 @@ export function createPresentation(state, globe, actions) {
         firstFix("pilot_1") != null
           ? "Crossed bearings on a controller signal can be compared with the operator’s position in the answer key."
           : "No controller position fix was supplied. Ground truth alone cannot establish a sensor detection.",
-      stat:
+      stat: [
+        fixError("pilot_1", firstFix("pilot_1") ?? 0),
         firstFix("pilot_1") != null
-          ? "CONTROLLER UPLINK / CROSS-BEARING FIX"
+          ? "CONTROLLER FIX ERROR"
           : "CONTROLLER FIX / NOT SUPPLIED",
+      ],
       t: firstFix("pilot_1") ?? Math.min(19400, duration),
       mode: "delta",
       object: "pilot_1",
@@ -87,8 +123,11 @@ export function createPresentation(state, globe, actions) {
         ? "Replay the jammer interval and compare the recorded spectrum with the bearings that remain. Missing observations are part of the dataset."
         : "This scenario does not include a jammer object. No jamming effect has been invented.",
       stat: object("jammer_1")
-        ? "RECORDED IQ · SHARED SCENARIO CLOCK"
-        : "JAMMER / NOT SUPPLIED",
+        ? [
+            String(data.media.filter((m) => m.kind === "iq").length),
+            "RECORDED IQ CAPTURES",
+          ]
+        : ["—", "JAMMER / NOT SUPPLIED"],
       t: event(/jammer/, 19900) + 50,
       mode: "delta",
       object: "jammer_1",
@@ -99,9 +138,10 @@ export function createPresentation(state, globe, actions) {
       text: hasMedia("microphone")
         ? "A fiber-optic platform can produce no radio observations while still producing an acoustic record. Compare both sensor channels."
         : "The fiber-optic truth track is visible. No microphone recording was supplied, so the acoustic channel remains NO SIGNAL.",
-      stat: hasMedia("microphone")
-        ? "ONE OBJECT · DIFFERENT SENSOR PICTURES"
-        : "ACOUSTIC FEED / NOT SUPPLIED",
+      stat: [
+        fiberRecords == null ? "—" : String(fiberRecords),
+        "RF RECORDS FOR FIBER TRACK",
+      ],
       t: event(/fiber/, 18900) + 30,
       mode: "delta",
       object: "fpv_fiber_1",
@@ -112,9 +152,12 @@ export function createPresentation(state, globe, actions) {
       text: rf.some((s) => s.dead_t != null)
         ? "At the recorded destruction time the receiver stops observing. Its mast turns grey and its detection strip ends."
         : "No receiver destruction time was supplied for this scenario.",
-      stat: rf.find((s) => s.dead_t != null)
-        ? `${rf.find((s) => s.dead_t != null).id} / OFFLINE`
-        : "NO DESTRUCTION EVENT",
+      stat: [
+        rf.find((s) => s.dead_t != null)?.id ?? "—",
+        rf.some((s) => s.dead_t != null)
+          ? "RECEIVER / OFFLINE"
+          : "NO DESTRUCTION EVENT",
+      ],
       t: event(/destroyed/, 20312) + 1,
       mode: "delta",
       wide: true,
@@ -125,8 +168,13 @@ export function createPresentation(state, globe, actions) {
         ? "Independent checks test the observations against geometry, timing and provenance. Expand each result to inspect its evidence."
         : "The observations are ready to inspect. No audit or one-shot baseline was supplied; the scorecard reports that absence explicitly.",
       stat: data.audit
-        ? `${data.audit.summary.pass} PASS · ${data.audit.summary.fail} FAIL · ${data.audit.summary.skip} SKIP`
-        : "AUDIT / NOT SUPPLIED",
+        ? [
+            auditScore(data.audit),
+            data.audit.baseline
+              ? `PASS · BASELINE ${auditScore(data.audit.baseline)}`
+              : "PASS · BASELINE NOT SUPPLIED",
+          ]
+        : ["—", "AUDIT / NOT SUPPLIED"],
       t: Math.min(18427, duration),
       mode: "delta",
       audit: true,
@@ -178,8 +226,8 @@ export function createPresentation(state, globe, actions) {
     state.shadow = !!beat.shadow;
     state.shadowHeight = 40;
     state.truth = true;
-    state.rays = true;
-    state.fixes = true;
+    state.rays = ![0, 1, 2, 7, 9].includes(state.beat);
+    state.fixes = [3, 5, 6].includes(state.beat);
     state.follow = false;
     actions.setMode(beat.mode);
     actions.seek(Math.min(duration, beat.t));
@@ -200,15 +248,19 @@ export function createPresentation(state, globe, actions) {
         2.2,
         -22 + state.beat * 9,
         -46,
-        data.scenario.area.size_km * 2050,
+        data.scenario.area.size_km * 2150,
       );
     state.playing = state.beat !== 9;
     state.speed = 1;
-    document.querySelector("#beat-number").textContent =
-      `${String(state.beat + 1).padStart(2, "0")} / ${beats.length}`;
+    document.querySelector("#beat-number").innerHTML =
+      `${String(state.beat + 1).padStart(2, "0")}<small>/ ${beats.length} CHAPTERS</small>`;
     document.querySelector("#beat-title").textContent = beat.title;
     document.querySelector("#beat-description").textContent = beat.text;
-    document.querySelector("#beat-stat").textContent = beat.stat;
+    const metric = document.createElement("span"),
+      caption = document.createElement("small");
+    metric.textContent = beat.stat[0];
+    caption.textContent = beat.stat[1];
+    document.querySelector("#beat-stat").replaceChildren(metric, caption);
     document.querySelector("#present-next").textContent =
       state.beat === 9 ? "FINISH BRIEFING →" : "NEXT MOMENT →";
     speak(beat);
@@ -231,12 +283,14 @@ export function createPresentation(state, globe, actions) {
       tab: state.tab,
     };
     state.presenting = true;
+    document.body.classList.add("presenting");
     panel.hidden = false;
     show(0);
   }
   function stop() {
     if (!state.presenting) return;
     state.presenting = false;
+    document.body.classList.remove("presenting");
     panel.hidden = true;
     if ("speechSynthesis" in window) speechSynthesis.cancel();
     if (saved) {
@@ -275,6 +329,7 @@ export function createPresentation(state, globe, actions) {
       if (now - startTime >= 20000 && state.beat < 9) show(state.beat + 1);
     },
     destroy() {
+      document.body.classList.remove("presenting");
       if ("speechSynthesis" in window) speechSynthesis.cancel();
       narration.remove();
     },
