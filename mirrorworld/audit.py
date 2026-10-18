@@ -40,6 +40,9 @@ CHECKS = [
 ]
 
 
+MIN_N, MIN_LOG_SPAN = 20, 0.15  # smallest samples a check will judge; below that it SKIPs
+
+
 def _result(cid, name, status, value, threshold, detail):
     return {"id": cid, "name": name, "status": status, "value": value,
             "threshold": threshold, "detail": detail}
@@ -63,12 +66,13 @@ class Scene:
     tracks: pd.DataFrame
     types: dict  # object id -> catalog type
     sides: dict  # object id -> side
+    window: tuple | None = None  # (t0, t1): audit only this slice, same for every dataset compared
 
     def __post_init__(self):
         self._recs = {}
 
     @classmethod
-    def load(cls, root):
+    def load(cls, root, window=None):
         root = Path(root)
         yml = root / "scenario.yaml"
         if not yml.exists():
@@ -86,7 +90,7 @@ class Scene:
             types = dict(zip(o["id"].astype(str), o["type"].astype(str)))
             if "side" in o.columns:
                 sides = dict(zip(o["id"].astype(str), o["side"].astype(str)))
-        return cls(root, cfg, world, tracks, types, sides)
+        return cls(root, cfg, world, tracks, types, sides, window)
 
     # --- truth -----------------------------------------------------------
     def state(self, obj, t):
@@ -134,6 +138,8 @@ class Scene:
         out = None
         if frames:
             df = pd.concat(frames, ignore_index=True)
+            if self.window:
+                df = df[df["t"].between(*self.window)].reset_index(drop=True)
             if key is not None:
                 prov = [c for c in ("record_id", "object_id", "link", "label") if c in key.columns]
                 df = df.merge(key[prov], on="record_id", how="left")
@@ -201,6 +207,9 @@ def check_provenance(sc):
                    if c in FORBIDDEN_COLS or c.startswith(FORBIDDEN_PREFIXES)]
             if bad:
                 issues.append(f"{rel}: truth columns {sorted(bad)}")
+            leaked = [c for c in df.columns if df[c].dtype == object and df[c].isin(set(sc.types)).any()]
+            if leaked:
+                issues.append(f"{rel}: truth object ids as values in {sorted(leaked)}")
             if "record_id" not in df.columns:
                 continue
             ids = df["record_id"].fillna("").astype(str)
@@ -308,8 +317,8 @@ def check_shadow(sc):
             continue
         f = r["df"]["freq_mhz"].to_numpy(float) if "freq_mhz" in r["df"] else np.full(len(r["df"]), np.nan)
         valid = r["ok"] & np.isfinite(r["eirp"]) & np.isfinite(f) & (r["rng"] > 10)
-        if not (valid & r["los"]).any() or not (valid & ~r["los"]).any():
-            continue
+        if (valid & r["los"]).sum() < MIN_N or (valid & ~r["los"]).sum() < MIN_N:
+            continue  # underpowered: a median of a handful of records proves nothing either way
         excess = r["eirp"] - itu.fspl_db(r["rng"] / 1000, f / 1000) - r["df"]["power_dbm"].to_numpy(float)
         med_los = float(np.median(excess[valid & r["los"]]))
         med_nlos = float(np.median(excess[valid & ~r["los"]]))
@@ -317,7 +326,7 @@ def check_shadow(sc):
                      int((valid & r["los"]).sum()), int((valid & ~r["los"]).sum())))
     if not rows:
         return _result("terrain_shadow", "Terrain shadow", "SKIP", None, "≥ 10 dB",
-                       "no sensor with power, geometry and both LOS/NLOS records")
+                       f"no sensor with ≥ {MIN_N} LOS and ≥ {MIN_N} NLOS detections with power + geometry")
     worst = min(d for *_, d, _, _ in rows)
     detail = "; ".join(f"{sid}: excess LOS {a:.1f} dB (n={n1}) vs NLOS {b:.1f} dB (n={n2}), Δ={d:.1f} dB"
                        for sid, a, b, d, n1, n2 in rows)
@@ -337,6 +346,8 @@ def check_occlusion(sc):
         die = _death(sc, sid)
         for o in drones:
             tr = sc.tracks[sc.tracks["object_id"] == o].sort_values("t")
+            if sc.window:
+                tr = tr[tr["t"].between(*sc.window)]
             if tr.empty:
                 continue
             tt = tr["t"].to_numpy(float)
@@ -389,6 +400,8 @@ def check_fixes(sc):
         return _result("fix_calibration", "Fix calibration", "SKIP", None, "share in [0.35, 0.65]",
                        "no fused/fixes.csv + answer_key/fused.csv")
     fx, key = pd.read_csv(fp), pd.read_csv(kp)
+    if sc.window and "t" in fx.columns:
+        fx = fx[fx["t"].between(*sc.window)]
     need_fx = {"fix_id", "t", "lat", "lon", "cep50_m"} - set(fx.columns)
     need_k = {"fix_id", "object_id"} - set(key.columns)
     if need_fx or need_k:
@@ -415,29 +428,30 @@ def check_fixes(sc):
 
 
 def check_range_law(sc):
-    """In LOS, farther means weaker: Spearman ρ(power, log10 range) < −0.5 per sensor."""
+    """In LOS, loss grows with distance like physics allows: fitted path-loss exponent in [1.5, 4.5]
+    (free space = 2), from received power relative to the transmitter's EIRP vs log10 range."""
     rows = []
     for sid in sc.sensors():
         r = sc.recs(sid)
         if r is None or r["site"] is None or "power_dbm" not in r["df"].columns:
             continue
-        use = r["ok"] & r["los"] & np.isfinite(r["eirp"])
-        if use.sum() < 10:
+        use = r["ok"] & r["los"] & np.isfinite(r["eirp"]) & (r["rng"] > 10)
+        if use.sum() < MIN_N:
             continue
-        pw = r["df"]["power_dbm"].to_numpy(float)[use]
+        rel = (r["df"]["power_dbm"].to_numpy(float) - r["eirp"])[use]  # emitters differ in power
         lg = np.log10(r["rng"][use])
-        if np.ptp(pw) == 0 or np.ptp(lg) == 0:
-            continue  # one static emitter: ρ undefined
-        rho = float(spearmanr(pw, lg)[0])
-        if np.isfinite(rho):
-            rows.append((sid, rho, int(use.sum())))
+        if np.ptp(lg) < MIN_LOG_SPAN:
+            continue  # too little range spread for a distance law to show above fading
+        slope = float(np.polyfit(lg, rel, 1)[0])  # dB per decade of range
+        rows.append((sid, -slope / 10.0, int(use.sum())))
     if not rows:
-        return _result("range_law", "Range law", "SKIP", None, "ρ < −0.5",
-                       "no sensor with enough LOS records")
-    worst = max(rho for _, rho, _ in rows)
-    detail = "; ".join(f"{sid}: ρ={rho:.3f} (n={n})" for sid, rho, n in rows)
-    return _result("range_law", "Range law", "PASS" if worst < -0.5 else "FAIL",
-                   round(worst, 4), "Spearman ρ < −0.5 per sensor", detail)
+        return _result("range_law", "Range law", "SKIP", None, "path-loss exponent in [1.5, 4.5]",
+                       f"no sensor with >= {MIN_N} LOS records spanning >= {MIN_LOG_SPAN} decades of range")
+    bad = [n for _, n, _ in rows if not 1.5 <= n <= 4.5]
+    worst = max(rows, key=lambda x: abs(x[1] - 2.0))[1]
+    detail = "; ".join(f"{sid}: exponent {n:.2f} (n={k})" for sid, n, k in rows)
+    return _result("range_law", "Range law", "FAIL" if bad else "PASS", round(worst, 3),
+                   "path-loss exponent in [1.5, 4.5] (free space 2)", detail)
 
 
 def check_acoustic(sc):
@@ -594,8 +608,8 @@ def _death(sc, sid):
 
 # --------------------------------------------------------------------------- driver
 
-def audit_dir(root):
-    sc = Scene.load(root)
+def audit_dir(root, window=None):
+    sc = Scene.load(root, window)
     checks = [check_provenance(sc), check_clock(sc), check_bearing(sc), check_shadow(sc),
               check_occlusion(sc), check_fixes(sc), check_range_law(sc), check_acoustic(sc),
               check_spoof(sc), check_camera(sc)]
@@ -654,14 +668,17 @@ def main(argv=None):
     ap.add_argument("out", help="run directory, e.g. out/ros-valley")
     ap.add_argument("--baseline", default=None,
                     help="a one-shot-LLM run directory to compare against")
+    ap.add_argument("--window", nargs=2, type=float, metavar=("T0", "T1"), default=None,
+                    help="audit only t in [T0, T1] seconds (applied identically to the baseline)")
     args = ap.parse_args(argv)
+    window = tuple(args.window) if args.window else None
 
-    audit = audit_dir(args.out)
+    audit = audit_dir(args.out, window)
     baseline, note = None, None
     if args.baseline:
         b = Path(args.baseline)
         if (b / "scenario.yaml").exists():
-            baseline = audit_dir(b)
+            baseline = audit_dir(b, window)
             note = args.baseline
         else:
             note = f"baseline dir {b} not found — generate it with `python baselines/oneshot/make.py` (needs OPENAI_API_KEY)"
