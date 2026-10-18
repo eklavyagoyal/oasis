@@ -12,8 +12,10 @@ box (the cue can miss): `in_frame` says whether the box touches the recorded ima
 `occluded` whether terrain hid it. Drawn == in_frame and not occluded.
 """
 import csv
+import json
 import math
 from datetime import timedelta
+from pathlib import Path
 
 import numpy as np
 import pandas as pd
@@ -151,6 +153,9 @@ def frame_objects(world, cam_xyz, objs, az_deg, el_deg, f_px, width, height):
         if not near:
             continue
         pm = project(cam_xyz, o["xyz_prev"], az_deg, el_deg, f_px, width, height)
+        mv = o["xyz"] - o["xyz_prev"]
+        hdg = math.degrees(math.atan2(mv[0], mv[1])) if math.hypot(mv[0], mv[1]) > 1e-6 else 0.0
+        to_cam = np.asarray(cam_xyz, float) - o["xyz"]
         rows.append({
             "object_id": o["id"], "shape": o["shape"],
             "col": pt["col"], "row": pt["row"], "range_m": pt["range_m"],
@@ -159,6 +164,10 @@ def frame_objects(world, cam_xyz, objs, az_deg, el_deg, f_px, width, height):
             "in_frame": bool(x0 < width and x0 + w > 0 and y0 < height and y0 + h > 0),
             "occluded": not bool(world.los(cam_xyz, o["xyz"])),
             "motion": (pt["col"] - pm["col"], pt["row"] - pm["row"]),
+            # the view the camera has of the airframe: bearing to the camera relative to the nose,
+            # and the camera's elevation seen from the object (negative = looking at the belly)
+            "aspect": ((math.degrees(math.atan2(to_cam[0], to_cam[1])) - hdg) % 360.0,
+                       math.degrees(math.atan2(to_cam[2], math.hypot(to_cam[0], to_cam[1])))),
         })
     return rows
 
@@ -186,6 +195,45 @@ def _silhouette(shape, pixel_span, extent_px, dots, supers=4):
     return m.reshape(h, supers, w, supers).mean(axis=(1, 3))
 
 
+SPRITES = Path(__file__).resolve().parent.parent / "sprites"
+_ATLAS = {}
+
+
+def _sprite(shape, aspect, size_px):
+    """The 3D model (pre-rendered in Blender, see tools/render_sprites.py) from the nearest viewing
+    angle, area-averaged down to its true size. Returns (rgb 0..255, alpha 0..1) or None."""
+    if shape not in _ATLAS:
+        idx = json.loads((SPRITES / "index.json").read_text()) if (SPRITES / "index.json").exists() else {}
+        _ATLAS[shape] = ((np.asarray(Image.open(SPRITES / f"{shape}.png").convert("RGBA"), np.float32), idx[shape])
+                         if shape in idx else None)
+    if _ATLAS[shape] is None:
+        return None
+    atlas, meta = _ATLAS[shape]
+    t = meta["tile_px"]
+    c = int(round(aspect[0] / 15.0)) % len(meta["az"])
+    r = int(np.clip(round((aspect[1] - meta["el"][0]) / 15.0), 0, len(meta["el"]) - 1))
+    tile = atlas[r * t:(r + 1) * t, c * t:(c + 1) * t]
+    n = max(int(round(size_px)), 1)
+    a = tile[..., 3:] / 255.0
+    pre = Image.fromarray(np.clip(tile[..., :3] * a, 0, 255).astype(np.uint8)).resize((n, n), Image.BOX)
+    al = np.asarray(Image.fromarray((a[..., 0] * 255).astype(np.uint8)).resize((n, n), Image.BOX), np.float32) / 255.0
+    rgb = np.asarray(pre, np.float32) / np.maximum(al[..., None], 1e-3)
+    if size_px < 1.0:  # sub-pixel: keep the true light-blocking area, not a whole pixel
+        al = al * size_px ** 2
+    return rgb, al
+
+
+def _stamp_rgb(img, rgb, alpha, col, row):
+    H, W, _ = img.shape
+    h, w = alpha.shape
+    x0, y0 = int(round(col - w / 2)), int(round(row - h / 2))
+    xs0, ys0, xs1, ys1 = max(x0, 0), max(y0, 0), min(x0 + w, W), min(y0 + h, H)
+    if xs0 >= xs1 or ys0 >= ys1:
+        return
+    a = alpha[ys0 - y0:ys1 - y0, xs0 - x0:xs1 - x0, None]
+    img[ys0:ys1, xs0:xs1] = img[ys0:ys1, xs0:xs1] * (1 - a) + rgb[ys0 - y0:ys1 - y0, xs0 - x0:xs1 - x0] * a
+
+
 def _stamp(img, alpha, colour, col, row):
     """Alpha-blend a small mask into img centred at (col, row)."""
     H, W, _ = img.shape
@@ -209,6 +257,17 @@ def paint_objects(img, rows, f_px, dots_by_id, visibility_km):
         h, w = img.shape[:2]
         bg = img[int(np.clip(r["row"], 0, h - 1)), int(np.clip(r["col"], 0, w - 1))]
         colour = bg * (1.0 - contrast) + DARK * contrast
+        md = math.hypot(*r["motion"])
+        offs = [(0.0, 0.0)] if md <= 1.0 else [(-0.5 * r["motion"][0], -0.5 * r["motion"][1]),
+                                               (0.0, 0.0),
+                                               (0.5 * r["motion"][0], 0.5 * r["motion"][1])]
+        spr = _sprite(r["shape"], r.get("aspect", (0.0, 0.0)), 1.15 * r["pixels_on_object"])
+        if spr is not None:  # real 3D airframe, shaded, hazed by range; drones read darker than the sky
+            rgb, al = spr
+            rgb = bg * (1.0 - contrast) + rgb * 0.55 * contrast
+            for dx, dy in offs:
+                _stamp_rgb(img, rgb, al / len(offs), r["col"] + dx, r["row"] + dy)
+            continue
         alpha = _silhouette(r["shape"], r["pixels_on_object"],
                             (r["true_bbox"][2], r["true_bbox"][3]), dots_by_id.get(r["object_id"], ()))
         md = math.hypot(*r["motion"])
