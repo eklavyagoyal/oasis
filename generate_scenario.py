@@ -192,7 +192,12 @@ def generate(config):
     yaml_path.write_text(text)
     out = ROOT / "out" / name
     run_oasis(yaml_path, out)
-    return summarise(out, r, seed)
+    result = summarise(out, r, seed)
+    (out / "summary.json").write_text(json.dumps(result, indent=1) + "\n")
+    run_record = load_json(out / "run.json")
+    run_record["artifacts"] = sorted(set(run_record.get("artifacts", [])) | {"summary.json"})
+    (out / "run.json").write_text(json.dumps(run_record, indent=2) + "\n")
+    return result
 
 
 def main():

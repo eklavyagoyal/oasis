@@ -1,0 +1,253 @@
+# Fixed showcase scenario: Analog and radio-silent fiber FPVs: two intercepted, two continue to fictional water works.
+# Fictional protected site and response events; paths are synthetic.
+name: 04-low-fpv-water
+seed: 408
+start: '2026-11-04T14:01:00Z'
+duration_s: 1200.0
+truth_hz: 2.0
+area:
+  lat: 49.3754
+  lon: 31.1882
+  size_km: 10.0
+weather:
+  wind_from_deg: 61.5
+  wind_mps: 5.3
+  temp_c: 4.8
+  rh_pct: 81.7
+  visibility_km: 11.6
+  cloud_pct: 60.0
+objects:
+- id: SITE-01
+  type: water_works
+  side: friendly
+  pos:
+  - 49.403486
+  - 31.228049
+  start_s: 0.0
+  loop: false
+- id: ADT-01
+  type: ad_team
+  side: friendly
+  pos:
+  - 49.393545
+  - 31.213139
+  start_s: 0.0
+  loop: false
+- id: ADB-01
+  type: ad_battery
+  side: friendly
+  pos:
+  - 49.408536
+  - 31.249603
+  start_s: 0.0
+  loop: false
+- id: fiber_1
+  type: fpv_fiber
+  side: hostile
+  path:
+  - - 49.392457
+    - 31.123282
+    - 31.2
+  - - 49.404639
+    - 31.155366
+    - 31.2
+  - - 49.390417
+    - 31.158982
+    - 31.2
+  - - 49.403486
+    - 31.228049
+    - 5.0
+  speed_mps: 18.18
+  start_s: 681.9
+  end_s: 1093.7
+  loop: false
+- id: fpv_1
+  type: fpv_analog
+  side: hostile
+  path:
+  - - 49.417552
+    - 31.123282
+    - 25.0
+  - - 49.412466
+    - 31.140545
+    - 25.0
+  - - 49.406904
+    - 31.162126
+    - 25.0
+  - - 49.404703
+    - 31.162616
+    - 25.0
+  - - 49.403486
+    - 31.228049
+    - 5.0
+  speed_mps: 25.91
+  start_s: 323.1
+  loop: false
+- id: op_fpv_1
+  type: operator
+  side: hostile
+  pos:
+  - 49.413477
+  - 31.129593
+  start_s: 323.1
+  end_s: 633.4
+  loop: false
+  controls: fpv_1
+- id: fiber_2
+  type: fpv_fiber
+  side: hostile
+  path:
+  - - 49.40001
+    - 31.123282
+    - 27.8
+  - - 49.396606
+    - 31.171804
+    - 27.8
+  - - 49.417668
+    - 31.179031
+    - 27.8
+  - - 49.414006
+    - 31.180006
+    - 27.8
+  - - 49.403486
+    - 31.228049
+    - 5.0
+  speed_mps: 17.13
+  start_s: 678.8
+  end_s: 1054.5
+  loop: false
+- id: fpv_2
+  type: fpv_analog
+  side: hostile
+  path:
+  - - 49.408101
+    - 31.123282
+    - 26.8
+  - - 49.400578
+    - 31.150604
+    - 26.8
+  - - 49.396515
+    - 31.180952
+    - 26.8
+  - - 49.417668
+    - 31.186005
+    - 26.8
+  - - 49.403486
+    - 31.228049
+    - 5.0
+  speed_mps: 25.71
+  start_s: 403.5
+  loop: false
+- id: op_fpv_2
+  type: operator
+  side: hostile
+  pos:
+  - 49.410686
+  - 31.13647
+  start_s: 403.5
+  end_s: 800.2
+  loop: false
+  controls: fpv_2
+- id: INT-01
+  type: jedi
+  side: friendly
+  path:
+  - - 49.390993
+    - 31.215797
+    - 15.0
+  - - 49.398437
+    - 31.201365
+    - 15.1
+  speed_mps: 60.0
+  start_s: 1071.5
+  end_s: 1093.7
+  loop: false
+- id: op_INT-01
+  type: operator
+  side: friendly
+  pos:
+  - 49.390993
+  - 31.215797
+  start_s: 1071.5
+  end_s: 1093.7
+  loop: false
+  controls: INT-01
+- id: INT-02
+  type: jedi
+  side: friendly
+  path:
+  - - 49.391685
+    - 31.214541
+    - 15.0
+  - - 49.413749
+    - 31.18118
+    - 27.2
+  speed_mps: 60.0
+  start_s: 997.1
+  end_s: 1054.5
+  loop: false
+- id: op_INT-02
+  type: operator
+  side: friendly
+  pos:
+  - 49.391685
+  - 31.214541
+  start_s: 997.1
+  end_s: 1054.5
+  loop: false
+  controls: INT-02
+sensors:
+- id: RF-01
+  type: rf_df
+  pos:
+  - 49.392487
+  - 31.193725
+  mast_m: 25.0
+  params:
+    calib_bias_deg: -0.14
+- id: RF-02
+  type: rf_df
+  pos:
+  - 49.365507
+  - 31.127426
+  mast_m: 25.0
+  params:
+    calib_bias_deg: 0.02
+- id: RF-03
+  type: rf_df
+  pos:
+  - 49.389789
+  - 31.243449
+  mast_m: 25.0
+  params:
+    calib_bias_deg: -0.41
+- id: RADAR-01
+  type: radar
+  pos:
+  - 49.378997
+  - 31.202012
+  mast_m: 15.0
+  params: {}
+- id: CAM-01
+  type: camera
+  mount: RF-01
+  mast_m: 22.0
+  params:
+    fov_deg: 3.0
+    width: 1280
+    height: 720
+    fps: 1
+    cue: rf
+    max_frames: 60
+- id: RID-01
+  type: remote_id
+  mount: RF-01
+  mast_m: 25.0
+  params: {}
+- id: C2-01
+  type: c2
+  pos:
+  - 49.393545
+  - 31.213139
+  mast_m: 10.0
+  params: {}

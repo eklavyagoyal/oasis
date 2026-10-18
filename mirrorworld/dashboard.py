@@ -285,6 +285,30 @@ def build(out: Path | str) -> dict:
         if o.end_s is not None:
             add(o.end_s, f"{o.id} off", "off")
 
+    summary_path = out / "summary.json"
+    if summary_path.exists():
+        summary = json.loads(summary_path.read_text())
+        truth_events = summary.get("event_log", {}).get("truth", [])
+        intercepted_by = set()
+        for event in truth_events:
+            if event["type"] == "interception":
+                intercepted_by.add(event["response_id"])
+                add(event["t"], f"{event['object_id']} intercepted by {event['response_id']}", "interception")
+            elif event["type"] == "site_reached":
+                add(event["t"], f"{event['object_id']} reached {event['site_id']}", "site_reached")
+        for oid, result in summary.get("outcome", {}).get("hostiles", {}).items():
+            if result.get("site") == "approached" and "intercepted_by" not in result:
+                ts = truth.loc[truth["object_id"] == oid, "t"]
+                if not ts.empty:
+                    add(ts.max(), f"{oid} approached site; boundary not reached", "site_missed")
+        for o in cfg.objects:
+            if o.side != "friendly" or o.type not in ("interceptor", "interceptor_drone", "octopus", "jedi"):
+                continue
+            if o.id not in intercepted_by:
+                ts = truth.loc[truth["object_id"] == o.id, "t"]
+                if not ts.empty:
+                    add(ts.max(), f"{o.id} response ended without interception", "response_missed")
+
     for s in rf_sensors:  # terrain occlusion intervals
         site = ctx.sensor_xyz(s)
         for oid in obj_ids:
@@ -428,6 +452,7 @@ def export(out: Path | str) -> Path:
     for f in sorted(STATIC_DIR.iterdir()):
         if f.is_file() and not f.name.startswith("."):
             shutil.copyfile(f, dst / f.name)
+    shutil.copytree(STATIC_DIR / "icons", dst / "icons", dirs_exist_ok=True)
     payload = build(out)
     try:
         payload["terrain"]["texture"] = _bake_texture(out, payload["terrain"], dst)
@@ -459,7 +484,8 @@ class _Static(http.server.SimpleHTTPRequestHandler):
 def serve(out: Path | str, port: int) -> None:
     handler = functools.partial(_Static, directory=str(Path(out).resolve()))
     httpd = http.server.ThreadingHTTPServer(("127.0.0.1", port), handler)
-    print(f"serving http://localhost:{port}/dashboard/", flush=True)
+    path = "/dashboard/" if (Path(out) / "dashboard" / "index.html").exists() else "/"
+    print(f"serving http://localhost:{port}{path}", flush=True)
     try:
         httpd.serve_forever()
     except KeyboardInterrupt:

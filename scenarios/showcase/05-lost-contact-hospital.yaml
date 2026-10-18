@@ -1,0 +1,183 @@
+# Fixed showcase scenario: Contact loss and a failed response; both aircraft finish without reaching a fictional hospital.
+# Fictional protected site and response events; paths are synthetic.
+name: 05-lost-contact-hospital
+seed: 505
+start: '2026-11-04T14:01:00Z'
+duration_s: 1200.0
+truth_hz: 2.0
+area:
+  lat: 49.3754
+  lon: 31.1882
+  size_km: 10.0
+weather:
+  wind_from_deg: 219.4
+  wind_mps: 3.8
+  temp_c: 5.2
+  rh_pct: 82.1
+  visibility_km: 14.1
+  cloud_pct: 60.0
+objects:
+- id: SITE-01
+  type: hospital
+  side: friendly
+  pos:
+  - 49.398181
+  - 31.253118
+  start_s: 0.0
+  loop: false
+- id: ADT-01
+  type: ad_team
+  side: friendly
+  pos:
+  - 49.401898
+  - 31.230147
+  start_s: 0.0
+  loop: false
+- id: ADB-01
+  type: ad_battery
+  side: friendly
+  pos:
+  - 49.405733
+  - 31.234065
+  start_s: 0.0
+  loop: false
+- id: mavic_1
+  type: dji_mavic3
+  side: hostile
+  path:
+  - - 49.371036
+    - 31.123282
+    - 61.2
+  - - 49.377226
+    - 31.156865
+    - 61.2
+  - - 49.40155
+    - 31.182987
+    - 61.2
+  - - 49.400518
+    - 31.197517
+    - 61.2
+  - - 49.408
+    - 31.224457
+    - 35.0
+  - - 49.408
+    - 31.252082
+    - 35.0
+  - - 49.412282
+    - 31.253118
+    - 61.2
+  - - 49.407651
+    - 31.236508
+    - 61.2
+  - - 49.407651
+    - 31.253118
+    - 61.2
+  speed_mps: 12.32
+  start_s: 45.0
+  loop: false
+- id: op_mavic_1
+  type: operator
+  side: hostile
+  pos:
+  - 49.366554
+  - 31.127858
+  start_s: 45.0
+  end_s: 1181.3
+  loop: false
+  controls: mavic_1
+- id: fiber_1
+  type: fpv_fiber
+  side: hostile
+  path:
+  - - 49.375641
+    - 31.123282
+    - 12.7
+  - - 49.375352
+    - 31.187066
+    - 12.7
+  - - 49.386924
+    - 31.183081
+    - 12.7
+  - - 49.39638
+    - 31.241912
+    - 20.0
+  speed_mps: 16.47
+  start_s: 401.7
+  loop: false
+- id: jammer_1
+  type: jammer
+  side: friendly
+  pos:
+  - 49.365507
+  - 31.127426
+  alt_agl_m: 15.0
+  start_s: 775.9
+  end_s: 914.6
+  loop: false
+- id: INT-MISS
+  type: jedi
+  side: friendly
+  path:
+  - - 49.401898
+    - 31.230147
+    - 15.0
+  - - 49.40538
+    - 31.241912
+    - 120.0
+  speed_mps: 60.0
+  start_s: 500.0
+sensors:
+- id: RF-01
+  type: rf_df
+  pos:
+  - 49.392487
+  - 31.193725
+  mast_m: 25.0
+  params:
+    calib_bias_deg: -0.55
+- id: RF-02
+  type: rf_df
+  pos:
+  - 49.365507
+  - 31.127426
+  mast_m: 25.0
+  params:
+    calib_bias_deg: 0.02
+- id: RF-03
+  type: rf_df
+  pos:
+  - 49.389789
+  - 31.243449
+  mast_m: 25.0
+  params:
+    calib_bias_deg: 0.47
+- id: RADAR-01
+  type: radar
+  pos:
+  - 49.378997
+  - 31.202012
+  mast_m: 15.0
+  params: {}
+- id: CAM-01
+  type: camera
+  mount: RF-01
+  mast_m: 22.0
+  params:
+    fov_deg: 3.0
+    width: 1280
+    height: 720
+    fps: 1
+    cue: rf
+    max_frames: 60
+- id: RID-01
+  type: remote_id
+  mount: RF-01
+  mast_m: 25.0
+  params: {}
+- id: C2-01
+  type: c2
+  pos:
+  - 49.401898
+  - 31.230147
+  mast_m: 10.0
+  params: {}
