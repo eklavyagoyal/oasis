@@ -1,8 +1,10 @@
-# Mirror World
+# OASIS
 
 Synthetic aerial defence scenarios over real Ukrainian terrain: ground truth, the records each sensor produced, and an answer key linking observations to their sources.
 
 The static **Mirror World console** implements [the UI brief](docs/ui-prompt.md) with CesiumJS 1.124 and Vite. It opens in Delta mode at 14:02:07 UTC, showing the real Ros valley output already available in this workspace.
+
+For an immediate frontend setup with the included demo, see [the dashboard handoff](dashboard/README.md).
 
 ## Run the console
 
