@@ -178,6 +178,7 @@ function start(data, { skipOpening = false, onFrame = null, createOverlay = null
     follow,
     home: () => globe.home(),
     present: () => {
+      if (data.game) { notify("Guided briefing is available only for the supplied Python replay."); return; }
       opening.skip();
       presentation.start();
     },
@@ -192,6 +193,7 @@ function start(data, { skipOpening = false, onFrame = null, createOverlay = null
   const presentation = createPresentation(state, globe, actions),
     commands = createCommands(state, actions);
   renderAudit(data);
+  $("#present-start").hidden = !!data.game;
   const place = data.scenario.label ||  // coordinates, never place names
     `${data.scenario.area.lat.toFixed(4)}° N · ${data.scenario.area.lon.toFixed(4)}° E`;
   $("#scenario-name").textContent = place;
@@ -441,6 +443,8 @@ function start(data, { skipOpening = false, onFrame = null, createOverlay = null
   document.addEventListener(
     "keydown",
     (e) => {
+      const entry = document.querySelector("#oasis-entry");
+      if (entry && !entry.hidden) return;
       if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") {
         e.preventDefault();
         commands.open();
@@ -642,6 +646,7 @@ function start(data, { skipOpening = false, onFrame = null, createOverlay = null
   setMode("delta");
   setTab("feeds");
   setFeed(feeds.has("camera") ? "camera" : feeds.has("iq") ? "iq" : "camera");
+  if (data.game) setTab("inspector");
   $("#globe-error").hidden = true;
   $("#loading").hidden = true;
   updateUI();

@@ -7,7 +7,7 @@ import { validateData, escapeHTML as esc } from "./data.js";
 
 // Navigation only: Eklavya's existing start(), timeline, panels and map stay the simulation UI.
 export function createFlow({ start, getActive, notify, heroData }) {
-  let world = null, busy = false, endShown = false, entry;
+  let world = null, lastGenerated = null, busy = false, endShown = false, entry;
   const app = document.querySelector("#app");
   const controls = document.createElement("nav");
   controls.className = "oasis-flow-controls";
@@ -31,7 +31,17 @@ export function createFlow({ start, getActive, notify, heroData }) {
   }
   async function download() {
     try {
-      const blob = await exportAll();
+      let data;
+      try { data = JSON.parse(await (await exportAll()).text()); }
+      catch (error) {
+        if (!lastGenerated) throw error;
+        data = { schema: "oasis.export/1", exported_at: new Date().toISOString(), worlds: [], runs: [] };
+      }
+      if (lastGenerated) {
+        if (!data.worlds.some((w) => w.id === lastGenerated.world.id)) data.worlds.push(lastGenerated.world);
+        if (!data.runs.some((r) => r.id === lastGenerated.run.id)) data.runs.push(lastGenerated.run);
+      }
+      const blob = new Blob([JSON.stringify(data)], { type: "application/json" });
       const url = URL.createObjectURL(blob), a = document.createElement("a");
       a.href = url; a.download = "oasis-export.json"; a.click();
       setTimeout(() => URL.revokeObjectURL(url), 1000);
@@ -51,6 +61,7 @@ export function createFlow({ start, getActive, notify, heroData }) {
     busy = true; updateButtons();
     try {
       const generated = await generateWorld(cfg, { world: existingWorld, onProgress: progress, bakedData: heroData });
+      lastGenerated = generated;
       const dataset = validateData(generated.dataset);
       const next = start(dataset, { skipOpening: true, onFrame: tick, createOverlay: (globe, data) => createRecordedLayer(globe, data, { showFixedIcons: true }) });
       world = generated.world; endShown = false;
