@@ -1,0 +1,293 @@
+# mirrorworld.builder: knobs + seed -> validated scenario; geometry from the real DEM.
+# Reproduce: uv run python -m mirrorworld.builder --knobs-json '{"birds": true, "date": "2026-11-04", "defence": false, "drones": 8, "duration_min": 20, "entry_side": "N", "heading_spread_deg": 25.0, "mix": {"dji_mavic3": 1, "gerbera": 2, "orlan10": 1, "shahed136": 3}, "sector": "vovchansk-border", "seed": 3, "sensor_preset": "minimal", "template": "incoming", "time_of_day": "morning", "wifi": true}'
+name: vovchansk-border-s3
+seed: 3
+start: '2026-11-04T06:56:00Z'
+duration_s: 1200.0
+truth_hz: 2
+area:
+  lat: 50.2906
+  lon: 36.9416
+  size_km: 10.0
+weather:
+  wind_from_deg: 231.6
+  wind_mps: 5.5
+  temp_c: 5.2
+  rh_pct: 77.9
+  visibility_km: 17.0
+objects:
+- id: SITE-01
+  type: site
+  side: friendly
+  pos:
+  - 50.292773
+  - 36.90959
+- id: ADT-01
+  type: ad_team
+  side: friendly
+  pos:
+  - 50.281524
+  - 36.901658
+- id: ADB-01
+  type: ad_battery
+  side: friendly
+  pos:
+  - 50.299175
+  - 36.924332
+- id: shahed_1
+  type: shahed136
+  side: hostile
+  path:
+  - - 50.332868
+    - 36.937007
+    - 1107.2
+  - - 50.313658
+    - 36.903795
+    - 1107.2
+  - - 50.305281
+    - 36.921201
+    - 1107.2
+  - - 50.296564
+    - 36.933068
+    - 1107.2
+  - - 50.292773
+    - 36.90959
+    - 5.0
+  speed_mps: 51.67
+  start_s: 92.7
+- id: gerbera_1
+  type: gerbera
+  side: hostile
+  path:
+  - - 50.332868
+    - 36.965917
+    - 541.2
+  - - 50.32694
+    - 36.956472
+    - 541.2
+  - - 50.320734
+    - 36.954627
+    - 541.2
+  - - 50.311339
+    - 36.939436
+    - 541.2
+  - - 50.292773
+    - 36.90959
+    - 5.0
+  speed_mps: 47.65
+  start_s: 626.9
+- id: mavic_1
+  type: dji_mavic3
+  side: hostile
+  path:
+  - - 50.332868
+    - 36.992783
+    - 81.1
+  - - 50.312669
+    - 36.965001
+    - 81.1
+  - - 50.308272
+    - 36.93483
+    - 81.1
+  - - 50.321248
+    - 36.912155
+    - 81.1
+  - - 50.289538
+    - 36.887757
+    - 81.1
+  - - 50.279075
+    - 36.903059
+    - 81.1
+  - - 50.248332
+    - 36.903059
+    - 81.1
+  speed_mps: 11.77
+  start_s: 353.9
+- id: op_mavic_1
+  type: operator
+  side: hostile
+  pos:
+  - 50.324846
+  - 36.985518
+  start_s: 353.9
+  end_s: 1737.8
+  controls: mavic_1
+- id: shahed_2
+  type: shahed136
+  side: hostile
+  path:
+  - - 50.332868
+    - 36.982807
+    - 1359.6
+  - - 50.325556
+    - 36.942088
+    - 1359.6
+  - - 50.312395
+    - 36.918823
+    - 1359.6
+  - - 50.292773
+    - 36.90959
+    - 5.0
+  speed_mps: 50.42
+  start_s: 302.1
+- id: mavic_2
+  type: dji_mavic3
+  side: hostile
+  path:
+  - - 50.332868
+    - 36.981888
+    - 115.7
+  - - 50.323299
+    - 36.951738
+    - 115.7
+  - - 50.306597
+    - 36.962477
+    - 115.7
+  - - 50.319276
+    - 36.922626
+    - 115.7
+  - - 50.286783
+    - 36.897064
+    - 115.7
+  - - 50.282847
+    - 36.911446
+    - 115.7
+  - - 50.248332
+    - 36.911446
+    - 115.7
+  speed_mps: 11.11
+  start_s: 369.4
+- id: op_mavic_2
+  type: operator
+  side: hostile
+  pos:
+  - 50.328188
+  - 36.987832
+  start_s: 369.4
+  end_s: 1859.1
+  controls: mavic_2
+- id: orlan_1
+  type: orlan10
+  side: hostile
+  path:
+  - - 50.332868
+    - 36.95119
+    - 256.0
+  - - 50.325573
+    - 36.942214
+    - 256.0
+  - - 50.324251
+    - 36.937865
+    - 256.0
+  - - 50.28
+    - 36.897431
+    - 256.0
+  - - 50.279659
+    - 36.920824
+    - 256.0
+  - - 50.248332
+    - 36.920824
+    - 256.0
+  speed_mps: 28.03
+  start_s: 216.3
+- id: gerbera_2
+  type: gerbera
+  side: hostile
+  path:
+  - - 50.332868
+    - 36.973755
+    - 1102.3
+  - - 50.324534
+    - 36.953084
+    - 1102.3
+  - - 50.32375
+    - 36.952062
+    - 1102.3
+  - - 50.315844
+    - 36.908407
+    - 1102.3
+  - - 50.292773
+    - 36.90959
+    - 5.0
+  speed_mps: 47.59
+  start_s: 423.9
+- id: orlan_2
+  type: orlan10
+  side: hostile
+  path:
+  - - 50.332868
+    - 36.902141
+    - 431.1
+  - - 50.302715
+    - 36.898659
+    - 431.1
+  - - 50.300217
+    - 36.925687
+    - 431.1
+  - - 50.281297
+    - 36.897159
+    - 431.1
+  - - 50.280156
+    - 36.918931
+    - 431.1
+  - - 50.248332
+    - 36.918931
+    - 431.1
+  speed_mps: 30.43
+  start_s: 625.4
+- id: wifi_1
+  type: wifi_ap
+  side: neutral
+  pos:
+  - 50.2906
+  - 36.9416
+  alt_agl_m: 20.0
+- id: geese_1
+  type: geese
+  side: neutral
+  path:
+  - - 50.309483
+    - 37.007758
+    - 246.1
+  - - 50.271717
+    - 36.875442
+    - 246.1
+  start_s: 626.5
+sensors:
+- id: RF-01
+  type: rf_df
+  pos:
+  - 50.310385
+  - 36.976791
+  mast_m: 25.0
+  params:
+    calib_bias_deg: -0.46
+- id: RF-02
+  type: rf_df
+  pos:
+  - 50.310385
+  - 36.892333
+  mast_m: 25.0
+  params:
+    calib_bias_deg: -0.8
+- id: RADAR-01
+  type: radar
+  pos:
+  - 50.259124
+  - 36.88811
+  mast_m: 15.0
+- id: CAM-01
+  type: camera
+  mount: RF-01
+  mast_m: 22.0
+  params:
+    fov_deg: 3.0
+    width: 1280
+    height: 720
+    fps: 1
+    cue: rf
+- id: C2-01
+  type: c2
+  pos:
+  - 50.281524
+  - 36.901658
