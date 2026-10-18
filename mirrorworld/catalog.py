@@ -7,7 +7,8 @@ Link fields:
             `controls` points at this drone transmits it (uplink) — so DF on it finds the pilot.
   band_mhz  (lo, hi) the link lives in. `channels` (centre MHz) when it sits on fixed channels.
   hop       re-tunes every packet across the band (FHSS): each detection shows a different freq.
-  duty      fraction of time on air.
+  duty      fraction of time on air (airtime). DJI remote_id = DroneID: unencrypted OFDM burst every
+            ~640 ms inside OcuSync carrying drone AND pilot GPS (lane D decodes it, not rf_df).
   sig_class what a spectrum classifier would call it.
 """
 
@@ -21,18 +22,18 @@ CATALOG = {
         "links": [
             {"name": "video", "tx": "self", "band_mhz": (2400.0, 2483.5), "bw_mhz": 20, "eirp_dbm": 26,
              "duty": 0.9, "hop": False, "sig_class": "OcuSync video"},
-            {"name": "rc", "tx": "operator", "band_mhz": (2400.0, 2483.5), "bw_mhz": 1.4, "eirp_dbm": 23,
-             "duty": 0.3, "hop": True, "sig_class": "OcuSync RC"},
+            {"name": "rc", "tx": "operator", "band_mhz": (2400.0, 2483.5), "bw_mhz": 5, "eirp_dbm": 23,
+             "duty": 0.25, "hop": True, "sig_class": "OcuSync RC"},
         ],
     },
     "fpv_analog": {
         "kind": "drone", "shape": "quad", "span_m": 0.30, "speed_mps": 25, "remote_id": False,
         "sound": {"f0_hz": 500, "level_db_1m": 86},  # 7" tri-blade
         "links": [
-            {"name": "video", "tx": "self", "band_mhz": (5645.0, 5930.0), "channels": _VIDEO_58, "bw_mhz": 18,
+            {"name": "video", "tx": "self", "band_mhz": (5645.0, 5930.0), "channels": _VIDEO_58, "bw_mhz": 20,
              "eirp_dbm": 29, "duty": 1.0, "hop": False, "sig_class": "Analog FM video"},
             {"name": "elrs", "tx": "operator", "band_mhz": (863.0, 870.0), "bw_mhz": 0.5, "eirp_dbm": 27,
-             "duty": 0.15, "hop": True, "sig_class": "ELRS LoRa FHSS"},
+             "duty": 0.8, "hop": True, "sig_class": "ELRS LoRa FHSS"},
         ],
     },
     "fpv_fiber": {  # fiber-optic spool: no radio at all — only ears and eyes catch it
@@ -45,7 +46,7 @@ CATALOG = {
         "sound": {"f0_hz": 117, "level_db_1m": 110},  # MD550 two-stroke ~7000 rpm, "moped"
         "links": [
             {"name": "lte", "tx": "self", "band_mhz": (1710.0, 1785.0), "bw_mhz": 5, "eirp_dbm": 23,
-             "duty": 0.05, "hop": False, "sig_class": "LTE uplink"},
+             "duty": 0.005, "hop": False, "sig_class": "LTE uplink"},
         ],
     },
     "geese": {  # migrating flock: clutter for cameras, mics (and radar if anyone adds one)
@@ -58,7 +59,7 @@ CATALOG = {
         "kind": "emitter", "height_m": 4.0,
         "links": [
             {"name": "wifi", "tx": "self", "band_mhz": (2401.0, 2473.0), "channels": _WIFI_24, "bw_mhz": 20,
-             "eirp_dbm": 20, "duty": 0.3, "hop": False, "sig_class": "Wi-Fi"},
+             "eirp_dbm": 20, "duty": 0.05, "hop": False, "sig_class": "Wi-Fi"},
         ],
     },
     "jammer": {  # barrage jammer over the 2.4 GHz ISM band
