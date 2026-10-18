@@ -22,7 +22,6 @@ from . import config, itu
 from .catalog import CATALOG
 from .world import World
 
-C_SOUND = 343.0  # m/s, dry air ~5 C as in the scenario weather
 FORBIDDEN_COLS = {"object_id", "los", "label"}
 FORBIDDEN_PREFIXES = ("true_", "error_")
 
@@ -460,7 +459,8 @@ def check_acoustic(sc):
     if not mics:
         return _result("acoustic_delay", "Acoustic delay", "SKIP", None, "≤ 2%",
                        "no microphone in scenario")
-    worst, bad_cause = 0.0, 0
+    c_sound = 331.3 + 0.606 * sc.cfg.weather.temp_c  # m/s at the scenario's air temperature; wind is not
+    worst, bad_cause = 0.0, 0                         # modelled here, so the 2% tolerance has to cover it
     for sid in mics:
         r = sc.recs(sid)
         kp = sc.root / "answer_key" / f"{sid}.csv"
@@ -482,9 +482,9 @@ def check_acoustic(sc):
             sel = np.flatnonzero(obj == o)
             pos0 = sc.state(o, t[sel])
             r0 = np.linalg.norm(pos0 - site, axis=1)
-            tau = t[sel] - r0 / C_SOUND  # sound leaves the source before it arrives
+            tau = t[sel] - r0 / c_sound  # sound leaves the source before it arrives
             pos1 = sc.state(o, tau)
-            delay = np.linalg.norm(pos1 - site, axis=1) / C_SOUND
+            delay = np.linalg.norm(pos1 - site, axis=1) / c_sound
             good = np.isfinite(delay) & (delay > 0) & np.isfinite(delay_key[sel])
             rel = np.abs(delay_key[sel][good] - delay[good]) / delay[good]
             if rel.size:
