@@ -1,20 +1,29 @@
 # OASIS: live build status
 
-_Updated 15:41 CEST, 18 Oct 2026. Auto-generated on the `status` branch; `main` holds the product._
+_Updated 16:10 CEST, 18 Oct 2026. Auto-generated on the `status` branch; `main` holds the product._
 
 **OASIS** generates synthetic aerial defence scenarios over real Ukrainian terrain: one true world, every sensor's physically faithful recordings, and an answer key tracing each record to its cause.
 
 ## What changed since the last update
 
-- The hero day was re-run: its 10-minute window now passes 9 of 9 applicable independent checks, against 1 for the one-shot LLM dataset.
-- The README now tells the full story: the check-by-check proof, the hero-day timeline, the seed engine with each template's audit, the log book and the known limits.
-- Console markers and labels now scale with zoom, with detail lines only up close, so the overview stays clean.
-- The console is live as a public static site (trimmed media), and the commit history carries no tool attribution.
+- New front door: a 3D globe with Ukraine highlighted, a seed dialog (world seed, scenario seed, attacker mix, duration) and instant browser exercises that play inside the existing console.
+- Five fixed showcase scenarios (power station, water works, hospital) reproduce their planned outcomes on the full sensor set; two audit fully clean.
+- Map markers are now high-resolution glass badges, coloured by side and status, for sites, teams, sensors and drones.
+- Fixed while integrating: the seed dialog rejected every attacker type, and the entry globe failed to load in production builds.
 
 ## Commits on main since the last update
 
-- Console: markers and labels scale with zoom (about 1x in the overview, up to 1.7x close in), detail lines only within 12 km, status shown as colour at any zoom, one marker and label per sensor mast (c40657d)
-- README: the full story for the jury: proof table per check against the one-shot LLM (9 pass vs 1 pass), hero-day timeline, seed engine and templates with their audits, log book, console, known limits (c313830)
+- Seed screen: accept attackers by catalog category (the catalog's side field names nations, not roles); bundle the map library's worker so the entry globe loads in production builds (3244f09)
+- Console flow: neutral comments, drop a link to a guide that does not exist (eb8213b)
+- Drop the internal iteration notes from the console branch (46e278b)
+- feat: connect OSIRIS entry and seed screen to Night Glass simulation (e120f03)
+- fix: retain source provenance and complete browser run records (9ec1fa1)
+- feat: render recorded browser runs inside existing Cesium map (5483b81)
+- feat: transplant OSIRIS entry and Ukraine seed screen into Vite (4f91300)
+- fix: distinguish generated readings from real terrain in existing console (b4437aa)
+- feat: recover browser seed engine on latest Night Glass base (9df2347)
+- Console: glass badge markers (dark disc, coloured ring and glow, white catalog glyph) rendered at 128 px; colour by side and status for sites, teams, sensors and drones (971aef9)
+- Add five fixed replay showcase scenarios (28022b6)
 
 ## Sensor modules on main
 
