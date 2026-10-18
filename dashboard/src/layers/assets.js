@@ -14,6 +14,13 @@ export const ICONS = {
   microphone: "microphone-2",
 };
 export const iconUrl = (type) => (ICONS[type] ? `./icons/${ICONS[type]}.svg` : null);
+// Markers follow the map: ~1x at the overview distance, up to 1.7x close in, never below 0.8x.
+export const ICON_SCALE = new C.NearFarScalar(2.0e3, 1.7, 5.0e4, 0.8);
+export const LABEL_SCALE = new C.NearFarScalar(2.0e3, 1.3, 5.0e4, 0.9);
+const NEAR_ONLY = new C.DistanceDisplayCondition(0, 1.2e4); // detail lines appear once you zoom in
+const OUTLINE = { outlineWidth: 3, style: C.LabelStyle.FILL_AND_OUTLINE, horizontalOrigin: C.HorizontalOrigin.LEFT,
+  pixelOffsetScaleByDistance: ICON_SCALE, scaleByDistance: LABEL_SCALE,
+  disableDepthTestDistance: Number.POSITIVE_INFINITY };
 const TONE = { reached: "hostile", approached: "rf", alerted: "rf", responding: "rf" };
 
 function statusAt(a, t) {
@@ -33,20 +40,30 @@ export function createAssets(globe, state) {
       billboard: {
         image: iconUrl(a.type) ?? iconUrl(a.kind === "site" ? "site" : "ad_team"),
         color: color(base),
-        width: 26,
-        height: 26,
+        width: 34,
+        height: 34,
+        scaleByDistance: ICON_SCALE,
         disableDepthTestDistance: Number.POSITIVE_INFINITY,
       },
       label: {
         text: a.id,
-        font: '12px "Geist Mono"',
+        font: '600 13px "Geist Mono"',
         fillColor: color(base),
-        pixelOffset: new C.Cartesian2(16, -2),
-        horizontalOrigin: C.HorizontalOrigin.LEFT,
+        pixelOffset: new C.Cartesian2(22, -6),
         outlineColor: color(palette.void),
-        outlineWidth: 3,
-        style: C.LabelStyle.FILL_AND_OUTLINE,
-        disableDepthTestDistance: Number.POSITIVE_INFINITY,
+        ...OUTLINE,
+      },
+    });
+    const detail = source.entities.add({
+      position: globe.position(a.lon, a.lat, ground + 4),
+      label: {
+        text: "",
+        font: '11px "Geist Mono"',
+        fillColor: color(base),
+        pixelOffset: new C.Cartesian2(22, 9),
+        outlineColor: color(palette.void),
+        distanceDisplayCondition: NEAR_ONLY,
+        ...OUTLINE,
       },
     });
     const rings = a.kind !== "site" ? [] : [1000, 100].map((r) =>
@@ -62,7 +79,7 @@ export function createAssets(globe, state) {
         },
       }),
     );
-    return { a, entity, rings, ground, base };
+    return { a, entity, detail, rings, ground, base };
   });
   // Sensor sites: one icon per mast (mounted sensors share it), struck dark once destroyed.
   const masts = new Map();
@@ -79,37 +96,39 @@ export function createAssets(globe, state) {
       position: globe.position(s.lon, s.lat, s.alt),
       billboard: {
         image: iconUrl(s.type),
-        color: color(palette.rf),
-        width: 22,
-        height: 22,
+        color: color(palette.system),
+        width: 28,
+        height: 28,
+        scaleByDistance: ICON_SCALE,
         disableDepthTestDistance: Number.POSITIVE_INFINITY,
       },
       label: {
         text: ids.join(" · "),
-        font: '11px "Geist Mono"',
-        fillColor: color(palette.rf),
-        pixelOffset: new C.Cartesian2(14, -2),
-        horizontalOrigin: C.HorizontalOrigin.LEFT,
+        font: '12px "Geist Mono"',
+        fillColor: color(palette.system),
+        pixelOffset: new C.Cartesian2(18, -2),
         outlineColor: color(palette.void),
-        outlineWidth: 3,
-        style: C.LabelStyle.FILL_AND_OUTLINE,
-        disableDepthTestDistance: Number.POSITIVE_INFINITY,
+        ...OUTLINE,
       },
     }),
+    ids,
   }));
   return {
     update() {
-      for (const { s, entity } of sites) {
-        const dead = s.dead_t != null && state.t > s.dead_t;
+      for (const { s, entity, ids } of sites) {
+        const dead = s.dead_t != null && state.t > s.dead_t,
+          tone = color(dead ? palette.neutral : palette.system, dead ? 0.55 : 1);
         entity.position = globe.position(s.lon, s.lat, s.alt);
-        entity.billboard.color = color(dead ? palette.hostile : palette.rf, dead ? 0.5 : 1);
+        entity.billboard.color = tone;
+        entity.label.fillColor = tone;
+        entity.label.text = `${ids.join(" · ")}${dead ? " / DOWN" : ""}`;
       }
-      for (const { a, entity, rings, ground, base } of items) {
+      for (const { a, entity, detail, rings, ground, base } of items) {
         const s = statusAt(a, state.t);
-        const tone = palette[TONE[s]] ?? base;
-        entity.position = globe.position(a.lon, a.lat, ground + 4);
-        entity.label.text = `${a.id} · ${a.label.toUpperCase()} · ${s.toUpperCase()}`;
-        entity.label.fillColor = color(tone);
+        const tone = palette[TONE[s]] ?? base;  // status shows as colour at any zoom, as text up close
+        entity.position = detail.position = globe.position(a.lon, a.lat, ground + 4);
+        entity.billboard.color = entity.label.fillColor = detail.label.fillColor = color(tone);
+        detail.label.text = `${a.label.toUpperCase()} · ${s.toUpperCase()}`;
         for (const ring of rings) ring.ellipse.height = globe.displayHeight(a.lon, a.lat, ground + 1);
       }
     },
