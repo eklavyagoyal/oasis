@@ -76,14 +76,20 @@ A calm, luminous instrument floating over a real landscape at dusk. Deep blue-bl
 
 ## Signature moments (build these with care)
 1. **Opening, ~6 s, skippable.**
-   - A dark globe with a thin atmospheric rim.
-   - Slow push toward Ukraine.
+   - Ukraine from altitude: dark terrain, a faint national outline.
+   - Slow push toward the sector.
    - The sector's island lights up as the camera arrives.
-   - A title card fades in: **OASIS** (Unbounded) / "ROS VALLEY · 4 NOV 2026 · ONE WORLD, EVERY SIGNAL".
+   - A title card fades in: **OASIS** (Unbounded) / "49.3700° N · 31.2000° E · 04 NOV 2026 · ONE WORLD, EVERY SIGNAL".
 2. **PRESENT chapters:**
    - A full-width lower third: a big chapter number (Unbounded), a 1-line title, a 1-line plain-English explanation, and one hero metric (e.g. "−30 dB behind the ridge", "7 PASS vs 1 PASS").
    - Eased camera flights, with only the relevant layers on.
 3. **Audit card:** two huge numerals side by side, "OASIS 7/7" vs "ONE-SHOT LLM 1/4". Every check is a calm row with a PASS/FAIL chip and its value; expandable.
+
+## Place names: none. Coordinates only. Ukraine only.
+- Never show a place name: no towns, rivers, regions or sector names. Show `MW.scenario.label` (e.g. `49.3700° N · 31.2000° E`) where a place name would go, plus live cursor coordinates (lat/lon, 4 decimals) in the bottom bar.
+- Object labels are their ids; selected-object callouts show coordinates and alt AGL.
+- The world is **Ukraine only**. The opening starts from a view of Ukraine (dark terrain, a faint national outline), not the whole planet, then descends to the scenario slab.
+- Title card: **OASIS** / `49.3700° N · 31.2000° E · 04 NOV 2026` (from `MW.scenario`). Remove any hardcoded location text (e.g. "ROS RIVER VALLEY").
 
 ## Rules
 - Keep the data contract, features, shortcuts, the static build (`base:'./'`) and no API keys.
