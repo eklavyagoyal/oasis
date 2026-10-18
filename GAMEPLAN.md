@@ -20,6 +20,7 @@ Roles: **Core** (generator, integration), **Pitch** (deck, demo script, presenti
 - **Ground assets:** RF-01/RF-02 (direction finding), RADAR-01, CAM-01 (EO), ACOUSTIC-01, C2-01 (alerts + response-asset status), SITE-01 (protected site: approached / reached / not reached).
 - **Aircraft archetypes:** Geran-2/Shahed, Gerbera decoy, Orlan-10, ZALA, Supercam, plus small UAS (Mavic, analog FPV, fiber FPV).
 - **Response assets:** interceptor drone, mobile AD team, AD battery. They're status changes (available → alerted → responding → outcome); no weapon mechanics.
+- **Remote access:** everything reachable over the tailnet via `tailscale serve` (HTTPS, tailnet-only, never public); SSH over the tailnet. See `CONTRACT.md` → Remote access.
 - **Out of scope:** Telegram/X scraping (pitch slide only), live data, regions outside Ukraine, 3D buildings.
 
 ## Status board
