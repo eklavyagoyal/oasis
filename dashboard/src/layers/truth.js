@@ -1,5 +1,6 @@
 import { sample, heightAt, upperBound } from "../data.js";
 import { ll, color, palette } from "../globe.js";
+import { iconUrl } from "./assets.js";
 const C = window.Cesium;
 function glyph(o) {
   const shape =
@@ -59,7 +60,7 @@ export function createTruth(globe, state) {
         }),
       ]),
       billboard: {
-        image: glyph(object),
+        image: iconUrl(object.type) ?? glyph(object),
         width: 30,
         height: 30,
         heightReference: C.HeightReference.NONE,
