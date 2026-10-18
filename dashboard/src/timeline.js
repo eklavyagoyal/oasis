@@ -7,7 +7,7 @@ export function createTimeline(state, seek) {
     scrubber = $("#time-scrubber"),
     data = state.data,
     duration = data.scenario.duration_s;
-  let focus = duration > 18000,
+  let focus = !data.game && duration > 18000,
     min = focus ? 18000 : 0,
     max = duration;
   let boundsKey = "",
@@ -25,7 +25,8 @@ export function createTimeline(state, seek) {
     max = duration;
     scrubber.min = min;
     scrubber.max = max;
-    $("#timeline-focus").textContent = focus ? "FULL DAY" : "DUSK";
+    $("#timeline-focus").hidden = !!data.game;
+    $("#timeline-focus").textContent = focus ? "FULL SCENARIO" : "DUSK SEGMENT";
     boundsKey = "";
     draw();
   }
