@@ -11,6 +11,8 @@ from .catalog import CATALOG
 
 UKRAINE = (44.0, 52.5, 22.0, 40.5)  # ponytail: lat/lon bbox, not the border polygon
 M_PER_DEG = 111_195.0  # mean-earth metres per degree; world.py's local frame uses the same
+ID = r"^[A-Za-z0-9_-][A-Za-z0-9_.-]{0,63}$"  # safe as a file name, URL segment, CoT uid and HTML text
+MODULE = r"^[a-z][a-z0-9_]{0,31}$"  # sensor type = module name under mirrorworld/sensors/
 
 
 class Spoof(BaseModel):
@@ -22,7 +24,7 @@ class Spoof(BaseModel):
 
 
 class Obj(BaseModel):
-    id: str
+    id: str = Field(pattern=ID)
     type: str  # CATALOG key
     side: Literal["hostile", "friendly", "neutral", "unknown"] = "unknown"
     pos: tuple[float, float] | None = None  # static: (lat, lon)
@@ -48,8 +50,8 @@ class Obj(BaseModel):
 
 
 class Sensor(BaseModel):
-    id: str
-    type: str  # module name in mirrorworld/sensors/
+    id: str = Field(pattern=ID)
+    type: str = Field(pattern=MODULE)  # module name in mirrorworld/sensors/
     pos: tuple[float, float] | None = None  # (lat, lon) ...
     mount: str | None = None  # ... or share another sensor's site (camera on RF1's tower)
     mast_m: float = 10.0  # this sensor's own height above ground
@@ -73,7 +75,7 @@ class Weather(BaseModel):
 
 
 class Scenario(BaseModel):
-    name: str
+    name: str = Field(pattern=ID)
     seed: int = 0
     start: datetime  # UTC, e.g. 2026-11-03T13:55:00Z
     duration_s: float = Field(gt=0, lt=86400)

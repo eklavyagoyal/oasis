@@ -24,6 +24,12 @@ const LOB_WINDOW_S = 3;
 const FIX_WINDOW_S = 10;
 const CHART_WINDOW_S = 600;
 
+function esc(v) {  // data.js can come from LLM-written scenarios: never trust it as HTML
+  return String(v).replace(/[&<>"']/g, function (c) {
+    return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
+  });
+}
+
 function classColor(i) {
   return CLASS_COLORS[((i | 0) + CLASS_COLORS.length) % CLASS_COLORS.length];
 }
@@ -437,7 +443,7 @@ function buildFeeds() {
     const card = document.createElement("div");
     card.className = "card";
     card.innerHTML =
-      '<div class="cap">' + s.id + " · " + s.type + "</div>" +
+      '<div class="cap">' + esc(s.id) + " · " + esc(s.type) + "</div>" +
       '<div class="body"><span class="placeholder">no media yet</span></div>' +
       '<audio controls preload="none"></audio>';
     host.appendChild(card);
@@ -462,9 +468,13 @@ function updateFeeds(now) {
     }
     if (img && fc.imgT !== img.t) {
       fc.imgT = img.t;
-      fc.body.innerHTML =
-        '<img src="' + img.src + '" alt="' + fc.sensor + '">' +
-        '<div class="cap">' + fmtClock(img.t) + "</div>";
+      const im = document.createElement("img");
+      im.src = img.src;
+      im.alt = fc.sensor;
+      const cap = document.createElement("div");
+      cap.className = "cap";
+      cap.textContent = fmtClock(img.t);
+      fc.body.replaceChildren(im, cap);
     } else if (!img && fc.imgT !== null) {
       fc.imgT = null;
       fc.body.innerHTML = '<span class="placeholder">no media yet</span>';
@@ -603,14 +613,14 @@ function buildLegend() {
     host.insertAdjacentHTML(
       "beforeend",
       '<div class="item"><span class="swatch" style="background:' + SIDE_COLORS[side] +
-        '"></span>side · ' + side + "</div>"
+        '"></span>side · ' + esc(side) + "</div>"
     );
   }
   MW.classes.forEach(function (c, i) {
     host.insertAdjacentHTML(
       "beforeend",
       '<div class="item"><span class="swatch" style="background:' + classColor(i) +
-        '"></span>class · ' + c + "</div>"
+        '"></span>class · ' + esc(c) + "</div>"
     );
   });
 }
@@ -619,7 +629,7 @@ function buildKeyMoments() {
   const host = el("keymoments");
   for (const ev of MW.events) {
     const li = document.createElement("li");
-    li.innerHTML = '<span class="kt">' + fmtClock(ev.t) + "</span>" + ev.label;
+    li.innerHTML = '<span class="kt">' + fmtClock(ev.t) + "</span>" + esc(ev.label);
     li.addEventListener("click", function () {
       clock.currentTime = TIME0(ev.t);
       const words = ev.label.split(/[\s:,]+/);
@@ -642,7 +652,7 @@ function updateStats() {
   const med = errs.length ? errs[Math.floor(errs.length / 2)] : null;
   parts.push("fixes: " + MW.fixes.t.length);
   parts.push("median fix err: " + (med === null ? "n/a" : med + " m"));
-  el("stats").innerHTML = parts.join("<br>");
+  el("stats").innerHTML = parts.map(esc).join("<br>");
 }
 
 function renderAudit() {
@@ -668,7 +678,7 @@ function renderAudit() {
     .map(function (r) {
       const ok = r[1] === true || r[1] === "PASS" || r[1] === "pass";
       const cls = ok ? "pass" : "fail";
-      return '<div class="' + cls + '">' + (ok ? "PASS" : "FAIL") + " · " + r[0] + "</div>";
+      return '<div class="' + cls + '">' + (ok ? "PASS" : "FAIL") + " · " + esc(r[0]) + "</div>";
     })
     .join("");
 }
@@ -681,11 +691,11 @@ for (const s of rfSensors) {
   shadowOn[s.id] = false;
   el("lob-toggles").insertAdjacentHTML(
     "beforeend",
-    '<label><input type="checkbox" data-sid="' + s.id + '" checked> LOB ' + s.id + "</label><br>"
+    '<label><input type="checkbox" data-sid="' + esc(s.id) + '" checked> LOB ' + esc(s.id) + "</label><br>"
   );
   el("shadow-toggles").insertAdjacentHTML(
     "beforeend",
-    '<label><input type="checkbox" data-sid="' + s.id + '"> shadow ' + s.id + "</label><br>"
+    '<label><input type="checkbox" data-sid="' + esc(s.id) + '"> shadow ' + esc(s.id) + "</label><br>"
   );
 }
 el("lob-toggles").addEventListener("change", function (e) {
