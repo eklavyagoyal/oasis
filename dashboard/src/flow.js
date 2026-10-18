@@ -46,6 +46,11 @@ export function createFlow({ start, getActive, notify, heroData }) {
     app.inert = true;
     entry.show();
   }
+  function returnToOsiris() {
+    app.inert = false;
+    entry.hide();
+    window.location.assign("/");
+  }
   async function generate(cfg, progress = () => {}, existingWorld = null) {
     if (busy) throw new Error("A world is already being generated.");
     busy = true; updateButtons();
@@ -94,7 +99,7 @@ export function createFlow({ start, getActive, notify, heroData }) {
     start(heroData, { skipOpening: true });
     app.inert = false; updateButtons();
   }
-  entry = createEntry({ onGenerate: generate, onReplay: replay, onExport: download, getCounts: counts });
+  entry = createEntry({ onGenerate: generate, onReplay: replay, onExport: download, getCounts: counts, onBack: returnToOsiris });
   // Scenario library: every run listed comes from the Python physics engine (truth, every sensor, answer key, audit).
   const library = document.createElement("dialog");
   library.className = "oasis-library";
@@ -133,8 +138,6 @@ export function createFlow({ start, getActive, notify, heroData }) {
       notify(`Could not load ${run.title}: ${error.message}`, 12000);
     }
   }
-  const enter = document.querySelector("#enter-simulation");
-  if (enter) { const fresh = enter.cloneNode(true); enter.replaceWith(fresh); fresh.onclick = openLibrary; }
   button("new-world").textContent = "SCENARIOS";
   button("new-world").onclick = openLibrary;
   button("same-world").onclick = rerun;
@@ -150,8 +153,8 @@ export function createFlow({ start, getActive, notify, heroData }) {
   result.querySelector("#result-rerun").onclick = rerun;
   result.querySelector("#result-new").onclick = showEntry;
   result.querySelector("#result-export").onclick = download;
-  result.querySelector("#result-globe").onclick = showEntry;
-  document.querySelector(".brand").onclick = (e) => { e.preventDefault(); showEntry(); };
+  result.querySelector("#result-globe").onclick = returnToOsiris;
+  document.querySelector(".brand").onclick = (e) => { e.preventDefault(); returnToOsiris(); };
   updateButtons();
   showEntry();
   return { tick, show: showEntry, loaded() { updateButtons(); }, destroy() { entry.destroy(); controls.remove(); result.remove(); notes.remove(); app.inert = false; } };
