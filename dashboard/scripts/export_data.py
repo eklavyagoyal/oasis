@@ -186,6 +186,9 @@ def main():
                 raise ValueError('Baked terrain texture must exist inside the exported dashboard')
             shutil.copy2(texture_path, output / 'texture.jpg')
             data['terrain']['texture'] = {**texture, 'src': 'texture.jpg'}
+        # Coordinate label (shown instead of place names) and the high-value asset layer come from the same bake.
+        data['scenario'].update({k: payload['scenario'][k] for k in ('label', 'region') if k in payload.get('scenario', {})})
+        data['assets'] = payload.get('assets', [])
     data['terrain'].setdefault('texture', None)
     (output / 'data.js').write_text('window.MW = ' + json.dumps(data, separators=(',', ':'), allow_nan=False) + ';\n')
     print(json.dumps({'scenario': data['scenario']['name'], 'objects': len(data['objects']),

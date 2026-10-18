@@ -8,8 +8,8 @@ __pycache__/
 .env
 
 # downloaded data and generated scenarios
-/cache/
-/out/
+/cache
+/out
 
 # static console dependencies, generated data and build
 node_modules/

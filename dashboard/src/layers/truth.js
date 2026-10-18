@@ -1,5 +1,6 @@
 import { sample, heightAt, upperBound } from "../data.js";
 import { ll, color, palette } from "../globe.js";
+import { iconUrl } from "./assets.js";
 const C = window.Cesium;
 function glyph(o) {
   const shape =
@@ -13,7 +14,7 @@ function glyph(o) {
             ? '<path d="m16 3 13 25-13-7-13 7Z"/>'
             : /supercam|wing/.test(o.type)
               ? '<path d="M16 2v27M3 18l13-7 13 7M11 28l5-3 5 3"/>'
-            : '<path d="m9 9 14 14m0-14L9 23"/><circle cx="8" cy="8" r="4"/><circle cx="24" cy="8" r="4"/><circle cx="8" cy="24" r="4"/><circle cx="24" cy="24" r="4"/><path d="m16 3-3 4h6Z"/>';
+              : '<path d="m9 9 14 14m0-14L9 23"/><circle cx="8" cy="8" r="4"/><circle cx="24" cy="8" r="4"/><circle cx="8" cy="24" r="4"/><circle cx="24" cy="24" r="4"/><path d="m16 3-3 4h6Z"/>';
   return (
     "data:image/svg+xml," +
     encodeURIComponent(
@@ -23,7 +24,8 @@ function glyph(o) {
 }
 export function createTruth(globe, state) {
   const { viewer, scene } = globe,
-    data = state.data;
+    // sites and response teams are drawn by the assets layer
+    data = { ...state.data, objects: state.data.objects.filter((o) => !['site', 'response'].includes(o.kind)) };
   const source = new C.CustomDataSource("ground truth");
   viewer.dataSources.add(source);
   const entities = new Map(),
@@ -58,7 +60,7 @@ export function createTruth(globe, state) {
         }),
       ]),
       billboard: {
-        image: glyph(object),
+        image: iconUrl(object.type) ?? glyph(object),
         width: 30,
         height: 30,
         heightReference: C.HeightReference.NONE,
@@ -79,11 +81,25 @@ export function createTruth(globe, state) {
     entities.set(object.id, entity);
   }
   const trails = scene.primitives.add(new C.PolylineCollection());
-  const trailPool = new Map(data.objects.filter(o => ['drone', 'bird'].includes(o.kind)).map(o => [o.id,
-    Array.from({length: 8}, (_, i) => trails.add({positions: [C.Cartesian3.ZERO, C.Cartesian3.UNIT_X],
-      show: false, width: 2.2, material: C.Material.fromType('PolylineGlow', {
-        color: color(palette.truth, 0.06 + (i / 7) * 0.56), glowPower: 0.13, taperPower: 1,
-      })}))]));
+  const trailPool = new Map(
+    data.objects
+      .filter((o) => ["drone", "bird"].includes(o.kind))
+      .map((o) => [
+        o.id,
+        Array.from({ length: 8 }, (_, i) =>
+          trails.add({
+            positions: [C.Cartesian3.ZERO, C.Cartesian3.UNIT_X],
+            show: false,
+            width: 2.2,
+            material: C.Material.fromType("PolylineGlow", {
+              color: color(palette.truth, 0.06 + (i / 7) * 0.56),
+              glowPower: 0.13,
+              taperPower: 1,
+            }),
+          }),
+        ),
+      ]),
+  );
   let relief = state.exaggeration;
   const ticks = new Map(),
     rings = new Map();
@@ -115,6 +131,7 @@ export function createTruth(globe, state) {
   }
   function update() {
     const visible = state.mode !== "operator" && state.truth;
+    const opacity = state.layerOpacity ?? 1;
     source.show = visible;
     velocity.show = visible;
     halos.show = visible;
@@ -124,7 +141,8 @@ export function createTruth(globe, state) {
       for (const o of data.objects) {
         const entity = entities.get(o.id);
         if (!entity) continue;
-        const position = new C.SampledPositionProperty(), packed = [];
+        const position = new C.SampledPositionProperty(),
+          packed = [];
         for (let i = 0; i < o.t.length; i++) {
           const p = globe.position(o.lon[i], o.lat[i], o.alt[i]);
           packed.push(o.t[i], p.x, p.y, p.z);
@@ -133,24 +151,41 @@ export function createTruth(globe, state) {
         entity.position = position;
       }
     }
-    const priority = data.objects.filter(o => sample(o, state.t)).sort((a, b) =>
-      (a.id === state.selected ? -10 : a.side === 'hostile' ? -1 : 0) -
-      (b.id === state.selected ? -10 : b.side === 'hostile' ? -1 : 0));
-    const labels = new Set(priority.slice(0, 6).map(o => o.id));
+    const priority = data.objects
+      .filter((o) => sample(o, state.t))
+      .sort(
+        (a, b) =>
+          (a.id === state.selected ? -10 : a.side === "hostile" ? -1 : 0) -
+          (b.id === state.selected ? -10 : b.side === "hostile" ? -1 : 0),
+      );
+    const labels = new Set(priority.slice(0, 6).map((o) => o.id));
     for (const object of data.objects) {
       const p = sample(object, state.t),
         tick = ticks.get(object.id),
         ring = rings.get(object.id);
       const entity = entities.get(object.id);
-      if (entity) entity.label.show = labels.has(object.id) && object.id !== state.selected;
+      if (entity) {
+        entity.label.show =
+          labels.has(object.id) && object.id !== state.selected;
+        entity.billboard.color = color(palette.truth, opacity);
+        entity.label.fillColor = color(palette.unknown, opacity);
+      }
       const segments = trailPool.get(object.id);
       segments?.forEach((line, i) => {
         const positions = [];
-        for (let t = state.t - 120 + i * 15; t <= state.t - 105 + i * 15; t += 3) {
+        for (
+          let t = state.t - 120 + i * 15;
+          t <= state.t - 105 + i * 15;
+          t += 3
+        ) {
           const at = sample(object, t);
           if (at) positions.push(globe.position(at.lon, at.lat, at.alt));
         }
         line.show = positions.length > 1;
+        line.material.uniforms.color = color(
+          palette.truth,
+          opacity * (0.06 + (i / 7) * 0.56),
+        );
         if (line.show) line.positions = positions;
       });
       if (tick) {
@@ -200,23 +235,48 @@ export function createTruth(globe, state) {
       state.t,
     );
     reticle.hidden = false;
+    const callout = reticle.querySelector(".reticle-callout");
+    const deckLeft = document.querySelector(".right-rail").offsetLeft;
+    reticle.classList.toggle(
+      "callout-left",
+      screen.x > 320 && screen.x + 76 + callout.offsetWidth > deckLeft - 16,
+    );
     reticle.style.transform = `translate(${screen.x}px,${screen.y}px)`;
-    document.querySelector('#reticle-label').textContent = state.selected.toUpperCase();
-    const object = data.objects.find(o => o.id === state.selected), prev = sample(object, state.t - 1);
-    const speed = prev ? Math.hypot((p.lat-prev.lat)*111320, (p.lon-prev.lon)*111320*Math.cos(p.lat*Math.PI/180)) : 0;
-    const values = document.querySelector('#reticle-values');
-    if (values) values.textContent = `${Math.round(p.alt-heightAt(data.terrain,p.lon,p.lat))} m AGL  ·  ${speed.toFixed(1)} m/s`;
-    const receivers = document.querySelector('#reticle-receivers');
+    document.querySelector("#reticle-label").textContent =
+      state.selected.toUpperCase();
+    const object = data.objects.find((o) => o.id === state.selected),
+      prev = sample(object, state.t - 1);
+    const speed = prev
+      ? Math.hypot(
+          (p.lat - prev.lat) * 111320,
+          (p.lon - prev.lon) * 111320 * Math.cos((p.lat * Math.PI) / 180),
+        )
+      : 0;
+    const values = document.querySelector("#reticle-values");
+    if (values)
+      values.textContent = `${Math.round(p.alt - heightAt(data.terrain, p.lon, p.lat))} m AGL  ·  ${speed.toFixed(1)} m/s`;
+    const receivers = document.querySelector("#reticle-receivers");
     if (receivers) {
       const oi = data.objects.indexOf(object);
-      const seen = Object.entries(data.rf).filter(([id, r]) => {
-        const sensor = data.sensors.find(s => s.id === id);
-        if (sensor.dead_t != null && state.t > sensor.dead_t) return false;
-        for (let i = upperBound(r.t, state.t) - 1; i >= 0 && r.t[i] >= state.t - 3; i--)
-          if (r.obj[i] === oi) return true;
-        return false;
-      }).map(([id]) => id);
-      receivers.textContent = state.mode === 'god' ? 'GROUND TRUTH' : seen.length ? `DETECTED BY ${seen.join(' · ')}` : 'NO RECENT RF';
+      const seen = Object.entries(data.rf)
+        .filter(([id, r]) => {
+          const sensor = data.sensors.find((s) => s.id === id);
+          if (sensor.dead_t != null && state.t > sensor.dead_t) return false;
+          for (
+            let i = upperBound(r.t, state.t) - 1;
+            i >= 0 && r.t[i] >= state.t - 3;
+            i--
+          )
+            if (r.obj[i] === oi) return true;
+          return false;
+        })
+        .map(([id]) => id);
+      receivers.textContent =
+        state.mode === "god"
+          ? "GROUND TRUTH"
+          : seen.length
+            ? `DETECTED BY ${seen.join(" · ")}`
+            : "NO RECENT RF";
     }
   }
   return { update, updateReticle, entities, source };
@@ -242,9 +302,15 @@ export function createSensors(globe, state) {
         heightReference: C.HeightReference.NONE,
       },
       polyline: {
-        positions: [globe.position(s.lon, s.lat, s.ground), globe.position(s.lon, s.lat, s.alt)],
+        positions: [
+          globe.position(s.lon, s.lat, s.ground),
+          globe.position(s.lon, s.lat, s.alt),
+        ],
         width: 2,
-        material: new C.PolylineGlowMaterialProperty({color: c, glowPower: 0.2}),
+        material: new C.PolylineGlowMaterialProperty({
+          color: c,
+          glowPower: 0.2,
+        }),
       },
       label: {
         text: s.id,
@@ -274,10 +340,17 @@ export function createSensors(globe, state) {
         const dead = s.dead_t != null && state.t > s.dead_t,
           c = color(dead ? palette.neutral : palette.system);
         e.position = globe.position(s.lon, s.lat, s.alt);
-        e.polyline.positions = [globe.position(s.lon,s.lat,s.ground),globe.position(s.lon,s.lat,s.alt)];
-        e.ellipse.height = globe.displayHeight(s.lon,s.lat,s.ground+2);
-        const dying = dead && state.t-s.dead_t < 1.5 && !matchMedia('(prefers-reduced-motion: reduce)').matches;
-        if (dying) c.alpha = 0.2 + 0.8 * Math.abs(Math.sin((state.t-s.dead_t)*30));
+        e.polyline.positions = [
+          globe.position(s.lon, s.lat, s.ground),
+          globe.position(s.lon, s.lat, s.alt),
+        ];
+        e.ellipse.height = globe.displayHeight(s.lon, s.lat, s.ground + 2);
+        const dying =
+          dead &&
+          state.t - s.dead_t < 1.5 &&
+          !matchMedia("(prefers-reduced-motion: reduce)").matches;
+        if (dying)
+          c.alpha = 0.2 + 0.8 * Math.abs(Math.sin((state.t - s.dead_t) * 30));
         e.point.color = c;
         e.label.fillColor = c;
         e.label.text = `${s.id}${dead ? " / DOWN" : ""}`;

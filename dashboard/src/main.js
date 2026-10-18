@@ -1,4 +1,6 @@
 import "./styles.css";
+import { createOpening } from "./motion.js";
+import { reducedMotion } from "./theme.js";
 import {
   validateData,
   parseDataFile,
@@ -23,7 +25,8 @@ import { createCommands } from "./commands.js";
 const $ = (s) => document.querySelector(s),
   C = window.Cesium;
 let active = null,
-  toastTimer;
+  toastTimer,
+  firstLoad = true;
 function notify(message, ms = 5000) {
   $("#toast").textContent = message;
   $("#toast").hidden = false;
@@ -35,7 +38,7 @@ function notify(message, ms = 5000) {
 function start(data) {
   active?.destroy();
   const summary = summarize(data);
-  console.info("MIRROR WORLD dataset", summary);
+  console.info("OASIS dataset", summary);
   const state = createState(data),
     listeners = new AbortController(),
     signal = listeners.signal;
@@ -47,6 +50,10 @@ function start(data) {
       `3D renderer could not start. Enable WebGL2 / hardware acceleration. ${error.message}`,
     );
   }
+  const opening = createOpening(globe, data);
+  let idleDone = false,
+    idleStart = 0,
+    lastInteraction = performance.now();
   let dirty = true,
     frameId,
     last = performance.now(),
@@ -86,6 +93,7 @@ function start(data) {
   };
   function setMode(mode) {
     state.mode = mode;
+    state.modeChangedAt = performance.now();
     if (mode === "operator") {
       state.follow = false;
       globe.viewer.trackedEntity = undefined;
@@ -108,6 +116,7 @@ function start(data) {
   }
   function setFeed(type) {
     state.feed = type;
+    setTab("feeds");
     document
       .querySelectorAll("[data-feed]")
       .forEach((b) => b.classList.toggle("active", b.dataset.feed === type));
@@ -117,6 +126,15 @@ function start(data) {
     state.tab = tab;
     $("#feed-panel").hidden = tab !== "feeds";
     $("#audit-panel").hidden = tab !== "audit";
+    $("#inspector-panel").hidden = tab !== "inspector";
+    document.body.dataset.tab = tab;
+    document.querySelectorAll("[data-feed]").forEach((b) => {
+      const selected = tab === "feeds" && b.dataset.feed === state.feed;
+      b.classList.toggle("active", selected);
+      b.setAttribute("aria-selected", String(selected));
+      if (selected)
+        $("#feed-panel").setAttribute("aria-labelledby", b.id || "tab-feeds");
+    });
     document.querySelectorAll("[data-tab]").forEach((b) => {
       b.classList.toggle("active", b.dataset.tab === tab);
       b.setAttribute("aria-selected", String(b.dataset.tab === tab));
@@ -148,19 +166,28 @@ function start(data) {
     togglePlay,
     follow,
     home: () => globe.home(),
-    present: () => presentation.start(),
+    present: () => {
+      opening.skip();
+      presentation.start();
+    },
+    opening: () => {
+      state.island = true;
+      state.follow = false;
+      globe.setIsland(true);
+      opening.start();
+      changed();
+    },
   };
   const presentation = createPresentation(state, globe, actions),
     commands = createCommands(state, actions);
   renderAudit(data);
-  // Places are shown as coordinates, never names.
-  const place = data.scenario.label ||
+  const place = data.scenario.label ||  // coordinates, never place names
     `${data.scenario.area.lat.toFixed(4)}° N · ${data.scenario.area.lon.toFixed(4)}° E`;
   $("#scenario-name").textContent = place;
   $("#scenario-region").textContent = "SYNTHETIC WORLD / REPLAY";
   $("#world-location").textContent =
     `${data.scenario.area.lat.toFixed(4)}° N  ${data.scenario.area.lon.toFixed(4)}° E`;
-  $("#area-title").innerHTML = `${esc(place)}<br><span>ONE WORLD. EVERY SIGNAL.</span>`;
+  $("#area-title").innerHTML = `${esc(place)}<span>One world. Every signal.</span>`;
   $("#area-size").textContent =
     `${data.scenario.area.size_km} × ${data.scenario.area.size_km} km`;
   $("#weather").textContent =
@@ -244,9 +271,13 @@ function start(data) {
     $("#terrain-note").textContent =
       state.exaggeration === 1
         ? "COPERNICUS GLO-30 · EXACT SIMULATION DEM"
-        : `TERRAIN EXAGGERATED ${state.exaggeration.toFixed(1)}× · READOUTS AT TRUE SCALE`;
+        : `RELIEF ×${state.exaggeration.toFixed(1)} · MEASUREMENTS AT TRUE SCALE`;
     $("#imagery-style").textContent = state.natural ? "NATURAL" : "NIGHT OPS";
-    $("#basemap").textContent = state.osm ? "OSM" : data.terrain.texture ? "SENTINEL-2" : "ESRI";
+    $("#basemap").textContent = state.osm
+      ? "OSM"
+      : data.terrain.texture
+        ? "SENTINEL-2"
+        : "ESRI";
     $("#world-mode").textContent = state.island ? "ISLAND ◇" : "GLOBE ◉";
     $("#play").textContent = state.playing ? "Ⅱ" : "▷";
     $("#play").setAttribute(
@@ -300,6 +331,30 @@ function start(data) {
     globe.setIsland(state.island);
     changed();
   };
+  const layersCard = $("#layers-card");
+  function toggleLayers(force) {
+    const show = force ?? layersCard.hidden;
+    layersCard.hidden = !show;
+    $("#layers-toggle").classList.toggle("active", show);
+    $("#layers-toggle").setAttribute("aria-expanded", String(show));
+  }
+  $("#layers-toggle").onclick = () => toggleLayers();
+  $("#layers-close").onclick = () => {
+    toggleLayers(false);
+    $("#layers-toggle").focus();
+  };
+  $("#moments-toggle").onclick = () => {
+    toggleLayers(true);
+    $(".moments-heading").scrollIntoView({ block: "nearest" });
+  };
+  function cinema() {
+    const hidden = document.body.classList.toggle("cinema");
+    $("#cinema-exit").hidden = !hidden;
+    if (hidden) $("#cinema-exit").focus();
+    else $("#cinema-toggle").focus();
+  }
+  $("#cinema-toggle").onclick = cinema;
+  $("#cinema-exit").onclick = cinema;
   $("#home-view").onclick = () => {
     state.follow = false;
     globe.home();
@@ -322,7 +377,7 @@ function start(data) {
   };
   $("#tilt-view").onclick = () => globe.tilt();
   $("#play").onclick = togglePlay;
-  $("#present-start").onclick = () => presentation.start();
+  $("#present-start").onclick = actions.present;
   document
     .querySelectorAll("[data-mode]")
     .forEach((b) => (b.onclick = () => setMode(b.dataset.mode)));
@@ -347,13 +402,14 @@ function start(data) {
       typeof id?.id === "string" &&
       id.id.startsWith("truth:") &&
       state.mode !== "operator"
-    )
+    ) {
       select(id.id.slice(6));
-    else if (id?.type === "fix") {
+      setTab("inspector");
+    } else if (id?.type === "fix") {
       state.selectedFix = id.index;
       if (state.mode !== "operator" && data.fixes.obj[id.index] >= 0)
         state.selected = data.objects[data.fixes.obj[id.index]].id;
-      changed();
+      setTab("inspector");
     }
   }, C.ScreenSpaceEventType.LEFT_CLICK);
   document.addEventListener(
@@ -373,6 +429,10 @@ function start(data) {
       )
         return;
       const key = e.key.toLowerCase();
+      if (opening.active && key === "escape") {
+        opening.skip(true);
+        return;
+      }
       if (key === " ") {
         e.preventDefault();
         togglePlay();
@@ -385,8 +445,9 @@ function start(data) {
       } else if (key === "g")
         setMode(MODES[(MODES.indexOf(state.mode) + 1) % 3]);
       else if (key === "p")
-        state.presenting ? presentation.stop() : presentation.start();
+        state.presenting ? presentation.stop() : actions.present();
       else if (key === "escape" && state.presenting) presentation.stop();
+      else if (key === "h") cinema();
       else if (key === "f") follow();
       else if (key === "[" || key === "]") {
         state.speed =
@@ -412,6 +473,15 @@ function start(data) {
     },
     { signal },
   );
+  for (const event of ["pointerdown", "wheel", "keydown"])
+    document.addEventListener(
+      event,
+      () => {
+        lastInteraction = performance.now();
+        idleDone = true;
+      },
+      { signal, passive: true },
+    );
   function updateUI() {
     const stamp = timeLabel(data, state.t, true);
     $("#clock").innerHTML =
@@ -480,7 +550,31 @@ function start(data) {
       globe.time(state.t);
     }
     presentation.tick(now);
-    if (dirty || (state.playing && now - lastLayers > 50)) {
+    // One finite drift on an untouched paused view; thereafter requestRenderMode sleeps.
+    if (
+      !idleDone &&
+      !opening.active &&
+      !state.playing &&
+      !state.presenting &&
+      !state.follow &&
+      !document.hidden &&
+      !reducedMotion() &&
+      now - lastInteraction > 12000
+    ) {
+      if (!idleStart) idleStart = now;
+      globe.orbit(-18 + Math.min(8, (now - idleStart) / 1000) * 0.12);
+      if (now - idleStart > 8000) idleDone = true;
+    }
+    const transitioning = now - (state.modeChangedAt ?? -1000) < 420;
+    const transitionFinished = state.layerOpacity < 1 && !transitioning;
+    state.layerOpacity = reducedMotion()
+      ? 1
+      : Math.min(1, (now - (state.modeChangedAt ?? -1000)) / 420);
+    if (
+      dirty ||
+      transitionFinished ||
+      ((state.playing || transitioning) && now - lastLayers > 50)
+    ) {
       truth.update();
       sensors.update();
       rf.update();
@@ -514,6 +608,10 @@ function start(data) {
   $("#loading").hidden = true;
   updateUI();
   frameId = requestAnimationFrame(frame);
+  if (firstLoad) {
+    opening.start();
+    firstLoad = false;
+  }
   active = {
     state,
     destroy() {
@@ -521,6 +619,7 @@ function start(data) {
       cancelAnimationFrame(frameId);
       listeners.abort();
       removePostRender();
+      opening.destroy();
       presentation.destroy();
       feeds.destroy();
       timeline.destroy();
@@ -579,7 +678,7 @@ try {
     );
   start(validateData(window.MW));
 } catch (error) {
-  console.warn("MIRROR WORLD initialization:", error.message);
+  console.warn("OASIS initialization:", error.message);
   $("#loading").hidden = true;
   $("#globe-error").hidden = false;
   $("#globe-error").textContent =
