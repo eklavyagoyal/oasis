@@ -75,6 +75,19 @@ Run order: `rf_df` first (camera reads `fused/fixes.csv`), then the remaining ty
 Shared physics: `rf_df.path_loss_db(world, tx_xyz, rx_xyz, f_mhz)` (free space + terrain diffraction). Use it for anything radio (e.g. Remote ID).
 Platform numbers (size, speed, links, sound) live in `mirrorworld/catalog.py`. Tune them there.
 
+## Remote access (requirement)
+Everything must be usable from another device on the team's tailnet, with nothing exposed publicly:
+- Servers bind to `127.0.0.1` only.
+- Expose them with `tailscale serve` (HTTPS, tailnet-only). Never use `tailscale funnel`.
+  ```
+  tailscale serve --bg --https=10000 http://127.0.0.1:5173                     # UI app (Vite dev)
+  tailscale serve --bg --https=10000 --set-path=/oasis http://127.0.0.1:8765   # dash --serve
+  ```
+  → `https://<machine>.<tailnet>.ts.net:10000/` and `…:10000/oasis/dashboard/`.
+- Vite must keep `server.allowedHosts: [".ts.net"]`, or it rejects the tailnet host name.
+- Shell access is plain SSH over the tailnet (macOS Remote Login): `ssh <user>@<machine>.<tailnet>.ts.net`.
+- Check with `tailscale serve status`. Undo with `tailscale serve --https=10000 off`.
+
 ## Hero scenario facts (`scenarios/ros-valley.yaml`, already runs: ~8 s)
 - **When**: Wed 4 Nov 2026, 08:55–14:35Z, as two acts. Sunset is ~14:29Z.
 - **Receivers**: RF1 is on the real 58 m Stebliv mast (antenna at 40 m). RF2 is on the real 52 m Selyshche mast (35 m). They're 7.7 km apart. EO1 and RID1 are mounted on RF1's mast.
