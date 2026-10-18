@@ -91,3 +91,4 @@ sensors:
   - {id: TEL1, type: telemetry, pos: [49.3380, 31.1750], params: {objects: [recon_1]}}
   - {id: SAT1, type: satellite, pos: [49.3700, 31.2000], params: {platform: SENTINEL-2A}}
   - {id: HUM1, type: reports, pos: [49.4100, 31.2400], params: {eppo_civilians: 25}}
+  - {id: IQ1, type: rf_iq, mount: RF1, mast_m: 40, params: {center_mhz: 2440, times_s: [18427, 18600, 19180, 19900]}}
