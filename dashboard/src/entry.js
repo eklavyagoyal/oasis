@@ -1,4 +1,6 @@
 import * as maplibregl from 'maplibre-gl';
+import mapWorkerUrl from 'maplibre-gl/dist/maplibre-gl-worker.mjs?worker&url';
+maplibregl.setWorkerUrl(mapWorkerUrl);  // the library ships its worker separately; bundle it and point at it
 import 'maplibre-gl/dist/maplibre-gl.css';
 import './entry.css';
 import UKRAINE from './game/ukraine.json';

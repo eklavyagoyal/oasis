@@ -1,4 +1,4 @@
-import { DEFAULTS, STATS, makeTile, populate } from './seed.js';
+import { CAT, DEFAULTS, makeTile, populate } from './seed.js';
 import { randomSite, loadTerrain, loadFeatures, TERRAIN_SOURCE, OSM_SOURCE } from './world.js';
 import { makeScenario } from './scenario.js';
 import { createSim, runToEnd, record } from './sim.js';
@@ -16,7 +16,7 @@ function config(input) {
   if (!Number.isInteger(cfg.drones) || cfg.drones < 1 || cfg.drones > 30) throw new Error('Drone count must be 1 to 30.');
   if (!['random', 'N', 'E', 'S', 'W'].includes(cfg.entry)) throw new Error('Invalid entry direction.');
   if (!['live', 'baked'].includes(cfg.terrainMode)) throw new Error('Invalid terrain mode.');
-  if (!Array.isArray(cfg.mix) || !cfg.mix.length || cfg.mix.some((id) => !STATS[id] || STATS[id].side !== 'hostile')) throw new Error('Choose one or more supported attacker types.');
+  if (!Array.isArray(cfg.mix) || !cfg.mix.length || cfg.mix.some((id) => CAT[id] !== 'attackers')) throw new Error('Choose one or more supported attacker types.');
   for (const key of ['defence', 'radar', 'acoustic']) if (typeof cfg[key] !== 'boolean') throw new Error(`Invalid ${key} option.`);
   if (!Number.isFinite(Date.parse(cfg.start))) throw new Error('Invalid simulation start time.');
   return cfg;
