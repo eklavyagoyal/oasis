@@ -75,18 +75,21 @@ def main(argv: list[str] | None = None) -> None:
     cmd, rest = argv[0], argv[1:]
     if cmd == "run":
         _run(rest)
+    elif cmd == "dash":
+        _call_main("mirrorworld.dashboard", rest)
     elif cmd in ("audit", "view", "prompt"):
         _call_main(f"mirrorworld.{cmd}", rest)
     else:
-        sys.exit(f"unknown command {cmd!r}; expected run, audit, view or prompt\n" + USAGE)
+        sys.exit(f"unknown command {cmd!r}; expected run, dash, audit, view or prompt\n" + USAGE)
 
 
-USAGE = "usage: python -m mirrorworld {run|audit|view|prompt} ..."
+USAGE = "usage: python -m mirrorworld {run|dash|audit|view|prompt} ..."
 
 
 def _usage() -> None:
     print(USAGE)
     print("  run <yaml> [-o OUT_DIR] [--skip-missing]   simulate a scenario into out/<name>/")
+    print("  dash out/<name> [--serve] [--port 8765]    export / serve the 3D replay dashboard")
     print("  audit|view|prompt ...                     other lanes' tools, forwarded as-is")
     sys.exit(2)
 

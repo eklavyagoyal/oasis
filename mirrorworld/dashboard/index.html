@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<!--
+  OASIS 3D replay console.
+  Layout and "intel console" styling inspired by the open-source God's Eye View console (MIT).
+  No build step: CesiumJS 1.124.0 from jsdelivr, everything else is plain JS/CSS.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OASIS · replay</title>
+<script>window.CESIUM_BASE_URL = "https://cdn.jsdelivr.net/npm/cesium@1.124.0/Build/Cesium/";</script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cesium@1.124.0/Build/Cesium/Widgets/widgets.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header id="topbar">
+  <div id="brand">OASIS</div>
+  <div id="clockline"><span id="scen-name">·</span> <span id="utc-clock">----------</span></div>
+  <div class="spacer"></div>
+  <div class="btn-group" id="view-mode" title="view mode">
+    <button data-mode="sensor">SENSOR PICTURE</button>
+    <button data-mode="truth">TRUTH</button>
+    <button data-mode="both" class="active">BOTH</button>
+  </div>
+</header>
+
+<div id="cesiumContainer"></div>
+
+<aside id="left-panel" class="panel">
+  <button class="collapse-btn" data-target="left-panel" title="collapse">&#9664;</button>
+  <h3>LAYERS</h3>
+  <div class="row"><label><input type="checkbox" id="tgl-truth" checked> truth objects</label></div>
+  <div class="row"><label><input type="checkbox" id="tgl-fixes" checked> fixes</label></div>
+  <div class="row"><label><input type="checkbox" id="tgl-err" checked> error lines</label></div>
+  <div class="row"><label><input type="checkbox" id="tgl-fa"> hide false alarms</label></div>
+  <div class="row" id="lob-toggles"></div>
+  <h3>TERRAIN SHADOW</h3>
+  <div class="row" id="shadow-toggles"></div>
+  <div class="row">
+    <label class="slider-label">drone height above ground: <span id="agl-value">40</span> m
+      <input type="range" id="agl-slider" min="0" max="300" step="5" value="40">
+    </label>
+  </div>
+  <h3>IMAGERY</h3>
+  <div class="btn-group" id="imagery-toggle">
+    <button data-img="esri" class="active">SAT</button>
+    <button data-img="osm">OSM</button>
+  </div>
+  <h3>LEGEND</h3>
+  <div id="legend"></div>
+  <h3>KEY MOMENTS</h3>
+  <ul id="keymoments"></ul>
+  <h3>STATS</h3>
+  <div id="stats" class="mono"></div>
+</aside>
+
+<aside id="right-panel" class="panel">
+  <button class="collapse-btn" data-target="right-panel" title="collapse">&#9654;</button>
+  <h3>FEEDS</h3>
+  <div id="feeds"></div>
+  <h3>RF <span id="rf-target" class="dim"></span></h3>
+  <div class="row btn-group" id="rf-window">
+    <button data-win="600" class="active">600 S</button>
+    <button data-win="full">FULL SPAN</button>
+  </div>
+  <canvas id="rf-chart" width="320" height="170"></canvas>
+  <h3>AUDIT</h3>
+  <div id="audit">audit not run yet</div>
+</aside>
+
+<div id="animationContainer"></div>
+<div id="timelineContainer"></div>
+<div id="tooltip"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/cesium@1.124.0/Build/Cesium/Cesium.js"></script>
+<script src="data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
