@@ -279,9 +279,9 @@ export function createGlobe(data, notify) {
     );
   }
   function setIsland(value) {
-    scene.globe.cartographicLimitRectangle = value
-      ? rectangle
-      : C.Rectangle.MAX_VALUE;
+    // Never cut the world out: the full landscape always renders (dimmed context imagery outside
+    // the sector); "island" only toggles the sector frame and slab decorations.
+    scene.globe.cartographicLimitRectangle = C.Rectangle.MAX_VALUE;
     decorations.show = value;
     mesh.show = value;
     scene.requestRender();
