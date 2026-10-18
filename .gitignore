@@ -16,6 +16,7 @@ node_modules/
 dist/
 dashboard/public/cesium/
 dashboard/public/data.js
+dashboard/public/texture.jpg
 dashboard/public/sensors/
 dashboard/test-results/
 dashboard/public/texture.jpg
