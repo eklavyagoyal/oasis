@@ -15,6 +15,7 @@ import { createGlobe, sunElevation } from "./globe.js";
 import { createTruth, createSensors } from "./layers/truth.js";
 import { createRF } from "./layers/rf.js";
 import { createShadow } from "./layers/shadow.js";
+import { createAssets } from "./layers/assets.js";
 import { createInspector } from "./panels/inspector.js";
 import { createFeeds } from "./panels/feeds.js";
 import { renderAudit } from "./panels/audit.js";
@@ -74,7 +75,8 @@ function start(data) {
   const truth = createTruth(globe, state),
     sensors = createSensors(globe, state),
     rf = createRF(globe, state),
-    shadow = createShadow(globe, state, notify);
+    shadow = createShadow(globe, state, notify),
+    assets = createAssets(globe, state);
   const select = (id) => {
     state.selected = id;
     state.selectedFix = null;
@@ -179,16 +181,13 @@ function start(data) {
   const presentation = createPresentation(state, globe, actions),
     commands = createCommands(state, actions);
   renderAudit(data);
-  $("#scenario-name").textContent = data.scenario.name
-    .toUpperCase()
-    .replaceAll("-", " ");
+  const place = data.scenario.label ||  // coordinates, never place names
+    `${data.scenario.area.lat.toFixed(4)}° N · ${data.scenario.area.lon.toFixed(4)}° E`;
+  $("#scenario-name").textContent = place;
   $("#scenario-region").textContent = "SYNTHETIC WORLD / REPLAY";
   $("#world-location").textContent =
     `${data.scenario.area.lat.toFixed(4)}° N  ${data.scenario.area.lon.toFixed(4)}° E`;
-  $("#area-title").innerHTML =
-    data.scenario.name === "ros-valley"
-      ? "Ros valley.<span>One world. Every signal.</span>"
-      : `${esc(data.scenario.name.toUpperCase().replaceAll("-", " "))}.<br><span>ONE WORLD. EVERY SIGNAL.</span>`;
+  $("#area-title").innerHTML = `${esc(place)}<span>One world. Every signal.</span>`;
   $("#area-size").textContent =
     `${data.scenario.area.size_km} × ${data.scenario.area.size_km} km`;
   $("#weather").textContent =
@@ -579,6 +578,7 @@ function start(data) {
       truth.update();
       sensors.update();
       rf.update();
+      assets.update();
       shadow.update();
       globe.scene.requestRender();
       lastLayers = now;
@@ -639,7 +639,7 @@ async function loadFile(file) {
     const data = parseDataFile(await file.text());
     start(data);
     notify(
-      `Loaded ${data.scenario.name}. Media resolves relative to this page.`,
+      `Loaded ${data.scenario.label || data.scenario.name}. Media resolves relative to this page.`,
     );
   } catch (error) {
     notify(error.message, 10000);

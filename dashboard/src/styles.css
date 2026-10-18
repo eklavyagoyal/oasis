@@ -205,13 +205,13 @@ dialog {
   font-variant-numeric: tabular-nums;
 }
 .top-clock time span {
-  font-size: 11px;
+  font-size: 13px;
   color: var(--text-2);
   letter-spacing: 0;
   margin-left: 2px;
 }
 .top-clock > .eyebrow {
-  font-size: 10px;
+  font-size: 13px;
 }
 .live-dot {
   margin: 0 5px;
@@ -226,7 +226,7 @@ dialog {
 }
 .mode-switch button {
   padding: 10px 12px;
-  font-size: 11px;
+  font-size: 13px;
   font-weight: 500;
   letter-spacing: 0.04em;
   white-space: nowrap;
@@ -257,7 +257,7 @@ dialog {
   display: flex;
   gap: 8px;
   align-items: center;
-  font-size: 11px;
+  font-size: 13px;
   letter-spacing: 0.12em;
   color: var(--text);
 }
@@ -297,7 +297,7 @@ dialog {
   display: flex;
   align-items: center;
   gap: 12px;
-  font-size: 10px;
+  font-size: 13px;
 }
 .hairline {
   display: inline-block;
@@ -328,7 +328,7 @@ dialog {
   align-items: center;
   gap: 8px;
   color: var(--text-2);
-  font-size: 10px;
+  font-size: 13px;
   letter-spacing: 0.12em;
   white-space: nowrap;
 }
@@ -517,7 +517,7 @@ dialog {
   align-items: center;
   justify-content: space-between;
   color: var(--label);
-  font-size: 11px;
+  font-size: 13px;
   letter-spacing: 0.04em;
   margin-top: 8px;
 }
@@ -538,7 +538,7 @@ select {
   font-family: var(--mono);
 }
 .shadow-settings select {
-  font-size: 11px;
+  font-size: 13px;
   min-width: 64px;
 }
 input[type="range"] {
@@ -584,7 +584,7 @@ input[type="range"]::-moz-range-thumb {
   align-items: center;
   justify-content: space-between;
   min-height: 32px;
-  font-size: 11px;
+  font-size: 13px;
   color: var(--label);
   letter-spacing: 0.04em;
 }
@@ -637,7 +637,7 @@ input[type="range"]::-moz-range-thumb {
   grid-template-columns: 1fr 1fr;
   gap: 12px;
   margin-top: 24px;
-  font-size: 10px;
+  font-size: 13px;
   color: var(--text-2);
 }
 .legend span {
@@ -671,7 +671,7 @@ input[type="range"]::-moz-range-thumb {
 }
 .analysis-heading {
   margin-bottom: 16px;
-  font-size: 10px;
+  font-size: 13px;
 }
 .right-tabs {
   display: flex;
@@ -699,7 +699,7 @@ input[type="range"]::-moz-range-thumb {
   justify-content: space-between;
   gap: 8px;
   align-items: center;
-  font-size: 10px;
+  font-size: 13px;
   color: var(--text-2);
   letter-spacing: 0.03em;
 }
@@ -710,7 +710,7 @@ input[type="range"]::-moz-range-thumb {
   color: var(--text);
 }
 #feed-state {
-  font-size: 10px;
+  font-size: 13px;
   color: var(--text-2);
 }
 .feed-metadata {
@@ -750,7 +750,7 @@ input[type="range"]::-moz-range-thumb {
   letter-spacing: 0.2em;
 }
 .feed-static small {
-  font-size: 11px;
+  font-size: 13px;
   color: var(--text-2);
   max-width: 220px;
   text-align: center;
@@ -807,7 +807,7 @@ input[type="range"]::-moz-range-thumb {
   position: absolute;
   bottom: 4px;
   left: 8px;
-  font-size: 8px;
+  font-size: 12px;
 }
 .feed-zoom {
   position: absolute;
@@ -878,7 +878,7 @@ input[type="range"]::-moz-range-thumb {
   animation-delay: 120ms;
 }
 .ticker-heading {
-  font-size: 10px;
+  font-size: 13px;
   margin-bottom: 12px;
 }
 .event-ticker {
@@ -891,7 +891,7 @@ input[type="range"]::-moz-range-thumb {
   grid-template-columns: 36px 30px 1fr 26px;
   gap: 8px;
   align-items: center;
-  font-size: 11px;
+  font-size: 13px;
   line-height: 16px;
 }
 .detection time,
@@ -920,7 +920,7 @@ input[type="range"]::-moz-range-thumb {
   align-items: center;
   gap: 8px;
   color: var(--label);
-  font-size: 9px;
+  font-size: 12px;
   letter-spacing: 0.06em;
   margin-top: 16px;
 }
@@ -931,7 +931,7 @@ body[data-tab="audit"] .signal-card {
   display: none;
 }
 .inspector-heading {
-  font-size: 10px;
+  font-size: 13px;
   margin-bottom: 12px;
 }
 .object-picker {
@@ -945,7 +945,7 @@ body[data-tab="audit"] .signal-card {
   align-items: center;
   margin: 12px 0 24px;
   gap: 8px;
-  font-size: 11px;
+  font-size: 13px;
   color: var(--text-2);
 }
 .side-tag {
@@ -974,20 +974,20 @@ body[data-tab="audit"] .signal-card {
   white-space: nowrap;
 }
 .telemetry-values strong small {
-  font-size: 11px;
+  font-size: 13px;
   margin-left: 3px;
   color: var(--text-2);
   letter-spacing: 0;
 }
 .telemetry-values > div > span {
-  font-size: 9px;
+  font-size: 12px;
   letter-spacing: 0.06em;
   color: var(--label);
 }
 .power-heading {
   display: flex;
   justify-content: space-between;
-  font-size: 10px;
+  font-size: 13px;
   color: var(--text-2);
 }
 .power-chart {
@@ -1032,7 +1032,7 @@ body[data-tab="audit"] .signal-card {
   display: flex;
   flex-direction: column;
   gap: 8px;
-  font-size: 10px;
+  font-size: 13px;
   color: var(--text-2);
 }
 .error-summary small {
@@ -1043,7 +1043,7 @@ body[data-tab="audit"] .signal-card {
   white-space: nowrap;
 }
 .error-summary strong small {
-  font-size: 11px;
+  font-size: 13px;
   color: var(--text-2);
 }
 .no-observation {
@@ -1147,7 +1147,7 @@ body[data-tab="audit"] .signal-card {
   color: var(--text-2);
 }
 .reticle-callout small {
-  font-size: 9px;
+  font-size: 12px;
   letter-spacing: 0.08em;
   color: var(--accent);
 }
@@ -1361,7 +1361,7 @@ body[data-tab="audit"] .signal-card {
   display: flex;
   align-items: center;
   gap: 12px;
-  font-size: 10px;
+  font-size: 13px;
   white-space: nowrap;
 }
 .timeline-tools button {
@@ -1378,7 +1378,7 @@ body[data-tab="audit"] .signal-card {
   justify-content: space-between;
   gap: 16px;
   pointer-events: none;
-  font-size: 8px;
+  font-size: 12px;
   letter-spacing: 0.1em;
   color: var(--label);
 }
@@ -1395,7 +1395,7 @@ kbd {
   border-radius: 3px;
 }
 .audit-kicker {
-  font-size: 11px;
+  font-size: 13px;
   letter-spacing: 0.12em;
   color: var(--label);
   margin: 8px 0;
@@ -1423,7 +1423,7 @@ kbd {
   gap: 12px;
 }
 .audit-score > span {
-  font-size: 11px;
+  font-size: 13px;
   letter-spacing: 0.08em;
   color: var(--text-2);
 }
@@ -1459,7 +1459,7 @@ kbd {
   padding: 12px 0;
   cursor: pointer;
   list-style: none;
-  font-size: 11px;
+  font-size: 13px;
 }
 .audit-check summary::-webkit-details-marker {
   display: none;
@@ -1536,11 +1536,11 @@ kbd {
   margin-bottom: 16px;
 }
 .presentation-top .eyebrow {
-  font-size: 10px;
+  font-size: 13px;
   flex: 1;
 }
 .presentation-top button {
-  font-size: 10px;
+  font-size: 13px;
   letter-spacing: 0.06em;
   padding: 4px;
   min-height: 24px;
@@ -1604,7 +1604,7 @@ body.presenting .signal-card {
   margin-top: 16px;
 }
 .presentation-bottom button {
-  font-size: 10px;
+  font-size: 13px;
   letter-spacing: 0.08em;
   min-height: 28px;
   padding: 4px 8px;
@@ -1658,7 +1658,7 @@ body.presenting .left-rail {
   top: 32px;
   right: 32px;
   padding: 12px 16px;
-  font-size: 11px;
+  font-size: 13px;
   letter-spacing: 0.12em;
   color: var(--text);
 }
@@ -1717,7 +1717,7 @@ body.cinema .chrome {
   top: 24px;
   z-index: 40;
   padding: 12px 16px;
-  font-size: 10px;
+  font-size: 13px;
   letter-spacing: 0.08em;
   color: var(--text-2);
 }
@@ -1769,7 +1769,7 @@ dialog::backdrop {
   margin-bottom: 24px;
 }
 .palette-title button {
-  font-size: 11px;
+  font-size: 13px;
 }
 #command-input {
   width: 100%;
@@ -1800,7 +1800,7 @@ dialog::backdrop {
   display: flex;
   justify-content: space-between;
   color: var(--text-2);
-  font-size: 11px;
+  font-size: 13px;
 }
 #image-dialog {
   width: min(1000px, 90vw);
@@ -1855,7 +1855,7 @@ dialog::backdrop {
   letter-spacing: -0.02em;
 }
 #loading > span {
-  font-size: 10px;
+  font-size: 13px;
   letter-spacing: 0.2em;
   color: var(--text-2);
 }
@@ -1961,7 +1961,7 @@ dialog::backdrop {
   }
   .right-tabs button {
     padding: 8px 5px;
-    font-size: 9px;
+    font-size: 12px;
   }
   .world-title {
     top: 136px;
@@ -1970,10 +1970,10 @@ dialog::backdrop {
     font-size: 20px;
   }
   .world-title .eyebrow {
-    font-size: 9px;
+    font-size: 12px;
   }
   .world-title p {
-    font-size: 11px;
+    font-size: 13px;
     max-width: 230px;
   }
   .right-rail,
@@ -1992,7 +1992,7 @@ dialog::backdrop {
   }
   .reticle-callout {
     left: 64px;
-    font-size: 11px;
+    font-size: 13px;
   }
   .reticle-callout strong {
     font-size: 12px;
@@ -2078,7 +2078,7 @@ dialog::backdrop {
     font-size: 20px;
   }
   .top-clock > .eyebrow {
-    font-size: 8px;
+    font-size: 12px;
   }
   .mode-switch {
     grid-column: 1/-1;
@@ -2098,7 +2098,7 @@ dialog::backdrop {
   }
   .present-button {
     padding: 0 12px;
-    font-size: 10px;
+    font-size: 13px;
   }
   .right-rail {
     right: 16px;
@@ -2135,7 +2135,7 @@ dialog::backdrop {
     gap: 0;
   }
   .right-tabs button {
-    font-size: 9px;
+    font-size: 12px;
     padding: 8px 4px;
   }
   .signal-card {
@@ -2175,7 +2175,7 @@ dialog::backdrop {
   .speed-controls button {
     min-width: 24px;
     padding: 4px;
-    font-size: 9px;
+    font-size: 12px;
   }
   .transport {
     gap: 8px;
@@ -2184,7 +2184,7 @@ dialog::backdrop {
     display: none;
   }
   .timeline-tools button {
-    font-size: 9px;
+    font-size: 12px;
   }
   .timeline-bottom {
     left: 24px;
@@ -2212,7 +2212,7 @@ dialog::backdrop {
     padding-left: 0;
   }
   #beat-stat small {
-    font-size: 10px;
+    font-size: 13px;
     margin-top: 8px;
   }
   #beat-number {
@@ -2256,7 +2256,7 @@ dialog::backdrop {
     top: 136px;
   }
   .world-title .eyebrow {
-    font-size: 8px;
+    font-size: 12px;
   }
   .world-title h1 {
     font-size: 20px;
@@ -2284,11 +2284,11 @@ dialog::backdrop {
     padding-bottom: 8px;
   }
   .right-tabs button {
-    font-size: 9px;
+    font-size: 12px;
     padding: 6px;
   }
   .feed-header {
-    font-size: 8px;
+    font-size: 12px;
     margin-bottom: 8px;
   }
   .feed-screen {
@@ -2296,14 +2296,14 @@ dialog::backdrop {
     aspect-ratio: auto;
   }
   .feed-metadata {
-    font-size: 8px;
+    font-size: 12px;
     margin-top: 8px;
   }
   .feed-hud {
     inset: 8px;
   }
   .feed-hud-bottom {
-    font-size: 6px;
+    font-size: 11px;
   }
   .left-rail {
     left: 60px;
@@ -2325,23 +2325,23 @@ dialog::backdrop {
     display: none;
   }
   .world-status {
-    font-size: 8px;
+    font-size: 12px;
     letter-spacing: 0.04em;
   }
   .map-bottom {
     left: 68px;
     bottom: 364px;
-    font-size: 8px;
+    font-size: 12px;
     max-width: 280px;
   }
   .cesium-viewer-bottom {
     left: 68px !important;
     bottom: 104px !important;
     max-width: calc(100% - 80px);
-    font-size: 7px !important;
+    font-size: 12px !important;
   }
   .cesium-widget-credits {
-    font-size: 7px !important;
+    font-size: 12px !important;
   }
   .timeline {
     left: 12px;
@@ -2362,7 +2362,7 @@ dialog::backdrop {
   .timeline-bottom {
     left: 16px;
     right: 16px;
-    font-size: 6px;
+    font-size: 11px;
   }
   .timeline-bottom #data-count {
     display: none;
@@ -2379,10 +2379,10 @@ dialog::backdrop {
     margin-bottom: 12px;
   }
   .presentation-top .eyebrow {
-    font-size: 8px;
+    font-size: 12px;
   }
   .presentation-top button {
-    font-size: 8px;
+    font-size: 12px;
   }
   .chapter-content {
     grid-template-columns: 44px 1fr;
@@ -2395,20 +2395,20 @@ dialog::backdrop {
     font-size: 15px;
   }
   .chapter-copy p {
-    font-size: 11px;
+    font-size: 13px;
   }
   #beat-stat {
     font-size: 20px;
   }
   #beat-stat small {
-    font-size: 9px;
+    font-size: 12px;
     margin-top: 4px;
   }
   .presentation-bottom {
     margin-top: 12px;
   }
   .presentation-bottom button {
-    font-size: 8px;
+    font-size: 12px;
     padding: 4px;
   }
   .beat-progress {
@@ -2422,12 +2422,12 @@ dialog::backdrop {
     font-size: 44px;
   }
   .opening-title p {
-    font-size: 9px;
+    font-size: 12px;
     line-height: 1.8;
     white-space: normal;
   }
   .opening-title .eyebrow {
-    font-size: 9px;
+    font-size: 12px;
   }
   #opening-skip {
     right: 16px;
@@ -2435,7 +2435,7 @@ dialog::backdrop {
   }
   .audit-title,
   .audit-intro {
-    font-size: 11px;
+    font-size: 13px;
   }
   .audit-score > strong {
     font-size: 44px;

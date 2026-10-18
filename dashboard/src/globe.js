@@ -136,7 +136,7 @@ export function createGlobe(data, notify) {
     island.east,
     island.north,
   );
-  scene.globe.cartographicLimitRectangle = rectangle;
+  // The world is never cut out: the sector is the focus, the landscape around it stays visible.
   let imagery,
     imageryGeneration = 0,
     imageryNatural = true,
@@ -145,6 +145,8 @@ export function createGlobe(data, notify) {
     const generation = ++imageryGeneration;
     viewer.imageryLayers.removeAll();
     imagery = null;
+    earthLayer = null;
+    ensureContext(state0Island);
     const texture = g.texture;
     const attach = (provider) => {
       if (viewer.isDestroyed() || generation !== imageryGeneration) return;
@@ -159,7 +161,7 @@ export function createGlobe(data, notify) {
         document.querySelector("#system-state").textContent =
           "IMAGERY DEGRADED · DEM ACTIVE";
       });
-      imagery = viewer.imageryLayers.addImageryProvider(provider, 0);
+      imagery = viewer.imageryLayers.addImageryProvider(provider);  // sector texture above the dimmed context
       styleImagery(natural);
     };
     if (texture && !osm) {
@@ -364,15 +366,25 @@ export function createGlobe(data, notify) {
     );
   }
   let earthLayer,
+    state0Island = true,
     openingGeneration = 0;
-  function setIsland(value) {
-    scene.globe.cartographicLimitRectangle = value
-      ? rectangle
-      : C.Rectangle.MAX_VALUE;
-    if (value && earthLayer) {
-      viewer.imageryLayers.remove(earthLayer);
-      earthLayer = null;
+  function ensureContext(island) {
+    // Real imagery for the whole landscape, dimmed while the sector is in focus so it reads first.
+    if (!earthLayer) {
+      earthLayer = viewer.imageryLayers.addImageryProvider(new C.UrlTemplateImageryProvider({
+        url: "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
+        credit: new C.Credit("Esri, Maxar, Earthstar Geographics", true),
+        maximumLevel: 18,
+      }), 0);
     }
+    earthLayer.brightness = island ? 0.42 : 1.0;
+    earthLayer.saturation = island ? 0.3 : 1.0;
+    earthLayer.contrast = island ? 1.1 : 1.0;
+  }
+  function setIsland(value) {
+    state0Island = value;
+    scene.globe.cartographicLimitRectangle = C.Rectangle.MAX_VALUE;
+    ensureContext(value);
     if (value) openingGeneration++;
     decorations.show = value;
     mesh.show = value;
