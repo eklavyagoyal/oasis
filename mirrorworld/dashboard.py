@@ -342,6 +342,53 @@ def build(out: Path | str) -> dict:
 
 
 # ---------------------------------------------------------------- export / serve
+def _bake_texture(out: Path, terrain: dict, dst: Path, px: int = 1600) -> dict:
+    """Real Sentinel-2 true colour (10 m TCI) for exactly the scenario area, shaded by the DEM the
+    physics used. Baked offline and draped by the UI, so nothing is fetched live during a demo."""
+    import rasterio
+    from PIL import Image
+    from rasterio.transform import from_bounds
+    from rasterio.warp import Resampling, reproject, transform_bounds
+
+    from .sensors.satellite import _find_scene
+    from .world import CACHE_DIR
+
+    cfg = config.load(out / "scenario.yaml")
+    w, s, e, n = terrain["west"], terrain["south"], terrain["east"], terrain["north"]
+    cache = CACHE_DIR / f"texture_{cfg.name}_{px}.jpg"
+    item = None
+    if not cache.exists():
+        item = _find_scene(cfg.area.lat, cfg.area.lon, 5)
+        with rasterio.Env(GDAL_HTTP_TIMEOUT=30, GDAL_HTTP_MAX_RETRY=3, GDAL_HTTP_RETRY_DELAY=2,
+                          GDAL_DISABLE_READDIR_ON_OPEN="EMPTY_DIR"):
+            with rasterio.open(item["assets"]["visual"]["href"]) as src:
+                win = src.window(*transform_bounds("EPSG:4326", src.crs, w, s, e, n, densify_pts=21))
+                win = win.round_offsets().round_lengths()
+                data = src.read(window=win, boundless=True, fill_value=0)
+                rgb = np.zeros((3, px, px), np.uint8)
+                reproject(data, rgb, src_transform=src.window_transform(win), src_crs=src.crs,
+                          dst_transform=from_bounds(w, s, e, n, px, px), dst_crs="EPSG:4326",
+                          resampling=Resampling.bilinear)
+        world = World(cfg)
+        lon_g, lat_g = np.meshgrid(np.linspace(w, e, px), np.linspace(n, s, px))  # image rows north->south
+        z = world.height(*world.to_xy(lat_g, lon_g))
+        cx = (e - w) * M_PER_DEG * math.cos(math.radians(cfg.area.lat)) / px
+        cy = (n - s) * M_PER_DEG / px
+        dzdx = np.gradient(z, axis=1) / cx * 3.0  # x3: gentle farmland relief needs help to read
+        dzdy = -np.gradient(z, axis=0) / cy * 3.0
+        az, el = math.radians(245.0), math.radians(35.0)  # light from the WSW, like the dusk sun
+        light = np.array([math.sin(az) * math.cos(el), math.cos(az) * math.cos(el), math.sin(el)])
+        nrm = np.stack([-dzdx, -dzdy, np.ones_like(z)]) / np.sqrt(dzdx ** 2 + dzdy ** 2 + 1.0)
+        shade = np.clip(np.tensordot(light, nrm, axes=1), 0.0, 1.0)
+        img = np.clip(rgb.astype(np.float32) * (0.45 + 0.75 * shade), 0, 255).astype(np.uint8)
+        cache.parent.mkdir(parents=True, exist_ok=True)
+        Image.fromarray(img.transpose(1, 2, 0)).save(cache, quality=88)
+    shutil.copyfile(cache, dst / "texture.jpg")
+    return {"src": "texture.jpg", "west": w, "south": s, "east": e, "north": n, "px": px,
+            "scene": item["id"] if item else "cached",
+            "credit": "Contains modified Copernicus Sentinel data; terrain Copernicus GLO-30"}
+
+
 def export(out: Path | str) -> Path:
     """Copy the static app and write data.js into out/<name>/dashboard/."""
     out = Path(out)
@@ -351,6 +398,11 @@ def export(out: Path | str) -> Path:
         if f.is_file() and not f.name.startswith("."):
             shutil.copyfile(f, dst / f.name)
     payload = build(out)
+    try:
+        payload["terrain"]["texture"] = _bake_texture(out, payload["terrain"], dst)
+    except Exception as exc:  # explicit degraded mode: the UI falls back to its tile basemap
+        print(f"warning: terrain texture unavailable ({exc!r}); UI falls back to tiles", file=sys.stderr)
+        payload["terrain"]["texture"] = None
     js = "window.MW = " + json.dumps(payload, separators=(",", ":"), allow_nan=False) + ";\n"
     (dst / "data.js").write_text(js)
     print(f"wrote {dst}/ ({len(js) / 1024:.0f} kB data.js)")
