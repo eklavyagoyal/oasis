@@ -1,0 +1,25 @@
+{
+  "global": {
+    "core:datatype": "ci16_le",
+    "core:sample_rate": 30720000.0,
+    "core:version": "1.2.0",
+    "core:hw": "OASIS synthetic SDR",
+    "core:description": "SYNTHETIC IQ1 wideband snapshot at 2440 MHz; noise floor -93.1 dBm; ci16 full scale = -67.9 dBm",
+    "core:extensions": [
+      {
+        "name": "mirror",
+        "version": "0.1.0",
+        "optional": true
+      }
+    ],
+    "mirror:full_scale_dbm": -67.9
+  },
+  "captures": [
+    {
+      "core:sample_start": 0,
+      "core:frequency": 2440000000.0,
+      "core:datetime": "2026-11-04T14:05:00.000Z"
+    }
+  ],
+  "annotations": []
+}

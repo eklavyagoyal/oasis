@@ -1,0 +1,196 @@
+{
+  "global": {
+    "core:datatype": "ci16_le",
+    "core:sample_rate": 30720000.0,
+    "core:version": "1.2.0",
+    "core:hw": "OASIS synthetic SDR",
+    "core:description": "SYNTHETIC IQ1 wideband snapshot at 2440 MHz; noise floor -93.1 dBm; ci16 full scale = -59.9 dBm",
+    "core:extensions": [
+      {
+        "name": "mirror",
+        "version": "0.1.0",
+        "optional": true
+      }
+    ],
+    "mirror:full_scale_dbm": -59.89
+  },
+  "captures": [
+    {
+      "core:sample_start": 0,
+      "core:frequency": 2440000000.0,
+      "core:datetime": "2026-11-04T14:26:40.000Z"
+    }
+  ],
+  "annotations": [
+    {
+      "core:sample_start": 0,
+      "core:sample_count": 138096,
+      "core:freq_lower_edge": 2427660108,
+      "core:freq_upper_edge": 2447660108,
+      "core:label": "OcuSync video",
+      "mirror:object_id": "mavic_1",
+      "mirror:link": "mavic_1:video",
+      "mirror:rx_power_dbm": -90.5
+    },
+    {
+      "core:sample_start": 0,
+      "core:sample_count": 46032,
+      "core:freq_lower_edge": 2446361797,
+      "core:freq_upper_edge": 2451361797,
+      "core:label": "OcuSync RC",
+      "mirror:object_id": "pilot_1",
+      "mirror:link": "mavic_1:rc",
+      "mirror:rx_power_dbm": -92.5
+    },
+    {
+      "core:sample_start": 0,
+      "core:sample_count": 138096,
+      "core:freq_lower_edge": 2424640000,
+      "core:freq_upper_edge": 2437692536,
+      "core:label": "OcuSync video",
+      "mirror:object_id": "recon_1",
+      "mirror:link": "recon_1:video",
+      "mirror:rx_power_dbm": -89.9
+    },
+    {
+      "core:sample_start": 0,
+      "core:sample_count": 614400,
+      "core:freq_lower_edge": 2424640000,
+      "core:freq_upper_edge": 2455360000,
+      "core:label": "Wideband noise",
+      "mirror:object_id": "jammer_1",
+      "mirror:link": "jammer_1:barrage",
+      "mirror:rx_power_dbm": -72.7
+    },
+    {
+      "core:sample_start": 44771,
+      "core:sample_count": 17277,
+      "core:freq_lower_edge": 2452000000,
+      "core:freq_upper_edge": 2455360000,
+      "core:label": "Wi-Fi",
+      "mirror:object_id": "wifi_2",
+      "mirror:link": "wifi_2:wifi",
+      "mirror:rx_power_dbm": -81.0
+    },
+    {
+      "core:sample_start": 84340,
+      "core:sample_count": 14328,
+      "core:freq_lower_edge": 2452000000,
+      "core:freq_upper_edge": 2455360000,
+      "core:label": "Wi-Fi",
+      "mirror:object_id": "wifi_2",
+      "mirror:link": "wifi_2:wifi",
+      "mirror:rx_power_dbm": -81.0
+    },
+    {
+      "core:sample_start": 146943,
+      "core:sample_count": 32880,
+      "core:freq_lower_edge": 2427079133,
+      "core:freq_upper_edge": 2432079133,
+      "core:label": "OcuSync RC",
+      "mirror:object_id": "pilot_1",
+      "mirror:link": "mavic_1:rc",
+      "mirror:rx_power_dbm": -91.8
+    },
+    {
+      "core:sample_start": 153600,
+      "core:sample_count": 138096,
+      "core:freq_lower_edge": 2427660108,
+      "core:freq_upper_edge": 2447660108,
+      "core:label": "OcuSync video",
+      "mirror:object_id": "mavic_1",
+      "mirror:link": "mavic_1:video",
+      "mirror:rx_power_dbm": -90.5
+    },
+    {
+      "core:sample_start": 153600,
+      "core:sample_count": 138096,
+      "core:freq_lower_edge": 2424640000,
+      "core:freq_upper_edge": 2437692536,
+      "core:label": "OcuSync video",
+      "mirror:object_id": "recon_1",
+      "mirror:link": "recon_1:video",
+      "mirror:rx_power_dbm": -89.2
+    },
+    {
+      "core:sample_start": 227356,
+      "core:sample_count": 19728,
+      "core:freq_lower_edge": 2452371329,
+      "core:freq_upper_edge": 2455360000,
+      "core:label": "OcuSync RC",
+      "mirror:object_id": "op_ua",
+      "mirror:link": "recon_1:rc",
+      "mirror:rx_power_dbm": -112.7
+    },
+    {
+      "core:sample_start": 291449,
+      "core:sample_count": 13152,
+      "core:freq_lower_edge": 2439936938,
+      "core:freq_upper_edge": 2444936938,
+      "core:label": "OcuSync RC",
+      "mirror:object_id": "pilot_1",
+      "mirror:link": "mavic_1:rc",
+      "mirror:rx_power_dbm": -91.3
+    },
+    {
+      "core:sample_start": 307200,
+      "core:sample_count": 138096,
+      "core:freq_lower_edge": 2427660108,
+      "core:freq_upper_edge": 2447660108,
+      "core:label": "OcuSync video",
+      "mirror:object_id": "mavic_1",
+      "mirror:link": "mavic_1:video",
+      "mirror:rx_power_dbm": -90.4
+    },
+    {
+      "core:sample_start": 307200,
+      "core:sample_count": 138096,
+      "core:freq_lower_edge": 2424640000,
+      "core:freq_upper_edge": 2437692536,
+      "core:label": "OcuSync video",
+      "mirror:object_id": "recon_1",
+      "mirror:link": "recon_1:video",
+      "mirror:rx_power_dbm": -88.9
+    },
+    {
+      "core:sample_start": 444228,
+      "core:sample_count": 26304,
+      "core:freq_lower_edge": 2453583053,
+      "core:freq_upper_edge": 2455360000,
+      "core:label": "OcuSync RC",
+      "mirror:object_id": "pilot_1",
+      "mirror:link": "mavic_1:rc",
+      "mirror:rx_power_dbm": -91.4
+    },
+    {
+      "core:sample_start": 460800,
+      "core:sample_count": 138096,
+      "core:freq_lower_edge": 2427660108,
+      "core:freq_upper_edge": 2447660108,
+      "core:label": "OcuSync video",
+      "mirror:object_id": "mavic_1",
+      "mirror:link": "mavic_1:video",
+      "mirror:rx_power_dbm": -90.6
+    },
+    {
+      "core:sample_start": 460800,
+      "core:sample_count": 138096,
+      "core:freq_lower_edge": 2424640000,
+      "core:freq_upper_edge": 2437692536,
+      "core:label": "OcuSync video",
+      "mirror:object_id": "recon_1",
+      "mirror:link": "recon_1:video",
+      "mirror:rx_power_dbm": -88.0
+    },
+    {
+      "core:sample_start": 538228,
+      "core:sample_count": 35072,
+      "core:freq_lower_edge": 2441341611,
+      "core:freq_upper_edge": 2446341611,
+      "core:label": "OcuSync RC",
+      "mirror:object_id": "pilot_1",
+      "mirror:link": "mavic_1:rc",
+      "mirror:rx_power_dbm": -91.3
+    }
+  ]
+}

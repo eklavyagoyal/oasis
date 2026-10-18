@@ -1,0 +1,6 @@
+object_id,site_id,true_min_dist_site_m,truth_status,ended_at_rendezvous
+shahed_am,SITE-01,707.7,approached,no
+mavic_1,SITE-01,23.4,reached,no
+fpv_fiber_1,SITE-01,3486.2,not reached,no
+shahed_1,SITE-01,1174.0,not reached,no
+fpv_1,SITE-01,6255.5,not reached,no

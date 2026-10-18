@@ -1,0 +1,91 @@
+{
+  "scenario": "04-low-fpv-water",
+  "summary": {
+    "pass": 7,
+    "fail": 1,
+    "skip": 2
+  },
+  "checks": [
+    {
+      "id": "provenance",
+      "name": "Provenance",
+      "status": "PASS",
+      "value": 0,
+      "threshold": "0 issues",
+      "detail": "clean"
+    },
+    {
+      "id": "clock",
+      "name": "Clock sync",
+      "status": "PASS",
+      "value": 0,
+      "threshold": "0 problems; abs(time_utc \u2212 (start+t)) \u2264 1 ms",
+      "detail": "17350 rows, max |time_utc \u2212 (start+t)| = 0.469 ms"
+    },
+    {
+      "id": "bearing_geometry",
+      "name": "Bearing geometry",
+      "status": "PASS",
+      "value": 0.9404,
+      "threshold": "\u2265 0.85 of LOS within 2\u03c3",
+      "detail": "RF-01: bias -0.12\u00b0, within 2\u03c3 0.946 (n=1443, n_los=1167); RF-02: bias -0.11\u00b0, within 2\u03c3 0.940 (n=1297, n_los=940); RF-03: bias -0.25\u00b0, within 2\u03c3 0.964 (n=742, n_los=335)"
+    },
+    {
+      "id": "terrain_shadow",
+      "name": "Terrain shadow",
+      "status": "PASS",
+      "value": 19.85,
+      "threshold": "NLOS \u2212 LOS median excess \u2265 10 dB",
+      "detail": "RF-01: excess LOS -3.9 dB (n=1167) vs NLOS 22.5 dB (n=276), \u0394=26.3 dB; RF-02: excess LOS 0.5 dB (n=940) vs NLOS 24.4 dB (n=357), \u0394=23.9 dB; RF-03: excess LOS -2.0 dB (n=335) vs NLOS 17.9 dB (n=407), \u0394=19.9 dB"
+    },
+    {
+      "id": "occlusion_gaps",
+      "name": "Occlusion gaps",
+      "status": "PASS",
+      "value": 0.1879,
+      "threshold": "rate_in / rate_out < 0.5",
+      "detail": "RF-01/fpv_2: 1 interval(s) 34s, 6 det in vs 335 out, ratio 0.188; RF-02/fpv_1: 1 interval(s) 78s, 0 det in vs 227 out, ratio 0.000; RF-02/fpv_2: 1 interval(s) 95s, 0 det in vs 265 out, ratio 0.000; RF-03/fiber_1: 1 interval(s) 327s, 0 det in vs 0 out, ratio n/a; RF-03/fpv_1: 1 interval(s) 206s, 0 det in vs 94 out, ratio 0.000; RF-03/fiber_2: 2 interval(s) 364s, 0 det in vs 0 out, ratio n/a; RF-03/fpv_2: 2 interval(s) 282s, 0 det in vs 104 out, ratio 0.000"
+    },
+    {
+      "id": "fix_calibration",
+      "name": "Fix calibration",
+      "status": "PASS",
+      "value": 0.4257,
+      "threshold": "share(error < cep50_m) in [0.35, 0.65]",
+      "detail": "n=606, median error 258 m, median cep50 239 m"
+    },
+    {
+      "id": "range_law",
+      "name": "Range law",
+      "status": "FAIL",
+      "value": -0.409,
+      "threshold": "path-loss exponent in [1.5, 4.5] (free space 2)",
+      "detail": "RF-01: exponent -0.41 (n=1167); RF-02: exponent 2.87 (n=940); RF-03: exponent 3.71 (n=335)"
+    },
+    {
+      "id": "acoustic_delay",
+      "name": "Acoustic delay",
+      "status": "SKIP",
+      "value": null,
+      "threshold": "\u2264 2%",
+      "detail": "no microphone in scenario"
+    },
+    {
+      "id": "spoof_visible",
+      "name": "Spoof visibility",
+      "status": "SKIP",
+      "value": null,
+      "threshold": "large error only inside spoof windows",
+      "detail": "no GNSS spoofing in scenario"
+    },
+    {
+      "id": "cross_sensor_time",
+      "name": "Cross-sensor time",
+      "status": "PASS",
+      "value": 1.0,
+      "threshold": "every frame within 5 s of a fix",
+      "detail": "60 frames, 0 without a fix within 5 s"
+    }
+  ],
+  "baseline": null
+}

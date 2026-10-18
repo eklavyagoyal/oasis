@@ -1,0 +1,2 @@
+record_id,object_id,link,label,true_lat,true_lon,true_alt_msl_m,true_alt_agl_m,b02_row,b02_col,b03_row,b03_col,b04_row,b04_col,b08_row,b08_col,shadow_row,shadow_col,covered_px_frac
+SAT1-000001,shahed_am,,target,49.370385,31.200612,1378.6,1200.0,296,308,294,310,293,311,295,309,39,266,0.05

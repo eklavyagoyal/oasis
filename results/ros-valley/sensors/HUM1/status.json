@@ -1,0 +1,15 @@
+{
+ "sensor_id": "HUM1",
+ "text_source": "template",
+ "llm_model": "gpt-4o-mini",
+ "llm_reports": 30,
+ "people": {
+  "observer": 1,
+  "eppo_civilians": 25
+ },
+ "episodes": 89,
+ "reports": 35,
+ "notes": [
+  "5 report(s) had LLM text that changed the facts; those use templates"
+ ]
+}

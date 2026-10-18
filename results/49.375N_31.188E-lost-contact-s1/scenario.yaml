@@ -1,0 +1,188 @@
+# mirrorworld.builder: knobs + seed -> validated scenario; geometry from the real DEM.
+# Reproduce: uv run python -m mirrorworld.builder --knobs-json '{"birds": true, "date": "2026-11-04", "defence": false, "drones": 6, "duration_min": 20, "entry_side": "random", "heading_spread_deg": 25.0, "mix": {"dji_mavic3": 1, "gerbera": 2, "orlan10": 1, "shahed136": 3}, "sector": "ros-valley", "seed": 1, "sensor_preset": "standard", "template": "lost-contact", "time_of_day": "dusk", "wifi": true}'
+name: 49.375N_31.188E-lost-contact-s1
+seed: 1
+start: '2026-11-04T14:01:00Z'
+duration_s: 1200.0
+truth_hz: 2
+area:
+  lat: 49.3754
+  lon: 31.1882
+  size_km: 10.0
+weather:
+  wind_from_deg: 144.6
+  wind_mps: 1.6
+  temp_c: 6.6
+  rh_pct: 82.3
+  visibility_km: 12.8
+objects:
+- id: SITE-01
+  type: site
+  side: friendly
+  pos:
+  - 49.417668
+  - 31.221591
+- id: ADT-01
+  type: ad_team
+  side: friendly
+  pos:
+  - 49.417668
+  - 31.240235
+- id: ADB-01
+  type: ad_battery
+  side: friendly
+  pos:
+  - 49.407102
+  - 31.206457
+- id: mavic_1
+  type: dji_mavic3
+  side: hostile
+  path:
+  - - 49.373471
+    - 31.123282
+    - 143.6
+  - - 49.37584
+    - 31.160544
+    - 143.6
+  - - 49.364588
+    - 31.171622
+    - 143.6
+  - - 49.356857
+    - 31.179404
+    - 143.6
+  - - 49.367531
+    - 31.231364
+    - 35.0
+  - - 49.383269
+    - 31.231364
+    - 35.0
+  - - 49.405819
+    - 31.228616
+    - 143.6
+  - - 49.415705
+    - 31.240864
+    - 143.6
+  - - 49.415705
+    - 31.253118
+    - 143.6
+  speed_mps: 11.31
+  start_s: 516.4
+- id: op_mavic_1
+  type: operator
+  side: hostile
+  pos:
+  - 49.372849
+  - 31.133771
+  start_s: 516.4
+  end_s: 1907.1
+  controls: mavic_1
+- id: fiber_1
+  type: fpv_fiber
+  side: hostile
+  path:
+  - - 49.394394
+    - 31.253118
+    - 16.2
+  - - 49.400156
+    - 31.244005
+    - 16.2
+  - - 49.401065
+    - 31.232215
+    - 16.2
+  - - 49.414282
+    - 31.228656
+    - 16.2
+  - - 49.417668
+    - 31.221591
+    - 5.0
+  speed_mps: 19.55
+  start_s: 305.7
+- id: wifi_1
+  type: wifi_ap
+  side: neutral
+  pos:
+  - 49.417668
+  - 31.253118
+  alt_agl_m: 20.0
+- id: geese_1
+  type: geese
+  side: neutral
+  path:
+  - - 49.417668
+    - 31.132221
+    - 228.6
+  - - 49.333132
+    - 31.244179
+    - 228.6
+  start_s: 507.4
+- id: jammer_1
+  type: jammer
+  side: friendly
+  pos:
+  - 49.365507
+  - 31.127426
+  alt_agl_m: 15.0
+  start_s: 491.7
+  end_s: 688.1
+sensors:
+- id: RF-01
+  type: rf_df
+  pos:
+  - 49.392487
+  - 31.193725
+  mast_m: 25.0
+  params:
+    calib_bias_deg: 0.08
+- id: RF-02
+  type: rf_df
+  pos:
+  - 49.365507
+  - 31.127426
+  mast_m: 25.0
+  params:
+    calib_bias_deg: 0.78
+- id: RF-03
+  type: rf_df
+  pos:
+  - 49.389789
+  - 31.243449
+  mast_m: 25.0
+  params:
+    calib_bias_deg: -0.79
+- id: RADAR-01
+  type: radar
+  pos:
+  - 49.378997
+  - 31.202012
+  mast_m: 15.0
+- id: CAM-01
+  type: camera
+  mount: RF-01
+  mast_m: 22.0
+  params:
+    fov_deg: 3.0
+    width: 1280
+    height: 720
+    fps: 1
+    cue: rf
+- id: ACOUSTIC-01
+  type: microphone
+  pos:
+  - 49.366777
+  - 31.193519
+  mast_m: 3.0
+- id: ACOUSTIC-02
+  type: microphone
+  pos:
+  - 49.376564
+  - 31.187576
+  mast_m: 3.0
+- id: RID-01
+  type: remote_id
+  mount: RF-01
+  mast_m: 25.0
+- id: C2-01
+  type: c2
+  pos:
+  - 49.417668
+  - 31.240235

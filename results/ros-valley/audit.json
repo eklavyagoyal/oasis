@@ -1,0 +1,180 @@
+{
+  "scenario": "ros-valley",
+  "summary": {
+    "pass": 9,
+    "fail": 0,
+    "skip": 1
+  },
+  "checks": [
+    {
+      "id": "provenance",
+      "name": "Provenance",
+      "status": "PASS",
+      "value": 0,
+      "threshold": "0 issues",
+      "detail": "clean"
+    },
+    {
+      "id": "clock",
+      "name": "Clock sync",
+      "status": "PASS",
+      "value": 0,
+      "threshold": "0 problems; abs(time_utc \u2212 (start+t)) \u2264 1 ms",
+      "detail": "249206 rows, max |time_utc \u2212 (start+t)| = 0.499 ms"
+    },
+    {
+      "id": "bearing_geometry",
+      "name": "Bearing geometry",
+      "status": "PASS",
+      "value": 0.948,
+      "threshold": "\u2265 0.85 of LOS within 2\u03c3",
+      "detail": "RF1: bias +0.84\u00b0, within 2\u03c3 0.959 (n=1716, n_los=1712); RF2: bias -0.59\u00b0, within 2\u03c3 0.948 (n=1000, n_los=1000)"
+    },
+    {
+      "id": "terrain_shadow",
+      "name": "Terrain shadow",
+      "status": "SKIP",
+      "value": null,
+      "threshold": "\u2265 10 dB",
+      "detail": "no sensor with \u2265 20 LOS and \u2265 20 NLOS detections with power + geometry"
+    },
+    {
+      "id": "occlusion_gaps",
+      "name": "Occlusion gaps",
+      "status": "PASS",
+      "value": 0.0,
+      "threshold": "rate_in / rate_out < 0.5",
+      "detail": "RF1/fpv_fiber_1: 1 interval(s) 36s, 0 det in vs 0 out, ratio n/a; RF2/mavic_1: 1 interval(s) 336s, 0 det in vs 8 out, ratio 0.000"
+    },
+    {
+      "id": "fix_calibration",
+      "name": "Fix calibration",
+      "status": "PASS",
+      "value": 0.5254,
+      "threshold": "share(error < cep50_m) in [0.35, 0.65]",
+      "detail": "n=236, median error 319 m, median cep50 334 m"
+    },
+    {
+      "id": "range_law",
+      "name": "Range law",
+      "status": "PASS",
+      "value": 4.154,
+      "threshold": "path-loss exponent in [1.5, 4.5] (free space 2)",
+      "detail": "RF1: exponent 1.89 (n=1712); RF2: exponent 4.15 (n=1000)"
+    },
+    {
+      "id": "acoustic_delay",
+      "name": "Acoustic delay",
+      "status": "PASS",
+      "value": 0.0017,
+      "threshold": "max |\u0394delay|/delay \u2264 2%, no arrival before emission",
+      "detail": "max relative delay error 0.17%, 0 causality violations"
+    },
+    {
+      "id": "spoof_visible",
+      "name": "Spoof visibility",
+      "status": "PASS",
+      "value": null,
+      "threshold": "error grows \u22653\u00d7 and \u226550 m inside spoof windows (informational)",
+      "detail": "recon_1: median error 2 m outside vs 245 m inside spoof window"
+    },
+    {
+      "id": "cross_sensor_time",
+      "name": "Cross-sensor time",
+      "status": "PASS",
+      "value": 1.0,
+      "threshold": "every frame within 5 s of a fix",
+      "detail": "1603 frames, 0 without a fix within 5 s"
+    }
+  ],
+  "baseline": {
+    "scenario": "ros-valley",
+    "summary": {
+      "pass": 1,
+      "fail": 3,
+      "skip": 6
+    },
+    "checks": [
+      {
+        "id": "provenance",
+        "name": "Provenance",
+        "status": "PASS",
+        "value": 0,
+        "threshold": "0 issues",
+        "detail": "clean"
+      },
+      {
+        "id": "clock",
+        "name": "Clock sync",
+        "status": "FAIL",
+        "value": 2,
+        "threshold": "0 problems; abs(time_utc \u2212 (start+t)) \u2264 1 ms",
+        "detail": "sensors/RF1/detections.csv: [RF1] timestamps not monotonic; sensors/RF2/detections.csv: [RF2] timestamps not monotonic"
+      },
+      {
+        "id": "bearing_geometry",
+        "name": "Bearing geometry",
+        "status": "FAIL",
+        "value": 0.0,
+        "threshold": "\u2265 0.85 of LOS within 2\u03c3",
+        "detail": "RF1: bias +28.55\u00b0, within 2\u03c3 0.765 (n=22, n_los=17); RF2: bias -48.67\u00b0, within 2\u03c3 0.000 (n=16, n_los=7)"
+      },
+      {
+        "id": "terrain_shadow",
+        "name": "Terrain shadow",
+        "status": "SKIP",
+        "value": null,
+        "threshold": "\u2265 10 dB",
+        "detail": "no sensor with \u2265 20 LOS and \u2265 20 NLOS detections with power + geometry"
+      },
+      {
+        "id": "occlusion_gaps",
+        "name": "Occlusion gaps",
+        "status": "SKIP",
+        "value": null,
+        "threshold": "< 0.5",
+        "detail": "no sensor/drone pair with NLOS intervals \u2265 30 s"
+      },
+      {
+        "id": "fix_calibration",
+        "name": "Fix calibration",
+        "status": "FAIL",
+        "value": 1.0,
+        "threshold": "share(error < cep50_m) in [0.35, 0.65]",
+        "detail": "n=15, median error 8 m, median cep50 50 m"
+      },
+      {
+        "id": "range_law",
+        "name": "Range law",
+        "status": "SKIP",
+        "value": null,
+        "threshold": "path-loss exponent in [1.5, 4.5]",
+        "detail": "no sensor with >= 20 LOS records spanning >= 0.15 decades of range"
+      },
+      {
+        "id": "acoustic_delay",
+        "name": "Acoustic delay",
+        "status": "SKIP",
+        "value": null,
+        "threshold": "\u2264 2%",
+        "detail": "MIC1: no detections or answer key to check"
+      },
+      {
+        "id": "spoof_visible",
+        "name": "Spoof visibility",
+        "status": "SKIP",
+        "value": null,
+        "threshold": "large error only inside spoof windows",
+        "detail": "no reported positions found in remote_id/telemetry files"
+      },
+      {
+        "id": "cross_sensor_time",
+        "name": "Cross-sensor time",
+        "status": "SKIP",
+        "value": null,
+        "threshold": "every frame within 5 s of a fix",
+        "detail": "camera present but no frames found"
+      }
+    ]
+  }
+}

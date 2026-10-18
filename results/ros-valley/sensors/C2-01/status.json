@@ -1,0 +1,20 @@
+{
+ "sensor_id": "C2-01",
+ "inputs_found": {
+  "fused/fixes.csv": 1300,
+  "sensors/RADAR-01/tracks.csv": 1277
+ },
+ "detection_streams": {
+  "CAM-02": 600,
+  "EO1": 600,
+  "HUM1": 35,
+  "MIC1": 1040,
+  "MIC2": 745,
+  "RADAR-01": 6121,
+  "RF1": 12390,
+  "RF2": 3489,
+  "RID1": 4914,
+  "TEL1": 10498
+ },
+ "notes": []
+}

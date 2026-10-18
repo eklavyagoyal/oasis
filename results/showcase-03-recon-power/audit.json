@@ -1,0 +1,91 @@
+{
+  "scenario": "03-recon-power",
+  "summary": {
+    "pass": 7,
+    "fail": 0,
+    "skip": 3
+  },
+  "checks": [
+    {
+      "id": "provenance",
+      "name": "Provenance",
+      "status": "PASS",
+      "value": 0,
+      "threshold": "0 issues",
+      "detail": "clean"
+    },
+    {
+      "id": "clock",
+      "name": "Clock sync",
+      "status": "PASS",
+      "value": 0,
+      "threshold": "0 problems; abs(time_utc \u2212 (start+t)) \u2264 1 ms",
+      "detail": "17796 rows, max |time_utc \u2212 (start+t)| = 0.480 ms"
+    },
+    {
+      "id": "bearing_geometry",
+      "name": "Bearing geometry",
+      "status": "PASS",
+      "value": 0.9524,
+      "threshold": "\u2265 0.85 of LOS within 2\u03c3",
+      "detail": "RF-01: bias +0.04\u00b0, within 2\u03c3 0.952 (n=1274, n_los=1239); RF-02: bias -0.29\u00b0, within 2\u03c3 0.956 (n=1239, n_los=1239)"
+    },
+    {
+      "id": "terrain_shadow",
+      "name": "Terrain shadow",
+      "status": "PASS",
+      "value": 22.07,
+      "threshold": "NLOS \u2212 LOS median excess \u2265 10 dB",
+      "detail": "RF-01: excess LOS -3.2 dB (n=1239) vs NLOS 18.8 dB (n=35), \u0394=22.1 dB"
+    },
+    {
+      "id": "occlusion_gaps",
+      "name": "Occlusion gaps",
+      "status": "SKIP",
+      "value": null,
+      "threshold": "< 0.5",
+      "detail": "no sensor/drone pair with NLOS intervals \u2265 30 s"
+    },
+    {
+      "id": "fix_calibration",
+      "name": "Fix calibration",
+      "status": "PASS",
+      "value": 0.5756,
+      "threshold": "share(error < cep50_m) in [0.35, 0.65]",
+      "detail": "n=238, median error 220 m, median cep50 223 m"
+    },
+    {
+      "id": "range_law",
+      "name": "Range law",
+      "status": "PASS",
+      "value": 2.195,
+      "threshold": "path-loss exponent in [1.5, 4.5] (free space 2)",
+      "detail": "RF-01: exponent 2.20 (n=1239); RF-02: exponent 1.93 (n=1239)"
+    },
+    {
+      "id": "acoustic_delay",
+      "name": "Acoustic delay",
+      "status": "SKIP",
+      "value": null,
+      "threshold": "\u2264 2%",
+      "detail": "no microphone in scenario"
+    },
+    {
+      "id": "spoof_visible",
+      "name": "Spoof visibility",
+      "status": "SKIP",
+      "value": null,
+      "threshold": "large error only inside spoof windows",
+      "detail": "no remote_id/telemetry in scenario"
+    },
+    {
+      "id": "cross_sensor_time",
+      "name": "Cross-sensor time",
+      "status": "PASS",
+      "value": 1.0,
+      "threshold": "every frame within 5 s of a fix",
+      "detail": "306 frames, 0 without a fix within 5 s"
+    }
+  ],
+  "baseline": null
+}

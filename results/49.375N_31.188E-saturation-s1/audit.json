@@ -1,0 +1,91 @@
+{
+  "scenario": "49.375N_31.188E-saturation-s1",
+  "summary": {
+    "pass": 6,
+    "fail": 2,
+    "skip": 2
+  },
+  "checks": [
+    {
+      "id": "provenance",
+      "name": "Provenance",
+      "status": "PASS",
+      "value": 0,
+      "threshold": "0 issues",
+      "detail": "clean"
+    },
+    {
+      "id": "clock",
+      "name": "Clock sync",
+      "status": "PASS",
+      "value": 0,
+      "threshold": "0 problems; abs(time_utc \u2212 (start+t)) \u2264 1 ms",
+      "detail": "20941 rows, max |time_utc \u2212 (start+t)| = 0.457 ms"
+    },
+    {
+      "id": "bearing_geometry",
+      "name": "Bearing geometry",
+      "status": "PASS",
+      "value": 0.9207,
+      "threshold": "\u2265 0.85 of LOS within 2\u03c3",
+      "detail": "RF-01: bias +0.29\u00b0, within 2\u03c3 0.944 (n=886, n_los=712); RF-02: bias +1.15\u00b0, within 2\u03c3 0.921 (n=164, n_los=164); RF-03: bias -0.93\u00b0, within 2\u03c3 0.956 (n=914, n_los=914)"
+    },
+    {
+      "id": "terrain_shadow",
+      "name": "Terrain shadow",
+      "status": "PASS",
+      "value": 19.32,
+      "threshold": "NLOS \u2212 LOS median excess \u2265 10 dB",
+      "detail": "RF-01: excess LOS -5.7 dB (n=712) vs NLOS 13.6 dB (n=174), \u0394=19.3 dB"
+    },
+    {
+      "id": "occlusion_gaps",
+      "name": "Occlusion gaps",
+      "status": "SKIP",
+      "value": null,
+      "threshold": "< 0.5",
+      "detail": "no sensor/drone pair with NLOS intervals \u2265 30 s"
+    },
+    {
+      "id": "fix_calibration",
+      "name": "Fix calibration",
+      "status": "PASS",
+      "value": 0.5637,
+      "threshold": "share(error < cep50_m) in [0.35, 0.65]",
+      "detail": "n=204, median error 229 m, median cep50 257 m"
+    },
+    {
+      "id": "range_law",
+      "name": "Range law",
+      "status": "FAIL",
+      "value": 0.261,
+      "threshold": "path-loss exponent in [1.5, 4.5] (free space 2)",
+      "detail": "RF-01: exponent 0.26 (n=712); RF-02: exponent 3.03 (n=164); RF-03: exponent 1.30 (n=914)"
+    },
+    {
+      "id": "acoustic_delay",
+      "name": "Acoustic delay",
+      "status": "FAIL",
+      "value": 0.0235,
+      "threshold": "max |\u0394delay|/delay \u2264 2%, no arrival before emission",
+      "detail": "max relative delay error 2.35%, 0 causality violations"
+    },
+    {
+      "id": "spoof_visible",
+      "name": "Spoof visibility",
+      "status": "SKIP",
+      "value": null,
+      "threshold": "large error only inside spoof windows",
+      "detail": "no GNSS spoofing in scenario"
+    },
+    {
+      "id": "cross_sensor_time",
+      "name": "Cross-sensor time",
+      "status": "PASS",
+      "value": 1.0,
+      "threshold": "every frame within 5 s of a fix",
+      "detail": "527 frames, 0 without a fix within 5 s"
+    }
+  ],
+  "baseline": null
+}

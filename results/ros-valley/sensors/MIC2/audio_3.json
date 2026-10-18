@@ -1,0 +1,9 @@
+{
+ "sensor_id": "MIC2",
+ "start_time_utc": "2026-11-04T14:01:20.000Z",
+ "t0": 18380.0,
+ "fs": 8000,
+ "samples": 128000,
+ "gain_db_re_20upa_per_fs": 64.0,
+ "ambient_dba": 35.0
+}

@@ -1,0 +1,6 @@
+asset_id,time_utc,t,status,note
+ADT-01,2026-11-04T08:55:00.000Z,0.0,available,asset on hand
+ADT-01,2026-11-04T08:56:10.000Z,70.0,alerted,first warn alert ALT-000006
+ADT-01,2026-11-04T08:56:10.000Z,70.0,responding,dispatched on ALT-000006
+SITE-01,2026-11-04T09:06:49.000Z,709.0,approached,confirmed track TRK-000039 within 969 m
+ADT-01,2026-11-04T14:34:59.500Z,20399.5,no contact,no C2 track within 500 m at its end

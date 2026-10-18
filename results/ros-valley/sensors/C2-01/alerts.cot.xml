@@ -1,0 +1,2950 @@
+<?xml version='1.0' encoding='utf-8'?>
+<events>
+  <event version="2.0" uid="mw-ros-valley-ALT-000000" type="b-a" how="m-r" time="2026-11-04T08:55:08.000Z" start="2026-11-04T08:55:08.000Z" stale="2026-11-04T09:00:08.000Z">
+    <point lat="49.378321" lon="31.131135" hae="170.5" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000000" />
+      <remarks>NEW TRACK TRK-000000: OcuSync video first seen at D9</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000001" type="b-a" how="m-r" time="2026-11-04T08:55:11.000Z" start="2026-11-04T08:55:11.000Z" stale="2026-11-04T09:00:11.000Z">
+    <point lat="49.385963" lon="31.119514" hae="178.9" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000001" />
+      <remarks>NEW TRACK TRK-000001: OcuSync video first seen at C10</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000002" type="b-a" how="m-r" time="2026-11-04T08:55:28.000Z" start="2026-11-04T08:55:28.000Z" stale="2026-11-04T09:00:28.000Z">
+    <point lat="49.390802" lon="31.111156" hae="181.7" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000002" />
+      <remarks>NEW TRACK TRK-000002: OcuSync RC first seen at B11</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000003" type="b-a" how="m-r" time="2026-11-04T08:55:36.000Z" start="2026-11-04T08:55:36.000Z" stale="2026-11-04T09:00:36.000Z">
+    <point lat="49.375734" lon="31.141334" hae="157.7" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000003" />
+      <remarks>NEW TRACK TRK-000003: OcuSync video first seen at D9</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000004" type="b-a" how="m-r" time="2026-11-04T08:55:37.000Z" start="2026-11-04T08:55:37.000Z" stale="2026-11-04T09:00:37.000Z">
+    <point lat="49.381675" lon="31.129730" hae="171.7" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000004" />
+      <remarks>NEW TRACK TRK-000004: OcuSync video first seen at C10</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000005" type="b-a" how="m-r" time="2026-11-04T08:55:59.000Z" start="2026-11-04T08:55:59.000Z" stale="2026-11-04T09:00:59.000Z">
+    <point lat="49.350159" lon="31.150528" hae="124.3" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000005" />
+      <remarks>NEW TRACK TRK-000005: OcuSync RC first seen at E6</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000006" type="b-a" how="m-r" time="2026-11-04T08:56:10.000Z" start="2026-11-04T08:56:10.000Z" stale="2026-11-04T09:01:10.000Z">
+    <point lat="49.378347" lon="31.132180" hae="171.3" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="LOST CONTACT TRK-000000" />
+      <remarks>LOST CONTACT TRK-000000: no update for 60 s</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000007" type="b-a" how="m-r" time="2026-11-04T08:56:29.000Z" start="2026-11-04T08:56:29.000Z" stale="2026-11-04T09:01:29.000Z">
+    <point lat="49.381823" lon="31.153570" hae="114.8" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000006" />
+      <remarks>NEW TRACK TRK-000006: OcuSync video first seen at E10</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000008" type="b-a" how="m-r" time="2026-11-04T08:56:36.000Z" start="2026-11-04T08:56:36.000Z" stale="2026-11-04T09:01:36.000Z">
+    <point lat="49.351690" lon="31.151699" hae="122.5" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000007" />
+      <remarks>NEW TRACK TRK-000007: ELRS LoRa FHSS first seen at E6</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000009" type="b-a" how="m-r" time="2026-11-04T08:56:56.000Z" start="2026-11-04T08:56:56.000Z" stale="2026-11-04T09:01:56.000Z">
+    <point lat="49.391729" lon="31.111438" hae="181.4" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000008" />
+      <remarks>NEW TRACK TRK-000008: OcuSync RC first seen at B11</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000010" type="b-a" how="m-r" time="2026-11-04T08:57:00.000Z" start="2026-11-04T08:57:00.000Z" stale="2026-11-04T09:02:00.000Z">
+    <point lat="49.380820" lon="31.146099" hae="150.5" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000009" />
+      <remarks>NEW TRACK TRK-000009: OcuSync video first seen at E10</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000011" type="b-a" how="m-r" time="2026-11-04T08:57:02.000Z" start="2026-11-04T08:57:02.000Z" stale="2026-11-04T09:02:02.000Z">
+    <point lat="49.372509" lon="31.159145" hae="142.2" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000010" />
+      <remarks>NEW TRACK TRK-000010: OcuSync video first seen at F9</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000012" type="b-a" how="m-r" time="2026-11-04T08:57:07.000Z" start="2026-11-04T08:57:07.000Z" stale="2026-11-04T09:02:07.000Z">
+    <point lat="49.348256" lon="31.150059" hae="127.9" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000011" />
+      <remarks>NEW TRACK TRK-000011: OcuSync RC first seen at E6</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000013" type="b-a" how="m-r" time="2026-11-04T08:57:33.000Z" start="2026-11-04T08:57:33.000Z" stale="2026-11-04T09:02:33.000Z">
+    <point lat="49.382070" lon="31.137782" hae="156.9" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="LOST CONTACT TRK-000004" />
+      <remarks>LOST CONTACT TRK-000004: no update for 60 s</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000014" type="b-a" how="m-r" time="2026-11-04T08:57:36.000Z" start="2026-11-04T08:57:36.000Z" stale="2026-11-04T09:02:36.000Z">
+    <point lat="49.377968" lon="31.149200" hae="143.1" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000012" />
+      <remarks>NEW TRACK TRK-000012: OcuSync video first seen at E9</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000015" type="b-a" how="m-r" time="2026-11-04T08:57:37.000Z" start="2026-11-04T08:57:37.000Z" stale="2026-11-04T09:02:37.000Z">
+    <point lat="49.380761" lon="31.143728" hae="152.5" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="LOST CONTACT TRK-000003" />
+      <remarks>LOST CONTACT TRK-000003: no update for 60 s</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000016" type="b-a" how="m-r" time="2026-11-04T08:57:42.000Z" start="2026-11-04T08:57:42.000Z" stale="2026-11-04T09:02:42.000Z">
+    <point lat="49.378571" lon="31.126784" hae="179.1" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000013" />
+      <remarks>NEW TRACK TRK-000013: OcuSync RC first seen at C9</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000017" type="b-a" how="m-r" time="2026-11-04T08:57:53.000Z" start="2026-11-04T08:57:53.000Z" stale="2026-11-04T09:02:53.000Z">
+    <point lat="49.371015" lon="31.133174" hae="177.1" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000014" />
+      <remarks>NEW TRACK TRK-000014: OcuSync RC first seen at D9</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000018" type="b-a" how="m-r" time="2026-11-04T08:58:00.000Z" start="2026-11-04T08:58:00.000Z" stale="2026-11-04T09:03:00.000Z">
+    <point lat="49.377811" lon="31.141148" hae="158.2" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000015" />
+      <remarks>NEW TRACK TRK-000015: OcuSync video first seen at D9</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000019" type="b-a" how="m-r" time="2026-11-04T08:58:11.000Z" start="2026-11-04T08:58:11.000Z" stale="2026-11-04T09:03:11.000Z">
+    <point lat="49.378739" lon="31.146117" hae="150.7" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="LOST CONTACT TRK-000009" />
+      <remarks>LOST CONTACT TRK-000009: no update for 60 s</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000020" type="b-a" how="m-r" time="2026-11-04T08:58:13.000Z" start="2026-11-04T08:58:13.000Z" stale="2026-11-04T09:03:13.000Z">
+    <point lat="49.357669" lon="31.165871" hae="154.2" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000016" />
+      <remarks>NEW TRACK TRK-000016: OcuSync video first seen at F7</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000021" type="b-a" how="m-r" time="2026-11-04T08:58:42.000Z" start="2026-11-04T08:58:42.000Z" stale="2026-11-04T09:03:42.000Z">
+    <point lat="49.378215" lon="31.133936" hae="168.5" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000017" />
+      <remarks>NEW TRACK TRK-000017: OcuSync video first seen at D9</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000022" type="b-a" how="m-r" time="2026-11-04T08:58:46.000Z" start="2026-11-04T08:58:46.000Z" stale="2026-11-04T09:03:46.000Z">
+    <point lat="49.370365" lon="31.142410" hae="139.9" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000018" />
+      <remarks>NEW TRACK TRK-000018: OcuSync video first seen at D9</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000023" type="b-a" how="m-r" time="2026-11-04T08:58:53.000Z" start="2026-11-04T08:58:53.000Z" stale="2026-11-04T09:03:53.000Z">
+    <point lat="49.362753" lon="31.147490" hae="131.6" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000019" />
+      <remarks>NEW TRACK TRK-000019: OcuSync video first seen at E8</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000024" type="b-a" how="m-r" time="2026-11-04T08:59:14.000Z" start="2026-11-04T08:59:14.000Z" stale="2026-11-04T09:04:14.000Z">
+    <point lat="49.381167" lon="31.125949" hae="171.7" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000020" />
+      <remarks>NEW TRACK TRK-000020: OcuSync video first seen at C10</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000025" type="b-a" how="m-r" time="2026-11-04T08:59:18.000Z" start="2026-11-04T08:59:18.000Z" stale="2026-11-04T09:04:18.000Z">
+    <point lat="49.367045" lon="31.145887" hae="144.2" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="LOST CONTACT TRK-000012" />
+      <remarks>LOST CONTACT TRK-000012: no update for 60 s</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000026" type="b-a" how="m-r" time="2026-11-04T08:59:20.000Z" start="2026-11-04T08:59:20.000Z" stale="2026-11-04T09:04:20.000Z">
+    <point lat="49.376418" lon="31.141419" hae="158.0" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="LOST CONTACT TRK-000015" />
+      <remarks>LOST CONTACT TRK-000015: no update for 60 s</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000027" type="b-a" how="m-r" time="2026-11-04T08:59:23.000Z" start="2026-11-04T08:59:23.000Z" stale="2026-11-04T09:04:23.000Z">
+    <point lat="49.386266" lon="31.110985" hae="184.6" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000021" />
+      <remarks>NEW TRACK TRK-000021: OcuSync RC first seen at B10</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000028" type="b-a" how="m-r" time="2026-11-04T08:59:27.000Z" start="2026-11-04T08:59:27.000Z" stale="2026-11-04T09:04:27.000Z">
+    <point lat="49.359818" lon="31.145370" hae="154.3" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000022" />
+      <remarks>NEW TRACK TRK-000022: OcuSync video first seen at E7</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000029" type="b-a" how="m-r" time="2026-11-04T08:59:37.000Z" start="2026-11-04T08:59:37.000Z" stale="2026-11-04T09:04:37.000Z">
+    <point lat="49.348108" lon="31.150348" hae="132.9" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000023" />
+      <remarks>NEW TRACK TRK-000023: OcuSync RC first seen at E6</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000030" type="b-a" how="m-r" time="2026-11-04T08:59:50.000Z" start="2026-11-04T08:59:50.000Z" stale="2026-11-04T09:04:50.000Z">
+    <point lat="49.383030" lon="31.123188" hae="161.4" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000024" />
+      <remarks>NEW TRACK TRK-000024: OcuSync video first seen at C10</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000031" type="b-a" how="m-r" time="2026-11-04T09:00:05.000Z" start="2026-11-04T09:00:05.000Z" stale="2026-11-04T09:05:05.000Z">
+    <point lat="49.389629" lon="31.115861" hae="178.2" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000025" />
+      <remarks>NEW TRACK TRK-000025: OcuSync video first seen at B11</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000032" type="b-a" how="m-r" time="2026-11-04T09:00:28.000Z" start="2026-11-04T09:00:28.000Z" stale="2026-11-04T09:05:28.000Z">
+    <point lat="49.374569" lon="31.133808" hae="165.5" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000026" />
+      <remarks>NEW TRACK TRK-000026: OcuSync video first seen at D9</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000033" type="b-a" how="m-r" time="2026-11-04T09:00:58.000Z" start="2026-11-04T09:00:58.000Z" stale="2026-11-04T09:05:58.000Z">
+    <point lat="49.381118" lon="31.133551" hae="155.7" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000027" />
+      <remarks>NEW TRACK TRK-000027: OcuSync video first seen at D10</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000034" type="b-a" how="m-r" time="2026-11-04T09:01:04.000Z" start="2026-11-04T09:01:04.000Z" stale="2026-11-04T09:06:04.000Z">
+    <point lat="49.365197" lon="31.136377" hae="170.0" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="LOST CONTACT TRK-000017" />
+      <remarks>LOST CONTACT TRK-000017: no update for 60 s</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000035" type="b-a" how="m-r" time="2026-11-04T09:01:06.000Z" start="2026-11-04T09:01:06.000Z" stale="2026-11-04T09:06:06.000Z">
+    <point lat="49.372130" lon="31.133729" hae="163.5" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="LOST CONTACT TRK-000020" />
+      <remarks>LOST CONTACT TRK-000020: no update for 60 s</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000036" type="b-a" how="m-r" time="2026-11-04T09:01:30.000Z" start="2026-11-04T09:01:30.000Z" stale="2026-11-04T09:06:30.000Z">
+    <point lat="49.377826" lon="31.130669" hae="170.8" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="LOST CONTACT TRK-000026" />
+      <remarks>LOST CONTACT TRK-000026: no update for 60 s</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000037" type="b-a" how="m-r" time="2026-11-04T09:01:31.000Z" start="2026-11-04T09:01:31.000Z" stale="2026-11-04T09:06:31.000Z">
+    <point lat="49.377043" lon="31.147132" hae="148.9" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000028" />
+      <remarks>NEW TRACK TRK-000028: OcuSync video first seen at E9</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000038" type="b-a" how="m-r" time="2026-11-04T09:02:03.000Z" start="2026-11-04T09:02:03.000Z" stale="2026-11-04T09:07:03.000Z">
+    <point lat="49.360201" lon="31.140914" hae="166.0" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000029" />
+      <remarks>NEW TRACK TRK-000029: OcuSync RC first seen at D7</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000039" type="b-a" how="m-r" time="2026-11-04T09:02:20.000Z" start="2026-11-04T09:02:20.000Z" stale="2026-11-04T09:07:20.000Z">
+    <point lat="49.377943" lon="31.147920" hae="151.1" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000030" />
+      <remarks>NEW TRACK TRK-000030: OcuSync video first seen at E9</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000040" type="b-a" how="m-r" time="2026-11-04T09:02:32.000Z" start="2026-11-04T09:02:32.000Z" stale="2026-11-04T09:07:32.000Z">
+    <point lat="49.381853" lon="31.136643" hae="158.5" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="LOST CONTACT TRK-000027" />
+      <remarks>LOST CONTACT TRK-000027: no update for 60 s</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000041" type="b-a" how="m-r" time="2026-11-04T09:02:58.000Z" start="2026-11-04T09:02:58.000Z" stale="2026-11-04T09:07:58.000Z">
+    <point lat="49.371712" lon="31.152704" hae="115.9" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000031" />
+      <remarks>NEW TRACK TRK-000031: Supercam datalink first seen at E9</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000042" type="b-a" how="m-r" time="2026-11-04T09:03:01.000Z" start="2026-11-04T09:03:01.000Z" stale="2026-11-04T09:08:01.000Z">
+    <point lat="49.383281" lon="31.140426" hae="152.4" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="LOST CONTACT TRK-000028" />
+      <remarks>LOST CONTACT TRK-000028: no update for 60 s</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000043" type="b-a" how="m-r" time="2026-11-04T09:03:15.000Z" start="2026-11-04T09:03:15.000Z" stale="2026-11-04T09:08:15.000Z">
+    <point lat="49.369527" lon="31.151091" hae="116.3" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000032" />
+      <remarks>NEW TRACK TRK-000032: OcuSync video first seen at E8</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000044" type="b-a" how="m-r" time="2026-11-04T09:03:31.000Z" start="2026-11-04T09:03:31.000Z" stale="2026-11-04T09:08:31.000Z">
+    <point lat="49.380351" lon="31.143409" hae="153.5" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="LOST CONTACT TRK-000030" />
+      <remarks>LOST CONTACT TRK-000030: no update for 60 s</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000045" type="b-a" how="m-r" time="2026-11-04T09:03:59.000Z" start="2026-11-04T09:03:59.000Z" stale="2026-11-04T09:08:59.000Z">
+    <point lat="49.379540" lon="31.132182" hae="163.7" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000033" />
+      <remarks>NEW TRACK TRK-000033: OcuSync video first seen at D10</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000046" type="b-a" how="m-r" time="2026-11-04T09:04:02.000Z" start="2026-11-04T09:04:02.000Z" stale="2026-11-04T09:09:02.000Z">
+    <point lat="49.366629" lon="31.147704" hae="130.5" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000034" />
+      <remarks>NEW TRACK TRK-000034: OcuSync video first seen at E8</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000047" type="b-a" how="m-r" time="2026-11-04T09:04:10.000Z" start="2026-11-04T09:04:10.000Z" stale="2026-11-04T09:09:10.000Z">
+    <point lat="49.372211" lon="31.136346" hae="155.0" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000035" />
+      <remarks>NEW TRACK TRK-000035: OcuSync video first seen at D9</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000048" type="b-a" how="m-r" time="2026-11-04T09:04:20.000Z" start="2026-11-04T09:04:20.000Z" stale="2026-11-04T09:09:20.000Z">
+    <point lat="49.369808" lon="31.151187" hae="116.3" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="LOST CONTACT TRK-000032" />
+      <remarks>LOST CONTACT TRK-000032: no update for 60 s</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000049" type="b-a" how="m-r" time="2026-11-04T09:04:28.000Z" start="2026-11-04T09:04:28.000Z" stale="2026-11-04T09:09:28.000Z">
+    <point lat="49.387401" lon="31.118089" hae="175.9" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000036" />
+      <remarks>NEW TRACK TRK-000036: OcuSync video first seen at C10</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000050" type="b-a" how="m-r" time="2026-11-04T09:04:38.000Z" start="2026-11-04T09:04:38.000Z" stale="2026-11-04T09:09:38.000Z">
+    <point lat="49.376690" lon="31.141638" hae="157.7" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="LOST CONTACT TRK-000031" />
+      <remarks>LOST CONTACT TRK-000031: no update for 60 s</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000051" type="b-a" how="m-r" time="2026-11-04T09:05:00.000Z" start="2026-11-04T09:05:00.000Z" stale="2026-11-04T09:10:00.000Z">
+    <point lat="49.350885" lon="31.150003" hae="123.9" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000037" />
+      <remarks>NEW TRACK TRK-000037: OcuSync video first seen at E6</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000052" type="b-a" how="m-r" time="2026-11-04T09:05:26.000Z" start="2026-11-04T09:05:26.000Z" stale="2026-11-04T09:10:26.000Z">
+    <point lat="49.387625" lon="31.123032" hae="177.6" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000038" />
+      <remarks>NEW TRACK TRK-000038: OcuSync video first seen at C10</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000053" type="b-a" how="m-r" time="2026-11-04T09:05:36.000Z" start="2026-11-04T09:05:36.000Z" stale="2026-11-04T09:10:36.000Z">
+    <point lat="49.350166" lon="31.168612" hae="153.4" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000039" />
+      <remarks>NEW TRACK TRK-000039: UAV fixed-wing first seen at F6</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000054" type="b-a" how="m-r" time="2026-11-04T09:05:44.000Z" start="2026-11-04T09:05:44.000Z" stale="2026-11-04T09:10:44.000Z">
+    <point lat="49.387475" lon="31.117453" hae="176.4" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="LOST CONTACT TRK-000036" />
+      <remarks>LOST CONTACT TRK-000036: no update for 60 s</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000055" type="b-a" how="m-r" time="2026-11-04T09:05:52.000Z" start="2026-11-04T09:05:52.000Z" stale="2026-11-04T09:10:52.000Z">
+    <point lat="49.374713" lon="31.135982" hae="165.6" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000040" />
+      <remarks>NEW TRACK TRK-000040: OcuSync video first seen at D9</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000056" type="b-a" how="m-r" time="2026-11-04T09:05:55.000Z" start="2026-11-04T09:05:55.000Z" stale="2026-11-04T09:10:55.000Z">
+    <point lat="49.387646" lon="31.118095" hae="176.1" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000041" />
+      <remarks>NEW TRACK TRK-000041: OcuSync video first seen at C10</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000057" type="b-a" how="m-r" time="2026-11-04T09:06:02.000Z" start="2026-11-04T09:06:02.000Z" stale="2026-11-04T09:11:02.000Z">
+    <point lat="49.378694" lon="31.126789" hae="178.8" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="LOST CONTACT TRK-000033" />
+      <remarks>LOST CONTACT TRK-000033: no update for 60 s</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000058" type="b-a" how="m-r" time="2026-11-04T09:06:05.000Z" start="2026-11-04T09:06:05.000Z" stale="2026-11-04T09:11:05.000Z">
+    <point lat="49.359475" lon="31.183096" hae="140.2" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="APPROACHING TRK-000039" />
+      <remarks>APPROACHING SITE-01: TRK-000039 at 2965 m</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000059" type="b-a" how="m-r" time="2026-11-04T09:06:15.000Z" start="2026-11-04T09:06:15.000Z" stale="2026-11-04T09:11:15.000Z">
+    <point lat="49.373680" lon="31.133174" hae="165.1" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="LOST CONTACT TRK-000035" />
+      <remarks>LOST CONTACT TRK-000035: no update for 60 s</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000060" type="b-a" how="m-r" time="2026-11-04T09:06:20.000Z" start="2026-11-04T09:06:20.000Z" stale="2026-11-04T09:11:20.000Z">
+    <point lat="49.379470" lon="31.134846" hae="164.6" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000042" />
+      <remarks>NEW TRACK TRK-000042: OcuSync video first seen at D10</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000061" type="b-a" how="m-r" time="2026-11-04T09:06:21.000Z" start="2026-11-04T09:06:21.000Z" stale="2026-11-04T09:11:21.000Z">
+    <point lat="49.367918" lon="31.136265" hae="167.8" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="LOST CONTACT TRK-000034" />
+      <remarks>LOST CONTACT TRK-000034: no update for 60 s</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000062" type="b-a" how="m-r" time="2026-11-04T09:06:28.000Z" start="2026-11-04T09:06:28.000Z" stale="2026-11-04T09:11:28.000Z">
+    <point lat="49.384247" lon="31.123631" hae="155.3" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="LOST CONTACT TRK-000038" />
+      <remarks>LOST CONTACT TRK-000038: no update for 60 s</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000063" type="b-a" how="m-r" time="2026-11-04T09:06:36.000Z" start="2026-11-04T09:06:36.000Z" stale="2026-11-04T09:11:36.000Z">
+    <point lat="49.388433" lon="31.125902" hae="175.2" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000043" />
+      <remarks>NEW TRACK TRK-000043: OcuSync RC first seen at C11</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000064" type="b-a" how="m-r" time="2026-11-04T09:06:49.000Z" start="2026-11-04T09:06:49.000Z" stale="2026-11-04T09:11:49.000Z">
+    <point lat="49.373289" lon="31.205166" hae="196.6" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="CLOSE TRK-000039" />
+      <remarks>CLOSE TO SITE-01: TRK-000039 at 969 m</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000065" type="b-a" how="m-r" time="2026-11-04T09:06:53.000Z" start="2026-11-04T09:06:53.000Z" stale="2026-11-04T09:11:53.000Z">
+    <point lat="49.380429" lon="31.140812" hae="155.7" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000044" />
+      <remarks>NEW TRACK TRK-000044: OcuSync video first seen at D10</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000066" type="b-a" how="m-r" time="2026-11-04T09:07:31.000Z" start="2026-11-04T09:07:31.000Z" stale="2026-11-04T09:12:31.000Z">
+    <point lat="49.331710" lon="31.159370" hae="153.6" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000045" />
+      <remarks>NEW TRACK TRK-000045: OcuSync RC first seen at F4</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000067" type="b-a" how="m-r" time="2026-11-04T09:07:39.000Z" start="2026-11-04T09:07:39.000Z" stale="2026-11-04T09:12:39.000Z">
+    <point lat="49.381445" lon="31.133697" hae="148.5" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="LOST CONTACT TRK-000042" />
+      <remarks>LOST CONTACT TRK-000042: no update for 60 s</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000068" type="b-a" how="m-r" time="2026-11-04T09:07:43.000Z" start="2026-11-04T09:07:43.000Z" stale="2026-11-04T09:12:43.000Z">
+    <point lat="49.380847" lon="31.143462" hae="152.5" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000046" />
+      <remarks>NEW TRACK TRK-000046: OcuSync video first seen at D10</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000069" type="b-a" how="m-r" time="2026-11-04T09:08:20.000Z" start="2026-11-04T09:08:20.000Z" stale="2026-11-04T09:13:20.000Z">
+    <point lat="49.380410" lon="31.145587" hae="151.2" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="LOST CONTACT TRK-000044" />
+      <remarks>LOST CONTACT TRK-000044: no update for 60 s</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000070" type="b-a" how="m-r" time="2026-11-04T09:08:21.000Z" start="2026-11-04T09:08:21.000Z" stale="2026-11-04T09:13:21.000Z">
+    <point lat="49.377308" lon="31.150610" hae="131.0" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000047" />
+      <remarks>NEW TRACK TRK-000047: OcuSync video first seen at E9</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000071" type="b-a" how="m-r" time="2026-11-04T09:08:31.000Z" start="2026-11-04T09:08:31.000Z" stale="2026-11-04T09:13:31.000Z">
+    <point lat="49.341689" lon="31.152997" hae="159.2" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000048" />
+      <remarks>NEW TRACK TRK-000048: OcuSync RC first seen at E5</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000072" type="b-a" how="m-r" time="2026-11-04T09:08:36.000Z" start="2026-11-04T09:08:36.000Z" stale="2026-11-04T09:13:36.000Z">
+    <point lat="49.371349" lon="31.151782" hae="116.7" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000049" />
+      <remarks>NEW TRACK TRK-000049: OcuSync video first seen at E9</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000073" type="b-a" how="m-r" time="2026-11-04T09:08:53.000Z" start="2026-11-04T09:08:53.000Z" stale="2026-11-04T09:13:53.000Z">
+    <point lat="49.380806" lon="31.145801" hae="150.8" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="LOST CONTACT TRK-000046" />
+      <remarks>LOST CONTACT TRK-000046: no update for 60 s</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000074" type="b-a" how="m-r" time="2026-11-04T09:08:54.000Z" start="2026-11-04T09:08:54.000Z" stale="2026-11-04T09:13:54.000Z">
+    <point lat="49.393617" lon="31.237385" hae="105.7" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="LOST CONTACT TRK-000039" />
+      <remarks>LOST CONTACT TRK-000039: no update for 60 s</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000075" type="b-a" how="m-r" time="2026-11-04T09:09:21.000Z" start="2026-11-04T09:09:21.000Z" stale="2026-11-04T09:14:21.000Z">
+    <point lat="49.373729" lon="31.136903" hae="161.4" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000050" />
+      <remarks>NEW TRACK TRK-000050: OcuSync video first seen at D9</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000076" type="b-a" how="m-r" time="2026-11-04T09:09:23.000Z" start="2026-11-04T09:09:23.000Z" stale="2026-11-04T09:14:23.000Z">
+    <point lat="49.379624" lon="31.129744" hae="170.6" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000051" />
+      <remarks>NEW TRACK TRK-000051: OcuSync video first seen at C10</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000077" type="b-a" how="m-r" time="2026-11-04T09:09:37.000Z" start="2026-11-04T09:09:37.000Z" stale="2026-11-04T09:14:37.000Z">
+    <point lat="49.378950" lon="31.141278" hae="161.2" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="LOST CONTACT TRK-000047" />
+      <remarks>LOST CONTACT TRK-000047: no update for 60 s</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000078" type="b-a" how="m-r" time="2026-11-04T09:10:06.000Z" start="2026-11-04T09:10:06.000Z" stale="2026-11-04T09:15:06.000Z">
+    <point lat="49.383089" lon="31.117070" hae="178.2" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000052" />
+      <remarks>NEW TRACK TRK-000052: OcuSync RC first seen at B10</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000079" type="b-a" how="m-r" time="2026-11-04T09:10:06.000Z" start="2026-11-04T09:10:06.000Z" stale="2026-11-04T09:15:06.000Z">
+    <point lat="49.355892" lon="31.146813" hae="150.8" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000053" />
+      <remarks>NEW TRACK TRK-000053: OcuSync video first seen at E7</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000080" type="b-a" how="m-r" time="2026-11-04T09:10:11.000Z" start="2026-11-04T09:10:11.000Z" stale="2026-11-04T09:15:11.000Z">
+    <point lat="49.333756" lon="31.158143" hae="153.5" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000054" />
+      <remarks>NEW TRACK TRK-000054: ELRS 2.4 FHSS first seen at E4</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000081" type="b-a" how="m-r" time="2026-11-04T09:10:20.000Z" start="2026-11-04T09:10:20.000Z" stale="2026-11-04T09:15:20.000Z">
+    <point lat="49.373093" lon="31.135332" hae="163.0" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000055" />
+      <remarks>NEW TRACK TRK-000055: OcuSync video first seen at D9</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000082" type="b-a" how="m-r" time="2026-11-04T09:10:26.000Z" start="2026-11-04T09:10:26.000Z" stale="2026-11-04T09:15:26.000Z">
+    <point lat="49.367922" lon="31.145766" hae="141.8" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="LOST CONTACT TRK-000049" />
+      <remarks>LOST CONTACT TRK-000049: no update for 60 s</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000083" type="b-a" how="m-r" time="2026-11-04T09:10:49.000Z" start="2026-11-04T09:10:49.000Z" stale="2026-11-04T09:15:49.000Z">
+    <point lat="49.355533" lon="31.147725" hae="146.5" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000056" />
+      <remarks>NEW TRACK TRK-000056: OcuSync video first seen at E7</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000084" type="b-a" how="m-r" time="2026-11-04T09:10:57.000Z" start="2026-11-04T09:10:57.000Z" stale="2026-11-04T09:15:57.000Z">
+    <point lat="49.379689" lon="31.128663" hae="172.4" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="LOST CONTACT TRK-000051" />
+      <remarks>LOST CONTACT TRK-000051: no update for 60 s</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000085" type="b-a" how="m-r" time="2026-11-04T09:11:15.000Z" start="2026-11-04T09:11:15.000Z" stale="2026-11-04T09:16:15.000Z">
+    <point lat="49.378368" lon="31.129632" hae="172.4" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000057" />
+      <remarks>NEW TRACK TRK-000057: OcuSync video first seen at C9</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000086" type="b-a" how="m-r" time="2026-11-04T09:11:43.000Z" start="2026-11-04T09:11:43.000Z" stale="2026-11-04T09:16:43.000Z">
+    <point lat="49.382387" lon="31.123630" hae="169.8" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="LOST CONTACT TRK-000055" />
+      <remarks>LOST CONTACT TRK-000055: no update for 60 s</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000087" type="b-a" how="m-r" time="2026-11-04T09:11:47.000Z" start="2026-11-04T09:11:47.000Z" stale="2026-11-04T09:16:47.000Z">
+    <point lat="49.379500" lon="31.138387" hae="160.8" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000058" />
+      <remarks>NEW TRACK TRK-000058: OcuSync video first seen at D10</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000088" type="b-a" how="m-r" time="2026-11-04T09:11:50.000Z" start="2026-11-04T09:11:50.000Z" stale="2026-11-04T09:16:50.000Z">
+    <point lat="49.375272" lon="31.132173" hae="168.8" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="LOST CONTACT TRK-000050" />
+      <remarks>LOST CONTACT TRK-000050: no update for 60 s</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000089" type="b-a" how="m-r" time="2026-11-04T09:11:56.000Z" start="2026-11-04T09:11:56.000Z" stale="2026-11-04T09:16:56.000Z">
+    <point lat="49.382605" lon="31.130127" hae="164.8" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000059" />
+      <remarks>NEW TRACK TRK-000059: OcuSync video first seen at C10</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000090" type="b-a" how="m-r" time="2026-11-04T09:12:03.000Z" start="2026-11-04T09:12:03.000Z" stale="2026-11-04T09:17:03.000Z">
+    <point lat="49.388085" lon="31.121103" hae="177.0" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000060" />
+      <remarks>NEW TRACK TRK-000060: OcuSync RC first seen at C11</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000091" type="b-a" how="m-r" time="2026-11-04T09:12:15.000Z" start="2026-11-04T09:12:15.000Z" stale="2026-11-04T09:17:15.000Z">
+    <point lat="49.342642" lon="31.154483" hae="154.4" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000061" />
+      <remarks>NEW TRACK TRK-000061: ELRS 2.4 FHSS first seen at E5</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000092" type="b-a" how="m-r" time="2026-11-04T09:12:57.000Z" start="2026-11-04T09:12:57.000Z" stale="2026-11-04T09:17:57.000Z">
+    <point lat="49.390359" lon="31.113531" hae="180.7" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000062" />
+      <remarks>NEW TRACK TRK-000062: OcuSync RC first seen at B11</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000093" type="b-a" how="m-r" time="2026-11-04T09:13:03.000Z" start="2026-11-04T09:13:03.000Z" stale="2026-11-04T09:18:03.000Z">
+    <point lat="49.346681" lon="31.155136" hae="147.2" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000063" />
+      <remarks>NEW TRACK TRK-000063: OcuSync RC first seen at E6</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000094" type="b-a" how="m-r" time="2026-11-04T09:13:10.000Z" start="2026-11-04T09:13:10.000Z" stale="2026-11-04T09:18:10.000Z">
+    <point lat="49.362524" lon="31.152488" hae="121.0" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000064" />
+      <remarks>NEW TRACK TRK-000064: OcuSync RC first seen at E8</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000095" type="b-a" how="m-r" time="2026-11-04T09:13:44.000Z" start="2026-11-04T09:13:44.000Z" stale="2026-11-04T09:18:44.000Z">
+    <point lat="49.377191" lon="31.151886" hae="123.1" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000065" />
+      <remarks>NEW TRACK TRK-000065: OcuSync video first seen at E9</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000096" type="b-a" how="m-r" time="2026-11-04T09:14:16.000Z" start="2026-11-04T09:14:16.000Z" stale="2026-11-04T09:19:16.000Z">
+    <point lat="49.381091" lon="31.147009" hae="149.0" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="LOST CONTACT TRK-000058" />
+      <remarks>LOST CONTACT TRK-000058: no update for 60 s</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000097" type="b-a" how="m-r" time="2026-11-04T09:14:25.000Z" start="2026-11-04T09:14:25.000Z" stale="2026-11-04T09:19:25.000Z">
+    <point lat="49.382489" lon="31.130351" hae="163.2" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000066" />
+      <remarks>NEW TRACK TRK-000066: OcuSync video first seen at C10</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000098" type="b-a" how="m-r" time="2026-11-04T09:14:33.000Z" start="2026-11-04T09:14:33.000Z" stale="2026-11-04T09:19:33.000Z">
+    <point lat="49.368468" lon="31.134509" hae="178.4" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000067" />
+      <remarks>NEW TRACK TRK-000067: OcuSync RC first seen at D8</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000099" type="b-a" how="m-r" time="2026-11-04T09:15:21.000Z" start="2026-11-04T09:15:21.000Z" stale="2026-11-04T09:20:21.000Z">
+    <point lat="49.373113" lon="31.145798" hae="149.7" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="LOST CONTACT TRK-000065" />
+      <remarks>LOST CONTACT TRK-000065: no update for 60 s</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000100" type="b-a" how="m-r" time="2026-11-04T09:15:59.000Z" start="2026-11-04T09:15:59.000Z" stale="2026-11-04T09:20:59.000Z">
+    <point lat="49.374594" lon="31.140512" hae="157.8" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="LOST CONTACT TRK-000067" />
+      <remarks>LOST CONTACT TRK-000067: no update for 60 s</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000101" type="b-a" how="m-r" time="2026-11-04T13:58:33.000Z" start="2026-11-04T13:58:33.000Z" stale="2026-11-04T14:03:33.000Z">
+    <point lat="49.355071" lon="31.201018" hae="199.6" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000068" />
+      <remarks>NEW TRACK TRK-000068: OcuSync RC first seen at I7</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000102" type="b-a" how="m-r" time="2026-11-04T13:58:43.000Z" start="2026-11-04T13:58:43.000Z" stale="2026-11-04T14:03:43.000Z">
+    <point lat="49.358551" lon="31.213080" hae="154.9" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000069" />
+      <remarks>NEW TRACK TRK-000069: OcuSync RC first seen at I7</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000103" type="b-a" how="m-r" time="2026-11-04T13:58:43.000Z" start="2026-11-04T13:58:43.000Z" stale="2026-11-04T14:03:43.000Z">
+    <point lat="49.358551" lon="31.213080" hae="154.9" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="APPROACHING TRK-000069" />
+      <remarks>APPROACHING SITE-01: TRK-000069 at 2672 m</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000104" type="b-a" how="m-r" time="2026-11-04T13:58:43.000Z" start="2026-11-04T13:58:43.000Z" stale="2026-11-04T14:03:43.000Z">
+    <point lat="49.355147" lon="31.202279" hae="188.7" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="APPROACHING TRK-000068" />
+      <remarks>APPROACHING SITE-01: TRK-000068 at 2992 m</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000105" type="b-a" how="m-r" time="2026-11-04T13:58:45.000Z" start="2026-11-04T13:58:45.000Z" stale="2026-11-04T14:03:45.000Z">
+    <point lat="49.350894" lon="31.189992" hae="183.2" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000070" />
+      <remarks>NEW TRACK TRK-000070: ELRS LoRa FHSS first seen at H6</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000106" type="b-a" how="m-r" time="2026-11-04T13:58:50.000Z" start="2026-11-04T13:58:50.000Z" stale="2026-11-04T14:03:50.000Z">
+    <point lat="49.338467" lon="31.226590" hae="167.1" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000071" />
+      <remarks>NEW TRACK TRK-000071: OcuSync RC first seen at J5</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000107" type="b-a" how="m-r" time="2026-11-04T13:59:15.000Z" start="2026-11-04T13:59:15.000Z" stale="2026-11-04T14:04:15.000Z">
+    <point lat="49.345608" lon="31.219930" hae="172.0" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000072" />
+      <remarks>NEW TRACK TRK-000072: OcuSync RC first seen at J6</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000108" type="b-a" how="m-r" time="2026-11-04T13:59:28.000Z" start="2026-11-04T13:59:28.000Z" stale="2026-11-04T14:04:28.000Z">
+    <point lat="49.355562" lon="31.199784" hae="196.6" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="APPROACHING TRK-000070" />
+      <remarks>APPROACHING SITE-01: TRK-000070 at 2964 m</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000109" type="b-a" how="m-r" time="2026-11-04T13:59:40.000Z" start="2026-11-04T13:59:40.000Z" stale="2026-11-04T14:04:40.000Z">
+    <point lat="49.354678" lon="31.207059" hae="193.8" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000073" />
+      <remarks>NEW TRACK TRK-000073: OcuSync RC first seen at I7</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000110" type="b-a" how="m-r" time="2026-11-04T13:59:48.000Z" start="2026-11-04T13:59:48.000Z" stale="2026-11-04T14:04:48.000Z">
+    <point lat="49.359635" lon="31.211555" hae="145.1" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000074" />
+      <remarks>NEW TRACK TRK-000074: ELRS LoRa FHSS first seen at I7</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000111" type="b-a" how="m-r" time="2026-11-04T13:59:48.000Z" start="2026-11-04T13:59:48.000Z" stale="2026-11-04T14:04:48.000Z">
+    <point lat="49.359635" lon="31.211555" hae="145.1" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="APPROACHING TRK-000074" />
+      <remarks>APPROACHING SITE-01: TRK-000074 at 2532 m</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000112" type="b-a" how="m-r" time="2026-11-04T14:00:00.000Z" start="2026-11-04T14:00:00.000Z" stale="2026-11-04T14:05:00.000Z">
+    <point lat="49.358387" lon="31.208948" hae="149.9" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="LOST CONTACT TRK-000069" />
+      <remarks>LOST CONTACT TRK-000069: no update for 60 s</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000113" type="b-a" how="m-r" time="2026-11-04T14:00:02.000Z" start="2026-11-04T14:00:02.000Z" stale="2026-11-04T14:05:02.000Z">
+    <point lat="49.340090" lon="31.165703" hae="132.0" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000075" />
+      <remarks>NEW TRACK TRK-000075: OcuSync video first seen at F5</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000114" type="b-a" how="m-r" time="2026-11-04T14:00:17.000Z" start="2026-11-04T14:00:17.000Z" stale="2026-11-04T14:05:17.000Z">
+    <point lat="49.346240" lon="31.217248" hae="174.8" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000076" />
+      <remarks>NEW TRACK TRK-000076: OcuSync RC first seen at J6</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000115" type="b-a" how="m-r" time="2026-11-04T14:00:20.000Z" start="2026-11-04T14:00:20.000Z" stale="2026-11-04T14:05:20.000Z">
+    <point lat="49.346292" lon="31.190437" hae="179.0" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000077" />
+      <remarks>NEW TRACK TRK-000077: OcuSync RC first seen at H6</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000116" type="b-a" how="m-r" time="2026-11-04T14:00:30.000Z" start="2026-11-04T14:00:30.000Z" stale="2026-11-04T14:05:30.000Z">
+    <point lat="49.358137" lon="31.207971" hae="153.7" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000078" />
+      <remarks>NEW TRACK TRK-000078: OcuSync RC first seen at I7</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000117" type="b-a" how="m-r" time="2026-11-04T14:00:30.000Z" start="2026-11-04T14:00:30.000Z" stale="2026-11-04T14:05:30.000Z">
+    <point lat="49.358137" lon="31.207971" hae="153.7" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="APPROACHING TRK-000078" />
+      <remarks>APPROACHING SITE-01: TRK-000078 at 2662 m</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000118" type="b-a" how="m-r" time="2026-11-04T14:00:47.000Z" start="2026-11-04T14:00:47.000Z" stale="2026-11-04T14:05:47.000Z">
+    <point lat="49.343203" lon="31.173655" hae="151.8" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000079" />
+      <remarks>NEW TRACK TRK-000079: OcuSync video first seen at G6</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000119" type="b-a" how="m-r" time="2026-11-04T14:00:52.000Z" start="2026-11-04T14:00:52.000Z" stale="2026-11-04T14:05:52.000Z">
+    <point lat="49.349562" lon="31.192081" hae="194.1" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="LOST CONTACT TRK-000070" />
+      <remarks>LOST CONTACT TRK-000070: no update for 60 s</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000120" type="b-a" how="m-r" time="2026-11-04T14:01:01.000Z" start="2026-11-04T14:01:01.000Z" stale="2026-11-04T14:06:01.000Z">
+    <point lat="49.360598" lon="31.193342" hae="195.2" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000080" />
+      <remarks>NEW TRACK TRK-000080: OcuSync video first seen at H7</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000121" type="b-a" how="m-r" time="2026-11-04T14:01:01.000Z" start="2026-11-04T14:01:01.000Z" stale="2026-11-04T14:06:01.000Z">
+    <point lat="49.360598" lon="31.193342" hae="195.2" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="APPROACHING TRK-000080" />
+      <remarks>APPROACHING SITE-01: TRK-000080 at 2525 m</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000122" type="b-a" how="m-r" time="2026-11-04T14:01:47.000Z" start="2026-11-04T14:01:47.000Z" stale="2026-11-04T14:06:47.000Z">
+    <point lat="49.362714" lon="31.198318" hae="194.3" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000081" />
+      <remarks>NEW TRACK TRK-000081: OcuSync RC first seen at H8</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000123" type="b-a" how="m-r" time="2026-11-04T14:01:47.000Z" start="2026-11-04T14:01:47.000Z" stale="2026-11-04T14:06:47.000Z">
+    <point lat="49.362714" lon="31.198318" hae="194.3" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="APPROACHING TRK-000081" />
+      <remarks>APPROACHING SITE-01: TRK-000081 at 2198 m</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000124" type="b-a" how="m-r" time="2026-11-04T14:01:49.000Z" start="2026-11-04T14:01:49.000Z" stale="2026-11-04T14:06:49.000Z">
+    <point lat="49.363007" lon="31.185644" hae="165.9" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000082" />
+      <remarks>NEW TRACK TRK-000082: OcuSync RC first seen at G8</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000125" type="b-a" how="m-r" time="2026-11-04T14:01:49.000Z" start="2026-11-04T14:01:49.000Z" stale="2026-11-04T14:06:49.000Z">
+    <point lat="49.363007" lon="31.185644" hae="165.9" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="APPROACHING TRK-000082" />
+      <remarks>APPROACHING SITE-01: TRK-000082 at 2535 m</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000126" type="b-a" how="m-r" time="2026-11-04T14:01:54.000Z" start="2026-11-04T14:01:54.000Z" stale="2026-11-04T14:06:54.000Z">
+    <point lat="49.355751" lon="31.200347" hae="199.5" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="APPROACHING TRK-000073" />
+      <remarks>APPROACHING SITE-01: TRK-000073 at 2938 m</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000127" type="b-a" how="m-r" time="2026-11-04T14:02:23.000Z" start="2026-11-04T14:02:23.000Z" stale="2026-11-04T14:07:23.000Z">
+    <point lat="49.368670" lon="31.224003" hae="148.6" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000083" />
+      <remarks>NEW TRACK TRK-000083: OcuSync RC first seen at J8</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000128" type="b-a" how="m-r" time="2026-11-04T14:02:23.000Z" start="2026-11-04T14:02:23.000Z" stale="2026-11-04T14:07:23.000Z">
+    <point lat="49.368670" lon="31.224003" hae="148.6" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="APPROACHING TRK-000083" />
+      <remarks>APPROACHING SITE-01: TRK-000083 at 2022 m</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000129" type="b-a" how="m-r" time="2026-11-04T14:02:29.000Z" start="2026-11-04T14:02:29.000Z" stale="2026-11-04T14:07:29.000Z">
+    <point lat="49.355555" lon="31.202806" hae="182.0" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="APPROACHING TRK-000079" />
+      <remarks>APPROACHING SITE-01: TRK-000079 at 2945 m</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000130" type="b-a" how="m-r" time="2026-11-04T14:02:30.000Z" start="2026-11-04T14:02:30.000Z" stale="2026-11-04T14:07:30.000Z">
+    <point lat="49.347942" lon="31.190633" hae="192.0" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000084" />
+      <remarks>NEW TRACK TRK-000084: OcuSync video first seen at H6</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000131" type="b-a" how="m-r" time="2026-11-04T14:02:48.000Z" start="2026-11-04T14:02:48.000Z" stale="2026-11-04T14:07:48.000Z">
+    <point lat="49.377539" lon="31.193111" hae="162.5" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="CLOSE TRK-000068" />
+      <remarks>CLOSE TO SITE-01: TRK-000068 at 994 m</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000132" type="b-a" how="m-r" time="2026-11-04T14:02:56.000Z" start="2026-11-04T14:02:56.000Z" stale="2026-11-04T14:07:56.000Z">
+    <point lat="49.342666" lon="31.187050" hae="152.4" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000085" />
+      <remarks>NEW TRACK TRK-000085: OcuSync video first seen at H5</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000133" type="b-a" how="m-r" time="2026-11-04T14:02:59.000Z" start="2026-11-04T14:02:59.000Z" stale="2026-11-04T14:07:59.000Z">
+    <point lat="49.352806" lon="31.206090" hae="198.6" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000086" />
+      <remarks>NEW TRACK TRK-000086: OcuSync RC first seen at I7</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000134" type="b-a" how="m-r" time="2026-11-04T14:03:05.000Z" start="2026-11-04T14:03:05.000Z" stale="2026-11-04T14:08:05.000Z">
+    <point lat="49.351198" lon="31.201801" hae="190.4" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="LOST CONTACT TRK-000075" />
+      <remarks>LOST CONTACT TRK-000075: no update for 60 s</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000135" type="b-a" how="m-r" time="2026-11-04T14:03:07.000Z" start="2026-11-04T14:03:07.000Z" stale="2026-11-04T14:08:07.000Z">
+    <point lat="49.343918" lon="31.202893" hae="203.9" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000087" />
+      <remarks>NEW TRACK TRK-000087: OcuSync video first seen at I6</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000136" type="b-a" how="m-r" time="2026-11-04T14:03:16.000Z" start="2026-11-04T14:03:16.000Z" stale="2026-11-04T14:08:16.000Z">
+    <point lat="49.358718" lon="31.203165" hae="167.7" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="LOST CONTACT TRK-000073" />
+      <remarks>LOST CONTACT TRK-000073: no update for 60 s</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000137" type="b-a" how="m-r" time="2026-11-04T14:03:28.000Z" start="2026-11-04T14:03:28.000Z" stale="2026-11-04T14:08:28.000Z">
+    <point lat="49.355473" lon="31.201889" hae="189.9" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="APPROACHING TRK-000084" />
+      <remarks>APPROACHING SITE-01: TRK-000084 at 2958 m</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000138" type="b-a" how="m-r" time="2026-11-04T14:03:30.000Z" start="2026-11-04T14:03:30.000Z" stale="2026-11-04T14:08:30.000Z">
+    <point lat="49.355495" lon="31.202928" hae="179.6" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="LOST CONTACT TRK-000079" />
+      <remarks>LOST CONTACT TRK-000079: no update for 60 s</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000139" type="b-a" how="m-r" time="2026-11-04T14:03:36.000Z" start="2026-11-04T14:03:36.000Z" stale="2026-11-04T14:08:36.000Z">
+    <point lat="49.342062" lon="31.198468" hae="190.6" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000088" />
+      <remarks>NEW TRACK TRK-000088: bird first seen at H5</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000140" type="b-a" how="m-r" time="2026-11-04T14:03:48.000Z" start="2026-11-04T14:03:48.000Z" stale="2026-11-04T14:08:48.000Z">
+    <point lat="49.364943" lon="31.191799" hae="175.8" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000089" />
+      <remarks>NEW TRACK TRK-000089: OcuSync RC first seen at H8</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000141" type="b-a" how="m-r" time="2026-11-04T14:03:48.000Z" start="2026-11-04T14:03:48.000Z" stale="2026-11-04T14:08:48.000Z">
+    <point lat="49.364943" lon="31.191799" hae="175.8" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="APPROACHING TRK-000089" />
+      <remarks>APPROACHING SITE-01: TRK-000089 at 2124 m</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000142" type="b-a" how="m-r" time="2026-11-04T14:03:51.000Z" start="2026-11-04T14:03:51.000Z" stale="2026-11-04T14:08:51.000Z">
+    <point lat="49.373992" lon="31.199906" hae="189.5" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000090" />
+      <remarks>NEW TRACK TRK-000090: OcuSync video first seen at H9</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000143" type="b-a" how="m-r" time="2026-11-04T14:03:51.000Z" start="2026-11-04T14:03:51.000Z" stale="2026-11-04T14:08:51.000Z">
+    <point lat="49.373992" lon="31.199906" hae="189.5" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="APPROACHING TRK-000090" />
+      <remarks>APPROACHING SITE-01: TRK-000090 at 964 m</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000144" type="b-a" how="m-r" time="2026-11-04T14:03:51.000Z" start="2026-11-04T14:03:51.000Z" stale="2026-11-04T14:08:51.000Z">
+    <point lat="49.373992" lon="31.199906" hae="189.5" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="CLOSE TRK-000090" />
+      <remarks>CLOSE TO SITE-01: TRK-000090 at 964 m</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000145" type="b-a" how="m-r" time="2026-11-04T14:04:04.000Z" start="2026-11-04T14:04:04.000Z" stale="2026-11-04T14:09:04.000Z">
+    <point lat="49.379788" lon="31.252695" hae="173.3" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000091" />
+      <remarks>NEW TRACK TRK-000091: OcuSync RC first seen at L10</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000146" type="b-a" how="m-r" time="2026-11-04T14:04:11.000Z" start="2026-11-04T14:04:11.000Z" stale="2026-11-04T14:09:11.000Z">
+    <point lat="49.337456" lon="31.191826" hae="177.1" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000092" />
+      <remarks>NEW TRACK TRK-000092: OcuSync video first seen at H5</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000147" type="b-a" how="m-r" time="2026-11-04T14:04:16.000Z" start="2026-11-04T14:04:16.000Z" stale="2026-11-04T14:09:16.000Z">
+    <point lat="49.354363" lon="31.205675" hae="198.2" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="LOST CONTACT TRK-000086" />
+      <remarks>LOST CONTACT TRK-000086: no update for 60 s</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000148" type="b-a" how="m-r" time="2026-11-04T14:04:18.000Z" start="2026-11-04T14:04:18.000Z" stale="2026-11-04T14:09:18.000Z">
+    <point lat="49.351048" lon="31.189700" hae="181.4" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000093" />
+      <remarks>NEW TRACK TRK-000093: OcuSync RC first seen at H6</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000149" type="b-a" how="m-r" time="2026-11-04T14:04:18.000Z" start="2026-11-04T14:04:18.000Z" stale="2026-11-04T14:09:18.000Z">
+    <point lat="49.341512" lon="31.201792" hae="217.6" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000094" />
+      <remarks>NEW TRACK TRK-000094: OcuSync video first seen at I5</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000150" type="b-a" how="m-r" time="2026-11-04T14:04:19.000Z" start="2026-11-04T14:04:19.000Z" stale="2026-11-04T14:09:19.000Z">
+    <point lat="49.342937" lon="31.225692" hae="164.0" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000095" />
+      <remarks>NEW TRACK TRK-000095: OcuSync RC first seen at J5</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000151" type="b-a" how="m-r" time="2026-11-04T14:04:23.000Z" start="2026-11-04T14:04:23.000Z" stale="2026-11-04T14:09:23.000Z">
+    <point lat="49.340526" lon="31.186471" hae="174.3" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="LOST CONTACT TRK-000085" />
+      <remarks>LOST CONTACT TRK-000085: no update for 60 s</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000152" type="b-a" how="m-r" time="2026-11-04T14:04:31.000Z" start="2026-11-04T14:04:31.000Z" stale="2026-11-04T14:09:31.000Z">
+    <point lat="49.383191" lon="31.190408" hae="172.5" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000096" />
+      <remarks>NEW TRACK TRK-000096: OcuSync video first seen at H10</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000153" type="b-a" how="m-r" time="2026-11-04T14:04:31.000Z" start="2026-11-04T14:04:31.000Z" stale="2026-11-04T14:09:31.000Z">
+    <point lat="49.383191" lon="31.190408" hae="172.5" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="APPROACHING TRK-000096" />
+      <remarks>APPROACHING SITE-01: TRK-000096 at 1065 m</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000154" type="b-a" how="m-r" time="2026-11-04T14:04:32.000Z" start="2026-11-04T14:04:32.000Z" stale="2026-11-04T14:09:32.000Z">
+    <point lat="49.378309" lon="31.261339" hae="199.4" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000097" />
+      <remarks>NEW TRACK TRK-000097: ZALA datalink first seen at M9</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000155" type="b-a" how="m-r" time="2026-11-04T14:04:45.000Z" start="2026-11-04T14:04:45.000Z" stale="2026-11-04T14:09:45.000Z">
+    <point lat="49.340699" lon="31.196854" hae="173.5" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="LOST CONTACT TRK-000088" />
+      <remarks>LOST CONTACT TRK-000088: no update for 60 s</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000156" type="b-a" how="m-r" time="2026-11-04T14:05:24.000Z" start="2026-11-04T14:05:24.000Z" stale="2026-11-04T14:10:24.000Z">
+    <point lat="49.334607" lon="31.176081" hae="157.4" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000098" />
+      <remarks>NEW TRACK TRK-000098: OcuSync video first seen at G5</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000157" type="b-a" how="m-r" time="2026-11-04T14:05:41.000Z" start="2026-11-04T14:05:41.000Z" stale="2026-11-04T14:10:41.000Z">
+    <point lat="49.362479" lon="31.192326" hae="186.7" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000099" />
+      <remarks>NEW TRACK TRK-000099: ELRS LoRa FHSS first seen at H8</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000158" type="b-a" how="m-r" time="2026-11-04T14:05:41.000Z" start="2026-11-04T14:05:41.000Z" stale="2026-11-04T14:10:41.000Z">
+    <point lat="49.362479" lon="31.192326" hae="186.7" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="APPROACHING TRK-000099" />
+      <remarks>APPROACHING SITE-01: TRK-000099 at 2357 m</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000159" type="b-a" how="m-r" time="2026-11-04T14:05:45.000Z" start="2026-11-04T14:05:45.000Z" stale="2026-11-04T14:10:45.000Z">
+    <point lat="49.341325" lon="31.200951" hae="213.7" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="LOST CONTACT TRK-000094" />
+      <remarks>LOST CONTACT TRK-000094: no update for 60 s</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000160" type="b-a" how="m-r" time="2026-11-04T14:05:49.000Z" start="2026-11-04T14:05:49.000Z" stale="2026-11-04T14:10:49.000Z">
+    <point lat="49.342038" lon="31.178160" hae="162.7" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000100" />
+      <remarks>NEW TRACK TRK-000100: ELRS LoRa FHSS first seen at G5</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000161" type="b-a" how="m-r" time="2026-11-04T14:06:03.000Z" start="2026-11-04T14:06:03.000Z" stale="2026-11-04T14:11:03.000Z">
+    <point lat="49.384908" lon="31.213492" hae="142.7" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="LOST CONTACT TRK-000068" />
+      <remarks>LOST CONTACT TRK-000068: no update for 60 s</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000162" type="b-a" how="m-r" time="2026-11-04T14:06:09.000Z" start="2026-11-04T14:06:09.000Z" stale="2026-11-04T14:11:09.000Z">
+    <point lat="49.334829" lon="31.177754" hae="159.4" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000101" />
+      <remarks>NEW TRACK TRK-000101: OcuSync video first seen at G5</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000163" type="b-a" how="m-r" time="2026-11-04T14:06:17.000Z" start="2026-11-04T14:06:17.000Z" stale="2026-11-04T14:11:17.000Z">
+    <point lat="49.397192" lon="31.272424" hae="176.3" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000102" />
+      <remarks>NEW TRACK TRK-000102: OcuSync RC first seen at N12</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000164" type="b-a" how="m-r" time="2026-11-04T14:06:21.000Z" start="2026-11-04T14:06:21.000Z" stale="2026-11-04T14:11:21.000Z">
+    <point lat="49.349558" lon="31.196821" hae="196.2" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="LOST CONTACT TRK-000093" />
+      <remarks>LOST CONTACT TRK-000093: no update for 60 s</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000165" type="b-a" how="m-r" time="2026-11-04T14:06:22.000Z" start="2026-11-04T14:06:22.000Z" stale="2026-11-04T14:11:22.000Z">
+    <point lat="49.379866" lon="31.259443" hae="192.3" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000103" />
+      <remarks>NEW TRACK TRK-000103: ELRS 2.4 FHSS first seen at M10</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000166" type="b-a" how="m-r" time="2026-11-04T14:06:30.000Z" start="2026-11-04T14:06:30.000Z" stale="2026-11-04T14:11:30.000Z">
+    <point lat="49.337244" lon="31.190447" hae="164.0" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="LOST CONTACT TRK-000092" />
+      <remarks>LOST CONTACT TRK-000092: no update for 60 s</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000167" type="b-a" how="m-r" time="2026-11-04T14:06:35.000Z" start="2026-11-04T14:06:35.000Z" stale="2026-11-04T14:11:35.000Z">
+    <point lat="49.351037" lon="31.195296" hae="187.8" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000104" />
+      <remarks>NEW TRACK TRK-000104: OcuSync RC first seen at H6</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000168" type="b-a" how="m-r" time="2026-11-04T14:06:36.000Z" start="2026-11-04T14:06:36.000Z" stale="2026-11-04T14:11:36.000Z">
+    <point lat="49.335016" lon="31.167021" hae="155.7" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000105" />
+      <remarks>NEW TRACK TRK-000105: OcuSync RC first seen at F5</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000169" type="b-a" how="m-r" time="2026-11-04T14:06:40.000Z" start="2026-11-04T14:06:40.000Z" stale="2026-11-04T14:11:40.000Z">
+    <point lat="49.342115" lon="31.187088" hae="153.3" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000106" />
+      <remarks>NEW TRACK TRK-000106: OcuSync video first seen at H5</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000170" type="b-a" how="m-r" time="2026-11-04T14:06:45.000Z" start="2026-11-04T14:06:45.000Z" stale="2026-11-04T14:11:45.000Z">
+    <point lat="49.335117" lon="31.182780" hae="188.0" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="LOST CONTACT TRK-000098" />
+      <remarks>LOST CONTACT TRK-000098: no update for 60 s</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000171" type="b-a" how="m-r" time="2026-11-04T14:07:23.000Z" start="2026-11-04T14:07:23.000Z" stale="2026-11-04T14:12:23.000Z">
+    <point lat="49.341385" lon="31.171688" hae="155.0" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000107" />
+      <remarks>NEW TRACK TRK-000107: OcuSync video first seen at F5</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000172" type="b-a" how="m-r" time="2026-11-04T14:07:43.000Z" start="2026-11-04T14:07:43.000Z" stale="2026-11-04T14:12:43.000Z">
+    <point lat="49.397263" lon="31.227976" hae="135.9" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000108" />
+      <remarks>NEW TRACK TRK-000108: OcuSync video first seen at K12</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000173" type="b-a" how="m-r" time="2026-11-04T14:07:43.000Z" start="2026-11-04T14:07:43.000Z" stale="2026-11-04T14:12:43.000Z">
+    <point lat="49.397263" lon="31.227976" hae="135.9" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="APPROACHING TRK-000108" />
+      <remarks>APPROACHING SITE-01: TRK-000108 at 2377 m</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000174" type="b-a" how="m-r" time="2026-11-04T14:07:46.000Z" start="2026-11-04T14:07:46.000Z" stale="2026-11-04T14:12:46.000Z">
+    <point lat="49.353328" lon="31.207534" hae="199.2" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="LOST CONTACT TRK-000084" />
+      <remarks>LOST CONTACT TRK-000084: no update for 60 s</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000175" type="b-a" how="m-r" time="2026-11-04T14:07:54.000Z" start="2026-11-04T14:07:54.000Z" stale="2026-11-04T14:12:54.000Z">
+    <point lat="49.335882" lon="31.169964" hae="150.3" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="LOST CONTACT TRK-000105" />
+      <remarks>LOST CONTACT TRK-000105: no update for 60 s</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000176" type="b-a" how="m-r" time="2026-11-04T14:08:16.000Z" start="2026-11-04T14:08:16.000Z" stale="2026-11-04T14:13:16.000Z">
+    <point lat="49.360481" lon="31.210700" hae="156.8" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000109" />
+      <remarks>NEW TRACK TRK-000109: OcuSync RC first seen at I7</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000177" type="b-a" how="m-r" time="2026-11-04T14:08:16.000Z" start="2026-11-04T14:08:16.000Z" stale="2026-11-04T14:13:16.000Z">
+    <point lat="49.360481" lon="31.210700" hae="156.8" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="APPROACHING TRK-000109" />
+      <remarks>APPROACHING SITE-01: TRK-000109 at 2428 m</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000178" type="b-a" how="m-r" time="2026-11-04T14:08:17.000Z" start="2026-11-04T14:08:17.000Z" stale="2026-11-04T14:13:17.000Z">
+    <point lat="49.342592" lon="31.168770" hae="150.4" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000110" />
+      <remarks>NEW TRACK TRK-000110: OcuSync video first seen at F5</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000179" type="b-a" how="m-r" time="2026-11-04T14:08:30.000Z" start="2026-11-04T14:08:30.000Z" stale="2026-11-04T14:13:30.000Z">
+    <point lat="49.389052" lon="31.214880" hae="142.6" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000111" />
+      <remarks>NEW TRACK TRK-000111: Supercam datalink first seen at J11</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000180" type="b-a" how="m-r" time="2026-11-04T14:08:30.000Z" start="2026-11-04T14:08:30.000Z" stale="2026-11-04T14:13:30.000Z">
+    <point lat="49.389052" lon="31.214880" hae="142.6" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="APPROACHING TRK-000111" />
+      <remarks>APPROACHING SITE-01: TRK-000111 at 1061 m</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000181" type="b-a" how="m-r" time="2026-11-04T14:08:52.000Z" start="2026-11-04T14:08:52.000Z" stale="2026-11-04T14:13:52.000Z">
+    <point lat="49.340634" lon="31.185579" hae="171.1" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000112" />
+      <remarks>NEW TRACK TRK-000112: OcuSync video first seen at G5</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000182" type="b-a" how="m-r" time="2026-11-04T14:08:54.000Z" start="2026-11-04T14:08:54.000Z" stale="2026-11-04T14:13:54.000Z">
+    <point lat="49.345612" lon="31.171872" hae="152.1" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="LOST CONTACT TRK-000107" />
+      <remarks>LOST CONTACT TRK-000107: no update for 60 s</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000183" type="b-a" how="m-r" time="2026-11-04T14:09:35.000Z" start="2026-11-04T14:09:35.000Z" stale="2026-11-04T14:14:35.000Z">
+    <point lat="49.352363" lon="31.197529" hae="179.2" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000113" />
+      <remarks>NEW TRACK TRK-000113: OcuSync RC first seen at H7</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000184" type="b-a" how="m-r" time="2026-11-04T14:09:41.000Z" start="2026-11-04T14:09:41.000Z" stale="2026-11-04T14:14:41.000Z">
+    <point lat="49.395030" lon="31.289043" hae="170.1" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000114" />
+      <remarks>NEW TRACK TRK-000114: OcuSync RC first seen at O11</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000185" type="b-a" how="m-r" time="2026-11-04T14:09:46.000Z" start="2026-11-04T14:09:46.000Z" stale="2026-11-04T14:14:46.000Z">
+    <point lat="49.348132" lon="31.185948" hae="175.2" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000115" />
+      <remarks>NEW TRACK TRK-000115: OcuSync video first seen at G6</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000186" type="b-a" how="m-r" time="2026-11-04T14:09:48.000Z" start="2026-11-04T14:09:48.000Z" stale="2026-11-04T14:14:48.000Z">
+    <point lat="49.405296" lon="31.276869" hae="149.1" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000116" />
+      <remarks>NEW TRACK TRK-000116: ZALA datalink first seen at N12</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000187" type="b-a" how="m-r" time="2026-11-04T14:10:07.000Z" start="2026-11-04T14:10:07.000Z" stale="2026-11-04T14:15:07.000Z">
+    <point lat="49.355253" lon="31.200441" hae="198.6" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="APPROACHING TRK-000113" />
+      <remarks>APPROACHING SITE-01: TRK-000113 at 2992 m</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000188" type="b-a" how="m-r" time="2026-11-04T14:10:12.000Z" start="2026-11-04T14:10:12.000Z" stale="2026-11-04T14:15:12.000Z">
+    <point lat="49.343300" lon="31.179679" hae="163.7" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="LOST CONTACT TRK-000112" />
+      <remarks>LOST CONTACT TRK-000112: no update for 60 s</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000189" type="b-a" how="m-r" time="2026-11-04T14:10:13.000Z" start="2026-11-04T14:10:13.000Z" stale="2026-11-04T14:15:13.000Z">
+    <point lat="49.348868" lon="31.181386" hae="175.1" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="LOST CONTACT TRK-000110" />
+      <remarks>LOST CONTACT TRK-000110: no update for 60 s</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000190" type="b-a" how="m-r" time="2026-11-04T14:10:14.000Z" start="2026-11-04T14:10:14.000Z" stale="2026-11-04T14:15:14.000Z">
+    <point lat="49.344840" lon="31.184758" hae="176.3" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000117" />
+      <remarks>NEW TRACK TRK-000117: OcuSync video first seen at G6</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000191" type="b-a" how="m-r" time="2026-11-04T14:10:17.000Z" start="2026-11-04T14:10:17.000Z" stale="2026-11-04T14:15:17.000Z">
+    <point lat="49.352264" lon="31.202326" hae="192.3" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="LOST CONTACT TRK-000104" />
+      <remarks>LOST CONTACT TRK-000104: no update for 60 s</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000192" type="b-a" how="m-r" time="2026-11-04T14:11:20.000Z" start="2026-11-04T14:11:20.000Z" stale="2026-11-04T14:16:20.000Z">
+    <point lat="49.339702" lon="31.183532" hae="189.3" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000118" />
+      <remarks>NEW TRACK TRK-000118: OcuSync video first seen at G5</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000193" type="b-a" how="m-r" time="2026-11-04T14:11:23.000Z" start="2026-11-04T14:11:23.000Z" stale="2026-11-04T14:16:23.000Z">
+    <point lat="49.356687" lon="31.207199" hae="168.5" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000119" />
+      <remarks>NEW TRACK TRK-000119: OcuSync RC first seen at I7</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000194" type="b-a" how="m-r" time="2026-11-04T14:11:23.000Z" start="2026-11-04T14:11:23.000Z" stale="2026-11-04T14:16:23.000Z">
+    <point lat="49.356687" lon="31.207199" hae="168.5" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="APPROACHING TRK-000119" />
+      <remarks>APPROACHING SITE-01: TRK-000119 at 2819 m</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000195" type="b-a" how="m-r" time="2026-11-04T14:11:49.000Z" start="2026-11-04T14:11:49.000Z" stale="2026-11-04T14:16:49.000Z">
+    <point lat="49.345165" lon="31.218090" hae="175.0" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000120" />
+      <remarks>NEW TRACK TRK-000120: OcuSync video first seen at J6</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000196" type="b-a" how="m-r" time="2026-11-04T14:11:54.000Z" start="2026-11-04T14:11:54.000Z" stale="2026-11-04T14:16:54.000Z">
+    <point lat="49.337973" lon="31.188856" hae="181.9" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000121" />
+      <remarks>NEW TRACK TRK-000121: OcuSync video first seen at H5</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000197" type="b-a" how="m-r" time="2026-11-04T14:12:09.000Z" start="2026-11-04T14:12:09.000Z" stale="2026-11-04T14:17:09.000Z">
+    <point lat="49.341567" lon="31.202015" hae="216.8" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000122" />
+      <remarks>NEW TRACK TRK-000122: OcuSync video first seen at I5</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000198" type="b-a" how="m-r" time="2026-11-04T14:12:19.000Z" start="2026-11-04T14:12:19.000Z" stale="2026-11-04T14:17:19.000Z">
+    <point lat="49.352801" lon="31.209860" hae="196.9" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000123" />
+      <remarks>NEW TRACK TRK-000123: OcuSync RC first seen at I7</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000199" type="b-a" how="m-r" time="2026-11-04T14:12:26.000Z" start="2026-11-04T14:12:26.000Z" stale="2026-11-04T14:17:26.000Z">
+    <point lat="49.336130" lon="31.182133" hae="190.9" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000124" />
+      <remarks>NEW TRACK TRK-000124: OcuSync video first seen at G5</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000200" type="b-a" how="m-r" time="2026-11-04T14:12:49.000Z" start="2026-11-04T14:12:49.000Z" stale="2026-11-04T14:17:49.000Z">
+    <point lat="49.390476" lon="31.231130" hae="132.0" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000125" />
+      <remarks>NEW TRACK TRK-000125: bird first seen at K11</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000201" type="b-a" how="m-r" time="2026-11-04T14:12:49.000Z" start="2026-11-04T14:12:49.000Z" stale="2026-11-04T14:17:49.000Z">
+    <point lat="49.390476" lon="31.231130" hae="132.0" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="APPROACHING TRK-000125" />
+      <remarks>APPROACHING SITE-01: TRK-000125 at 2114 m</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000202" type="b-a" how="m-r" time="2026-11-04T14:12:56.000Z" start="2026-11-04T14:12:56.000Z" stale="2026-11-04T14:17:56.000Z">
+    <point lat="49.348511" lon="31.189758" hae="190.0" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="LOST CONTACT TRK-000113" />
+      <remarks>LOST CONTACT TRK-000113: no update for 60 s</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000203" type="b-a" how="m-r" time="2026-11-04T14:12:59.000Z" start="2026-11-04T14:12:59.000Z" stale="2026-11-04T14:17:59.000Z">
+    <point lat="49.343673" lon="31.209174" hae="208.5" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="LOST CONTACT TRK-000115" />
+      <remarks>LOST CONTACT TRK-000115: no update for 60 s</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000204" type="b-a" how="m-r" time="2026-11-04T14:13:19.000Z" start="2026-11-04T14:13:19.000Z" stale="2026-11-04T14:18:19.000Z">
+    <point lat="49.355521" lon="31.202958" hae="179.0" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="APPROACHING TRK-000123" />
+      <remarks>APPROACHING SITE-01: TRK-000123 at 2948 m</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000205" type="b-a" how="m-r" time="2026-11-04T14:13:23.000Z" start="2026-11-04T14:13:23.000Z" stale="2026-11-04T14:18:23.000Z">
+    <point lat="49.350510" lon="31.193039" hae="188.5" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000126" />
+      <remarks>NEW TRACK TRK-000126: OcuSync RC first seen at H6</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000206" type="b-a" how="m-r" time="2026-11-04T14:13:29.000Z" start="2026-11-04T14:13:29.000Z" stale="2026-11-04T14:18:29.000Z">
+    <point lat="49.386622" lon="31.225382" hae="144.5" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000127" />
+      <remarks>NEW TRACK TRK-000127: bird first seen at J10</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000207" type="b-a" how="m-r" time="2026-11-04T14:13:29.000Z" start="2026-11-04T14:13:29.000Z" stale="2026-11-04T14:18:29.000Z">
+    <point lat="49.386622" lon="31.225382" hae="144.5" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="APPROACHING TRK-000127" />
+      <remarks>APPROACHING SITE-01: TRK-000127 at 1563 m</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000208" type="b-a" how="m-r" time="2026-11-04T14:13:29.000Z" start="2026-11-04T14:13:29.000Z" stale="2026-11-04T14:18:29.000Z">
+    <point lat="49.341121" lon="31.195893" hae="174.6" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="LOST CONTACT TRK-000121" />
+      <remarks>LOST CONTACT TRK-000121: no update for 60 s</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000209" type="b-a" how="m-r" time="2026-11-04T14:13:40.000Z" start="2026-11-04T14:13:40.000Z" stale="2026-11-04T14:18:40.000Z">
+    <point lat="49.343899" lon="31.183124" hae="164.5" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000128" />
+      <remarks>NEW TRACK TRK-000128: OcuSync RC first seen at G6</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000210" type="b-a" how="m-r" time="2026-11-04T14:13:48.000Z" start="2026-11-04T14:13:48.000Z" stale="2026-11-04T14:18:48.000Z">
+    <point lat="49.340853" lon="31.199179" hae="194.1" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="LOST CONTACT TRK-000122" />
+      <remarks>LOST CONTACT TRK-000122: no update for 60 s</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000211" type="b-a" how="m-r" time="2026-11-04T14:13:51.000Z" start="2026-11-04T14:13:51.000Z" stale="2026-11-04T14:18:51.000Z">
+    <point lat="49.335855" lon="31.185855" hae="210.7" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000129" />
+      <remarks>NEW TRACK TRK-000129: OcuSync video first seen at G5</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000212" type="b-a" how="m-r" time="2026-11-04T14:13:51.000Z" start="2026-11-04T14:13:51.000Z" stale="2026-11-04T14:18:51.000Z">
+    <point lat="49.340318" lon="31.183119" hae="185.3" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="LOST CONTACT TRK-000119" />
+      <remarks>LOST CONTACT TRK-000119: no update for 60 s</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000213" type="b-a" how="m-r" time="2026-11-04T14:14:05.000Z" start="2026-11-04T14:14:05.000Z" stale="2026-11-04T14:19:05.000Z">
+    <point lat="49.388639" lon="31.229467" hae="135.1" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="LOST CONTACT TRK-000125" />
+      <remarks>LOST CONTACT TRK-000125: no update for 60 s</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000214" type="b-a" how="m-r" time="2026-11-04T14:14:15.000Z" start="2026-11-04T14:14:15.000Z" stale="2026-11-04T14:19:15.000Z">
+    <point lat="49.382088" lon="31.218752" hae="158.3" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="CLOSE TRK-000127" />
+      <remarks>CLOSE TO SITE-01: TRK-000127 at 996 m</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000215" type="b-a" how="m-r" time="2026-11-04T14:15:21.000Z" start="2026-11-04T14:15:21.000Z" stale="2026-11-04T14:20:21.000Z">
+    <point lat="49.355258" lon="31.203058" hae="174.0" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="APPROACHING TRK-000126" />
+      <remarks>APPROACHING SITE-01: TRK-000126 at 2977 m</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000216" type="b-a" how="m-r" time="2026-11-04T14:15:27.000Z" start="2026-11-04T14:15:27.000Z" stale="2026-11-04T14:20:27.000Z">
+    <point lat="49.347041" lon="31.199491" hae="211.6" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000130" />
+      <remarks>NEW TRACK TRK-000130: OcuSync RC first seen at H6</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000217" type="b-a" how="m-r" time="2026-11-04T14:15:32.000Z" start="2026-11-04T14:15:32.000Z" stale="2026-11-04T14:20:32.000Z">
+    <point lat="49.352753" lon="31.181047" hae="170.3" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000131" />
+      <remarks>NEW TRACK TRK-000131: OcuSync RC first seen at G7</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000218" type="b-a" how="m-r" time="2026-11-04T14:15:37.000Z" start="2026-11-04T14:15:37.000Z" stale="2026-11-04T14:20:37.000Z">
+    <point lat="49.345124" lon="31.172950" hae="148.3" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000132" />
+      <remarks>NEW TRACK TRK-000132: OcuSync video first seen at G6</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000219" type="b-a" how="m-r" time="2026-11-04T14:15:54.000Z" start="2026-11-04T14:15:54.000Z" stale="2026-11-04T14:20:54.000Z">
+    <point lat="49.356540" lon="31.208514" hae="158.2" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="LOST CONTACT TRK-000123" />
+      <remarks>LOST CONTACT TRK-000123: no update for 60 s</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000220" type="b-a" how="m-r" time="2026-11-04T14:16:21.000Z" start="2026-11-04T14:16:21.000Z" stale="2026-11-04T14:21:21.000Z">
+    <point lat="49.346460" lon="31.171204" hae="154.7" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000133" />
+      <remarks>NEW TRACK TRK-000133: OcuSync video first seen at F6</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000221" type="b-a" how="m-r" time="2026-11-04T14:16:25.000Z" start="2026-11-04T14:16:25.000Z" stale="2026-11-04T14:21:25.000Z">
+    <point lat="49.369949" lon="31.228331" hae="128.6" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000134" />
+      <remarks>NEW TRACK TRK-000134: OcuSync RC first seen at K8</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000222" type="b-a" how="m-r" time="2026-11-04T14:16:25.000Z" start="2026-11-04T14:16:25.000Z" stale="2026-11-04T14:21:25.000Z">
+    <point lat="49.369949" lon="31.228331" hae="128.6" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="APPROACHING TRK-000134" />
+      <remarks>APPROACHING SITE-01: TRK-000134 at 2156 m</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000223" type="b-a" how="m-r" time="2026-11-04T14:16:30.000Z" start="2026-11-04T14:16:30.000Z" stale="2026-11-04T14:21:30.000Z">
+    <point lat="49.355489" lon="31.206675" hae="197.3" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="APPROACHING TRK-000130" />
+      <remarks>APPROACHING SITE-01: TRK-000130 at 2950 m</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000224" type="b-a" how="m-r" time="2026-11-04T14:16:34.000Z" start="2026-11-04T14:16:34.000Z" stale="2026-11-04T14:21:34.000Z">
+    <point lat="49.349028" lon="31.196237" hae="199.5" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000135" />
+      <remarks>NEW TRACK TRK-000135: OcuSync RC first seen at H6</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000225" type="b-a" how="m-r" time="2026-11-04T14:16:37.000Z" start="2026-11-04T14:16:37.000Z" stale="2026-11-04T14:21:37.000Z">
+    <point lat="49.358254" lon="31.204532" hae="159.6" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="LOST CONTACT TRK-000126" />
+      <remarks>LOST CONTACT TRK-000126: no update for 60 s</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000226" type="b-a" how="m-r" time="2026-11-04T14:16:43.000Z" start="2026-11-04T14:16:43.000Z" stale="2026-11-04T14:21:43.000Z">
+    <point lat="49.341929" lon="31.169371" hae="152.3" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="LOST CONTACT TRK-000132" />
+      <remarks>LOST CONTACT TRK-000132: no update for 60 s</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000227" type="b-a" how="m-r" time="2026-11-04T14:17:03.000Z" start="2026-11-04T14:17:03.000Z" stale="2026-11-04T14:22:03.000Z">
+    <point lat="49.349433" lon="31.182991" hae="178.1" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000136" />
+      <remarks>NEW TRACK TRK-000136: OcuSync video first seen at G6</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000228" type="b-a" how="m-r" time="2026-11-04T14:17:15.000Z" start="2026-11-04T14:17:15.000Z" stale="2026-11-04T14:22:15.000Z">
+    <point lat="49.356458" lon="31.201157" hae="182.5" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="APPROACHING TRK-000135" />
+      <remarks>APPROACHING SITE-01: TRK-000135 at 2854 m</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000229" type="b-a" how="m-r" time="2026-11-04T14:17:29.000Z" start="2026-11-04T14:17:29.000Z" stale="2026-11-04T14:22:29.000Z">
+    <point lat="49.346147" lon="31.174254" hae="157.1" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="LOST CONTACT TRK-000133" />
+      <remarks>LOST CONTACT TRK-000133: no update for 60 s</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000230" type="b-a" how="m-r" time="2026-11-04T14:17:50.000Z" start="2026-11-04T14:17:50.000Z" stale="2026-11-04T14:22:50.000Z">
+    <point lat="49.355678" lon="31.213185" hae="171.5" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="LOST CONTACT TRK-000130" />
+      <remarks>LOST CONTACT TRK-000130: no update for 60 s</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000231" type="b-a" how="m-r" time="2026-11-04T14:18:09.000Z" start="2026-11-04T14:18:09.000Z" stale="2026-11-04T14:23:09.000Z">
+    <point lat="49.357326" lon="31.205869" hae="162.5" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000137" />
+      <remarks>NEW TRACK TRK-000137: OcuSync RC first seen at I7</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000232" type="b-a" how="m-r" time="2026-11-04T14:18:09.000Z" start="2026-11-04T14:18:09.000Z" stale="2026-11-04T14:23:09.000Z">
+    <point lat="49.357326" lon="31.205869" hae="162.5" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="APPROACHING TRK-000137" />
+      <remarks>APPROACHING SITE-01: TRK-000137 at 2744 m</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000233" type="b-a" how="m-r" time="2026-11-04T14:18:27.000Z" start="2026-11-04T14:18:27.000Z" stale="2026-11-04T14:23:27.000Z">
+    <point lat="49.345309" lon="31.184803" hae="177.3" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000138" />
+      <remarks>NEW TRACK TRK-000138: OcuSync video first seen at G6</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000234" type="b-a" how="m-r" time="2026-11-04T14:18:55.000Z" start="2026-11-04T14:18:55.000Z" stale="2026-11-04T14:23:55.000Z">
+    <point lat="49.352933" lon="31.198544" hae="187.1" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="LOST CONTACT TRK-000135" />
+      <remarks>LOST CONTACT TRK-000135: no update for 60 s</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000235" type="b-a" how="m-r" time="2026-11-04T14:19:17.000Z" start="2026-11-04T14:19:17.000Z" stale="2026-11-04T14:24:17.000Z">
+    <point lat="49.374635" lon="31.272299" hae="201.5" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000139" />
+      <remarks>NEW TRACK TRK-000139: OcuSync video first seen at N9</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000236" type="b-a" how="m-r" time="2026-11-04T14:19:17.000Z" start="2026-11-04T14:19:17.000Z" stale="2026-11-04T14:24:17.000Z">
+    <point lat="49.350454" lon="31.201845" hae="194.0" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="LOST CONTACT TRK-000136" />
+      <remarks>LOST CONTACT TRK-000136: no update for 60 s</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000237" type="b-a" how="m-r" time="2026-11-04T14:19:27.000Z" start="2026-11-04T14:19:27.000Z" stale="2026-11-04T14:24:27.000Z">
+    <point lat="49.352683" lon="31.205656" hae="197.4" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000140" />
+      <remarks>NEW TRACK TRK-000140: OcuSync RC first seen at I7</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000238" type="b-a" how="m-r" time="2026-11-04T14:19:31.000Z" start="2026-11-04T14:19:31.000Z" stale="2026-11-04T14:24:31.000Z">
+    <point lat="49.344799" lon="31.208315" hae="207.3" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000141" />
+      <remarks>NEW TRACK TRK-000141: OcuSync video first seen at I6</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000239" type="b-a" how="m-r" time="2026-11-04T14:19:40.000Z" start="2026-11-04T14:19:40.000Z" stale="2026-11-04T14:24:40.000Z">
+    <point lat="49.338397" lon="31.183514" hae="192.2" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000142" />
+      <remarks>NEW TRACK TRK-000142: OcuSync video first seen at G5</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000240" type="b-a" how="m-r" time="2026-11-04T14:19:49.000Z" start="2026-11-04T14:19:49.000Z" stale="2026-11-04T14:24:49.000Z">
+    <point lat="49.338162" lon="31.197773" hae="162.0" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000143" />
+      <remarks>NEW TRACK TRK-000143: OcuSync video first seen at H5</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000241" type="b-a" how="m-r" time="2026-11-04T14:19:51.000Z" start="2026-11-04T14:19:51.000Z" stale="2026-11-04T14:24:51.000Z">
+    <point lat="49.346454" lon="31.189881" hae="185.6" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000144" />
+      <remarks>NEW TRACK TRK-000144: OcuSync RC first seen at H6</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000242" type="b-a" how="m-r" time="2026-11-04T14:19:54.000Z" start="2026-11-04T14:19:54.000Z" stale="2026-11-04T14:24:54.000Z">
+    <point lat="49.356143" lon="31.214016" hae="172.3" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000145" />
+      <remarks>NEW TRACK TRK-000145: OcuSync RC first seen at J7</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000243" type="b-a" how="m-r" time="2026-11-04T14:19:54.000Z" start="2026-11-04T14:19:54.000Z" stale="2026-11-04T14:24:54.000Z">
+    <point lat="49.356143" lon="31.214016" hae="172.3" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="APPROACHING TRK-000145" />
+      <remarks>APPROACHING SITE-01: TRK-000145 at 2948 m</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000244" type="b-a" how="m-r" time="2026-11-04T14:20:01.000Z" start="2026-11-04T14:20:01.000Z" stale="2026-11-04T14:25:01.000Z">
+    <point lat="49.336925" lon="31.184962" hae="201.8" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000146" />
+      <remarks>NEW TRACK TRK-000146: OcuSync video first seen at G5</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000245" type="b-a" how="m-r" time="2026-11-04T14:20:02.000Z" start="2026-11-04T14:20:02.000Z" stale="2026-11-04T14:25:02.000Z">
+    <point lat="49.349399" lon="31.167621" hae="149.7" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000147" />
+      <remarks>NEW TRACK TRK-000147: bird first seen at F6</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000246" type="b-a" how="m-r" time="2026-11-04T14:20:18.000Z" start="2026-11-04T14:20:18.000Z" stale="2026-11-04T14:25:18.000Z">
+    <point lat="49.351554" lon="31.195259" hae="181.9" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="LOST CONTACT TRK-000137" />
+      <remarks>LOST CONTACT TRK-000137: no update for 60 s</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000247" type="b-a" how="m-r" time="2026-11-04T14:20:21.775Z" start="2026-11-04T14:20:21.775Z" stale="2026-11-04T14:25:21.775Z">
+    <point lat="49.399974" lon="31.265100" hae="153.8" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000148" />
+      <remarks>NEW TRACK TRK-000148: OcuSync video first seen at M12</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000248" type="b-a" how="m-r" time="2026-11-04T14:20:26.000Z" start="2026-11-04T14:20:26.000Z" stale="2026-11-04T14:25:26.000Z">
+    <point lat="49.342157" lon="31.204873" hae="227.3" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000149" />
+      <remarks>NEW TRACK TRK-000149: OcuSync video first seen at I5</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000249" type="b-a" how="m-r" time="2026-11-04T14:20:27.000Z" start="2026-11-04T14:20:27.000Z" stale="2026-11-04T14:25:27.000Z">
+    <point lat="49.352455" lon="31.172758" hae="162.1" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="LOST CONTACT TRK-000127" />
+      <remarks>LOST CONTACT TRK-000127: no update for 60 s</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000250" type="b-a" how="m-r" time="2026-11-04T14:20:27.000Z" start="2026-11-04T14:20:27.000Z" stale="2026-11-04T14:25:27.000Z">
+    <point lat="49.342630" lon="31.195995" hae="173.5" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="LOST CONTACT TRK-000138" />
+      <remarks>LOST CONTACT TRK-000138: no update for 60 s</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000251" type="b-a" how="m-r" time="2026-11-04T14:20:34.000Z" start="2026-11-04T14:20:34.000Z" stale="2026-11-04T14:25:34.000Z">
+    <point lat="49.355292" lon="31.205077" hae="192.4" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="APPROACHING TRK-000140" />
+      <remarks>APPROACHING SITE-01: TRK-000140 at 2970 m</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000252" type="b-a" how="m-r" time="2026-11-04T14:20:35.000Z" start="2026-11-04T14:20:35.000Z" stale="2026-11-04T14:25:35.000Z">
+    <point lat="49.398178" lon="31.247060" hae="121.2" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000150" />
+      <remarks>NEW TRACK TRK-000150: OcuSync video first seen at L12</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000253" type="b-a" how="m-r" time="2026-11-04T14:20:43.000Z" start="2026-11-04T14:20:43.000Z" stale="2026-11-04T14:25:43.000Z">
+    <point lat="49.344773" lon="31.162366" hae="125.6" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000151" />
+      <remarks>NEW TRACK TRK-000151: bird first seen at F6</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000254" type="b-a" how="m-r" time="2026-11-04T14:20:45.000Z" start="2026-11-04T14:20:45.000Z" stale="2026-11-04T14:25:45.000Z">
+    <point lat="49.347786" lon="31.186798" hae="178.3" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000152" />
+      <remarks>NEW TRACK TRK-000152: OcuSync RC first seen at H6</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000255" type="b-a" how="m-r" time="2026-11-04T14:21:00.000Z" start="2026-11-04T14:21:00.000Z" stale="2026-11-04T14:26:00.000Z">
+    <point lat="49.357892" lon="31.215508" hae="159.2" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000153" />
+      <remarks>NEW TRACK TRK-000153: OcuSync RC first seen at J7</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000256" type="b-a" how="m-r" time="2026-11-04T14:21:00.000Z" start="2026-11-04T14:21:00.000Z" stale="2026-11-04T14:26:00.000Z">
+    <point lat="49.357892" lon="31.215508" hae="159.2" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="APPROACHING TRK-000153" />
+      <remarks>APPROACHING SITE-01: TRK-000153 at 2787 m</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000257" type="b-a" how="m-r" time="2026-11-04T14:21:04.000Z" start="2026-11-04T14:21:04.000Z" stale="2026-11-04T14:26:04.000Z">
+    <point lat="49.339159" lon="31.198785" hae="180.8" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="LOST CONTACT TRK-000143" />
+      <remarks>LOST CONTACT TRK-000143: no update for 60 s</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000258" type="b-a" how="m-r" time="2026-11-04T14:21:09.000Z" start="2026-11-04T14:21:09.000Z" stale="2026-11-04T14:26:09.000Z">
+    <point lat="49.349709" lon="31.166534" hae="150.6" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="LOST CONTACT TRK-000147" />
+      <remarks>LOST CONTACT TRK-000147: no update for 60 s</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000259" type="b-a" how="m-r" time="2026-11-04T14:21:38.000Z" start="2026-11-04T14:21:38.000Z" stale="2026-11-04T14:26:38.000Z">
+    <point lat="49.333499" lon="31.174925" hae="155.9" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000154" />
+      <remarks>NEW TRACK TRK-000154: OcuSync video first seen at G4</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000260" type="b-a" how="m-r" time="2026-11-04T14:21:41.000Z" start="2026-11-04T14:21:41.000Z" stale="2026-11-04T14:26:41.000Z">
+    <point lat="49.336398" lon="31.186992" hae="203.9" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000155" />
+      <remarks>NEW TRACK TRK-000155: OcuSync video first seen at H5</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000261" type="b-a" how="m-r" time="2026-11-04T14:21:42.000Z" start="2026-11-04T14:21:42.000Z" stale="2026-11-04T14:26:42.000Z">
+    <point lat="49.394370" lon="31.240653" hae="102.1" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000156" />
+      <remarks>NEW TRACK TRK-000156: OcuSync video first seen at K11</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000262" type="b-a" how="m-r" time="2026-11-04T14:21:42.000Z" start="2026-11-04T14:21:42.000Z" stale="2026-11-04T14:26:42.000Z">
+    <point lat="49.394370" lon="31.240653" hae="102.1" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="APPROACHING TRK-000156" />
+      <remarks>APPROACHING SITE-01: TRK-000156 at 2925 m</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000263" type="b-a" how="m-r" time="2026-11-04T14:21:51.000Z" start="2026-11-04T14:21:51.000Z" stale="2026-11-04T14:26:51.000Z">
+    <point lat="49.361154" lon="31.218352" hae="158.4" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000157" />
+      <remarks>NEW TRACK TRK-000157: OcuSync RC first seen at J8</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000264" type="b-a" how="m-r" time="2026-11-04T14:21:51.000Z" start="2026-11-04T14:21:51.000Z" stale="2026-11-04T14:26:51.000Z">
+    <point lat="49.361154" lon="31.218352" hae="158.4" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="APPROACHING TRK-000157" />
+      <remarks>APPROACHING SITE-01: TRK-000157 at 2512 m</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000265" type="b-a" how="m-r" time="2026-11-04T14:21:53.000Z" start="2026-11-04T14:21:53.000Z" stale="2026-11-04T14:26:53.000Z">
+    <point lat="49.344999" lon="31.160415" hae="130.4" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="LOST CONTACT TRK-000151" />
+      <remarks>LOST CONTACT TRK-000151: no update for 60 s</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000266" type="b-a" how="m-r" time="2026-11-04T14:21:58.000Z" start="2026-11-04T14:21:58.000Z" stale="2026-11-04T14:26:58.000Z">
+    <point lat="49.337389" lon="31.189408" hae="179.7" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="LOST CONTACT TRK-000146" />
+      <remarks>LOST CONTACT TRK-000146: no update for 60 s</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000267" type="b-a" how="m-r" time="2026-11-04T14:22:05.000Z" start="2026-11-04T14:22:05.000Z" stale="2026-11-04T14:27:05.000Z">
+    <point lat="49.348965" lon="31.193946" hae="198.5" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000158" />
+      <remarks>NEW TRACK TRK-000158: OcuSync RC first seen at H6</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000268" type="b-a" how="m-r" time="2026-11-04T14:22:26.000Z" start="2026-11-04T14:22:26.000Z" stale="2026-11-04T14:27:26.000Z">
+    <point lat="49.390723" lon="31.261034" hae="168.2" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000159" />
+      <remarks>NEW TRACK TRK-000159: Supercam datalink first seen at M11</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000269" type="b-a" how="m-r" time="2026-11-04T14:22:38.000Z" start="2026-11-04T14:22:38.000Z" stale="2026-11-04T14:27:38.000Z">
+    <point lat="49.348624" lon="31.193411" hae="198.9" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000160" />
+      <remarks>NEW TRACK TRK-000160: OcuSync RC first seen at H6</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000270" type="b-a" how="m-r" time="2026-11-04T14:22:43.000Z" start="2026-11-04T14:22:43.000Z" stale="2026-11-04T14:27:43.000Z">
+    <point lat="49.355942" lon="31.209597" hae="172.0" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000161" />
+      <remarks>NEW TRACK TRK-000161: OcuSync RC first seen at I7</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000271" type="b-a" how="m-r" time="2026-11-04T14:22:43.000Z" start="2026-11-04T14:22:43.000Z" stale="2026-11-04T14:27:43.000Z">
+    <point lat="49.355942" lon="31.209597" hae="172.0" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="APPROACHING TRK-000161" />
+      <remarks>APPROACHING SITE-01: TRK-000161 at 2917 m</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000272" type="b-a" how="m-r" time="2026-11-04T14:22:51.000Z" start="2026-11-04T14:22:51.000Z" stale="2026-11-04T14:27:51.000Z">
+    <point lat="49.380403" lon="31.245884" hae="160.1" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000162" />
+      <remarks>NEW TRACK TRK-000162: ELRS LoRa FHSS first seen at L10</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000273" type="b-a" how="m-r" time="2026-11-04T14:22:51.000Z" start="2026-11-04T14:22:51.000Z" stale="2026-11-04T14:27:51.000Z">
+    <point lat="49.380403" lon="31.245884" hae="160.1" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="APPROACHING TRK-000162" />
+      <remarks>APPROACHING SITE-01: TRK-000162 at 2966 m</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000274" type="b-a" how="m-r" time="2026-11-04T14:22:53.000Z" start="2026-11-04T14:22:53.000Z" stale="2026-11-04T14:27:53.000Z">
+    <point lat="49.336454" lon="31.186381" hae="205.5" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="LOST CONTACT TRK-000155" />
+      <remarks>LOST CONTACT TRK-000155: no update for 60 s</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000275" type="b-a" how="m-r" time="2026-11-04T14:22:55.000Z" start="2026-11-04T14:22:55.000Z" stale="2026-11-04T14:27:55.000Z">
+    <point lat="49.341103" lon="31.179647" hae="169.4" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000163" />
+      <remarks>NEW TRACK TRK-000163: OcuSync video first seen at G5</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000276" type="b-a" how="m-r" time="2026-11-04T14:22:56.000Z" start="2026-11-04T14:22:56.000Z" stale="2026-11-04T14:27:56.000Z">
+    <point lat="49.335526" lon="31.167602" hae="154.0" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000164" />
+      <remarks>NEW TRACK TRK-000164: OcuSync video first seen at F5</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000277" type="b-a" how="m-r" time="2026-11-04T14:23:11.000Z" start="2026-11-04T14:23:11.000Z" stale="2026-11-04T14:28:11.000Z">
+    <point lat="49.347024" lon="31.192271" hae="196.8" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000165" />
+      <remarks>NEW TRACK TRK-000165: OcuSync RC first seen at H6</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000278" type="b-a" how="m-r" time="2026-11-04T14:23:17.000Z" start="2026-11-04T14:23:17.000Z" stale="2026-11-04T14:28:17.000Z">
+    <point lat="49.336567" lon="31.178856" hae="164.3" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="LOST CONTACT TRK-000154" />
+      <remarks>LOST CONTACT TRK-000154: no update for 60 s</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000279" type="b-a" how="m-r" time="2026-11-04T14:23:23.000Z" start="2026-11-04T14:23:23.000Z" stale="2026-11-04T14:28:23.000Z">
+    <point lat="49.355139" lon="31.198963" hae="195.0" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="LOST CONTACT TRK-000140" />
+      <remarks>LOST CONTACT TRK-000140: no update for 60 s</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000280" type="b-a" how="m-r" time="2026-11-04T14:23:27.000Z" start="2026-11-04T14:23:27.000Z" stale="2026-11-04T14:28:27.000Z">
+    <point lat="49.356417" lon="31.206336" hae="176.3" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="APPROACHING TRK-000160" />
+      <remarks>APPROACHING SITE-01: TRK-000160 at 2846 m</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000281" type="b-a" how="m-r" time="2026-11-04T14:23:37.000Z" start="2026-11-04T14:23:37.000Z" stale="2026-11-04T14:28:37.000Z">
+    <point lat="49.349030" lon="31.193824" hae="198.2" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000166" />
+      <remarks>NEW TRACK TRK-000166: OcuSync RC first seen at H6</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000282" type="b-a" how="m-r" time="2026-11-04T14:23:45.000Z" start="2026-11-04T14:23:45.000Z" stale="2026-11-04T14:28:45.000Z">
+    <point lat="49.342445" lon="31.223388" hae="167.6" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000167" />
+      <remarks>NEW TRACK TRK-000167: OcuSync RC first seen at J5</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000283" type="b-a" how="m-r" time="2026-11-04T14:23:55.000Z" start="2026-11-04T14:23:55.000Z" stale="2026-11-04T14:28:55.000Z">
+    <point lat="49.354366" lon="31.204139" hae="178.4" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000168" />
+      <remarks>NEW TRACK TRK-000168: OcuSync RC first seen at I7</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000284" type="b-a" how="m-r" time="2026-11-04T14:23:57.000Z" start="2026-11-04T14:23:57.000Z" stale="2026-11-04T14:28:57.000Z">
+    <point lat="49.355971" lon="31.204191" hae="166.6" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="APPROACHING TRK-000168" />
+      <remarks>APPROACHING SITE-01: TRK-000168 at 2895 m</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000285" type="b-a" how="m-r" time="2026-11-04T14:24:11.000Z" start="2026-11-04T14:24:11.000Z" stale="2026-11-04T14:29:11.000Z">
+    <point lat="49.393714" lon="31.274295" hae="184.6" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000169" />
+      <remarks>NEW TRACK TRK-000169: OcuSync RC first seen at N11</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000286" type="b-a" how="m-r" time="2026-11-04T14:24:23.000Z" start="2026-11-04T14:24:23.000Z" stale="2026-11-04T14:29:23.000Z">
+    <point lat="49.361420" lon="31.218447" hae="155.5" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000170" />
+      <remarks>NEW TRACK TRK-000170: OcuSync RC first seen at J8</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000287" type="b-a" how="m-r" time="2026-11-04T14:24:23.000Z" start="2026-11-04T14:24:23.000Z" stale="2026-11-04T14:29:23.000Z">
+    <point lat="49.361420" lon="31.218447" hae="155.5" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="APPROACHING TRK-000170" />
+      <remarks>APPROACHING SITE-01: TRK-000170 at 2487 m</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000288" type="b-a" how="m-r" time="2026-11-04T14:24:25.000Z" start="2026-11-04T14:24:25.000Z" stale="2026-11-04T14:29:25.000Z">
+    <point lat="49.345726" lon="31.171946" hae="153.2" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000171" />
+      <remarks>NEW TRACK TRK-000171: OcuSync video first seen at F6</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000289" type="b-a" how="m-r" time="2026-11-04T14:24:36.000Z" start="2026-11-04T14:24:36.000Z" stale="2026-11-04T14:29:36.000Z">
+    <point lat="49.357531" lon="31.207595" hae="161.1" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="LOST CONTACT TRK-000160" />
+      <remarks>LOST CONTACT TRK-000160: no update for 60 s</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000290" type="b-a" how="m-r" time="2026-11-04T14:24:37.000Z" start="2026-11-04T14:24:37.000Z" stale="2026-11-04T14:29:37.000Z">
+    <point lat="49.343709" lon="31.176876" hae="159.3" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="LOST CONTACT TRK-000163" />
+      <remarks>LOST CONTACT TRK-000163: no update for 60 s</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000291" type="b-a" how="m-r" time="2026-11-04T14:24:48.000Z" start="2026-11-04T14:24:48.000Z" stale="2026-11-04T14:29:48.000Z">
+    <point lat="49.384536" lon="31.252453" hae="171.3" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000172" />
+      <remarks>NEW TRACK TRK-000172: OcuSync RC first seen at L10</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000292" type="b-a" how="m-r" time="2026-11-04T14:24:57.000Z" start="2026-11-04T14:24:57.000Z" stale="2026-11-04T14:29:57.000Z">
+    <point lat="49.355134" lon="31.207801" hae="177.3" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000173" />
+      <remarks>NEW TRACK TRK-000173: ELRS LoRa FHSS first seen at I7</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000293" type="b-a" how="m-r" time="2026-11-04T14:24:57.000Z" start="2026-11-04T14:24:57.000Z" stale="2026-11-04T14:29:57.000Z">
+    <point lat="49.355134" lon="31.207801" hae="177.3" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="APPROACHING TRK-000173" />
+      <remarks>APPROACHING SITE-01: TRK-000173 at 2994 m</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000294" type="b-a" how="m-r" time="2026-11-04T14:24:58.000Z" start="2026-11-04T14:24:58.000Z" stale="2026-11-04T14:29:58.000Z">
+    <point lat="49.342637" lon="31.167952" hae="149.8" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="LOST CONTACT TRK-000164" />
+      <remarks>LOST CONTACT TRK-000164: no update for 60 s</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000295" type="b-a" how="m-r" time="2026-11-04T14:24:59.000Z" start="2026-11-04T14:24:59.000Z" stale="2026-11-04T14:29:59.000Z">
+    <point lat="49.311958" lon="31.269411" hae="166.1" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000174" />
+      <remarks>NEW TRACK TRK-000174: ELRS LoRa FHSS first seen at N2</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000296" type="b-a" how="m-r" time="2026-11-04T14:24:59.000Z" start="2026-11-04T14:24:59.000Z" stale="2026-11-04T14:29:59.000Z">
+    <point lat="49.343969" lon="31.176049" hae="155.5" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000175" />
+      <remarks>NEW TRACK TRK-000175: OcuSync video first seen at G6</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000297" type="b-a" how="m-r" time="2026-11-04T14:25:06.000Z" start="2026-11-04T14:25:06.000Z" stale="2026-11-04T14:30:06.000Z">
+    <point lat="49.318733" lon="31.225932" hae="139.6" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000176" />
+      <remarks>NEW TRACK TRK-000176: ELRS LoRa FHSS first seen at J3</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000298" type="b-a" how="m-r" time="2026-11-04T14:25:09.000Z" start="2026-11-04T14:25:09.000Z" stale="2026-11-04T14:30:09.000Z">
+    <point lat="49.317767" lon="31.237196" hae="167.9" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000177" />
+      <remarks>NEW TRACK TRK-000177: ELRS LoRa FHSS first seen at K3</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000299" type="b-a" how="m-r" time="2026-11-04T14:25:17.000Z" start="2026-11-04T14:25:17.000Z" stale="2026-11-04T14:30:17.000Z">
+    <point lat="49.338172" lon="31.245104" hae="137.8" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000178" />
+      <remarks>NEW TRACK TRK-000178: UAV fixed-wing first seen at L5</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000300" type="b-a" how="m-r" time="2026-11-04T14:25:17.000Z" start="2026-11-04T14:25:17.000Z" stale="2026-11-04T14:30:17.000Z">
+    <point lat="49.356299" lon="31.205971" hae="173.2" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="LOST CONTACT TRK-000168" />
+      <remarks>LOST CONTACT TRK-000168: no update for 60 s</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000301" type="b-a" how="m-r" time="2026-11-04T14:25:18.000Z" start="2026-11-04T14:25:18.000Z" stale="2026-11-04T14:30:18.000Z">
+    <point lat="49.344991" lon="31.202487" hae="193.8" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000179" />
+      <remarks>NEW TRACK TRK-000179: ELRS LoRa FHSS first seen at I6</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000302" type="b-a" how="m-r" time="2026-11-04T14:25:21.000Z" start="2026-11-04T14:25:21.000Z" stale="2026-11-04T14:30:21.000Z">
+    <point lat="49.319079" lon="31.248844" hae="166.9" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000180" />
+      <remarks>NEW TRACK TRK-000180: ELRS LoRa FHSS first seen at L3</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000303" type="b-a" how="m-r" time="2026-11-04T14:25:24.000Z" start="2026-11-04T14:25:24.000Z" stale="2026-11-04T14:30:24.000Z">
+    <point lat="49.326642" lon="31.262781" hae="162.5" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000181" />
+      <remarks>NEW TRACK TRK-000181: Supercam datalink first seen at M4</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000304" type="b-a" how="m-r" time="2026-11-04T14:25:28.000Z" start="2026-11-04T14:25:28.000Z" stale="2026-11-04T14:30:28.000Z">
+    <point lat="49.314035" lon="31.285143" hae="177.3" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000182" />
+      <remarks>NEW TRACK TRK-000182: ELRS LoRa FHSS first seen at O2</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000305" type="b-a" how="m-r" time="2026-11-04T14:25:31.000Z" start="2026-11-04T14:25:31.000Z" stale="2026-11-04T14:30:31.000Z">
+    <point lat="49.333510" lon="31.220202" hae="187.2" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000183" />
+      <remarks>NEW TRACK TRK-000183: ELRS LoRa FHSS first seen at J4</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000306" type="b-a" how="m-r" time="2026-11-04T14:25:33.000Z" start="2026-11-04T14:25:33.000Z" stale="2026-11-04T14:30:33.000Z">
+    <point lat="49.305401" lon="31.269925" hae="205.7" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000184" />
+      <remarks>NEW TRACK TRK-000184: ELRS LoRa FHSS first seen at N1</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000307" type="b-a" how="m-r" time="2026-11-04T14:25:33.000Z" start="2026-11-04T14:25:33.000Z" stale="2026-11-04T14:30:33.000Z">
+    <point lat="49.343680" lon="31.171262" hae="143.1" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="LOST CONTACT TRK-000171" />
+      <remarks>LOST CONTACT TRK-000171: no update for 60 s</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000308" type="b-a" how="m-r" time="2026-11-04T14:25:35.000Z" start="2026-11-04T14:25:35.000Z" stale="2026-11-04T14:30:35.000Z">
+    <point lat="49.325824" lon="31.183777" hae="193.3" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000185" />
+      <remarks>NEW TRACK TRK-000185: ELRS LoRa FHSS first seen at G4</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000309" type="b-a" how="m-r" time="2026-11-04T14:25:42.000Z" start="2026-11-04T14:25:42.000Z" stale="2026-11-04T14:30:42.000Z">
+    <point lat="49.376357" lon="31.231048" hae="107.4" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000186" />
+      <remarks>NEW TRACK TRK-000186: UAV rotary first seen at K9</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000310" type="b-a" how="m-r" time="2026-11-04T14:25:42.000Z" start="2026-11-04T14:25:42.000Z" stale="2026-11-04T14:30:42.000Z">
+    <point lat="49.376357" lon="31.231048" hae="107.4" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="APPROACHING TRK-000186" />
+      <remarks>APPROACHING SITE-01: TRK-000186 at 1988 m</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000311" type="b-a" how="m-r" time="2026-11-04T14:25:47.000Z" start="2026-11-04T14:25:47.000Z" stale="2026-11-04T14:30:47.000Z">
+    <point lat="49.323623" lon="31.211071" hae="182.2" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000187" />
+      <remarks>NEW TRACK TRK-000187: ELRS LoRa FHSS first seen at I3</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000312" type="b-a" how="m-r" time="2026-11-04T14:26:00.000Z" start="2026-11-04T14:26:00.000Z" stale="2026-11-04T14:31:00.000Z">
+    <point lat="49.322746" lon="31.231727" hae="142.6" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000188" />
+      <remarks>NEW TRACK TRK-000188: ELRS LoRa FHSS first seen at K3</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000313" type="b-a" how="m-r" time="2026-11-04T14:26:06.000Z" start="2026-11-04T14:26:06.000Z" stale="2026-11-04T14:31:06.000Z">
+    <point lat="49.346188" lon="31.179502" hae="162.0" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="LOST CONTACT TRK-000175" />
+      <remarks>LOST CONTACT TRK-000175: no update for 60 s</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000314" type="b-a" how="m-r" time="2026-11-04T14:26:09.000Z" start="2026-11-04T14:26:09.000Z" stale="2026-11-04T14:31:09.000Z">
+    <point lat="49.324791" lon="31.258520" hae="169.5" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000189" />
+      <remarks>NEW TRACK TRK-000189: ELRS LoRa FHSS first seen at M3</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000315" type="b-a" how="m-r" time="2026-11-04T14:26:12.000Z" start="2026-11-04T14:26:12.000Z" stale="2026-11-04T14:31:12.000Z">
+    <point lat="49.314494" lon="31.259022" hae="164.1" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000190" />
+      <remarks>NEW TRACK TRK-000190: Analog FM video first seen at M2</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000316" type="b-a" how="m-r" time="2026-11-04T14:26:13.000Z" start="2026-11-04T14:26:13.000Z" stale="2026-11-04T14:31:13.000Z">
+    <point lat="49.356943" lon="31.218585" hae="182.8" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="APPROACHING TRK-000178" />
+      <remarks>APPROACHING SITE-01: TRK-000178 at 2955 m</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000317" type="b-a" how="m-r" time="2026-11-04T14:26:18.000Z" start="2026-11-04T14:26:18.000Z" stale="2026-11-04T14:31:18.000Z">
+    <point lat="49.353818" lon="31.195327" hae="178.4" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000191" />
+      <remarks>NEW TRACK TRK-000191: ELRS LoRa FHSS first seen at H7</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000318" type="b-a" how="m-r" time="2026-11-04T14:26:20.000Z" start="2026-11-04T14:26:20.000Z" stale="2026-11-04T14:31:20.000Z">
+    <point lat="49.317635" lon="31.239659" hae="156.8" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000192" />
+      <remarks>NEW TRACK TRK-000192: ELRS LoRa FHSS first seen at K3</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000319" type="b-a" how="m-r" time="2026-11-04T14:26:21.000Z" start="2026-11-04T14:26:21.000Z" stale="2026-11-04T14:31:21.000Z">
+    <point lat="49.314723" lon="31.285565" hae="171.9" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000193" />
+      <remarks>NEW TRACK TRK-000193: ELRS LoRa FHSS first seen at O2</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000320" type="b-a" how="m-r" time="2026-11-04T14:26:45.000Z" start="2026-11-04T14:26:45.000Z" stale="2026-11-04T14:31:45.000Z">
+    <point lat="49.348904" lon="31.186532" hae="178.5" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="LOST CONTACT TRK-000166" />
+      <remarks>LOST CONTACT TRK-000166: no update for 60 s</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000321" type="b-a" how="m-r" time="2026-11-04T14:26:46.000Z" start="2026-11-04T14:26:46.000Z" stale="2026-11-04T14:31:46.000Z">
+    <point lat="49.356402" lon="31.201285" hae="179.4" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="LOST CONTACT TRK-000173" />
+      <remarks>LOST CONTACT TRK-000173: no update for 60 s</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000322" type="b-a" how="m-r" time="2026-11-04T14:26:49.000Z" start="2026-11-04T14:26:49.000Z" stale="2026-11-04T14:31:49.000Z">
+    <point lat="49.311849" lon="31.282843" hae="193.9" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000194" />
+      <remarks>NEW TRACK TRK-000194: ELRS LoRa FHSS first seen at N2</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000323" type="b-a" how="m-r" time="2026-11-04T14:26:53.000Z" start="2026-11-04T14:26:53.000Z" stale="2026-11-04T14:31:53.000Z">
+    <point lat="49.322829" lon="31.243689" hae="153.5" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000195" />
+      <remarks>NEW TRACK TRK-000195: ELRS LoRa FHSS first seen at L3</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000324" type="b-a" how="m-r" time="2026-11-04T14:26:57.000Z" start="2026-11-04T14:26:57.000Z" stale="2026-11-04T14:31:57.000Z">
+    <point lat="49.361304" lon="31.202055" hae="197.1" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000196" />
+      <remarks>NEW TRACK TRK-000196: Supercam datalink first seen at I8</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000325" type="b-a" how="m-r" time="2026-11-04T14:26:57.000Z" start="2026-11-04T14:26:57.000Z" stale="2026-11-04T14:31:57.000Z">
+    <point lat="49.361304" lon="31.202055" hae="197.1" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="APPROACHING TRK-000196" />
+      <remarks>APPROACHING SITE-01: TRK-000196 at 2311 m</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000326" type="b-a" how="m-r" time="2026-11-04T14:26:59.000Z" start="2026-11-04T14:26:59.000Z" stale="2026-11-04T14:31:59.000Z">
+    <point lat="49.312572" lon="31.284568" hae="186.8" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="LOST CONTACT TRK-000182" />
+      <remarks>LOST CONTACT TRK-000182: no update for 60 s</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000327" type="b-a" how="m-r" time="2026-11-04T14:27:00.000Z" start="2026-11-04T14:27:00.000Z" stale="2026-11-04T14:32:00.000Z">
+    <point lat="49.308917" lon="31.244444" hae="144.5" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000197" />
+      <remarks>NEW TRACK TRK-000197: ELRS LoRa FHSS first seen at L2</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000328" type="b-a" how="m-r" time="2026-11-04T14:27:03.000Z" start="2026-11-04T14:27:03.000Z" stale="2026-11-04T14:32:03.000Z">
+    <point lat="49.319764" lon="31.264852" hae="168.9" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000198" />
+      <remarks>NEW TRACK TRK-000198: ELRS LoRa FHSS first seen at M3</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000329" type="b-a" how="m-r" time="2026-11-04T14:27:04.000Z" start="2026-11-04T14:27:04.000Z" stale="2026-11-04T14:32:04.000Z">
+    <point lat="49.348771" lon="31.197051" hae="200.9" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000199" />
+      <remarks>NEW TRACK TRK-000199: OcuSync RC first seen at H6</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000330" type="b-a" how="m-r" time="2026-11-04T14:27:14.000Z" start="2026-11-04T14:27:14.000Z" stale="2026-11-04T14:32:14.000Z">
+    <point lat="49.343455" lon="31.254653" hae="139.4" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000200" />
+      <remarks>NEW TRACK TRK-000200: ELRS LoRa FHSS first seen at L6</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000331" type="b-a" how="m-r" time="2026-11-04T14:27:24.000Z" start="2026-11-04T14:27:24.000Z" stale="2026-11-04T14:32:24.000Z">
+    <point lat="49.315132" lon="31.267633" hae="191.3" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000201" />
+      <remarks>NEW TRACK TRK-000201: ELRS LoRa FHSS first seen at M2</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000332" type="b-a" how="m-r" time="2026-11-04T14:27:26.000Z" start="2026-11-04T14:27:26.000Z" stale="2026-11-04T14:32:26.000Z">
+    <point lat="49.328908" lon="31.169208" hae="140.9" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000202" />
+      <remarks>NEW TRACK TRK-000202: ELRS LoRa FHSS first seen at F4</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000333" type="b-a" how="m-r" time="2026-11-04T14:27:27.000Z" start="2026-11-04T14:27:27.000Z" stale="2026-11-04T14:32:27.000Z">
+    <point lat="49.342977" lon="31.197043" hae="179.1" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000203" />
+      <remarks>NEW TRACK TRK-000203: UAV rotary first seen at H5</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000334" type="b-a" how="m-r" time="2026-11-04T14:27:31.000Z" start="2026-11-04T14:27:31.000Z" stale="2026-11-04T14:32:31.000Z">
+    <point lat="49.324831" lon="31.257887" hae="169.1" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000204" />
+      <remarks>NEW TRACK TRK-000204: ELRS LoRa FHSS first seen at M3</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000335" type="b-a" how="m-r" time="2026-11-04T14:27:52.000Z" start="2026-11-04T14:27:52.000Z" stale="2026-11-04T14:32:52.000Z">
+    <point lat="49.325484" lon="31.205346" hae="204.1" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000205" />
+      <remarks>NEW TRACK TRK-000205: ELRS LoRa FHSS first seen at I4</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000336" type="b-a" how="m-r" time="2026-11-04T14:27:55.000Z" start="2026-11-04T14:27:55.000Z" stale="2026-11-04T14:32:55.000Z">
+    <point lat="49.343398" lon="31.183613" hae="155.4" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000206" />
+      <remarks>NEW TRACK TRK-000206: OcuSync RC first seen at G6</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000337" type="b-a" how="m-r" time="2026-11-04T14:28:00.000Z" start="2026-11-04T14:28:00.000Z" stale="2026-11-04T14:33:00.000Z">
+    <point lat="49.352757" lon="31.197960" hae="188.0" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000207" />
+      <remarks>NEW TRACK TRK-000207: OcuSync RC first seen at H7</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000338" type="b-a" how="m-r" time="2026-11-04T14:28:00.000Z" start="2026-11-04T14:28:00.000Z" stale="2026-11-04T14:33:00.000Z">
+    <point lat="49.353278" lon="31.265782" hae="156.1" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000208" />
+      <remarks>NEW TRACK TRK-000208: Orlan datalink FHSS first seen at M7</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000339" type="b-a" how="m-r" time="2026-11-04T14:28:02.000Z" start="2026-11-04T14:28:02.000Z" stale="2026-11-04T14:33:02.000Z">
+    <point lat="49.326724" lon="31.243218" hae="131.0" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000209" />
+      <remarks>NEW TRACK TRK-000209: ELRS LoRa FHSS first seen at L4</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000340" type="b-a" how="m-r" time="2026-11-04T14:28:08.000Z" start="2026-11-04T14:28:08.000Z" stale="2026-11-04T14:33:08.000Z">
+    <point lat="49.355156" lon="31.216805" hae="193.7" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000210" />
+      <remarks>NEW TRACK TRK-000210: ELRS LoRa FHSS first seen at J7</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000341" type="b-a" how="m-r" time="2026-11-04T14:28:11.000Z" start="2026-11-04T14:28:11.000Z" stale="2026-11-04T14:33:11.000Z">
+    <point lat="49.341962" lon="31.210434" hae="208.5" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000211" />
+      <remarks>NEW TRACK TRK-000211: ELRS LoRa FHSS first seen at I5</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000342" type="b-a" how="m-r" time="2026-11-04T14:28:14.000Z" start="2026-11-04T14:28:14.000Z" stale="2026-11-04T14:33:14.000Z">
+    <point lat="49.327702" lon="31.180945" hae="170.7" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000212" />
+      <remarks>NEW TRACK TRK-000212: ELRS LoRa FHSS first seen at G4</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000343" type="b-a" how="m-r" time="2026-11-04T14:28:35.000Z" start="2026-11-04T14:28:35.000Z" stale="2026-11-04T14:33:35.000Z">
+    <point lat="49.403719" lon="31.152096" hae="125.2" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000213" />
+      <remarks>NEW TRACK TRK-000213: UAV fixed-wing first seen at E12</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000344" type="b-a" how="m-r" time="2026-11-04T14:28:38.000Z" start="2026-11-04T14:28:38.000Z" stale="2026-11-04T14:33:38.000Z">
+    <point lat="49.356038" lon="31.206252" hae="184.1" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="APPROACHING TRK-000207" />
+      <remarks>APPROACHING SITE-01: TRK-000207 at 2888 m</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000345" type="b-a" how="m-r" time="2026-11-04T14:28:52.000Z" start="2026-11-04T14:28:52.000Z" stale="2026-11-04T14:33:52.000Z">
+    <point lat="49.305789" lon="31.285269" hae="181.2" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000214" />
+      <remarks>NEW TRACK TRK-000214: ELRS LoRa FHSS first seen at O1</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000346" type="b-a" how="m-r" time="2026-11-04T14:28:52.000Z" start="2026-11-04T14:28:52.000Z" stale="2026-11-04T14:33:52.000Z">
+    <point lat="49.350822" lon="31.201849" hae="192.5" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000215" />
+      <remarks>NEW TRACK TRK-000215: OcuSync RC first seen at I6</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000347" type="b-a" how="m-r" time="2026-11-04T14:28:53.000Z" start="2026-11-04T14:28:53.000Z" stale="2026-11-04T14:33:53.000Z">
+    <point lat="49.317866" lon="31.250621" hae="172.6" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000216" />
+      <remarks>NEW TRACK TRK-000216: ELRS LoRa FHSS first seen at L3</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000348" type="b-a" how="m-r" time="2026-11-04T14:28:55.000Z" start="2026-11-04T14:28:55.000Z" stale="2026-11-04T14:33:55.000Z">
+    <point lat="49.334140" lon="31.200052" hae="195.7" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000217" />
+      <remarks>NEW TRACK TRK-000217: OcuSync video first seen at I5</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000349" type="b-a" how="m-r" time="2026-11-04T14:29:01.000Z" start="2026-11-04T14:29:01.000Z" stale="2026-11-04T14:34:01.000Z">
+    <point lat="49.342405" lon="31.195614" hae="173.6" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000218" />
+      <remarks>NEW TRACK TRK-000218: OcuSync video first seen at H5</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000350" type="b-a" how="m-r" time="2026-11-04T14:29:12.000Z" start="2026-11-04T14:29:12.000Z" stale="2026-11-04T14:34:12.000Z">
+    <point lat="49.395658" lon="31.164396" hae="144.9" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="LOST CONTACT TRK-000178" />
+      <remarks>LOST CONTACT TRK-000178: no update for 60 s</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000351" type="b-a" how="m-r" time="2026-11-04T14:29:14.000Z" start="2026-11-04T14:29:14.000Z" stale="2026-11-04T14:34:14.000Z">
+    <point lat="49.347196" lon="31.182351" hae="173.3" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000219" />
+      <remarks>NEW TRACK TRK-000219: OcuSync video first seen at G6</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000352" type="b-a" how="m-r" time="2026-11-04T14:29:20.000Z" start="2026-11-04T14:29:20.000Z" stale="2026-11-04T14:34:20.000Z">
+    <point lat="49.321839" lon="31.232865" hae="139.9" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000220" />
+      <remarks>NEW TRACK TRK-000220: ELRS LoRa FHSS first seen at K3</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000353" type="b-a" how="m-r" time="2026-11-04T14:29:30.000Z" start="2026-11-04T14:29:30.000Z" stale="2026-11-04T14:34:30.000Z">
+    <point lat="49.312171" lon="31.264521" hae="155.3" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000221" />
+      <remarks>NEW TRACK TRK-000221: ELRS LoRa FHSS first seen at M2</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000354" type="b-a" how="m-r" time="2026-11-04T14:29:42.000Z" start="2026-11-04T14:29:42.000Z" stale="2026-11-04T14:34:42.000Z">
+    <point lat="49.338976" lon="31.173861" hae="153.6" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000222" />
+      <remarks>NEW TRACK TRK-000222: ELRS 2.4 FHSS first seen at G5</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000355" type="b-a" how="m-r" time="2026-11-04T14:29:43.000Z" start="2026-11-04T14:29:43.000Z" stale="2026-11-04T14:34:43.000Z">
+    <point lat="49.356616" lon="31.206467" hae="172.7" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="LOST CONTACT TRK-000207" />
+      <remarks>LOST CONTACT TRK-000207: no update for 60 s</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000356" type="b-a" how="m-r" time="2026-11-04T14:29:43.000Z" start="2026-11-04T14:29:43.000Z" stale="2026-11-04T14:34:43.000Z">
+    <point lat="49.406788" lon="31.151120" hae="128.3" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="LOST CONTACT TRK-000213" />
+      <remarks>LOST CONTACT TRK-000213: no update for 60 s</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000357" type="b-a" how="m-r" time="2026-11-04T14:29:44.000Z" start="2026-11-04T14:29:44.000Z" stale="2026-11-04T14:34:44.000Z">
+    <point lat="49.331014" lon="31.160134" hae="152.0" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000223" />
+      <remarks>NEW TRACK TRK-000223: ELRS LoRa FHSS first seen at F4</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000358" type="b-a" how="m-r" time="2026-11-04T14:29:48.000Z" start="2026-11-04T14:29:48.000Z" stale="2026-11-04T14:34:48.000Z">
+    <point lat="49.348830" lon="31.192731" hae="197.4" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000224" />
+      <remarks>NEW TRACK TRK-000224: ELRS 2.4 FHSS first seen at H6</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000359" type="b-a" how="m-r" time="2026-11-04T14:29:53.000Z" start="2026-11-04T14:29:53.000Z" stale="2026-11-04T14:34:53.000Z">
+    <point lat="49.333633" lon="31.252498" hae="158.2" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000225" />
+      <remarks>NEW TRACK TRK-000225: ELRS LoRa FHSS first seen at L4</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000360" type="b-a" how="m-r" time="2026-11-04T14:29:54.000Z" start="2026-11-04T14:29:54.000Z" stale="2026-11-04T14:34:54.000Z">
+    <point lat="49.310469" lon="31.287725" hae="159.7" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000226" />
+      <remarks>NEW TRACK TRK-000226: ELRS LoRa FHSS first seen at O2</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000361" type="b-a" how="m-r" time="2026-11-04T14:29:57.000Z" start="2026-11-04T14:29:57.000Z" stale="2026-11-04T14:34:57.000Z">
+    <point lat="49.313125" lon="31.252295" hae="162.2" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000227" />
+      <remarks>NEW TRACK TRK-000227: ELRS LoRa FHSS first seen at L2</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000362" type="b-a" how="m-r" time="2026-11-04T14:30:02.000Z" start="2026-11-04T14:30:02.000Z" stale="2026-11-04T14:35:02.000Z">
+    <point lat="49.307797" lon="31.266656" hae="203.5" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000228" />
+      <remarks>NEW TRACK TRK-000228: ELRS LoRa FHSS first seen at M2</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000363" type="b-a" how="m-r" time="2026-11-04T14:30:03.000Z" start="2026-11-04T14:30:03.000Z" stale="2026-11-04T14:35:03.000Z">
+    <point lat="49.320456" lon="31.260626" hae="167.2" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000229" />
+      <remarks>NEW TRACK TRK-000229: ELRS LoRa FHSS first seen at M3</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000364" type="b-a" how="m-r" time="2026-11-04T14:30:05.000Z" start="2026-11-04T14:30:05.000Z" stale="2026-11-04T14:35:05.000Z">
+    <point lat="49.313476" lon="31.229476" hae="161.3" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000230" />
+      <remarks>NEW TRACK TRK-000230: ELRS LoRa FHSS first seen at K2</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000365" type="b-a" how="m-r" time="2026-11-04T14:30:06.000Z" start="2026-11-04T14:30:06.000Z" stale="2026-11-04T14:35:06.000Z">
+    <point lat="49.353124" lon="31.199664" hae="191.6" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="LOST CONTACT TRK-000215" />
+      <remarks>LOST CONTACT TRK-000215: no update for 60 s</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000366" type="b-a" how="m-r" time="2026-11-04T14:30:11.000Z" start="2026-11-04T14:30:11.000Z" stale="2026-11-04T14:35:11.000Z">
+    <point lat="49.327623" lon="31.175207" hae="164.4" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000231" />
+      <remarks>NEW TRACK TRK-000231: ELRS LoRa FHSS first seen at G4</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000367" type="b-a" how="m-r" time="2026-11-04T14:30:12.000Z" start="2026-11-04T14:30:12.000Z" stale="2026-11-04T14:35:12.000Z">
+    <point lat="49.349179" lon="31.244643" hae="146.9" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000232" />
+      <remarks>NEW TRACK TRK-000232: ELRS LoRa FHSS first seen at L6</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000368" type="b-a" how="m-r" time="2026-11-04T14:30:26.000Z" start="2026-11-04T14:30:26.000Z" stale="2026-11-04T14:35:26.000Z">
+    <point lat="49.335712" lon="31.211400" hae="200.5" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000233" />
+      <remarks>NEW TRACK TRK-000233: ELRS LoRa FHSS first seen at I5</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000369" type="b-a" how="m-r" time="2026-11-04T14:30:37.000Z" start="2026-11-04T14:30:37.000Z" stale="2026-11-04T14:35:37.000Z">
+    <point lat="49.319929" lon="31.241106" hae="140.5" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000234" />
+      <remarks>NEW TRACK TRK-000234: ELRS LoRa FHSS first seen at K3</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000370" type="b-a" how="m-r" time="2026-11-04T14:30:41.000Z" start="2026-11-04T14:30:41.000Z" stale="2026-11-04T14:35:41.000Z">
+    <point lat="49.336406" lon="31.187024" hae="203.6" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="LOST CONTACT TRK-000203" />
+      <remarks>LOST CONTACT TRK-000203: no update for 60 s</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000371" type="b-a" how="m-r" time="2026-11-04T14:30:46.000Z" start="2026-11-04T14:30:46.000Z" stale="2026-11-04T14:35:46.000Z">
+    <point lat="49.316558" lon="31.270456" hae="190.7" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000235" />
+      <remarks>NEW TRACK TRK-000235: ELRS LoRa FHSS first seen at N3</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000372" type="b-a" how="m-r" time="2026-11-04T14:30:53.000Z" start="2026-11-04T14:30:53.000Z" stale="2026-11-04T14:35:53.000Z">
+    <point lat="49.355081" lon="31.204104" hae="174.6" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="LOST CONTACT TRK-000186" />
+      <remarks>LOST CONTACT TRK-000186: no update for 60 s</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000373" type="b-a" how="m-r" time="2026-11-04T14:30:54.000Z" start="2026-11-04T14:30:54.000Z" stale="2026-11-04T14:35:54.000Z">
+    <point lat="49.322848" lon="31.291306" hae="169.7" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000236" />
+      <remarks>NEW TRACK TRK-000236: ELRS LoRa FHSS first seen at O3</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000374" type="b-a" how="m-r" time="2026-11-04T14:31:02.000Z" start="2026-11-04T14:31:02.000Z" stale="2026-11-04T14:36:02.000Z">
+    <point lat="49.317500" lon="31.281885" hae="166.9" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000237" />
+      <remarks>NEW TRACK TRK-000237: ELRS LoRa FHSS first seen at N3</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000375" type="b-a" how="m-r" time="2026-11-04T14:31:04.000Z" start="2026-11-04T14:31:04.000Z" stale="2026-11-04T14:36:04.000Z">
+    <point lat="49.328016" lon="31.197727" hae="193.9" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000238" />
+      <remarks>NEW TRACK TRK-000238: Analog FM video first seen at H4</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000376" type="b-a" how="m-r" time="2026-11-04T14:31:07.000Z" start="2026-11-04T14:31:07.000Z" stale="2026-11-04T14:36:07.000Z">
+    <point lat="49.323617" lon="31.208314" hae="182.6" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000239" />
+      <remarks>NEW TRACK TRK-000239: Analog FM video first seen at I3</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000377" type="b-a" how="m-r" time="2026-11-04T14:31:09.000Z" start="2026-11-04T14:31:09.000Z" stale="2026-11-04T14:36:09.000Z">
+    <point lat="49.330816" lon="31.242941" hae="135.9" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000240" />
+      <remarks>NEW TRACK TRK-000240: ELRS LoRa FHSS first seen at L4</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000378" type="b-a" how="m-r" time="2026-11-04T14:31:10.000Z" start="2026-11-04T14:31:10.000Z" stale="2026-11-04T14:36:10.000Z">
+    <point lat="49.336668" lon="31.174244" hae="163.8" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="LOST CONTACT TRK-000222" />
+      <remarks>LOST CONTACT TRK-000222: no update for 60 s</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000379" type="b-a" how="m-r" time="2026-11-04T14:31:11.000Z" start="2026-11-04T14:31:11.000Z" stale="2026-11-04T14:36:11.000Z">
+    <point lat="49.355000" lon="31.230000" hae="164.5" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="SENSOR SILENT" />
+      <remarks>SENSOR SILENT MIC2: no detections since 2026-11-04T14:30:11.000Z (EO1, HUM1, MIC1, RADAR-01, RF1, RF2, RID1, TEL1 still reporting)</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000380" type="b-a" how="m-r" time="2026-11-04T14:31:13.000Z" start="2026-11-04T14:31:13.000Z" stale="2026-11-04T14:36:13.000Z">
+    <point lat="49.313901" lon="31.250026" hae="164.8" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="LOST CONTACT TRK-000227" />
+      <remarks>LOST CONTACT TRK-000227: no update for 60 s</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000381" type="b-a" how="m-r" time="2026-11-04T14:31:19.000Z" start="2026-11-04T14:31:19.000Z" stale="2026-11-04T14:36:19.000Z">
+    <point lat="49.326192" lon="31.188029" hae="179.4" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000241" />
+      <remarks>NEW TRACK TRK-000241: Analog FM video first seen at H4</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000382" type="b-a" how="m-r" time="2026-11-04T14:31:28.000Z" start="2026-11-04T14:31:28.000Z" stale="2026-11-04T14:36:28.000Z">
+    <point lat="49.307366" lon="31.268003" hae="211.1" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000242" />
+      <remarks>NEW TRACK TRK-000242: ELRS LoRa FHSS first seen at M2</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000383" type="b-a" how="m-r" time="2026-11-04T14:31:38.000Z" start="2026-11-04T14:31:38.000Z" stale="2026-11-04T14:36:38.000Z">
+    <point lat="49.340718" lon="31.168575" hae="152.7" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000243" />
+      <remarks>NEW TRACK TRK-000243: OcuSync video first seen at F5</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000384" type="b-a" how="m-r" time="2026-11-04T14:31:39.000Z" start="2026-11-04T14:31:39.000Z" stale="2026-11-04T14:36:39.000Z">
+    <point lat="49.357484" lon="31.184045" hae="162.6" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000244" />
+      <remarks>NEW TRACK TRK-000244: OcuSync RC first seen at G7</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000385" type="b-a" how="m-r" time="2026-11-04T14:31:41.000Z" start="2026-11-04T14:31:41.000Z" stale="2026-11-04T14:36:41.000Z">
+    <point lat="49.318334" lon="31.275609" hae="172.8" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000245" />
+      <remarks>NEW TRACK TRK-000245: ELRS LoRa FHSS first seen at N3</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000386" type="b-a" how="m-r" time="2026-11-04T14:31:42.000Z" start="2026-11-04T14:31:42.000Z" stale="2026-11-04T14:36:42.000Z">
+    <point lat="49.308996" lon="31.268577" hae="180.2" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="LOST CONTACT TRK-000228" />
+      <remarks>LOST CONTACT TRK-000228: no update for 60 s</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000387" type="b-a" how="m-r" time="2026-11-04T14:31:49.000Z" start="2026-11-04T14:31:49.000Z" stale="2026-11-04T14:36:49.000Z">
+    <point lat="49.329060" lon="31.170695" hae="155.8" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000246" />
+      <remarks>NEW TRACK TRK-000246: Analog FM video first seen at F4</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000388" type="b-a" how="m-r" time="2026-11-04T14:32:06.000Z" start="2026-11-04T14:32:06.000Z" stale="2026-11-04T14:37:06.000Z">
+    <point lat="49.330336" lon="31.163033" hae="144.7" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000247" />
+      <remarks>NEW TRACK TRK-000247: Analog FM video first seen at F4</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000389" type="b-a" how="m-r" time="2026-11-04T14:32:07.000Z" start="2026-11-04T14:32:07.000Z" stale="2026-11-04T14:37:07.000Z">
+    <point lat="49.329663" lon="31.256924" hae="166.6" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000248" />
+      <remarks>NEW TRACK TRK-000248: ELRS LoRa FHSS first seen at M4</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000390" type="b-a" how="m-r" time="2026-11-04T14:32:12.000Z" start="2026-11-04T14:32:12.000Z" stale="2026-11-04T14:37:12.000Z">
+    <point lat="49.314635" lon="31.244737" hae="139.5" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="LOST CONTACT TRK-000234" />
+      <remarks>LOST CONTACT TRK-000234: no update for 60 s</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000391" type="b-a" how="m-r" time="2026-11-04T14:32:17.000Z" start="2026-11-04T14:32:17.000Z" stale="2026-11-04T14:37:17.000Z">
+    <point lat="49.326138" lon="31.199365" hae="202.3" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="LOST CONTACT TRK-000238" />
+      <remarks>LOST CONTACT TRK-000238: no update for 60 s</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000392" type="b-a" how="m-r" time="2026-11-04T14:32:18.000Z" start="2026-11-04T14:32:18.000Z" stale="2026-11-04T14:37:18.000Z">
+    <point lat="49.347009" lon="31.215092" hae="179.8" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000249" />
+      <remarks>NEW TRACK TRK-000249: ELRS LoRa FHSS first seen at J6</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000393" type="b-a" how="m-r" time="2026-11-04T14:32:24.000Z" start="2026-11-04T14:32:24.000Z" stale="2026-11-04T14:37:24.000Z">
+    <point lat="49.349249" lon="31.176780" hae="163.4" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000250" />
+      <remarks>NEW TRACK TRK-000250: OcuSync video first seen at G6</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000394" type="b-a" how="m-r" time="2026-11-04T14:32:26.000Z" start="2026-11-04T14:32:26.000Z" stale="2026-11-04T14:37:26.000Z">
+    <point lat="49.340131" lon="31.238358" hae="151.1" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000251" />
+      <remarks>NEW TRACK TRK-000251: ELRS LoRa FHSS first seen at K5</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000395" type="b-a" how="m-r" time="2026-11-04T14:32:34.000Z" start="2026-11-04T14:32:34.000Z" stale="2026-11-04T14:37:34.000Z">
+    <point lat="49.323107" lon="31.211639" hae="178.9" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="LOST CONTACT TRK-000239" />
+      <remarks>LOST CONTACT TRK-000239: no update for 60 s</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000396" type="b-a" how="m-r" time="2026-11-04T14:32:37.000Z" start="2026-11-04T14:32:37.000Z" stale="2026-11-04T14:37:37.000Z">
+    <point lat="49.310438" lon="31.278949" hae="206.2" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000252" />
+      <remarks>NEW TRACK TRK-000252: ELRS LoRa FHSS first seen at N2</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000397" type="b-a" how="m-r" time="2026-11-04T14:32:38.000Z" start="2026-11-04T14:32:38.000Z" stale="2026-11-04T14:37:38.000Z">
+    <point lat="49.312999" lon="31.285142" hae="182.7" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="LOST CONTACT TRK-000237" />
+      <remarks>LOST CONTACT TRK-000237: no update for 60 s</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000398" type="b-a" how="m-r" time="2026-11-04T14:32:39.000Z" start="2026-11-04T14:32:39.000Z" stale="2026-11-04T14:37:39.000Z">
+    <point lat="49.330858" lon="31.161528" hae="148.3" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000253" />
+      <remarks>NEW TRACK TRK-000253: Analog FM video first seen at F4</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000399" type="b-a" how="m-r" time="2026-11-04T14:32:41.000Z" start="2026-11-04T14:32:41.000Z" stale="2026-11-04T14:37:41.000Z">
+    <point lat="49.341240" lon="31.169866" hae="153.9" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="LOST CONTACT TRK-000243" />
+      <remarks>LOST CONTACT TRK-000243: no update for 60 s</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000400" type="b-a" how="m-r" time="2026-11-04T14:32:43.000Z" start="2026-11-04T14:32:43.000Z" stale="2026-11-04T14:37:43.000Z">
+    <point lat="49.314614" lon="31.262003" hae="157.8" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000254" />
+      <remarks>NEW TRACK TRK-000254: ELRS LoRa FHSS first seen at M2</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000401" type="b-a" how="m-r" time="2026-11-04T14:32:50.000Z" start="2026-11-04T14:32:50.000Z" stale="2026-11-04T14:37:50.000Z">
+    <point lat="49.324481" lon="31.191170" hae="199.6" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000255" />
+      <remarks>NEW TRACK TRK-000255: ELRS LoRa FHSS first seen at H3</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000402" type="b-a" how="m-r" time="2026-11-04T14:32:53.000Z" start="2026-11-04T14:32:53.000Z" stale="2026-11-04T14:37:53.000Z">
+    <point lat="49.318600" lon="31.273197" hae="171.4" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000256" />
+      <remarks>NEW TRACK TRK-000256: ELRS LoRa FHSS first seen at N3</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000403" type="b-a" how="m-r" time="2026-11-04T14:32:54.000Z" start="2026-11-04T14:32:54.000Z" stale="2026-11-04T14:37:54.000Z">
+    <point lat="49.342479" lon="31.203612" hae="225.2" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000257" />
+      <remarks>NEW TRACK TRK-000257: ELRS LoRa FHSS first seen at I5</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000404" type="b-a" how="m-r" time="2026-11-04T14:33:01.000Z" start="2026-11-04T14:33:01.000Z" stale="2026-11-04T14:38:01.000Z">
+    <point lat="49.347844" lon="31.180597" hae="170.9" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000258" />
+      <remarks>NEW TRACK TRK-000258: OcuSync video first seen at G6</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000405" type="b-a" how="m-r" time="2026-11-04T14:33:01.000Z" start="2026-11-04T14:33:01.000Z" stale="2026-11-04T14:38:01.000Z">
+    <point lat="49.320021" lon="31.276338" hae="167.9" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="LOST CONTACT TRK-000245" />
+      <remarks>LOST CONTACT TRK-000245: no update for 60 s</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000406" type="b-a" how="m-r" time="2026-11-04T14:33:08.000Z" start="2026-11-04T14:33:08.000Z" stale="2026-11-04T14:38:08.000Z">
+    <point lat="49.359938" lon="31.193073" hae="195.2" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000259" />
+      <remarks>NEW TRACK TRK-000259: OcuSync video first seen at H7</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000407" type="b-a" how="m-r" time="2026-11-04T14:33:08.000Z" start="2026-11-04T14:33:08.000Z" stale="2026-11-04T14:38:08.000Z">
+    <point lat="49.359938" lon="31.193073" hae="195.2" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="APPROACHING TRK-000259" />
+      <remarks>APPROACHING SITE-01: TRK-000259 at 2601 m</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000408" type="b-a" how="m-r" time="2026-11-04T14:33:08.000Z" start="2026-11-04T14:33:08.000Z" stale="2026-11-04T14:38:08.000Z">
+    <point lat="49.325452" lon="31.196839" hae="197.6" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="LOST CONTACT TRK-000241" />
+      <remarks>LOST CONTACT TRK-000241: no update for 60 s</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000409" type="b-a" how="m-r" time="2026-11-04T14:33:10.000Z" start="2026-11-04T14:33:10.000Z" stale="2026-11-04T14:38:10.000Z">
+    <point lat="49.330498" lon="31.164638" hae="140.5" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000260" />
+      <remarks>NEW TRACK TRK-000260: Analog FM video first seen at F4</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000410" type="b-a" how="m-r" time="2026-11-04T14:33:12.000Z" start="2026-11-04T14:33:12.000Z" stale="2026-11-04T14:38:12.000Z">
+    <point lat="49.327319" lon="31.186336" hae="172.8" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="LOST CONTACT TRK-000246" />
+      <remarks>LOST CONTACT TRK-000246: no update for 60 s</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000411" type="b-a" how="m-r" time="2026-11-04T14:33:19.000Z" start="2026-11-04T14:33:19.000Z" stale="2026-11-04T14:38:19.000Z">
+    <point lat="49.309006" lon="31.254984" hae="185.2" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000261" />
+      <remarks>NEW TRACK TRK-000261: ELRS LoRa FHSS first seen at L2</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000412" type="b-a" how="m-r" time="2026-11-04T14:33:40.000Z" start="2026-11-04T14:33:40.000Z" stale="2026-11-04T14:38:40.000Z">
+    <point lat="49.348677" lon="31.185722" hae="177.8" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="NEW TRACK TRK-000262" />
+      <remarks>NEW TRACK TRK-000262: UAV rotary first seen at G6</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000413" type="b-a" how="m-r" time="2026-11-04T14:33:47.000Z" start="2026-11-04T14:33:47.000Z" stale="2026-11-04T14:38:47.000Z">
+    <point lat="49.327943" lon="31.180723" hae="169.3" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="LOST CONTACT TRK-000247" />
+      <remarks>LOST CONTACT TRK-000247: no update for 60 s</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000414" type="b-a" how="m-r" time="2026-11-04T14:33:56.000Z" start="2026-11-04T14:33:56.000Z" stale="2026-11-04T14:38:56.000Z">
+    <point lat="49.308053" lon="31.275361" hae="199.4" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="LOST CONTACT TRK-000252" />
+      <remarks>LOST CONTACT TRK-000252: no update for 60 s</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000415" type="b-a" how="m-r" time="2026-11-04T14:34:00.000Z" start="2026-11-04T14:34:00.000Z" stale="2026-11-04T14:39:00.000Z">
+    <point lat="49.329190" lon="31.174508" hae="162.6" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="LOST CONTACT TRK-000253" />
+      <remarks>LOST CONTACT TRK-000253: no update for 60 s</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000416" type="b-a" how="m-r" time="2026-11-04T14:34:01.000Z" start="2026-11-04T14:34:01.000Z" stale="2026-11-04T14:39:01.000Z">
+    <point lat="49.342684" lon="31.205325" hae="225.9" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="LOST CONTACT TRK-000257" />
+      <remarks>LOST CONTACT TRK-000257: no update for 60 s</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000417" type="b-a" how="m-r" time="2026-11-04T14:34:06.000Z" start="2026-11-04T14:34:06.000Z" stale="2026-11-04T14:39:06.000Z">
+    <point lat="49.347143" lon="31.180932" hae="169.0" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="LOST CONTACT TRK-000258" />
+      <remarks>LOST CONTACT TRK-000258: no update for 60 s</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000418" type="b-a" how="m-r" time="2026-11-04T14:34:30.000Z" start="2026-11-04T14:34:30.000Z" stale="2026-11-04T14:39:30.000Z">
+    <point lat="49.330279" lon="31.166191" hae="138.8" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="LOST CONTACT TRK-000260" />
+      <remarks>LOST CONTACT TRK-000260: no update for 60 s</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000419" type="b-a" how="m-r" time="2026-11-04T14:34:30.000Z" start="2026-11-04T14:34:30.000Z" stale="2026-11-04T14:39:30.000Z">
+    <point lat="49.331100" lon="31.159700" hae="154.0" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="SENSOR SILENT" />
+      <remarks>SENSOR SILENT RF2: no detections since 2026-11-04T14:33:30.000Z (CAM-02, EO1, MIC1, RADAR-01, RF1, RID1, TEL1 still reporting)</remarks>
+    </detail>
+  </event>
+  <event version="2.0" uid="mw-ros-valley-ALT-000420" type="b-a" how="m-r" time="2026-11-04T14:34:35.000Z" start="2026-11-04T14:34:35.000Z" stale="2026-11-04T14:39:35.000Z">
+    <point lat="49.392600" lon="31.110900" hae="179.6" ce="9999999.0" le="9999999.0" />
+    <detail>
+      <contact callsign="SENSOR SILENT" />
+      <remarks>SENSOR SILENT EO1: no detections since 2026-11-04T14:33:35.000Z (CAM-02, MIC1, RADAR-01, RF1, RID1, TEL1 still reporting)</remarks>
+    </detail>
+  </event>
+</events>

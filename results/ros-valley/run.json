@@ -1,0 +1,27 @@
+{
+  "seed": 7,
+  "start": "2026-11-04T08:55:00.000Z",
+  "duration_s": 20400.0,
+  "dem_sources": [
+    "https://copernicus-dem-30m.s3.amazonaws.com/Copernicus_DSM_COG_10_N49_00_E031_00_DEM/Copernicus_DSM_COG_10_N49_00_E031_00_DEM.tif"
+  ],
+  "skipped_sensor_types": [],
+  "timings_s": {
+    "load": 0.007462458917871118,
+    "world": 0.009960875031538308,
+    "truth": 0.35172908403910697,
+    "write": 0.908228209009394,
+    "sensors:rf_df": 4.355380124994554,
+    "sensors:radar": 0.3484138749772683,
+    "sensors:camera": 118.90363512502518,
+    "sensors:microphone": 127.7638640840305,
+    "sensors:remote_id": 0.19421054201666266,
+    "sensors:telemetry": 0.11107149999588728,
+    "sensors:satellite": 2.4795013329712674,
+    "sensors:reports": 33.410517457989044,
+    "sensors:rf_iq": 0.7883770409971476,
+    "sensors:c2": 0.37604624999221414
+  },
+  "python": "3.12.7",
+  "numpy": "2.5.4"
+}

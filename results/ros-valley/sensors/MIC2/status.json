@@ -1,0 +1,53 @@
+{
+ "sensor_id": "MIC2",
+ "params": {
+  "fs": 8000,
+  "ambient_dba": 35.0,
+  "max_window_min": 10.0,
+  "detect_snr_db": 6.0,
+  "frame_s": 1.0,
+  "int_s": 30.0
+ },
+ "gain_db_re_20upa_per_fs": 64.0,
+ "windows": [
+  {
+   "start": "2026-11-04T09:03:31.000Z",
+   "end": "2026-11-04T09:10:26.000Z",
+   "seconds": 415.0
+  },
+  {
+   "start": "2026-11-04T13:58:34.000Z",
+   "end": "2026-11-04T14:00:15.000Z",
+   "seconds": 101.0
+  },
+  {
+   "start": "2026-11-04T14:01:20.000Z",
+   "end": "2026-11-04T14:01:36.000Z",
+   "seconds": 16.0
+  },
+  {
+   "start": "2026-11-04T14:02:36.000Z",
+   "end": "2026-11-04T14:12:36.000Z",
+   "seconds": 600.0
+  },
+  {
+   "start": "2026-11-04T14:12:36.000Z",
+   "end": "2026-11-04T14:22:36.000Z",
+   "seconds": 600.0
+  },
+  {
+   "start": "2026-11-04T14:22:36.000Z",
+   "end": "2026-11-04T14:31:06.000Z",
+   "seconds": 510.0
+  },
+  {
+   "start": "2026-11-04T14:34:35.000Z",
+   "end": "2026-11-04T14:35:05.000Z",
+   "seconds": 30.0
+  }
+ ],
+ "audio_minutes": 37.9,
+ "detections": 745,
+ "clipped_samples": 46,
+ "note": "clipped samples present: gain is too low"
+}

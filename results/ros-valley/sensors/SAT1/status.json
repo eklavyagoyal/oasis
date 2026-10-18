@@ -1,0 +1,121 @@
+{
+ "sensor_id": "SAT1",
+ "platform": "SENTINEL-2A",
+ "norad_id": 40697,
+ "tle": {
+  "file": "cache/tle_40697.txt",
+  "epoch_utc": "2026-10-18T03:38:25Z",
+  "source": "CelesTrak"
+ },
+ "window_utc": [
+  "2026-11-04T08:55:00.000Z",
+  "2026-11-04T14:35:00.000Z"
+ ],
+ "passes_in_window": [
+  {
+   "time_utc": "2026-11-04T09:06:39.787Z",
+   "cross_track_km": 19.523,
+   "elev_deg": 88.467,
+   "zenith_deg": 1.533,
+   "sun_el_deg": 24.814,
+   "in_swath": true,
+   "sun_ok": true,
+   "t_s": 699.787
+  },
+  {
+   "time_utc": "2026-11-04T10:45:25.529Z",
+   "cross_track_km": 1664.414,
+   "elev_deg": 16.742,
+   "zenith_deg": 73.258,
+   "sun_el_deg": 23.525,
+   "in_swath": false,
+   "sun_ok": true,
+   "t_s": 6625.529
+  },
+  {
+   "time_utc": "2026-11-04T12:22:47.151Z",
+   "cross_track_km": 2927.327,
+   "elev_deg": 1.091,
+   "zenith_deg": 88.909,
+   "sun_el_deg": 15.737,
+   "in_swath": false,
+   "sun_ok": true,
+   "t_s": 12467.151
+  },
+  {
+   "time_utc": "2026-11-04T13:58:56.917Z",
+   "cross_track_km": 3553.992,
+   "elev_deg": -4.219,
+   "zenith_deg": 94.219,
+   "sun_el_deg": 3.561,
+   "in_swath": false,
+   "sun_ok": false,
+   "t_s": 18236.918
+  }
+ ],
+ "chip_km": 6.0,
+ "gsd_m": 10.0,
+ "max_cloud_pct": 5.0,
+ "band_delay_s": {
+  "B02": 0.0,
+  "B08": 0.264,
+  "B03": 0.527,
+  "B04": 1.005
+ },
+ "object_reflectance": {
+  "B02": 0.07,
+  "B03": 0.08,
+  "B04": 0.09,
+  "B08": 0.06
+ },
+ "shadow_factor": 0.5,
+ "pass": {
+  "t_s": 699.787,
+  "cross_track_km": 19.523,
+  "elev_deg": 88.467,
+  "zenith_deg": 1.533,
+  "az_deg": 278.947,
+  "range_km": 796.796,
+  "sun_el_deg": 24.814,
+  "sun_az_deg": 171.469,
+  "time_utc": "2026-11-04T09:06:39.787Z"
+ },
+ "background": {
+  "scene_id": "S2B_36UUV_20241107_0_L2A",
+  "datetime_utc": "2024-11-07T09:06:33.015000Z",
+  "cloud_pct": 0.000441,
+  "mgrs_tile": "MGRS-36UUV",
+  "sun_elev_deg": 23.977794693163503,
+  "cache": "s2_S2B_36UUV_20241107_0_L2A_chip.npz",
+  "reflectance_calibration": {
+   "B02": {
+    "scale": 0.0001,
+    "offset_used": 0.0
+   },
+   "B03": {
+    "scale": 0.0001,
+    "offset_used": 0.0
+   },
+   "B04": {
+    "scale": 0.0001,
+    "offset_used": 0.0
+   },
+   "B08": {
+    "scale": 0.0001,
+    "offset_used": 0.0
+   }
+  },
+  "note": "real Copernicus Sentinel-2 L2A scene from a different day than the pass; only the inserted objects come from the world truth"
+ },
+ "inserted_count": 1,
+ "skipped": [
+  {
+   "reason": "no catalog footprint (span_m/shape)",
+   "count": 2
+  },
+  {
+   "reason": "outside the chip",
+   "count": 4
+  }
+ ]
+}

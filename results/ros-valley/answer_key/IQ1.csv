@@ -1,0 +1,5 @@
+record_id,time_utc,t,n_bursts,object_ids,file
+IQ1-000000,2026-11-04T14:02:07.000Z,18427.000,14,mavic_1;pilot_1;recon_1;op_ua;wifi_2,snap_000.sigmf-data
+IQ1-000001,2026-11-04T14:05:00.000Z,18600.000,14,mavic_1;recon_1;op_ua;wifi_2;pilot_1,snap_001.sigmf-data
+IQ1-000002,2026-11-04T14:14:40.000Z,19180.000,17,mavic_1;pilot_1;recon_1;op_ua;wifi_2,snap_002.sigmf-data
+IQ1-000003,2026-11-04T14:26:40.000Z,19900.000,17,mavic_1;pilot_1;recon_1;jammer_1;wifi_2;op_ua,snap_003.sigmf-data
