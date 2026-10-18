@@ -1,9 +1,9 @@
-# Build the MIRROR WORLD console
+# Build the OASIS console
 
 You are a world-class creative technologist: half motion/UI designer from the studios behind the screens in *Blade Runner 2049* and *Oblivion*, half senior WebGL/CesiumJS engineer. Build the single most beautiful, futuristic and *credible* 3D command console you have ever made. It is the screen a defence-tech jury watches during a 4-minute live demo today. It has to make them lean forward in the first 3 seconds and trust it by second 30.
 
 ## What it visualises
-**Mirror World** is a synthetic battlespace generator. Given a scenario, it builds **one true world** on real Ukrainian terrain (Copernicus 30 m elevation data; receivers on real radio masts from OpenStreetMap; a real Sentinel-2 satellite pass; the real sun). Every sensor then records only what physics lets it observe:
+**OASIS** is a synthetic battlespace generator, our answer to the "Mirror World" challenge. Given a scenario, it builds **one true world** on real Ukrainian terrain (Copernicus 30 m elevation data; receivers on real radio masts from OpenStreetMap; a real Sentinel-2 satellite pass; the real sun). Every sensor then records only what physics lets it observe:
 - radio direction-finders (lines of bearing + crossed-bearing position fixes)
 - raw IQ spectrum snapshots
 - an RF-cued camera
@@ -111,7 +111,7 @@ Prefer `MW.events` when present.
 - **Truth objects:** crisp vector glyphs by kind (quad, delta wing, flock, operator, emitter) with a velocity tick and a gradient trail. Hostiles get a slow halo pulse. The selected object gets a screen-space reticle with live readouts (alt AGL, speed, which receivers can see it right now).
 
 ## Information architecture
-- **Top bar:** MIRROR WORLD wordmark · scenario name · UTC clock with ms (large mono) · local time · sun elevation · wind vector · the mode switch · a ▶ PRESENT button.
+- **Top bar:** OASIS wordmark · scenario name · UTC clock with ms (large mono) · local time · sun elevation · wind vector · the mode switch · a ▶ PRESENT button.
 - **Mode switch** (the conceptual heart, big, centred):
   - **OPERATOR**: only what sensors produced; no truth.
   - **GOD MODE**: truth only.
@@ -130,7 +130,7 @@ Prefer `MW.events` when present.
     - received-power sparkline per receiver over time, with non-line-of-sight stretches dimmed so the ridge drop is obvious
     - fix error stats
   - **EVENT TICKER**: newest detections streaming in, colour-coded and capped.
-  - **AUDIT**: `MW.audit` as a scorecard with huge numerals, e.g. "MIRROR WORLD 10/10 · ONE-SHOT LLM 3/10". Each check is a PASS/FAIL chip with its value; expand for detail.
+  - **AUDIT**: `MW.audit` as a scorecard with huge numerals, e.g. "OASIS 10/10 · ONE-SHOT LLM 3/10". Each check is a PASS/FAIL chip with its value; expand for detail.
 - **Bottom: a bespoke timeline** (not the stock widget look; style or replace it):
   - act bands (MORNING / DUSK)
   - event glyphs

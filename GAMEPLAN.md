@@ -1,4 +1,4 @@
-# Gameplan: Mirror World (hand-in 16:00 CEST)
+# Gameplan: OASIS (hand-in 16:00 CEST)
 
 **One line:** We don't predict drones; we *write* the truth and then simulate exactly what every sensor would have recorded. Defence AI teams get the recordings **plus the answer key**, the data they can't safely or legally collect themselves. *We make the exam; their software takes it.*
 
@@ -69,7 +69,7 @@ Roles: **Core** (generator, integration), **Pitch** (deck, demo script, presenti
 7. **Invisible to radio.** A fiber-optic FPV produces zero RF detections, but the microphones, camera and radar catch it.
 8. **Lying sensors.** Remote ID leaks the pilot's GPS; friendly telemetry drifts ~2 km under GNSS spoofing while RF stays on truth.
 9. **Intercepted.** C2-01 alerts, the interceptor responds, the outcome is recorded, and SITE-01 is not reached.
-10. **Proof.** Audit scorecard: Mirror World vs one-shot LLM, same checks, same scenario.
+10. **Proof.** Audit scorecard: OASIS vs one-shot LLM, same checks, same scenario.
 
 ## Deck (6 slides)
 1. **Problem:** defence AI is starved of labelled, multi-sensor data and edge cases.
