@@ -1,6 +1,6 @@
 import { sample, heightAt, upperBound } from "../data.js";
 import { ll, color, palette } from "../globe.js";
-import { iconUrl } from "./assets.js";
+import { ICON_SCALE, LABEL_SCALE, iconUrl } from "./assets.js";
 const C = window.Cesium;
 function glyph(o) {
   const shape =
@@ -61,14 +61,17 @@ export function createTruth(globe, state) {
       ]),
       billboard: {
         image: iconUrl(object.type) ?? glyph(object),
-        width: 30,
-        height: 30,
+        width: 32,
+        height: 32,
+        scaleByDistance: ICON_SCALE,
         heightReference: C.HeightReference.NONE,
         disableDepthTestDistance: Number.POSITIVE_INFINITY,
       },
       label: {
         text: object.id.toUpperCase(),
-        font: '10px "Geist Mono"',
+        font: '12px "Geist Mono"',
+        scaleByDistance: LABEL_SCALE,
+        pixelOffsetScaleByDistance: ICON_SCALE,
         fillColor: color(palette.unknown),
         outlineColor: color(palette.void),
         outlineWidth: 3,
@@ -293,14 +296,6 @@ export function createSensors(globe, state) {
     const entity = source.entities.add({
       id: `sensor:${s.id}`,
       position: globe.position(s.lon, s.lat, s.alt),
-      point: {
-        pixelSize: s.type === "rf_df" ? 6 : 4,
-        color: c,
-        outlineColor: color(palette.void),
-        outlineWidth: 2,
-        disableDepthTestDistance: Number.POSITIVE_INFINITY,
-        heightReference: C.HeightReference.NONE,
-      },
       polyline: {
         positions: [
           globe.position(s.lon, s.lat, s.ground),
@@ -311,17 +306,6 @@ export function createSensors(globe, state) {
           color: c,
           glowPower: 0.2,
         }),
-      },
-      label: {
-        text: s.id,
-        font: '11px "Geist Mono"',
-        fillColor: c,
-        pixelOffset: new C.Cartesian2(11, 13),
-        horizontalOrigin: C.HorizontalOrigin.LEFT,
-        outlineColor: color(palette.void),
-        outlineWidth: 3,
-        style: C.LabelStyle.FILL_AND_OUTLINE,
-        disableDepthTestDistance: Number.POSITIVE_INFINITY,
       },
       ellipse: {
         semiMajorAxis: 110,
@@ -351,9 +335,6 @@ export function createSensors(globe, state) {
           !matchMedia("(prefers-reduced-motion: reduce)").matches;
         if (dying)
           c.alpha = 0.2 + 0.8 * Math.abs(Math.sin((state.t - s.dead_t) * 30));
-        e.point.color = c;
-        e.label.fillColor = c;
-        e.label.text = `${s.id}${dead ? " / DOWN" : ""}`;
         e.polyline.material.color = c;
         e.ellipse.outlineColor = c.withAlpha(dead ? 0.1 : 0.3);
         e.ellipse.semiMajorAxis =
