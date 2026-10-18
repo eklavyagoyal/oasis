@@ -571,7 +571,7 @@ def _sensor(sensor, ctx):
         at_src = [(s, at(preds[s["obj"].id])) for s in sources]
         for j, d in enumerate(dets):
             cands = [(a["level_tot"][j], s, a) for s, a in at_src if a["valid"][j]]
-            if not cands:
+            if not cands or d["t"] > ctx.cfg.duration_s:  # sound still in flight when recording stops
                 continue
             level, dom, a = max(cands, key=lambda c2: c2[0])
             i_end = int(round((d["t"] - w0) * p["fs"]))

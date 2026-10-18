@@ -375,9 +375,11 @@ def _post(sensor, ctx):
 
     rows, answers = [], []
     for f in reports:
+        if f["t"] > ctx.cfg.duration_s:  # filed after the recording window closed
+            continue
         uk, en, source = texts[f["record_id"]]
         rows.append({
-            "record_id": f["record_id"], "time_utc": ctx.iso(f["t"]),
+            "record_id": f["record_id"], "time_utc": ctx.iso(f["t"]), "t": round(float(f["t"]), 3),
             "reporter_type": f["reporter_type"], "reporter_lat": f["reporter_lat"],
             "reporter_lon": f["reporter_lon"], "direction_deg": f["direction_deg"],
             "est_distance_m": f["est_distance_m"], "est_type": f["est_type"],
@@ -390,7 +392,7 @@ def _post(sensor, ctx):
             "true_az_deg": round(f["_true_az"], 1), "delay_s": round(f["_delay"], 1),
             "text_source": source,
         })
-    cols = ["record_id", "time_utc", "reporter_type", "reporter_lat", "reporter_lon",
+    cols = ["record_id", "time_utc", "t", "reporter_type", "reporter_lat", "reporter_lon",
             "direction_deg", "est_distance_m", "est_type", "count", "est_alt",
             "text_uk", "text_en"]
     acols = ["record_id", "object_id", "label", "perceived_by", "obs_time_utc",
