@@ -4,6 +4,9 @@
 
 > Defence AI needs data where the answer is known. Real recordings are scarce, sensitive and unlabelled, and they never contain the edge cases (jamming, spoofing, fibre-optic drones, decoys). OASIS makes that data, and proves it is physically consistent.
 
+![The same 2.5 m delta-wing drone through the OASIS camera model at 400 m and 2,140 m](docs/media/drone_near_far.png)
+*The camera model draws a Blender-rendered airframe at its true angular size and viewing angle: 32 px across at 400 m, about 6 px at 2,140 m.*
+
 ## Why it beats asking an LLM for a dataset
 Same 10-minute window, same scenario file, same file layout, same 10 independent checks. The baseline is one call to a strong general model that was given the full scenario and asked for physically realistic data (`baselines/oneshot/`).
 
