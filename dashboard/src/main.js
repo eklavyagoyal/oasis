@@ -441,6 +441,7 @@ function start(data, { skipOpening = false, onFrame = null, createOverlay = null
   document.addEventListener(
     "keydown",
     (e) => {
+      if (e.target?.closest?.("#oasis-entry") || document.querySelector("#oasis-entry:not([hidden])")) return;
       if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") {
         e.preventDefault();
         commands.open();

@@ -18,6 +18,7 @@
   -webkit-font-smoothing: antialiased;
 }
 #oasis-entry[hidden] { display: none !important; }
+#oasis-entry.seed-only > :not(.oasis-modal) { display: none !important; }
 #oasis-entry *, #oasis-entry *::before, #oasis-entry *::after { box-sizing: border-box; }
 #oasis-entry button, #oasis-entry input, #oasis-entry select { font: inherit; }
 #oasis-entry button { color: inherit; }

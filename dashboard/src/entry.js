@@ -28,7 +28,7 @@ function errorMessage(error) {
   try { return JSON.stringify(error) || 'Unknown error'; } catch { return 'Unknown error'; }
 }
 
-export function createEntry({ onGenerate, onReplay, onExport, getCounts, onBakedDemo } = {}) {
+export function createEntry({ onGenerate, onReplay, onExport, getCounts, onBakedDemo, onBack } = {}) {
   const root = document.createElement('section');
   root.id = 'oasis-entry';
   root.setAttribute('aria-label', 'OASIS simulation entry');
@@ -207,10 +207,14 @@ export function createEntry({ onGenerate, onReplay, onExport, getCounts, onBaked
     bakedButton.hidden = true;
   }
 
-  function closeDialog(restoreFocus = true) {
+  function closeDialog() {
     if (busy) return;
     modal.hidden = true;
-    if (restoreFocus && previousFocus?.isConnected) previousFocus.focus();
+    if (typeof onBack === 'function') onBack();
+    else {
+      root.hidden = true;
+      if (previousFocus?.isConnected) previousFocus.focus();
+    }
   }
 
   function readSeed(id, label) {
@@ -363,9 +367,9 @@ export function createEntry({ onGenerate, onReplay, onExport, getCounts, onBaked
   function show() {
     if (destroyed) return;
     root.hidden = false;
-    modal.hidden = true;
+    root.classList.add('seed-only');
     refreshCounts();
-    requestAnimationFrame(() => { if (map && !destroyed) map.resize(); });
+    openDialog();
   }
 
   function hide() {
@@ -450,7 +454,6 @@ export function createEntry({ onGenerate, onReplay, onExport, getCounts, onBaked
   updateTime();
   const clockTimer = window.setInterval(updateTime, 1000);
   const countTimer = window.setInterval(refreshCounts, 60000);
-  initMap();
   show();
 
   return {
