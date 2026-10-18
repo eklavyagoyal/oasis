@@ -1,0 +1,7 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": null,
+  "installCommand": "npm ci",
+  "buildCommand": "unzip -o -q dashboard/demo.zip -d dashboard/public && npm run build",
+  "outputDirectory": "dist"
+}

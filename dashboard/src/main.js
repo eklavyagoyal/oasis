@@ -19,6 +19,7 @@ import { renderAudit } from "./panels/audit.js";
 import { createTimeline } from "./timeline.js";
 import { createPresentation } from "./present.js";
 import { createCommands } from "./commands.js";
+import { createGame } from "./game/index.js";
 const $ = (s) => document.querySelector(s),
   C = window.Cesium;
 let active = null,
@@ -51,6 +52,7 @@ function start(data) {
     last = performance.now(),
     lastLayers = 0,
     lastUI = 0,
+    lastGame = 0,
     disposed = false;
   const changed = () => {
     dirty = true;
@@ -67,7 +69,8 @@ function start(data) {
   const truth = createTruth(globe, state),
     sensors = createSensors(globe, state),
     rf = createRF(globe, state),
-    shadow = createShadow(globe, state, notify);
+    shadow = createShadow(globe, state, notify),
+    game = createGame(globe, state, notify);
   const select = (id) => {
     state.selected = id;
     state.selectedFix = null;
@@ -115,6 +118,19 @@ function start(data) {
     state.tab = tab;
     $("#feed-panel").hidden = tab !== "feeds";
     $("#audit-panel").hidden = tab !== "audit";
+    $("#game-panel").hidden = tab !== "game";
+    // Simulate tab: the replay's truth/RF layers make way for the game world, and come back after.
+    if ((tab === "game") !== Boolean(state.replayLayers)) {
+      const keys = ["truth", "rays", "fixes", "shadow"];
+      if (tab === "game") {
+        state.replayLayers = Object.fromEntries(keys.map((k) => [k, state[k]]));
+        keys.forEach((k) => (state[k] = false));
+        state.playing = false;
+      } else {
+        Object.assign(state, state.replayLayers);
+        state.replayLayers = null;
+      }
+    }
     document.querySelectorAll("[data-tab]").forEach((b) => {
       b.classList.toggle("active", b.dataset.tab === tab);
       b.setAttribute("aria-selected", String(b.dataset.tab === tab));
@@ -322,6 +338,11 @@ function start(data) {
   };
   $("#tilt-view").onclick = () => globe.tilt();
   $("#play").onclick = togglePlay;
+  for (const part of ["left", "right", "timeline"])
+    $(`#hide-${part}`).onclick = () => {
+      $("#app").classList.toggle(`hide-${part}`);
+      setTimeout(() => globe.viewer.resize(), 0);
+    };
   $("#present-start").onclick = () => presentation.start();
   document
     .querySelectorAll("[data-mode]")
@@ -388,6 +409,12 @@ function start(data) {
         state.presenting ? presentation.stop() : presentation.start();
       else if (key === "escape" && state.presenting) presentation.stop();
       else if (key === "f") follow();
+      else if (key === "h") {
+        const hide = !$("#app").classList.contains("hide-left");
+        for (const part of ["left", "right", "timeline"])
+          $("#app").classList.toggle(`hide-${part}`, hide);
+        setTimeout(() => globe.viewer.resize(), 0);
+      }
       else if (key === "[" || key === "]") {
         state.speed =
           SPEEDS[
@@ -480,6 +507,11 @@ function start(data) {
       globe.time(state.t);
     }
     presentation.tick(now);
+    game.tick(dt, state.speed);
+    if (game.active && (dirty || (game.running && now - lastGame > 100))) {
+      game.render();
+      lastGame = now;
+    }
     if (dirty || (state.playing && now - lastLayers > 50)) {
       truth.update();
       sensors.update();
@@ -521,6 +553,7 @@ function start(data) {
       listeners.abort();
       removePostRender();
       presentation.destroy();
+      game.destroy();
       feeds.destroy();
       timeline.destroy();
       shadow.destroy();

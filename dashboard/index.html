@@ -65,6 +65,11 @@
         >
           <span>COMMAND</span><kbd>⌘ K</kbd>
         </button>
+        <div class="panel-toggles" aria-label="Show or hide panels">
+          <button id="hide-left" title="Hide left panel (H)">◧</button
+          ><button id="hide-timeline" title="Hide timeline">⬓</button
+          ><button id="hide-right" title="Hide right panel">◨</button>
+        </div>
         <button id="present-start" class="present-button">
           <span>▷</span> PRESENT
         </button>
@@ -269,9 +274,18 @@
               aria-controls="audit-panel"
               aria-selected="false"
             >
-              AUDIT <span id="audit-count">—</span>
+              AUDIT <span id="audit-count">—</span></button
+            ><button
+              id="tab-game"
+              data-tab="game"
+              role="tab"
+              aria-controls="game-panel"
+              aria-selected="false"
+            >
+              SIMULATE
             </button>
           </div>
+          <section id="game-panel" class="game-panel" role="tabpanel" aria-labelledby="tab-game" hidden></section>
           <div id="feed-panel" role="tabpanel" aria-labelledby="tab-feeds">
             <div class="feed-picker" id="feed-picker">
               <button class="active" data-feed="camera">EO</button
