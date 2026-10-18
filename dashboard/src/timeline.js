@@ -1,3 +1,4 @@
+import { theme } from "./theme.js";
 import { upperBound, timeLabel } from "./data.js";
 const $ = (s) => document.querySelector(s);
 export function createTimeline(state, seek) {
@@ -24,9 +25,7 @@ export function createTimeline(state, seek) {
     max = duration;
     scrubber.min = min;
     scrubber.max = max;
-    $("#timeline-focus").textContent = focus
-      ? "VIEW FULL DAY ↔"
-      : "FOCUS DUSK ↔";
+    $("#timeline-focus").textContent = focus ? "FULL DAY" : "DUSK";
     boundsKey = "";
     draw();
   }
@@ -40,21 +39,20 @@ export function createTimeline(state, seek) {
     const ctx = canvas.getContext("2d");
     ctx.scale(ratio, ratio);
     const X = (t) => ((t - min) / (max - min)) * width;
-    ctx.fillStyle = "#d2dbe5";
-    ctx.font = '7px "JetBrains Mono"';
+    ctx.fillStyle = theme("text");
+    ctx.font = '9px "Geist Mono"';
     const morningEnd = Math.min(1500, duration),
       duskStart = Math.min(18000, duration * 0.85);
     for (const [a, b, label, c] of [
-      [0, morningEnd, "ACT I / MORNING", "#172b36"],
-      [duskStart, duration, "ACT II / DUSK", "#302616"],
+      [0, morningEnd, "ACT I / MORNING", theme("hairline")],
+      [duskStart, duration, "ACT II / DUSK", theme("hairline")],
     ]) {
       if (b < min || a > max) continue;
       const x = Math.max(0, X(a)),
         right = Math.min(width, X(b));
       ctx.fillStyle = c;
-      ctx.fillRect(x, 0, right - x, 13);
-      ctx.fillStyle = "#a6bcc8";
-      if (right - x > 65) ctx.fillText(label, x + 6, 9);
+      ctx.fillRect(x, 0, right - x, 2);
+      ctx.fillStyle = theme("text-2");
     }
     const bins = Math.max(1, Math.floor(width / 3));
     const filtered = state.densityFiltered && state.mode !== "operator",
@@ -69,8 +67,8 @@ export function createTimeline(state, seek) {
       const rf = data.rf[id],
         counts = new Uint16Array(bins);
       if (state.mode === "god") {
-        ctx.fillStyle = "#24323b";
-        ctx.fillRect(0, 36 + row * 14, width, 1);
+        ctx.fillStyle = theme("hairline");
+        ctx.fillRect(0, 19 + row * 6, width, 1);
         return;
       }
       for (
@@ -86,34 +84,36 @@ export function createTimeline(state, seek) {
         counts[b]++;
       }
       const highest = Math.max(1, ...counts),
-        y = 36 + row * 14;
-      ctx.fillStyle = "#141f28";
-      ctx.fillRect(0, y, width, 7);
+        y = 19 + row * 6;
+      ctx.fillStyle = theme("hairline");
+      ctx.fillRect(0, y, width, 2);
       for (let i = 0; i < bins; i++)
         if (counts[i]) {
-          ctx.fillStyle = `rgba(${row === 0 ? "57,230,255" : "255,176,0"},${0.18 + (0.65 * counts[i]) / highest})`;
-          ctx.fillRect((i * width) / bins, y, Math.max(1, width / bins - 1), 7);
+          ctx.fillStyle = theme("signal");
+          ctx.globalAlpha = 0.18 + (0.65 * counts[i]) / highest;
+          ctx.fillRect((i * width) / bins, y, Math.max(1, width / bins - 1), 2);
         }
+      ctx.globalAlpha = 1;
       const s = data.sensors.find((s) => s.id === id);
       if (s?.dead_t != null && s.dead_t >= min && s.dead_t <= max) {
-        ctx.fillStyle = "#10171e";
-        ctx.fillRect(X(s.dead_t), y, width - X(s.dead_t), 7);
-        ctx.fillStyle = "#a2b2bf";
+        ctx.fillStyle = theme("surface");
+        ctx.fillRect(X(s.dead_t), y, width - X(s.dead_t), 2);
+        ctx.fillStyle = theme("text-2");
         ctx.fillText("×", X(s.dead_t) + 2, y + 6);
       }
     });
-    ctx.font = '7px "JetBrains Mono"';
-    ctx.fillStyle = "#8d9fac";
+    ctx.font = '9px "Geist Mono"';
+    ctx.fillStyle = theme("text-2");
     for (let i = 0; i <= 8; i++) {
       const t = min + ((max - min) * i) / 8,
         x = X(t),
         label = timeLabel(data, t).slice(0, 5);
       ctx.textAlign = i === 0 ? "left" : i === 8 ? "right" : "center";
       ctx.fillText(label, x, height - 1);
-      ctx.strokeStyle = "#253440";
+      ctx.strokeStyle = theme("hairline");
       ctx.beginPath();
-      ctx.moveTo(x, 17);
-      ctx.lineTo(x, height - 13);
+      ctx.moveTo(x, 12);
+      ctx.lineTo(x, height - 12);
       ctx.stroke();
     }
     const key = `${min}/${max}/${state.mode}`;

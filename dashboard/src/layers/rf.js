@@ -7,7 +7,11 @@ function poolLine(collection, width = 1.5) {
     positions: [C.Cartesian3.ZERO, C.Cartesian3.UNIT_X],
     width,
     show: false,
-    material: C.Material.fromType("PolylineGlow", { color: color(palette.rf), glowPower: 0.14, taperPower: 1 }),
+    material: C.Material.fromType("PolylineGlow", {
+      color: color(palette.rf),
+      glowPower: 0.14,
+      taperPower: 1,
+    }),
   });
 }
 export function createRF(globe, state) {
@@ -50,7 +54,7 @@ export function createRF(globe, state) {
     }),
   );
   const ripples = scene.primitives.add(new C.PolylineCollection());
-  const ripplePool = Array.from({length: 40}, () => poolLine(ripples, 2.5));
+  const ripplePool = Array.from({ length: 40 }, () => poolLine(ripples, 2.5));
   let relief = state.exaggeration;
   const positionCache = new Map();
   const sensors = new Map(data.sensors.map((s) => [s.id, s]));
@@ -71,14 +75,23 @@ export function createRF(globe, state) {
         lat > data.terrain.north
       )
         break;
-      positions.push(globe.position(lon, lat, heightAt(data.terrain, lon, lat) + 18));
+      positions.push(
+        globe.position(lon, lat, heightAt(data.terrain, lon, lat) + 18),
+      );
     }
     return positions.length > 1
       ? positions
-      : [globe.position(s.lon, s.lat, s.alt), globe.position(s.lon, s.lat, s.alt + 0.01)];
+      : [
+          globe.position(s.lon, s.lat, s.alt),
+          globe.position(s.lon, s.lat, s.alt + 0.01),
+        ];
   }
   function update() {
-    if (relief !== state.exaggeration) { relief = state.exaggeration; positionCache.clear(); }
+    if (relief !== state.exaggeration) {
+      relief = state.exaggeration;
+      positionCache.clear();
+    }
+    const opacity = state.layerOpacity ?? 1;
     const sensorVisible = state.mode !== "god";
     rays.show = sensorVisible && state.rays;
     pulses.show = rays.show;
@@ -110,7 +123,7 @@ export function createRF(globe, state) {
           const nlos = state.mode === "delta" && !r.los[i];
           line.material.uniforms.color = color(
             classColor(r.cls[i]),
-            fade * snr * (nlos ? 0.22 : 0.78),
+            opacity * fade * snr * (nlos ? 0.22 : 0.78),
           );
           line.width = nlos ? 1 : 1.5;
           line.show = true;
@@ -182,7 +195,9 @@ export function createRF(globe, state) {
             y = a * Math.cos(rotation) - b * Math.sin(rotation);
           const lo = lon + x / (111320 * Math.cos((lat * Math.PI) / 180)),
             la = lat + y / 111320;
-          verts.push(globe.position(lo, la, heightAt(data.terrain, lo, la) + 12));
+          verts.push(
+            globe.position(lo, la, heightAt(data.terrain, lo, la) + 12),
+          );
         }
         const line = ellipsePool[n],
           point = pointPool[n],
@@ -194,7 +209,8 @@ export function createRF(globe, state) {
         );
         line.positions = verts;
         line.show = true;
-        line.material.uniforms.color = color(palette.rf, fade * 0.7);
+        line.material.uniforms.color = color(palette.rf, opacity * fade * 0.7);
+        point.color = color(palette.rf, opacity);
         point.position = globe.position(lon, lat, alt);
         point.show = true;
         point.id = { type: "fix", index: i };
@@ -210,19 +226,31 @@ export function createRF(globe, state) {
           const a = globe.position(lon, lat, alt),
             b = globe.position(truth.lon, truth.lat, truth.alt);
           delta.positions = [a, b];
-          delta.material.uniforms.color = color(palette.truth, fade * 0.72);
+          delta.material.uniforms.color = color(
+            palette.truth,
+            opacity * opacity * fade * 0.72,
+          );
           label.position = C.Cartesian3.midpoint(a, b, new C.Cartesian3());
           label.text =
             f.err[i] == null
               ? "UNSCORED"
               : `${Math.round(f.err[i])} m Δ${state.t - f.t[i] > 6 ? ` / ${Math.round(state.t - f.t[i])} s OLD` : ""}`;
         }
-        const ripple = ripplePool[n], age = state.t - f.t[i];
-        ripple.show = age >= 0 && age < 1.2 && !matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const ripple = ripplePool[n],
+          age = state.t - f.t[i];
+        ripple.show =
+          age >= 0 &&
+          age < 1.2 &&
+          !matchMedia("(prefers-reduced-motion: reduce)").matches;
         if (ripple.show) {
           const centre = globe.position(lon, lat, alt);
-          ripple.positions = verts.map(v => C.Cartesian3.lerp(centre, v, 1 + age * 0.35, new C.Cartesian3()));
-          ripple.material.uniforms.color = color(palette.rf, (1 - age / 1.2) * 0.6);
+          ripple.positions = verts.map((v) =>
+            C.Cartesian3.lerp(centre, v, 1 + age * 0.35, new C.Cartesian3()),
+          );
+          ripple.material.uniforms.color = color(
+            palette.rf,
+            (1 - age / 1.2) * 0.6,
+          );
         }
         n++;
       }

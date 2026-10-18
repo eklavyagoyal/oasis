@@ -1,6 +1,6 @@
 # OASIS console handoff
 
-Branch: `dashboard-ui`. This is the standalone Cesium/Vite console from `docs/ui-prompt.md`, with the Night Glass art-direction work from `docs/ui-prompt-v2.md` in progress. The first pushed checkpoint includes the working replay, all panels and PRESENT mode, local Sentinel-2 terrain imagery and relief controls. Further visual changes will follow on the same branch.
+Branch: `dashboard-ui`. This is the standalone Cesium/Vite OASIS console from `docs/ui-prompt.md`, including the Night Glass art direction from `docs/ui-prompt-v2.md`: full-bleed terrain, floating controls, six analysis tabs, Cinema, a skippable opening and ten PRESENT chapters. The branch includes the demo data, screenshots, browser checks and this handoff.
 
 ## Start immediately
 
@@ -23,7 +23,7 @@ npx playwright install chromium
 npm run test:browser
 ```
 
-The existing browser checks also cover imports, missing data, audio, keyboard controls and responsive layouts. Some expectations describe the v1 panel arrangement and will be updated alongside the v2 layout.
+The browser checks cover the current layout, opening, Cinema, satellite detail, imports, missing data, audio, keyboard controls, all ten PRESENT chapters and responsive layouts. They serve the production build under a nested URL to verify relative asset paths.
 
 ## Where to edit
 
@@ -41,4 +41,12 @@ The product name is OASIS. Keep `window.MW`, relative asset paths and Vite `base
 - HTTPS: https://eklavyas-macbook-pro.tailbc1933.ts.net:8444/
 - DNS-independent tailnet fallback: http://100.79.203.26:8080/
 
-Both require access to the team's tailnet. The current Mac deployment is a background static server managed by launchd. See the root README for start/stop instructions. A local build does not deploy to another machine automatically.
+Both require access to the team's tailnet. The current Mac deployment is a background static server managed by launchd, serving `../mw-dashboard-ui/dist/` from this branch's worktree. Rebuild in that worktree to update these URLs. See the root README for start/stop instructions. A local build does not deploy to another machine automatically.
+
+## Current limits
+
+- The frozen audit is 9 PASS, 0 FAIL, 1 SKIP. The one-shot baseline and timestamped microphone media are absent; the UI reports those absences.
+- The real Sentinel backdrop is historical context; timestamped satellite observations are separate feed images.
+- Relief exaggeration is visual only. Height and signal readouts stay in physical units.
+- Rendering sleeps after a finite idle drift. The 60 fps target still needs a physical-device benchmark; automated checks use SwiftShader.
+- `main` also contains simulator/backend work. Keep UI changes on a branch from `origin/dashboard-ui`; merge backend updates deliberately.

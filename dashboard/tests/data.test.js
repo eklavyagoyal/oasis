@@ -191,3 +191,39 @@ test("real exported scenario meets the frontend contract when available", async 
   assert.ok(data.terrain.h.length > 4);
   assert.ok(Object.values(data.rf).every((r) => r.t.length === r.obj.length));
 });
+
+test("baked terrain texture accepts local files and rejects unsafe paths or bounds", () => {
+  const d = fixture();
+  d.terrain.texture = {
+    src: "texture.jpg",
+    west: 30,
+    south: 48,
+    east: 32,
+    north: 50,
+    credit: "Copernicus",
+  };
+  assert.equal(validateData(d).terrain.texture.src, "texture.jpg");
+  for (const src of [
+    "https://example.com/texture.jpg",
+    "../texture.jpg",
+    "./%2e%2e/texture.jpg",
+    "javascript:alert(1)",
+  ]) {
+    assert.throws(
+      () =>
+        validateData({
+          ...d,
+          terrain: { ...d.terrain, texture: { ...d.terrain.texture, src } },
+        }),
+      /terrain.texture/,
+    );
+  }
+  assert.throws(
+    () =>
+      validateData({
+        ...d,
+        terrain: { ...d.terrain, texture: { ...d.terrain.texture, west: 33 } },
+      }),
+    /terrain.texture/,
+  );
+});
