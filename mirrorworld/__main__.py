@@ -122,6 +122,8 @@ def _run(argv: list[str]) -> None:
     timings["world"] = time.perf_counter() - t0
 
     out = Path(args.out) if args.out else Path("out") / cfg.name
+    previous_files = {str(p.relative_to(out)): p.stat().st_mtime_ns
+                      for p in out.rglob("*") if p.is_file()} if out.exists() else {}
     ctx = Context(cfg, world, None, {o.id: o for o in cfg.objects}, out)
 
     t0 = time.perf_counter()
@@ -167,10 +169,14 @@ def _run(argv: list[str]) -> None:
         mod.run(group, ctx)
         timings[f"sensors:{typ}"] = time.perf_counter() - t0
 
+    artifacts = sorted(str(path.relative_to(out)) for path in out.rglob("*")
+                       if path.is_file() and path.name != "run.json"
+                       and path.stat().st_mtime_ns != previous_files.get(str(path.relative_to(out))))
     (out / "run.json").write_text(json.dumps({
         "seed": cfg.seed,
         "start": ctx.iso(0),
         "duration_s": cfg.duration_s,
+        "artifacts": artifacts,
         "dem_sources": world.sources,
         "skipped_sensor_types": skipped,
         "timings_s": timings,
