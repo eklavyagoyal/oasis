@@ -1,0 +1,158 @@
+# mirrorworld.builder: knobs + seed -> validated scenario; geometry from the real DEM.
+# Reproduce: uv run python -m mirrorworld.builder --knobs-json '{"birds": true, "date": "2026-11-04", "defence": false, "drones": 6, "duration_min": 20, "entry_side": "random", "heading_spread_deg": 25.0, "mix": {"dji_mavic3": 1, "gerbera": 2, "orlan10": 1, "shahed136": 3}, "sector": "ros-valley", "seed": 1, "sensor_preset": "standard", "template": "recon-strike", "time_of_day": "dusk", "wifi": true}'
+name: 49.375N_31.188E-recon-strike-s1
+seed: 1
+start: '2026-11-04T14:01:00Z'
+duration_s: 1200.0
+truth_hz: 2
+area:
+  lat: 49.3754
+  lon: 31.1882
+  size_km: 10.0
+weather:
+  wind_from_deg: 144.6
+  wind_mps: 1.6
+  temp_c: 6.6
+  rh_pct: 82.3
+  visibility_km: 12.8
+objects:
+- id: SITE-01
+  type: site
+  side: friendly
+  pos:
+  - 49.417668
+  - 31.221591
+- id: ADT-01
+  type: ad_team
+  side: friendly
+  pos:
+  - 49.417668
+  - 31.240235
+- id: ADB-01
+  type: ad_battery
+  side: friendly
+  pos:
+  - 49.407102
+  - 31.206457
+- id: orlan_1
+  type: orlan10
+  side: hostile
+  path:
+  - - 49.373471
+    - 31.123282
+    - 475.2
+  - - 49.380876
+    - 31.15492
+    - 475.2
+  - - 49.393268
+    - 31.179552
+    - 475.2
+  - - 49.402338
+    - 31.184191
+    - 475.2
+  - - 49.392166
+    - 31.201661
+    - 475.2
+  - - 49.392166
+    - 31.253118
+    - 475.2
+  speed_mps: 27.71
+  start_s: 52.7
+- id: lancet_1
+  type: lancet
+  side: hostile
+  path:
+  - - 49.401491
+    - 31.123282
+    - 223.7
+  - - 49.409285
+    - 31.160679
+    - 223.7
+  - - 49.396518
+    - 31.169602
+    - 223.7
+  - - 49.407102
+    - 31.206457
+    - 5.0
+  speed_mps: 28.27
+  start_s: 207.9
+- id: wifi_1
+  type: wifi_ap
+  side: neutral
+  pos:
+  - 49.417668
+  - 31.253118
+  alt_agl_m: 20.0
+- id: geese_1
+  type: geese
+  side: neutral
+  path:
+  - - 49.355654
+    - 31.253118
+    - 295.7
+  - - 49.395146
+    - 31.123282
+    - 295.7
+  start_s: 119.0
+sensors:
+- id: RF-01
+  type: rf_df
+  pos:
+  - 49.392487
+  - 31.193725
+  mast_m: 25.0
+  params:
+    calib_bias_deg: 0.08
+- id: RF-02
+  type: rf_df
+  pos:
+  - 49.365507
+  - 31.127426
+  mast_m: 25.0
+  params:
+    calib_bias_deg: 0.78
+- id: RF-03
+  type: rf_df
+  pos:
+  - 49.389789
+  - 31.243449
+  mast_m: 25.0
+  params:
+    calib_bias_deg: -0.79
+- id: RADAR-01
+  type: radar
+  pos:
+  - 49.378997
+  - 31.202012
+  mast_m: 15.0
+- id: CAM-01
+  type: camera
+  mount: RF-01
+  mast_m: 22.0
+  params:
+    fov_deg: 3.0
+    width: 1280
+    height: 720
+    fps: 1
+    cue: rf
+- id: ACOUSTIC-01
+  type: microphone
+  pos:
+  - 49.366777
+  - 31.193519
+  mast_m: 3.0
+- id: ACOUSTIC-02
+  type: microphone
+  pos:
+  - 49.376564
+  - 31.187576
+  mast_m: 3.0
+- id: RID-01
+  type: remote_id
+  mount: RF-01
+  mast_m: 25.0
+- id: C2-01
+  type: c2
+  pos:
+  - 49.417668
+  - 31.240235

@@ -99,3 +99,24 @@ for it in ints:
 assert all(o.end_s is None or o.end_s >= o.start_s for o in scen.objects)
 
 print("all builder tests passed")
+
+
+# seed engine: the sector's built world is fixed, the seed only changes what moves
+def _fixed(scen):
+    objs = {o.id: o.pos for o in scen.objects if o.id in ("SITE-01", "ADT-01", "ADB-01", "wifi_1")}
+    return objs, [(x.id, x.pos, x.params.get("calib_bias_deg")) for x in scen.sensors if x.pos is not None]
+
+
+def _movers(scen):
+    return [(o.id, o.path) for o in scen.objects if o.path]
+
+
+a, b = build(Knobs(seed=1))[1], build(Knobs(seed=2))[1]
+assert _fixed(a) == _fixed(b), "sites, AD positions, masts, mics and calibration must not move between seeds"
+assert _movers(a) != _movers(b), "different seeds must fly different air pictures"
+for tpl in ("saturation", "recon-strike"):
+    sc = build(Knobs(seed=3, template=tpl))[1]
+    assert _fixed(sc)[0]["SITE-01"] == _fixed(a)[0]["SITE-01"], tpl
+    kinds = {o.type for o in sc.objects}
+    assert ("lancet" in kinds) if tpl == "recon-strike" else ("interceptor" in kinds), (tpl, kinds)
+print("seed engine ok")

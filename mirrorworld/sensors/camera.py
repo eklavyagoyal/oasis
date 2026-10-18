@@ -28,7 +28,7 @@ DEFAULTS = dict(fov_deg=3.0, width=1280, height=720, fps=1.0, cue="rf", max_fram
                 jpeg_quality=82, assumed_agl_m=100.0)
 GROUND_CLASSES = {"OcuSync RC", "ELRS LoRa FHSS", "Wi-Fi", "Wideband noise"}  # cueing skips these
 LABEL = {"hostile": "target", "unknown": "target", "friendly": "friendly", "neutral": "clutter"}
-SHAPE_CLASS = {"quad": "multirotor", "delta": "fixed-wing", "flock": "bird"}
+SHAPE_CLASS = {"quad": "multirotor", "delta": "fixed-wing", "fixed_wing": "fixed-wing", "flock": "bird"}
 CLASSES = ("multirotor", "fixed-wing", "bird")
 DARK = np.array([35.0, 35.0, 42.0])  # silhouette colour before haze mixing
 EXPOSURE_S = 0.02  # 1/50 s shutter: motion blur only when apparent motion is fast
@@ -134,9 +134,9 @@ def project(cam_xyz, obj_xyz, az_deg, el_deg, f_px, width, height):
 
 
 def _extent_px(shape, span_m, rng_m, f_px):
-    """Rendered box size in pixels: quad/delta span_m wide, a flock spreads over ~30 m."""
+    """Rendered box size in pixels: airframes span_m wide, a flock spreads over ~30 m."""
     w_m, h_m = {"quad": (span_m, span_m), "delta": (span_m, 0.75 * span_m),
-                "flock": (30.0, 16.0)}[shape]
+                "fixed_wing": (span_m, 0.5 * span_m), "flock": (30.0, 16.0)}[shape]
     return w_m / rng_m * f_px, h_m / rng_m * f_px
 
 
