@@ -1,0 +1,83 @@
+# Hero scenario: the brief's own example, done properly.
+# Ros river valley near Korsun-Shevchenkivskyi, 3 Nov 2026, dusk (sunset ~14:31 UTC), light westerly.
+# t = seconds after start. Timeline:
+#   0-900     farmer's Mavic (neutral) works the fields, broadcasting honest Remote ID
+#   102-      hostile Mavic passes the brief's example truth point at ~14:02:07Z (t=427)
+#   300-      friendly recon Mavic patrols near RF1; Russian EW spoofs its GNSS 1250-1500
+#   600-      goose flock crosses the valley (clutter for eyes and ears)
+#   900-      fiber-optic FPV creeps up the valley at 10 m: RF-silent
+#   1700-     Shahed crosses at 1,200 m; its modem leaks the odd LTE burst
+#   1795-     analog FPV + ELRS; 2.4 GHz barrage jammer 1850-1970 (868 MHz control survives it)
+#   ~2300     the FPV hits RF2's mast: RF2 goes dark
+name: ros-valley
+seed: 7
+start: 2026-11-03T13:55:00Z
+duration_s: 2400
+truth_hz: 2
+area: {lat: 49.365, lon: 31.228, size_km: 16}
+weather: {wind_from_deg: 270, wind_mps: 3.5, temp_c: 4, rh_pct: 85, visibility_km: 12, cloud_pct: 40}
+
+objects:
+  - id: mavic_1
+    type: dji_mavic3
+    side: hostile
+    start_s: 102
+    path:
+      - [49.3420, 31.1720, 60]
+      - [49.3754, 31.1882, 120]
+      - [49.3900, 31.2150, 120]
+      - [49.3850, 31.2450, 100]
+      - [49.3650, 31.2250, 120]
+      - [49.3420, 31.1720, 60]
+  - {id: pilot_1, type: operator, side: hostile, pos: [49.3390, 31.1680], controls: mavic_1}
+
+  - id: recon_1
+    type: dji_mavic3
+    side: friendly
+    start_s: 300
+    loop: true
+    path: [[49.3600, 31.1900, 80], [49.3650, 31.2050, 80], [49.3560, 31.2100, 80], [49.3520, 31.1950, 80]]
+    gnss_spoof: {start_s: 1250, end_s: 1500, drift_mps: 8, drift_deg: 60}
+  - {id: op_ua, type: operator, side: friendly, pos: [49.3570, 31.1880], controls: recon_1}
+
+  - id: farmer_mavic
+    type: dji_mavic3
+    side: neutral
+    end_s: 900
+    loop: true
+    path: [[49.4000, 31.1500, 40], [49.4050, 31.1650, 40], [49.4000, 31.1700, 40], [49.3950, 31.1550, 40]]
+  - {id: farmer, type: operator, side: neutral, pos: [49.3980, 31.1480], controls: farmer_mavic}
+
+  - {id: geese_1, type: geese, side: neutral, start_s: 600, path: [[49.4300, 31.3000, 300], [49.3000, 31.1300, 250]]}
+
+  - id: fpv_fiber_1
+    type: fpv_fiber
+    side: hostile
+    start_s: 900
+    path: [[49.4300, 31.3300, 15], [49.4150, 31.2700, 10], [49.3950, 31.2300, 10]]
+
+  - {id: shahed_1, type: shahed136, side: hostile, start_s: 1700, path: [[49.2960, 31.1200, 1200], [49.4350, 31.3350, 1200]]}
+
+  - id: fpv_1
+    type: fpv_analog
+    side: hostile
+    start_s: 1795
+    speed_mps: 20
+    path: [[49.3000, 31.3300, 40], [49.3300, 31.3100, 40], [49.3350, 31.2700, 30], [49.3450, 31.2900, 30], [49.3528, 31.2699, 16]]
+  - {id: pilot_2, type: operator, side: hostile, pos: [49.2990, 31.3320], controls: fpv_1}
+
+  - {id: wifi_korsun, type: wifi_ap, side: neutral, pos: [49.4180, 31.2580]}
+  - {id: wifi_village, type: wifi_ap, side: neutral, pos: [49.3700, 31.1500]}
+  - {id: jammer_1, type: jammer, side: friendly, pos: [49.3600, 31.2400], start_s: 1850, end_s: 1970}
+
+sensors:
+  # RF1/RF2 rebuilt from the brief's example: 6 km apart, bearings 1.8 and 293 deg to the drone at 14:02:07Z
+  - {id: RF1, type: rf_df, pos: [49.3562, 31.1873], mast_m: 15, params: {calib_bias_deg: 0.8}}
+  - {id: RF2, type: rf_df, pos: [49.3528, 31.2699], mast_m: 15, destroyed_by: fpv_1, params: {calib_bias_deg: -0.6}}
+  - {id: EO1, type: camera, mount: RF1, mast_m: 14, params: {fov_deg: 3.0, width: 1280, height: 720, fps: 1, cue: rf}}
+  - {id: MIC1, type: microphone, pos: [49.3800, 31.2000], mast_m: 3}
+  - {id: MIC2, type: microphone, pos: [49.3600, 31.2500], mast_m: 3}
+  - {id: RID1, type: remote_id, mount: RF1, mast_m: 15}
+  - {id: TEL1, type: telemetry, pos: [49.3570, 31.1880], params: {objects: [recon_1]}}
+  - {id: SAT1, type: satellite, pos: [49.3650, 31.2280], params: {platform: SENTINEL-2C}}
+  - {id: HUM1, type: reports, pos: [49.4000, 31.2100], params: {eppo_civilians: 25}}
