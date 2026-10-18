@@ -1,0 +1,441 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#04060a" />
+    <title>MIRROR WORLD — Synthetic battlespace console</title>
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M3 25V7l13 12L29 7v18M3 7l13 12 13-12' fill='none' stroke='%2339e6ff' stroke-width='2'/%3E%3C/svg%3E"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link vite-ignore rel="stylesheet" href="./cesium/Widgets/widgets.css" />
+    <script>
+      window.CESIUM_BASE_URL = "./cesium/";
+    </script>
+    <script vite-ignore src="./cesium/Cesium.js"></script>
+    <script vite-ignore src="./data.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <header class="topbar">
+        <a class="brand" href="./" aria-label="Mirror World home"
+          ><svg viewBox="0 0 40 36" aria-hidden="true">
+            <path d="M3 30V6l17 16L37 6v24M3 6l17 16L37 6M20 22v10" /></svg
+          ><span
+            >MIRROR<span class="brand-light">WORLD</span
+            ><small>SYNTHETIC BATTLESPACE ENGINE</small></span
+          ></a
+        >
+        <div class="scenario-id">
+          <span class="eyebrow"
+            >SCENARIO / <span id="scenario-name">AWAITING DATA</span></span
+          >
+          <div>
+            <span class="status-dot"></span
+            ><span id="scenario-region">PHYSICS-BASED REPLAY</span>
+          </div>
+        </div>
+        <nav class="mode-switch" aria-label="Observation mode">
+          <button data-mode="operator" title="Only sensor observations">
+            OPERATOR</button
+          ><button data-mode="god" title="Ground truth only">GOD MODE</button
+          ><button
+            data-mode="delta"
+            class="active"
+            title="Compare observations and truth"
+          >
+            Δ DELTA
+          </button>
+        </nav>
+        <div class="top-clock">
+          <time id="top-clock">00:00:00<span>.000</span></time
+          ><span>SCENARIO CLOCK / UTC</span>
+        </div>
+        <button
+          class="command-trigger"
+          id="command-open"
+          title="Command palette (⌘K)"
+        >
+          <span>COMMAND</span><kbd>⌘ K</kbd>
+        </button>
+        <button id="present-start" class="present-button">
+          <span>▷</span> PRESENT
+        </button>
+      </header>
+      <div class="contextbar">
+        <span
+          ><b class="cyan">●</b>
+          <span id="system-state">INITIALIZING WORLD</span></span
+        ><span id="world-location">ONE WORLD. EVERY PERSPECTIVE.</span
+        ><span class="context-weather" id="weather">—</span
+        ><span class="context-sun" id="sun">SUN —</span
+        ><span class="date" id="date-label">—</span>
+      </div>
+      <main class="workspace">
+        <section
+          class="viewport"
+          aria-label="Interactive 3D terrain and observations"
+        >
+          <div
+            id="globe"
+            tabindex="0"
+            aria-label="3D map. Drag to orbit; scroll to zoom. Use map controls for keyboard navigation."
+          ></div>
+          <div class="viewport-vignette"></div>
+          <div class="scan-wipe" id="scan-wipe"></div>
+          <div class="world-title">
+            <span class="eyebrow cyan"
+              >TERRAIN DIGITAL TWIN <span class="hairline"></span>
+              <span id="area-size">—</span></span
+            >
+            <h1 id="area-title">
+              ONE WORLD.<br /><span>MANY PERSPECTIVES.</span>
+            </h1>
+            <p id="mode-description">
+              The distance between observation and truth.
+            </p>
+          </div>
+          <div class="view-badge">
+            <span class="tiny-square"></span
+            ><span id="view-badge-text">DELTA / OBSERVATION + TRUTH</span>
+          </div>
+          <div class="map-controls" aria-label="Map controls">
+            <button
+              id="home-view"
+              title="Reset camera"
+              aria-label="Reset camera"
+            >
+              ⌂</button
+            ><button id="zoom-in" title="Zoom in" aria-label="Zoom in">+</button
+            ><button id="zoom-out" title="Zoom out" aria-label="Zoom out">
+              −</button
+            ><button
+              id="orbit-view"
+              title="Rotate view"
+              aria-label="Rotate view"
+            >
+              ↻</button
+            ><button
+              id="tilt-view"
+              title="Toggle overhead view"
+              aria-label="Toggle overhead view"
+            >
+              ◇</button
+            ><span class="north">N<br />↑</span>
+          </div>
+          <div id="selection-reticle" class="selection-reticle" hidden>
+            <div class="reticle-corners"></div>
+            <span id="reticle-label"></span>
+          </div>
+          <div class="map-bottom">
+            <span id="map-coordinates">—</span
+            ><span id="terrain-note"
+              >COPERNICUS GLO-30 · EXACT SIMULATION DEM</span
+            >
+          </div>
+          <div id="globe-error" class="globe-error" hidden></div>
+          <div id="presentation" class="presentation" hidden>
+            <div class="presentation-top">
+              <span id="beat-number">01 / 10</span><span>GUIDED BRIEFING</span
+              ><button id="present-exit" aria-label="Exit presentation">
+                ESC ×
+              </button>
+            </div>
+            <h2 id="beat-title"></h2>
+            <p id="beat-description"></p>
+            <div class="presentation-bottom">
+              <strong id="beat-stat"></strong>
+              <div>
+                <button id="present-previous" aria-label="Previous beat">
+                  ←</button
+                ><button id="present-next">NEXT MOMENT →</button>
+              </div>
+            </div>
+            <div class="beat-progress"><i id="beat-progress"></i></div>
+          </div>
+        </section>
+        <aside class="left-rail rail" aria-label="Layers and key moments">
+          <div class="rail-heading">
+            <span>WORLD LAYERS</span><span class="section-number">01</span>
+          </div>
+          <div class="layers" id="layer-controls">
+            <label class="layer-row"
+              ><span><i class="swatch white"></i>Ground truth</span
+              ><input id="layer-truth" type="checkbox" checked /><span
+                class="switch"
+              ></span
+            ></label>
+            <label class="layer-row"
+              ><span><i class="swatch amber"></i>Direction finding</span
+              ><input id="layer-rays" type="checkbox" checked /><span
+                class="switch"
+              ></span
+            ></label>
+            <div id="receiver-controls" class="receiver-controls"></div>
+            <label class="layer-row"
+              ><span><i class="swatch ellipse amber"></i>Position fixes</span
+              ><input id="layer-fixes" type="checkbox" checked /><span
+                class="switch"
+              ></span
+            ></label>
+            <label class="layer-row"
+              ><span><i class="swatch shadow-red"></i>Terrain dead zones</span
+              ><input id="layer-shadow" type="checkbox" /><span
+                class="switch"
+              ></span
+            ></label>
+            <div class="shadow-settings">
+              <label
+                >RECEIVER
+                <select
+                  id="shadow-sensor"
+                  aria-label="Dead-zone receiver"
+                ></select></label
+              ><label for="shadow-height"
+                >FLIGHT HEIGHT
+                <output id="shadow-value">40 m AGL</output></label
+              ><input
+                id="shadow-height"
+                type="range"
+                min="0"
+                max="300"
+                value="40"
+                step="5"
+              />
+            </div>
+            <label class="layer-row"
+              ><span><i class="swatch contour cyan"></i>Elevation contours</span
+              ><input id="layer-contours" type="checkbox" /><span
+                class="switch"
+              ></span
+            ></label>
+          </div>
+          <div class="view-options">
+            <div>
+              <span>IMAGERY</span><button id="imagery-style">NIGHT OPS</button>
+            </div>
+            <div><span>BASEMAP</span><button id="basemap">ESRI ↗</button></div>
+            <div>
+              <span>WORLD VIEW</span><button id="world-mode">ISLAND ◇</button>
+            </div>
+            <label for="exaggeration"
+              >TERRAIN SCALE
+              <output id="exaggeration-value">1.0× / TRUE</output></label
+            ><input
+              id="exaggeration"
+              type="range"
+              min="1"
+              max="4"
+              value="1"
+              step="0.1"
+            />
+          </div>
+          <div class="rail-heading moments-heading">
+            <span>KEY MOMENTS</span><span class="section-number">02</span>
+          </div>
+          <div id="moments" class="moments"></div>
+          <div class="legend">
+            <span><i class="line-key white"></i>TRUTH</span
+            ><span><i class="line-key amber"></i>OBSERVATION</span
+            ><span><i class="swatch hostile"></i>HOSTILE</span
+            ><span><i class="swatch friendly"></i>FRIENDLY</span>
+          </div>
+          <button id="import-button" class="import-button">
+            ↥ LOAD SCENARIO <span>data.js</span></button
+          ><input type="file" id="file-input" accept=".js,.json" hidden />
+        </aside>
+        <aside class="right-rail rail" aria-label="Sensor feeds and analysis">
+          <div class="right-tabs" role="tablist" aria-label="Analysis panels">
+            <button
+              class="active"
+              id="tab-feeds"
+              data-tab="feeds"
+              role="tab"
+              aria-controls="feed-panel"
+              aria-selected="true"
+            >
+              FEEDS</button
+            ><button
+              id="tab-audit"
+              data-tab="audit"
+              role="tab"
+              aria-controls="audit-panel"
+              aria-selected="false"
+            >
+              AUDIT <span id="audit-count">—</span>
+            </button>
+          </div>
+          <div id="feed-panel" role="tabpanel" aria-labelledby="tab-feeds">
+            <div class="feed-picker" id="feed-picker">
+              <button class="active" data-feed="camera">EO</button
+              ><button data-feed="iq">IQ / RF</button
+              ><button data-feed="satellite">SAT</button
+              ><button data-feed="microphone">AUDIO</button>
+            </div>
+            <div class="feed-header">
+              <span id="feed-name">ELECTRO-OPTICAL</span
+              ><span id="feed-state" class="muted">NO SIGNAL</span>
+            </div>
+            <div class="feed-screen" id="feed-screen">
+              <img id="feed-image" alt="Sensor capture" hidden />
+              <div class="feed-static" id="feed-empty">
+                <span class="crosshair-icon">⌖</span><strong>NO SIGNAL</strong
+                ><small id="feed-empty-message"
+                  >No capture in this dataset</small
+                >
+              </div>
+              <div class="feed-hud" id="feed-hud" hidden>
+                <i></i><span id="feed-timestamp"></span
+                ><span class="feed-hud-bottom">SENSOR CAPTURE / UNALTERED</span>
+              </div>
+              <div class="iq-cursor" id="iq-cursor" hidden></div>
+              <canvas id="audio-canvas" hidden></canvas
+              ><button id="audio-play" hidden>▷ ENABLE AUDIO</button
+              ><button
+                id="feed-zoom"
+                class="feed-zoom"
+                hidden
+                aria-label="Zoom sensor image"
+              >
+                ⛶
+              </button>
+            </div>
+            <div class="feed-metadata">
+              <span id="feed-source">SOURCE UNAVAILABLE</span
+              ><span id="feed-age">—</span>
+            </div>
+            <div class="rail-heading inspector-heading">
+              <span>INSPECTOR</span
+              ><span id="inspector-status" class="cyan">TRUTH LINKED</span>
+            </div>
+            <div id="inspector"></div>
+            <div class="rail-heading ticker-heading">
+              <span>DETECTION STREAM</span
+              ><span id="detection-rate" class="amber">—</span>
+            </div>
+            <div
+              id="event-ticker"
+              class="event-ticker"
+              aria-label="Recent detections"
+            ></div>
+          </div>
+          <div
+            id="audit-panel"
+            role="tabpanel"
+            aria-labelledby="tab-audit"
+            hidden
+          ></div>
+          <div class="rail-foot">
+            <span class="status-dot"></span> REPLAY FROM SYNTHETIC SENSOR
+            RECORDS
+          </div>
+        </aside>
+      </main>
+      <footer class="timeline" aria-label="Scenario replay timeline">
+        <div class="transport">
+          <button
+            id="play"
+            class="play-button"
+            aria-label="Play scenario"
+            title="Space"
+          >
+            ▷
+          </button>
+          <div class="clock">
+            <time id="clock">00:00:00<span>.000</span></time
+            ><span class="clock-caption"
+              >UTC <i> / </i><span id="local-clock">—</span> LOCAL</span
+            >
+          </div>
+          <div class="transport-divider"></div>
+          <div class="speed-controls" aria-label="Playback speed">
+            <button data-speed="1">1×</button><button data-speed="5">5×</button
+            ><button data-speed="20" class="active">20×</button
+            ><button data-speed="60">60×</button
+            ><button data-speed="300">300×</button>
+          </div>
+          <div class="timeline-readout">
+            <span id="active-count">—</span><span id="timeline-range">—</span>
+          </div>
+          <button
+            id="density-scope"
+            title="Switch detection density between the selected truth object and all records"
+          >
+            DENSITY / SELECTED</button
+          ><button id="timeline-focus">FOCUS DUSK ↔</button>
+        </div>
+        <div class="timeline-track-area">
+          <div class="density-labels" id="density-labels">
+            <span>EVENTS</span>
+          </div>
+          <div class="timeline-chart" id="timeline-chart">
+            <canvas id="timeline-canvas" aria-hidden="true"></canvas>
+            <div id="timeline-events"></div>
+            <div id="playhead"><span id="playhead-label">—</span></div>
+            <input
+              id="time-scrubber"
+              type="range"
+              min="0"
+              max="20400"
+              step="0.1"
+              value="0"
+              aria-label="Scenario time"
+            />
+          </div>
+        </div>
+        <div class="timeline-bottom">
+          <span
+            ><b class="cyan">MIRROR WORLD</b> <span class="muted">/</span> THE
+            SENSOR PICTURE IS NOT THE TRUTH.</span
+          ><span class="keyboard-hints"
+            ><kbd>SPACE</kbd> PLAY <kbd>G</kbd> MODE <kbd>F</kbd> FOLLOW
+            <kbd>1–9</kbd> MOMENTS</span
+          ><span id="data-count">—</span>
+        </div>
+      </footer>
+    </div>
+    <dialog id="command-dialog">
+      <form method="dialog">
+        <div class="palette-title">
+          COMMAND CONSOLE<button aria-label="Close command palette">
+            ESC ×
+          </button>
+        </div>
+      </form>
+      <input
+        id="command-input"
+        placeholder="jump 14:02 · follow mavic_1 · operator mode"
+        aria-label="Command"
+        autocomplete="off"
+      />
+      <div id="command-results"></div>
+      <p>↑ ↓ to navigate <span>↵ to execute</span></p>
+    </dialog>
+    <dialog id="image-dialog">
+      <form method="dialog">
+        <button aria-label="Close image">CLOSE ×</button>
+      </form>
+      <img id="expanded-image" alt="Expanded sensor capture" />
+    </dialog>
+    <div id="drop-overlay" hidden>
+      <span>↥</span>
+      <h2>LOAD ANOTHER WORLD</h2>
+      <p>Drop data.js to replace the current scenario</p>
+      <small>Media paths resolve relative to this page.</small>
+    </div>
+    <div id="toast" role="status" hidden></div>
+    <div id="loading">
+      <div class="loading-mark">M<span>W</span></div>
+      <span>RECONSTRUCTING THE WORLD</span>
+      <div class="loading-line"></div>
+    </div>
+    <script type="module" src="./src/main.js"></script>
+  </body>
+</html>
