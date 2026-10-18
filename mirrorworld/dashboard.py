@@ -397,6 +397,7 @@ def export(out: Path | str) -> Path:
     for f in sorted(STATIC_DIR.iterdir()):
         if f.is_file() and not f.name.startswith("."):
             shutil.copyfile(f, dst / f.name)
+    shutil.copytree(STATIC_DIR / "icons", dst / "icons", dirs_exist_ok=True)
     payload = build(out)
     try:
         payload["terrain"]["texture"] = _bake_texture(out, payload["terrain"], dst)

@@ -18,6 +18,20 @@ const CLASS_COLORS = [
 ];
 const AMBER = "#ffb000";
 const GREY = "#5a626c";
+const OBJECT_ICONS = {
+  power_station: "building-factory-2", water_works: "droplet-cog", hospital: "building-hospital",
+  ad_team: "users-group", handheld_team: "users-group",
+  ad_battery: "shield-bolt", patriot: "shield-bolt", iris_t: "shield-bolt", nasams: "shield-bolt",
+  gerbera: "plane-inflight",
+  interceptor: "drone", interceptor_drone: "drone", octopus: "drone", jedi: "drone",
+  dji_mavic3: "drone", fpv_analog: "drone", fpv_fiber: "drone",
+};
+const SENSOR_ICONS = {
+  rf_df: "antenna", rf_receiver: "antenna", rf_iq: "antenna", remote_id: "antenna",
+  radar: "radar", camera: "device-cctv", eo_ir_camera: "device-cctv",
+  microphone: "microphone-2", acoustic: "microphone-2",
+};
+function iconUrl(name) { return "icons/" + name + ".svg"; }
 const M_PER_DEG = 111195;
 const LOB_M = 8000;
 const LOB_WINDOW_S = 3;
@@ -173,9 +187,10 @@ for (let oi = 0; oi < MW.objects.length; oi++) {
   for (let i = 0; i < o.t.length; i++) {
     pos.addSample(TIME0(o.t[i]), Cesium.Cartesian3.fromDegrees(o.lon[i], o.lat[i], o.alt[i]));
   }
-  const color = cssColor(SIDE_COLORS[o.side] || SIDE_COLORS.unknown);
+  const color = cssColor(o.kind === "site" ? SIDE_COLORS.neutral : SIDE_COLORS[o.side] || SIDE_COLORS.unknown);
   const isOp = o.kind === "operator";
   const isEm = o.kind === "emitter";
+  const icon = OBJECT_ICONS[o.type] || (o.kind === "drone" ? "plane-tilt" : null);
   const opts = {
     name: o.id,
     position: pos,
@@ -207,6 +222,10 @@ for (let oi = 0; oi < MW.objects.length; oi++) {
         ),
       width: 14,
       height: 14,
+    };
+  } else if (icon) {
+    opts.billboard = {
+      image: iconUrl(icon), width: 24, height: 24, color: color,
     };
   } else {
     opts.point = {
@@ -249,6 +268,7 @@ const sensorEntities = [];
 for (const s of MW.sensors) {
   const top = Cesium.Cartesian3.fromDegrees(s.lon, s.lat, s.alt);
   const base = Cesium.Cartesian3.fromDegrees(s.lon, s.lat, s.ground);
+  const icon = SENSOR_ICONS[s.type];
   const mast = viewer.entities.add({
     polyline: {
       positions: [base, top],
@@ -259,12 +279,15 @@ for (const s of MW.sensors) {
   const mark = viewer.entities.add({
     name: s.id,
     position: top,
-    point: {
+    point: icon ? undefined : {
       pixelSize: 8,
       color: cssColor(AMBER),
       outlineColor: Cesium.Color.BLACK,
       outlineWidth: 2,
     },
+    billboard: icon ? {
+      image: iconUrl(icon), width: 24, height: 24, color: cssColor(AMBER),
+    } : undefined,
     label: {
       text: s.id,
       font: "11px monospace",
@@ -778,7 +801,8 @@ clock.onTick.addEventListener(function () {
     if (dead !== s.dead) {
       s.dead = dead;
       const col = cssColor(dead ? GREY : AMBER);
-      s.mark.point.color = col;
+      if (s.mark.billboard) s.mark.billboard.color = col;
+      else s.mark.point.color = col;
       s.mark.label.fillColor = col;
       s.mast.polyline.material = dead ? cssColor(GREY, 0.4) : cssColor(AMBER, 0.55);
     }
