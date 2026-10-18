@@ -1,0 +1,163 @@
+/* Game control panel (right rail) + rail/timeline hide toggles. Uses only tokens from styles.css. */
+#app.hide-left { --left: 0px; }
+#app.hide-right { --right: 0px; }
+#app.hide-timeline { --timeline: 0px; }
+#app.hide-left .left-rail,
+#app.hide-right .right-rail,
+#app.hide-timeline .timeline { display: none; }
+
+.game-panel { padding-bottom: 28px; }
+.game-panel[hidden] { display: none; }
+.game-panel .rail-heading { border-top: 1px solid var(--hairline); margin-top: 6px; }
+.game-panel .rail-heading:first-child { border-top: 0; margin-top: 0; }
+
+.gp-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 30px;
+  border-bottom: 1px solid var(--hairline);
+}
+.gp-row > label { flex: 1; color: var(--text-2); font-size: 10px; }
+.gp-row input[type="number"],
+.gp-row select {
+  width: 86px;
+  height: 22px;
+  padding: 0 6px;
+  background: var(--glass-strong);
+  border: 1px solid var(--hairline);
+  border-radius: 2px;
+  color: var(--text);
+  font: 11px var(--mono);
+}
+.gp-row input[type="range"] { width: 120px; accent-color: var(--accent); }
+.gp-row input:focus,
+.gp-row select:focus { outline: none; border-color: var(--accent); }
+.gp-num { font: 10px var(--mono); color: var(--accent); font-weight: 400; margin-left: 4px; }
+.gp-dice { width: 24px; height: 22px; padding: 0; font-size: 14px; border: 1px solid var(--hairline); }
+
+.gp-seg { display: flex; border: 1px solid var(--hairline); border-radius: 2px; }
+.gp-seg button { height: 22px; padding: 0 10px; font: 9px var(--mono); color: var(--text-2); border-radius: 0; }
+.gp-seg button.active { background: var(--glass-strong); color: var(--accent); }
+
+.gp-opts { border-bottom: 1px solid var(--hairline); }
+.gp-opts summary {
+  cursor: pointer;
+  padding: 9px 0;
+  font-size: 9px;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--text-3);
+}
+.gp-opts summary:hover { color: var(--text-2); }
+.gp-opts[open] summary { color: var(--accent); }
+
+.gp-sub {
+  padding: 10px 0 6px;
+  font: 8px var(--mono);
+  letter-spacing: 0.14em;
+  color: var(--text-3);
+}
+.gp-sub.friendly { color: var(--friendly); }
+.gp-sub.hostile { color: var(--hostile); }
+
+.gp-mix { display: grid; gap: 5px; padding-bottom: 8px; }
+.gp-mix label { display: flex; align-items: center; gap: 7px; color: var(--text-2); font-size: 10px; cursor: pointer; text-transform: capitalize; }
+.gp-mix input { accent-color: var(--accent); margin: 0; }
+
+.gp-btns { display: grid; gap: 6px; padding: 12px 0 4px; }
+.gp-btns.three { grid-template-columns: repeat(3, 1fr); padding-top: 0; }
+.gp-btn {
+  height: 30px;
+  border: 1px solid var(--hairline);
+  background: var(--glass);
+  font-size: 9px;
+  letter-spacing: 0.13em;
+  color: var(--text);
+}
+.gp-btn.primary { border-color: var(--accent); color: var(--accent); }
+.gp-btn.primary:hover { background: var(--accent); color: var(--void); }
+.gp-btn.wide { width: 100%; margin-top: 14px; }
+
+.gp-clock {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 12px 0 8px;
+}
+.gp-clock span { font: 22px var(--mono); color: var(--text); letter-spacing: 0.04em; }
+.gp-clock small { font: 9px var(--mono); color: var(--signal); letter-spacing: 0.1em; }
+
+.gp-oob { display: grid; gap: 2px; }
+.gp-unit {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  column-gap: 8px;
+  row-gap: 3px;
+  padding: 5px 0;
+  border-bottom: 1px solid var(--hairline);
+}
+.gp-unit .id { font: 10px var(--mono); color: var(--text); }
+.gp-unit .type { font-size: 9px; color: var(--text-3); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.gp-unit .badge {
+  font: 8px var(--mono);
+  letter-spacing: 0.08em;
+  padding: 1px 4px;
+  border: 1px solid var(--hairline);
+  color: var(--text-2);
+}
+.gp-unit .badge[data-s="INBOUND"] { color: var(--signal); border-color: var(--signal); }
+.gp-unit .badge[data-s="KILLED"] { color: var(--pass); border-color: var(--pass); }
+.gp-unit .badge[data-s="JAMMED"] { color: var(--accent); border-color: var(--accent); }
+.gp-unit .badge[data-s="IMPACT"],
+.gp-unit .badge[data-s="DESTROYED"] { color: var(--fail); border-color: var(--fail); }
+.gp-unit .badge[data-s="EXITED"],
+.gp-unit .badge[data-s="PENDING"] { color: var(--text-3); }
+.gp-unit .hp { grid-column: 1 / -1; height: 3px; background: var(--hairline); }
+.gp-unit .hp i { display: block; height: 100%; transition: width 0.3s; }
+.gp-unit.friendly .hp i { background: var(--friendly); }
+.gp-unit.hostile .hp i { background: var(--hostile); }
+.gp-unit.dead .hp i { background: var(--neutral); }
+.gp-unit.dead .id { color: var(--text-3); }
+
+.gp-feed { display: grid; gap: 1px; }
+.gp-ev {
+  display: grid;
+  grid-template-columns: 52px 1fr;
+  gap: 6px;
+  padding: 4px 0 4px 6px;
+  border-left: 2px solid var(--hairline);
+  font-size: 10px;
+  color: var(--text-2);
+  line-height: 1.4;
+}
+.gp-ev time { font: 9px var(--mono); color: var(--text-3); }
+.gp-ev.bad { border-color: var(--hostile); color: var(--hostile); }
+.gp-ev.hit { border-color: var(--pass); color: var(--pass); }
+.gp-ev.miss,
+.gp-ev.dim { color: var(--text-3); }
+.gp-ev.det { border-color: var(--accent); color: var(--accent); }
+.gp-ev.jam { border-color: #B48CFF; color: #B48CFF; }
+
+.gp-aar[hidden] { display: none; }
+.gp-big { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; padding-bottom: 10px; }
+.gp-big div { background: var(--glass); border: 1px solid var(--hairline); padding: 8px 6px; }
+.gp-big b { display: block; font: 22px var(--mono); font-weight: 400; color: var(--text); }
+.gp-big small { font: 7px var(--mono); letter-spacing: 0.12em; color: var(--text-3); }
+.gp-big div:nth-child(2) b { color: var(--pass); }
+.gp-big div:nth-child(3) b { color: var(--accent); }
+.gp-big div:nth-child(4) b { color: var(--fail); }
+.gp-big div:nth-child(5) b { color: var(--signal); }
+.gp-kv,
+.gp-dmg > div {
+  display: flex;
+  justify-content: space-between;
+  padding: 6px 0;
+  border-bottom: 1px solid var(--hairline);
+  font-size: 10px;
+  color: var(--text-2);
+}
+.gp-kv b,
+.gp-dmg b { font: 10px var(--mono); font-weight: 400; color: var(--text); }
+.gp-dmg .dead b { color: var(--fail); }
