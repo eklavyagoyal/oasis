@@ -5,6 +5,13 @@ const $ = (s) => document.querySelector(s);
 export function createInspector(state, onSelect) {
   const data = state.data,
     container = $("#inspector"),
+    hasRfMeasurements =
+      !data.game && Object.values(data.rf ?? {}).some((r) => r.t?.length),
+    hasPositionFixes = !data.game && data.fixes?.t?.length > 0,
+    gameIntervals = data.game?.record?.detections?.length,
+    rfUnavailable = data.game
+      ? `Browser simulation supplies ${Number.isInteger(gameIntervals) ? `${gameIntervals} simplified detection intervals` : "simplified detection intervals"} from range + terrain line-of-sight only; no RF bearing, SNR, received-power, or uncertainty measurements are supplied.`
+      : "No RF measurement records were supplied. Bearing, power, SNR, and uncertainty are unavailable.",
     byObject = new Map();
   for (const object of data.objects) {
     const index = data.objects.indexOf(object),
@@ -24,18 +31,29 @@ export function createInspector(state, onSelect) {
     signature = key;
     $("#inspector-status").textContent =
       state.mode === "operator"
-        ? "OBSERVATIONS ONLY"
+        ? data.game
+          ? "SIM INTERVALS ONLY"
+          : "SYNTHETIC OBSERVATIONS"
         : state.mode === "god"
-          ? "GROUND TRUTH"
-          : "TRUTH LINKED";
+          ? data.game
+            ? "SIMULATED TRUTH"
+            : "GROUND TRUTH"
+          : data.game
+            ? "SIMULATION"
+            : "TRUTH LINKED";
     if (state.mode === "operator") {
       const f = data.fixes,
         index = state.selectedFix;
       if (index != null && index >= 0 && index < f.t.length)
         container.innerHTML = `<div class="no-observation"><strong>POSITION FIX / ${index + 1}</strong>${esc(data.classes[f.cls[index]])}<br><span class="cyan">${f.lat[index].toFixed(5)}° N · ${f.lon[index].toFixed(5)}° E</span><br>CEP50 ${Math.round(f.cep50[index])} m<br>Semi-axes ${Math.round(f.smaj[index])} × ${Math.round(f.smin[index])} m<br>No truth association in Operator mode.</div>`;
-      else
-        container.innerHTML =
-          '<div class="no-observation"><strong>The sensor picture.</strong>Select an amber fix on the map to inspect its reported position and uncertainty.<br><br>Ground truth and answer-key associations are hidden in this mode.</div>';
+      else {
+        const message = data.game
+          ? rfUnavailable
+          : hasPositionFixes
+            ? "Select an amber fix on the map to inspect its generated position and uncertainty. Ground-truth associations are hidden in Operator mode."
+            : "No position fixes were supplied. There is no reported position or uncertainty to inspect.";
+        container.innerHTML = `<div class="no-observation"><strong>${data.game ? "SIMULATED DETECTIONS ONLY." : "NO POSITION FIXES."}</strong>${esc(message)}</div>`;
+      }
       return;
     }
     const o = data.objects.find((o) => o.id === state.selected);
@@ -44,7 +62,7 @@ export function createInspector(state, onSelect) {
         '<div class="no-observation">No truth objects supplied.</div>';
       return;
     }
-    container.innerHTML = `<select class="object-picker" aria-label="Inspect truth object">${data.objects.map((obj) => `<option value="${esc(obj.id)}" ${obj.id === o.id ? "selected" : ""}>${esc(obj.id.toUpperCase())}</option>`).join("")}</select><div class="object-class"><span>${esc(o.type.replaceAll("_", " ").toUpperCase())}</span><span class="side-tag ${esc(o.side)}">${esc(o.side.toUpperCase())}</span></div><div class="telemetry-values"><div><strong id="stat-agl">—</strong><span>ALTITUDE AGL</span></div><div><strong id="stat-speed">—</strong><span>GROUND SPEED</span></div><div><strong id="stat-masl">—</strong><span>ALTITUDE / DEM</span></div></div><div id="power-region" ${state.mode === "god" ? "hidden" : ""}><div class="power-heading"><span>RECEIVED POWER / dBm</span><span>10 MIN WINDOW</span></div><canvas class="power-chart" aria-label="Received power by receiver; dim segments indicate terrain non-line-of-sight"></canvas><div class="receiver-status" id="receiver-status"></div><div class="error-summary"><span class="label">OBSERVATION → TRUTH<small id="fix-error-label">LATEST FIX ERROR</small></span><strong id="stat-error">—</strong></div></div><div id="object-inactive" class="no-observation" hidden>Object inactive at the current time.</div>`;
+    container.innerHTML = `<select class="object-picker" aria-label="Inspect truth object">${data.objects.map((obj) => `<option value="${esc(obj.id)}" ${obj.id === o.id ? "selected" : ""}>${esc(obj.id.toUpperCase())}</option>`).join("")}</select><div class="object-class"><span>${esc(o.type.replaceAll("_", " ").toUpperCase())}</span><span class="side-tag ${esc(o.side)}">${esc(o.side.toUpperCase())}</span></div><div class="telemetry-values"><div><strong id="stat-agl">—</strong><span>${data.game ? "SIMULATED AGL" : "TRUTH ALTITUDE AGL"}</span></div><div><strong id="stat-speed">—</strong><span>${data.game ? "SIMULATED SPEED" : "TRUTH GROUND SPEED"}</span></div><div><strong id="stat-masl">—</strong><span>${data.game ? "SIM ALTITUDE / DEM" : "TRUTH ALTITUDE / DEM"}</span></div></div><div id="power-region" ${state.mode === "god" ? "hidden" : ""}><div class="power-heading"><span>MODELED RECEIVED POWER / dBm</span><span>10 MIN WINDOW</span></div>${hasRfMeasurements ? "" : `<div class="no-observation" id="rf-unavailable">${esc(rfUnavailable)}</div>`}<canvas class="power-chart" aria-label="Modeled received power by receiver; dim segments indicate terrain non-line-of-sight" ${hasRfMeasurements ? "" : "hidden"}></canvas><div class="receiver-status" id="receiver-status" ${hasRfMeasurements ? "" : "hidden"}></div><div class="error-summary" ${hasPositionFixes ? "" : "hidden"}><span class="label">FIX ERROR VS SIMULATED TRUTH<small id="fix-error-label">LATEST SCORED FIX</small></span><strong id="stat-error">—</strong></div></div><div id="object-inactive" class="no-observation" hidden>Object inactive at the current time.</div>`;
     container.querySelector("select").onchange = (e) =>
       onSelect(e.target.value);
     chart = container.querySelector("canvas");
@@ -76,6 +94,7 @@ export function createInspector(state, onSelect) {
       for (const id of ["#stat-agl", "#stat-speed", "#stat-masl"])
         $(id).textContent = "—";
     if (state.mode === "god") return;
+    if (!hasRfMeasurements) return;
     const entries = byObject.get(object.id),
       width = chart.clientWidth,
       height = chart.clientHeight,
@@ -164,7 +183,7 @@ export function createInspector(state, onSelect) {
       ? `${Math.round(errors[0])}<small> m</small>`
       : "—";
     $("#fix-error-label").textContent = errors.length
-      ? `MEDIAN ${Math.round([...errors].sort((a, b) => a - b)[Math.floor(errors.length / 2)])} m / ${errors.length} FIXES`
+      ? `MEDIAN VS TRUTH ${Math.round([...errors].sort((a, b) => a - b)[Math.floor(errors.length / 2)])} m / ${errors.length} FIXES`
       : "NO SCORED FIX IN LAST 5 MIN";
   }
   return { update };
