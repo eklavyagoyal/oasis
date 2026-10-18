@@ -1,6 +1,7 @@
 import { sample, heightAt, upperBound } from "../data.js";
 import { ll, color, palette } from "../globe.js";
-import { ICON_SCALE, LABEL_SCALE, iconUrl } from "./assets.js";
+import { ICON_SCALE, ICONS, LABEL_SCALE } from "./assets.js";
+import { badge } from "./badge.js";
 const C = window.Cesium;
 function glyph(o) {
   const shape =
@@ -60,9 +61,12 @@ export function createTruth(globe, state) {
         }),
       ]),
       billboard: {
-        image: iconUrl(object.type) ?? glyph(object),
-        width: 32,
-        height: 32,
+        image: object.kind === "drone"
+          ? badge(ICONS[object.type] ?? "plane-tilt",
+              { hostile: palette.hostile, friendly: palette.friendly }[object.side] ?? palette.neutral)
+          : glyph(object),
+        width: object.kind === "drone" ? 40 : 30,
+        height: object.kind === "drone" ? 40 : 30,
         scaleByDistance: ICON_SCALE,
         heightReference: C.HeightReference.NONE,
         disableDepthTestDistance: Number.POSITIVE_INFINITY,
@@ -76,7 +80,7 @@ export function createTruth(globe, state) {
         outlineColor: color(palette.void),
         outlineWidth: 3,
         style: C.LabelStyle.FILL_AND_OUTLINE,
-        pixelOffset: new C.Cartesian2(20, -15),
+        pixelOffset: new C.Cartesian2(24, -18),
         horizontalOrigin: C.HorizontalOrigin.LEFT,
         disableDepthTestDistance: Number.POSITIVE_INFINITY,
       },

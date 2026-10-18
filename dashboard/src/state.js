@@ -2,7 +2,7 @@ export const MODES = ["operator", "god", "delta"];
 export const SPEEDS = [1, 5, 20, 60, 300];
 export function createState(data) {
   const initial =
-    data.scenario.duration_s >= 18427 ? 18427 : (data.fixes.t[0] ?? 0);
+    data.game ? 0 : data.scenario.duration_s >= 18427 ? 18427 : (data.fixes.t[0] ?? 0);
   return {
     data,
     t: initial,
@@ -10,7 +10,7 @@ export function createState(data) {
     speed: 20,
     mode: "delta",
     selected:
-      data.objects.find((o) => o.id === "mavic_1")?.id ?? data.objects[0]?.id,
+      data.objects.find((o) => o.id === "mavic_1")?.id ?? data.objects.find((o) => o.kind === "drone")?.id ?? data.objects[0]?.id,
     selectedFix: null,
     densityFiltered: true,
     follow: false,

@@ -58,7 +58,7 @@ export function createOpening(globe, data) {
       })
       .toUpperCase();
     document.querySelector("#opening-subtitle").textContent =
-      `${data.scenario.label || ""} · ${date} · ONE WORLD, EVERY SIGNAL`;
+      `${data.scenario.label || ""} · ${date} · SYNTHETIC SCENARIO`;
     document.querySelector(".opening-coordinate").textContent =
       `${data.scenario.area.lat.toFixed(4)}° N / ${data.scenario.area.lon.toFixed(4)}° E`;
     globe.opening();

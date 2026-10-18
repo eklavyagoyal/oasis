@@ -7,7 +7,7 @@ export function createTimeline(state, seek) {
     scrubber = $("#time-scrubber"),
     data = state.data,
     duration = data.scenario.duration_s;
-  let focus = duration > 18000,
+  let focus = !data.game && duration > 18000,
     min = focus ? 18000 : 0,
     max = duration;
   let boundsKey = "",
@@ -15,7 +15,7 @@ export function createTimeline(state, seek) {
     lastScope = "";
   const receivers = Object.keys(data.rf);
   $("#density-labels").replaceChildren();
-  for (const label of ["EVENTS", ...receivers]) {
+  for (const label of ["EVENTS", ...(data.game ? ["MODEL DETECTIONS"] : receivers)]) {
     const span = document.createElement("span");
     span.textContent = label;
     $("#density-labels").append(span);
@@ -25,7 +25,8 @@ export function createTimeline(state, seek) {
     max = duration;
     scrubber.min = min;
     scrubber.max = max;
-    $("#timeline-focus").textContent = focus ? "FULL DAY" : "DUSK";
+    $("#timeline-focus").hidden = !!data.game;
+    $("#timeline-focus").textContent = focus ? "FULL SCENARIO" : "DUSK SEGMENT";
     boundsKey = "";
     draw();
   }
@@ -43,7 +44,7 @@ export function createTimeline(state, seek) {
     ctx.font = '9px "Geist Mono"';
     const morningEnd = Math.min(1500, duration),
       duskStart = Math.min(18000, duration * 0.85);
-    for (const [a, b, label, c] of [
+    for (const [a, b, label, c] of data.game ? [] : [
       [0, morningEnd, "ACT I / MORNING", theme("hairline")],
       [duskStart, duration, "ACT II / DUSK", theme("hairline")],
     ]) {
@@ -54,12 +55,23 @@ export function createTimeline(state, seek) {
       ctx.fillRect(x, 0, right - x, 2);
       ctx.fillStyle = theme("text-2");
     }
+    if (data.game && state.mode !== "god") {
+      ctx.fillStyle = theme("signal");
+      for (const detection of data.game.record.detections) {
+        if (detection.t_end < min || detection.t_start > max) continue;
+        ctx.globalAlpha = 0.25;
+        const left = Math.max(0, X(detection.t_start)), right = Math.min(width, X(detection.t_end));
+        ctx.fillRect(left, 19, Math.max(1, right - left), 3);
+      }
+      ctx.globalAlpha = 1;
+    }
     const bins = Math.max(1, Math.floor(width / 3));
     const filtered = state.densityFiltered && state.mode !== "operator",
       oi = data.objects.findIndex((o) => o.id === state.selected);
     $("#density-scope").textContent = filtered
       ? `DENSITY / ${state.selected?.toUpperCase() ?? "NO TRACK"}`
       : "DENSITY / ALL SIGNALS";
+    $("#density-scope").hidden = !!data.game;
     $("#density-scope").disabled = state.mode !== "delta";
     if (state.mode === "god")
       $("#density-scope").textContent = "TRUTH MODE / RF HIDDEN";

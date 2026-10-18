@@ -14,7 +14,8 @@
     "data:export": "uv run python dashboard/scripts/export_data.py out/ros-valley"
   },
   "dependencies": {
-    "cesium": "1.124.0"
+    "cesium": "1.124.0",
+    "maplibre-gl": "^6.15.0"
   },
   "devDependencies": {
     "@playwright/test": "^1.56.0",
