@@ -94,7 +94,7 @@ Platform numbers (size, speed, links, sound) live in `mirrorworld/catalog.py`. T
   - `rf-physics.md` covers propagation and direction-finding.
 
 ## Lanes
-**A: core + RF.** Owner: Eklavya + Claude.
+**A: core + RF.**
 - Files: `pyproject.toml`, `mirrorworld/{__main__,config,catalog,world,truth}.py`, `mirrorworld/sensors/rf_df.py`, `scenarios/`.
 - Physics: per link, per receiver, per tick: real DEM profile → free space + ITU-R P.526 Bullington diffraction + location-correlated shadowing + Rician/Rayleigh fading. Noise floor (kTB + NF + man-made) plus co-channel interference (Wi-Fi, jammer). DF bearing error grows as 1/√SNR, plus a site calibration bias and NLOS wild bearings. Uplinks are DF'd at the operator. Least-squares crossed-bearing fixes with CEP → CoT.
 - Done when the hero run writes truth, RF CSV/CoT, fixes and answer key, and RF2 loses `mavic_1` behind the ridge.
