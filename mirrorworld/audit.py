@@ -510,8 +510,8 @@ def check_spoof(sc):
         obj = df["object_id"].fillna("").astype(str).to_numpy()
         px, py = sc.world.to_xy(df[cols[0]].to_numpy(float), df[cols[1]].to_numpy(float))
         for o in pd.unique(obj):
-            if not o:
-                continue
+            if o not in spoofs:
+                continue  # honest broadcasters have no window to compare against
             sel = obj == o
             pos = sc.state(o, t[sel])
             good = np.isfinite(pos).all(1)

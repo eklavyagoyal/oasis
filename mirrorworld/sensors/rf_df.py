@@ -245,6 +245,11 @@ def _fuse(det, key, ctx, sites, report_hz):
 
     cols = ["fix_id", "time_utc", "t", "lat", "lon", "hae_m", "ce_m", "cep50_m", "semi_major_m", "semi_minor_m",
             "orient_deg", "n_sensors", "sig_class", "freq_mhz", "record_ids"]
+    # a false alarm off the tick grid can pull a fix's mean time behind its neighbour: emit in time order
+    order = np.argsort([f["t"] for f in fixes], kind="stable")
+    fixes, answers = [fixes[i] for i in order], [answers[i] for i in order]
+    for n, (f, a) in enumerate(zip(fixes, answers)):
+        f["fix_id"] = a["fix_id"] = f"FIX-{n:06d}"
     fixes = pd.DataFrame(fixes, columns=cols)
     out = ctx.out / "fused"
     out.mkdir(parents=True, exist_ok=True)
