@@ -48,6 +48,12 @@ def run(sensors: list[Sensor], ctx: Context) -> None:
 ```
 Run order: `rf_df` first (camera reads `fused/fixes.csv`), then the remaining types in config order.
 
+**Media for the 3D dashboard** (`python -m mirrorworld dash out/<name> --serve`). If your sensor produces images, audio or IQ, also write `sensors/<id>/media.csv`:
+- Columns: `t,time_utc,kind,path`. `kind` is one of image | audio | iq | event. `path` is relative to your sensor folder.
+- For audio, `t` = the time of the first sample.
+- `kind=event` rows (e.g. "S2A pass") become clickable key moments.
+- The dashboard picks these up automatically, synced to the replay clock. It also shows `out/<name>/audit.json` (lane B) as a PASS/FAIL card.
+
 `Context` (`mirrorworld/__main__.py`):
 - `cfg`: Scenario
 - `world`: World
