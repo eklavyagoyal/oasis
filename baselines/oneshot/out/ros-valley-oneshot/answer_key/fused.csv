@@ -1,0 +1,16 @@
+fix_id,object_id,label,error_m
+FIX-000000,mavic_1,target,63
+FIX-000001,recon_1,friendly,9
+FIX-000002,mavic_1,target,52
+FIX-000003,recon_1,friendly,7
+FIX-000004,mavic_1,target,58
+FIX-000005,recon_1,friendly,6
+FIX-000006,mavic_1,target,128
+FIX-000007,recon_1,friendly,10
+FIX-000008,recon_1,friendly,5
+FIX-000009,recon_1,friendly,7
+FIX-000010,recon_1,friendly,7
+FIX-000011,recon_1,friendly,7
+FIX-000012,recon_1,friendly,8
+FIX-000013,recon_1,friendly,8
+FIX-000014,recon_1,friendly,8
