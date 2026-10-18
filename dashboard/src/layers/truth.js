@@ -1,7 +1,7 @@
 import { sample, heightAt, upperBound } from "../data.js";
 import { ll, color, palette } from "../globe.js";
 import { ICON_SCALE, ICONS, LABEL_SCALE } from "./assets.js";
-import { badge } from "./badge.js";
+import { airframeBadge, badge } from "./badge.js";
 const C = window.Cesium;
 function glyph(o) {
   const shape =
@@ -62,18 +62,21 @@ export function createTruth(globe, state) {
       ]),
       billboard: {
         image: object.kind === "drone"
-          ? badge(ICONS[object.type] ?? "plane-tilt",
+          ? airframeBadge(object.type,
               { hostile: palette.hostile, friendly: palette.friendly }[object.side] ?? palette.neutral)
           : glyph(object),
-        width: object.kind === "drone" ? 40 : 30,
-        height: object.kind === "drone" ? 40 : 30,
+        width: object.kind === "drone" ? 46 : 30,
+        height: object.kind === "drone" ? 46 : 30,
         scaleByDistance: ICON_SCALE,
         heightReference: C.HeightReference.NONE,
         disableDepthTestDistance: Number.POSITIVE_INFINITY,
       },
       label: {
         text: object.id.toUpperCase(),
-        font: '12px "Geist Mono"',
+        font: '600 12px "Geist Mono"',
+        showBackground: true,
+        backgroundColor: new C.Color(0.024, 0.031, 0.043, 0.8),
+        backgroundPadding: new C.Cartesian2(7, 4),
         scaleByDistance: LABEL_SCALE,
         pixelOffsetScaleByDistance: ICON_SCALE,
         fillColor: color(palette.unknown),
@@ -176,6 +179,11 @@ export function createTruth(globe, state) {
           labels.has(object.id) && object.id !== state.selected;
         entity.billboard.color = color(palette.truth, opacity);
         entity.label.fillColor = color(palette.unknown, opacity);
+        const ahead = object.kind === "drone" && p ? sample(object, state.t + 2) : null;
+        if (ahead && (ahead.lon !== p.lon || ahead.lat !== p.lat)) {  // airframe nose along the track
+          const heading = Math.atan2((ahead.lon - p.lon) * Math.cos((p.lat * Math.PI) / 180), ahead.lat - p.lat);
+          entity.billboard.rotation = viewer.camera.heading - heading;
+        }
       }
       const segments = trailPool.get(object.id);
       segments?.forEach((line, i) => {

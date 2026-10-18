@@ -2453,3 +2453,8 @@ dialog::backdrop {
     display: none;
   }
 }
+
+/* Legibility over imagery: map-overlay text gets a dark halo so it reads on any terrain. */
+.world-title, .world-title *, .view-badge, .view-badge *, .world-status, .world-status *, #terrain-note, #exaggeration-value {
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.95), 0 0 16px rgba(0, 0, 0, 0.8);
+}

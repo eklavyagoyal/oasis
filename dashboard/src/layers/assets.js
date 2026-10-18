@@ -19,7 +19,8 @@ export const iconUrl = (type) => (ICONS[type] ? `./icons/${ICONS[type]}.svg` : n
 export const ICON_SCALE = new C.NearFarScalar(2.0e3, 1.7, 5.0e4, 0.8);
 export const LABEL_SCALE = new C.NearFarScalar(2.0e3, 1.3, 5.0e4, 0.9);
 const NEAR_ONLY = new C.DistanceDisplayCondition(0, 1.2e4); // detail lines appear once you zoom in
-const OUTLINE = { outlineWidth: 3, style: C.LabelStyle.FILL_AND_OUTLINE, horizontalOrigin: C.HorizontalOrigin.LEFT,
+const OUTLINE = { outlineWidth: 2, style: C.LabelStyle.FILL_AND_OUTLINE, horizontalOrigin: C.HorizontalOrigin.LEFT,
+  showBackground: true, backgroundColor: new C.Color(0.024, 0.031, 0.043, 0.8), backgroundPadding: new C.Cartesian2(8, 5),
   pixelOffsetScaleByDistance: ICON_SCALE, scaleByDistance: LABEL_SCALE,
   disableDepthTestDistance: Number.POSITIVE_INFINITY };
 const TONE = { reached: "hostile", approached: "rf", alerted: "rf", responding: "rf" };

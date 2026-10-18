@@ -44,3 +44,17 @@ body.cinema .oasis-flow-controls { display: none; }
   .oasis-flow-controls button { padding: 7px; font-size: 9px; }
   .oasis-run-result { padding: 18px; }
 }
+
+.oasis-library { position: fixed; width: min(980px, calc(100vw - 32px)); max-height: 84vh; padding: 28px 28px 24px; color: #f4f1ea; background: rgba(8, 11, 15, 0.97); border: 1px solid rgba(255, 255, 255, 0.12); border-radius: 18px; box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6); }
+.oasis-library::backdrop { background: rgba(3, 5, 7, 0.72); backdrop-filter: blur(6px); }
+.oasis-library form { position: absolute; top: 18px; right: 20px; }
+.oasis-library form button { padding: 8px 12px; color: #aab3bd; font: 12px/1 "Geist Mono", monospace; letter-spacing: 0.08em; background: transparent; border: 1px solid rgba(255, 255, 255, 0.14); border-radius: 8px; cursor: pointer; }
+.oasis-library .eyebrow { color: #6ff2c5; font: 12px/1 "Geist Mono", monospace; letter-spacing: 0.14em; }
+.oasis-library h2 { margin: 10px 0 8px; font: 600 30px/1.1 "Geist", sans-serif; }
+.oasis-library p { max-width: 720px; margin: 0; color: #aab3bd; font: 15px/1.5 "Geist", sans-serif; }
+#library-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(270px, 1fr)); gap: 12px; max-height: 58vh; margin-top: 20px; overflow: auto; }
+.library-run { display: flex; flex-direction: column; gap: 6px; padding: 16px 18px; text-align: left; color: inherit; background: rgba(255, 255, 255, 0.035); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 12px; cursor: pointer; font: 13px/1.4 "Geist Mono", monospace; transition: border-color 0.2s, background 0.2s, transform 0.2s; }
+.library-run:hover, .library-run:focus-visible { background: rgba(111, 242, 197, 0.07); border-color: #6ff2c5; transform: translateY(-1px); }
+.library-run strong { font: 600 16px/1.25 "Geist", sans-serif; }
+.library-run span { color: #aab3bd; }
+.library-run em { color: #6ff2c5; font-style: normal; }

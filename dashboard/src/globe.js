@@ -210,9 +210,9 @@ export function createGlobe(data, notify) {
   function styleImagery(natural) {
     imageryNatural = natural;
     if (!imagery) return;
-    imagery.brightness = (natural ? 1.02 : 0.72) * solarGrade;
-    imagery.saturation = natural ? 0.92 : 0.35;
-    imagery.contrast = natural ? 1.08 : 1.2;
+    imagery.brightness = (natural ? 0.74 : 0.6) * solarGrade;  // graded down so overlays and labels read first
+    imagery.saturation = natural ? 0.62 : 0.35;
+    imagery.contrast = natural ? 1.14 : 1.2;
     imagery.gamma = 1.15;
     scene.requestRender();
   }
@@ -377,9 +377,9 @@ export function createGlobe(data, notify) {
         maximumLevel: 18,
       }), 0);
     }
-    earthLayer.brightness = island ? 0.42 : 1.0;
-    earthLayer.saturation = island ? 0.3 : 1.0;
-    earthLayer.contrast = island ? 1.1 : 1.0;
+    earthLayer.brightness = island ? 0.42 : 0.5;  // the landscape around the sector stays darker than the sector
+    earthLayer.saturation = island ? 0.3 : 0.45;
+    earthLayer.contrast = island ? 1.1 : 1.05;
   }
   function setIsland(value) {
     state0Island = value;
