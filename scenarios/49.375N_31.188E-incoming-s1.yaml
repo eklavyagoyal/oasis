@@ -1,0 +1,239 @@
+# mirrorworld.builder: knobs + seed -> validated scenario; geometry from the real DEM.
+# Reproduce: uv run python -m mirrorworld.builder --knobs-json '{"birds": true, "date": "2026-11-04", "defence": false, "drones": 6, "duration_min": 20, "entry_side": "random", "heading_spread_deg": 25.0, "mix": {"dji_mavic3": 1, "gerbera": 2, "orlan10": 1, "shahed136": 3}, "sector": "ros-valley", "seed": 1, "sensor_preset": "standard", "template": "incoming", "time_of_day": "dusk", "wifi": true}'
+name: 49.375N_31.188E-incoming-s1
+seed: 1
+start: '2026-11-04T14:01:00Z'
+duration_s: 1200.0
+truth_hz: 2
+area:
+  lat: 49.3754
+  lon: 31.1882
+  size_km: 10.0
+weather:
+  wind_from_deg: 144.6
+  wind_mps: 1.6
+  temp_c: 6.6
+  rh_pct: 82.3
+  visibility_km: 12.8
+objects:
+- id: SITE-01
+  type: site
+  side: friendly
+  pos:
+  - 49.417668
+  - 31.221591
+- id: ADT-01
+  type: ad_team
+  side: friendly
+  pos:
+  - 49.417668
+  - 31.240235
+- id: ADB-01
+  type: ad_battery
+  side: friendly
+  pos:
+  - 49.407102
+  - 31.206457
+- id: gerbera_1
+  type: gerbera
+  side: hostile
+  path:
+  - - 49.379672
+    - 31.253118
+    - 1136.2
+  - - 49.388891
+    - 31.246901
+    - 1136.2
+  - - 49.410797
+    - 31.241683
+    - 1136.2
+  - - 49.417668
+    - 31.221591
+    - 5.0
+  speed_mps: 45.53
+  start_s: 210.8
+- id: orlan_1
+  type: orlan10
+  side: hostile
+  path:
+  - - 49.417668
+    - 31.217372
+    - 222.5
+  - - 49.417668
+    - 31.218629
+    - 222.5
+  - - 49.417281
+    - 31.219276
+    - 222.5
+  - - 49.408965
+    - 31.19831
+    - 222.5
+  - - 49.400189
+    - 31.221527
+    - 222.5
+  - - 49.333132
+    - 31.221527
+    - 222.5
+  speed_mps: 29.69
+  start_s: 305.7
+- id: shahed_1
+  type: shahed136
+  side: hostile
+  path:
+  - - 49.406108
+    - 31.123282
+    - 643.2
+  - - 49.408342
+    - 31.152224
+    - 643.2
+  - - 49.409944
+    - 31.172263
+    - 643.2
+  - - 49.411661
+    - 31.182203
+    - 643.2
+  - - 49.417668
+    - 31.221591
+    - 5.0
+  speed_mps: 46.57
+  start_s: 507.4
+- id: shahed_2
+  type: shahed136
+  side: hostile
+  path:
+  - - 49.333132
+    - 31.217182
+    - 1036.9
+  - - 49.354576
+    - 31.206345
+    - 1036.9
+  - - 49.360085
+    - 31.2356
+    - 1036.9
+  - - 49.391914
+    - 31.253118
+    - 1036.9
+  - - 49.417668
+    - 31.221591
+    - 5.0
+  speed_mps: 48.65
+  start_s: 450.3
+- id: gerbera_2
+  type: gerbera
+  side: hostile
+  path:
+  - - 49.417668
+    - 31.225481
+    - 661.8
+  - - 49.417536
+    - 31.224514
+    - 661.8
+  - - 49.417492
+    - 31.223828
+    - 661.8
+  - - 49.417668
+    - 31.22225
+    - 661.8
+  - - 49.417668
+    - 31.221591
+    - 5.0
+  speed_mps: 47.62
+  start_s: 96.2
+- id: gerbera_3
+  type: gerbera
+  side: hostile
+  path:
+  - - 49.417668
+    - 31.196904
+    - 1192.2
+  - - 49.417668
+    - 31.201034
+    - 1192.2
+  - - 49.413897
+    - 31.217044
+    - 1192.2
+  - - 49.417668
+    - 31.221591
+    - 5.0
+  speed_mps: 45.2
+  start_s: 472.4
+- id: wifi_1
+  type: wifi_ap
+  side: neutral
+  pos:
+  - 49.417668
+  - 31.253118
+  alt_agl_m: 20.0
+- id: geese_1
+  type: geese
+  side: neutral
+  path:
+  - - 49.333132
+    - 31.231647
+    - 236.8
+  - - 49.417668
+    - 31.144753
+    - 236.8
+  start_s: 504.4
+sensors:
+- id: RF-01
+  type: rf_df
+  pos:
+  - 49.392487
+  - 31.193725
+  mast_m: 25.0
+  params:
+    calib_bias_deg: 0.08
+- id: RF-02
+  type: rf_df
+  pos:
+  - 49.365507
+  - 31.127426
+  mast_m: 25.0
+  params:
+    calib_bias_deg: 0.78
+- id: RF-03
+  type: rf_df
+  pos:
+  - 49.389789
+  - 31.243449
+  mast_m: 25.0
+  params:
+    calib_bias_deg: -0.79
+- id: RADAR-01
+  type: radar
+  pos:
+  - 49.378997
+  - 31.202012
+  mast_m: 15.0
+- id: CAM-01
+  type: camera
+  mount: RF-01
+  mast_m: 22.0
+  params:
+    fov_deg: 3.0
+    width: 1280
+    height: 720
+    fps: 1
+    cue: rf
+- id: ACOUSTIC-01
+  type: microphone
+  pos:
+  - 49.366777
+  - 31.193519
+  mast_m: 3.0
+- id: ACOUSTIC-02
+  type: microphone
+  pos:
+  - 49.376564
+  - 31.187576
+  mast_m: 3.0
+- id: RID-01
+  type: remote_id
+  mount: RF-01
+  mast_m: 25.0
+- id: C2-01
+  type: c2
+  pos:
+  - 49.417668
+  - 31.240235

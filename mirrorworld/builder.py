@@ -61,13 +61,20 @@ ALT_AGL = {  # cruise altitude band per type
     "shahed136": (300.0, 1500.0), "gerbera": (300.0, 1500.0),
     "fpv_analog": (10.0, 40.0), "fpv_fiber": (10.0, 40.0),
     "orlan10": (150.0, 500.0), "zala": (150.0, 500.0), "supercam": (150.0, 500.0),
-    "dji_mavic3": (60.0, 150.0),
+    "dji_mavic3": (60.0, 150.0), "lancet": (100.0, 400.0),
 }
 ID_STEM = {"shahed136": "shahed", "gerbera": "gerbera", "orlan10": "orlan", "zala": "zala",
-           "supercam": "supercam", "dji_mavic3": "mavic", "fpv_analog": "fpv", "fpv_fiber": "fiber"}
+           "supercam": "supercam", "dji_mavic3": "mavic", "fpv_analog": "fpv", "fpv_fiber": "fiber", "lancet": "lancet"}
 SIDES = "NESW"
 OPPOSITE = {"N": "S", "S": "N", "E": "W", "W": "E"}
 INTERCEPTOR_SPEED_MPS = 60.0  # catalog speed, exact
+TEMPLATES = ("incoming", "intercepted", "lost-contact", "saturation", "recon-strike")
+
+
+def _world_rng(sector: str, name: str):
+    """Seeded by the sector alone: what is built there (site, AD positions, mast calibration, mics) is the
+    same for every seed; the scenario seed only drives what moves (drones, timing, weather, clutter)."""
+    return np.random.default_rng([zlib.crc32(sector.encode()), zlib.crc32(name.encode())])
 
 
 class Knobs(BaseModel):
@@ -83,7 +90,7 @@ class Knobs(BaseModel):
     date: str = "2026-11-04"
     duration_min: int = Field(20, ge=1, le=360)
     sensor_preset: str = "standard"  # minimal | standard | full
-    template: str = "incoming"  # incoming | intercepted | lost-contact
+    template: str = "incoming"  # one of TEMPLATES
     defence: bool = False
     birds: bool = True
     wifi: bool = True
@@ -142,8 +149,8 @@ class Knobs(BaseModel):
     @field_validator("template")
     @classmethod
     def _template(cls, v):
-        if v not in ("incoming", "intercepted", "lost-contact"):
-            raise ValueError(f"template must be incoming, intercepted or lost-contact, not {v!r}")
+        if v not in TEMPLATES:
+            raise ValueError(f"template must be one of {', '.join(TEMPLATES)}, not {v!r}")
         return v
 
 
@@ -375,11 +382,11 @@ def build(knobs: Knobs) -> tuple[str, Scenario]:
     world = World(Scenario(name="_area", seed=k.seed, start=start, duration_s=60,
                            area=Area(lat=cx, lon=clon, size_km=AREA_KM), objects=[], sensors=[]))
 
-    # ground assets: SITE-01 1.5-3 km from the town, ADT-01/ADB-01 1-2 km from SITE-01
+    # ground assets, fixed per sector: SITE-01 1.5-3 km from the town, ADT-01/ADB-01 1-2 km from SITE-01
     town_xy = _clamp(*[float(v) for v in world.to_xy(*info["town"])])
-    site_xy = _point_near(rng, town_xy, 1500.0, 3000.0)
-    adt_xy = _point_near(rng, site_xy, 1000.0, 2000.0)
-    adb_xy = _point_near(rng, site_xy, 1000.0, 2000.0)
+    site_xy = _point_near(_world_rng(sector, "site"), town_xy, 1500.0, 3000.0)
+    adt_xy = _point_near(_world_rng(sector, "ad_team"), site_xy, 1000.0, 2000.0)
+    adb_xy = _point_near(_world_rng(sector, "ad_battery"), site_xy, 1000.0, 2000.0)
 
     # terrain-sited receivers
     cand_xy = _candidates(world)
@@ -389,7 +396,7 @@ def build(knobs: Knobs) -> tuple[str, Scenario]:
     radar_i = int(np.argmax([cov[i].sum() if i not in rf_sites else -1
                              for i in range(len(cand_xy))]))  # best remaining high point
     rf_xyz = [(float(x), float(y), float(world.height(x, y)) + RF_MAST_M) for x, y in cand_xy[rf_sites]]
-    bias = [round(float(rng.uniform(-1.0, 1.0)), 2) for _ in rf_sites]
+    bias = [round(float(b), 2) for b in _world_rng(sector, "calibration").uniform(-1.0, 1.0, len(rf_sites))]
 
     objs: list[dict] = [
         _obj("SITE-01", "site", "friendly", pos=_ll(world, site_xy)),
@@ -444,6 +451,34 @@ def build(knobs: Knobs) -> tuple[str, Scenario]:
         mids = _corridor(rng, entry_xy, site_xy, k.heading_spread_deg)
         add_drone("fpv_fiber", [entry_xy] + mids + [site_xy],
                   [alt] * (len(mids) + 1) + [TERMINAL_AGL_M], start_s)
+    elif k.template == "saturation":
+        # a raid in 2-3 tight waves of one-way drones from one side: more targets than the defence can service
+        pool = sorted(t for t in k.mix if t in ONE_WAY) or ["gerbera", "shahed136"]
+        entry_side = k.entry_side if k.entry_side != "random" else SIDES[int(rng.integers(4))]
+        waves = sorted(float(rng.uniform(0.0, 0.5 * duration_s)) for _ in range(int(rng.integers(2, 4))))
+        for i in range(k.drones):
+            typ = str(rng.choice(pool))
+            entry_xy = _edge_point(rng, entry_side)
+            alt = float(rng.uniform(*ALT_AGL[typ]))
+            mids = _corridor(rng, entry_xy, site_xy, k.heading_spread_deg)
+            add_drone(typ, [entry_xy] + mids + [site_xy], [alt] * (len(mids) + 1) + [TERMINAL_AGL_M],
+                      waves[i % len(waves)] + float(rng.uniform(0.0, 20.0)))
+    elif k.template == "recon-strike":
+        # a recon UAV finds the AD battery and orbits it; a loitering munition follows it in mid-orbit
+        rtyp = next((t for t in ("orlan10", "zala", "supercam") if t in k.mix), "orlan10")
+        entry_side = k.entry_side if k.entry_side != "random" else SIDES[int(rng.integers(4))]
+        entry_xy = _edge_point(rng, entry_side)
+        alt = float(rng.uniform(*ALT_AGL[rtyp]))
+        mids = _corridor(rng, entry_xy, adb_xy, k.heading_spread_deg)
+        lo1, lo2 = _loiter_points(rng, adb_xy)
+        exit_xy = _edge_point_at(OPPOSITE[entry_side], lo2[0] if OPPOSITE[entry_side] in "NS" else lo2[1])
+        recon = add_drone(rtyp, [entry_xy] + mids + [lo1, lo2, exit_xy], [alt] * (len(mids) + 4),
+                          float(rng.uniform(0.0, 0.15 * duration_s)))
+        entry_xy = _edge_point(rng, entry_side)
+        alt = float(rng.uniform(*ALT_AGL["lancet"]))
+        mids = _corridor(rng, entry_xy, adb_xy, k.heading_spread_deg)
+        add_drone("lancet", [entry_xy] + mids + [adb_xy], [alt] * (len(mids) + 1) + [TERMINAL_AGL_M],
+                  recon["start"] + float(rng.uniform(0.3, 0.5)) * (recon["end"] - recon["start"]))
     else:
         types = rng.choice(sorted(k.mix), size=k.drones,
                            p=np.array([k.mix[t] for t in sorted(k.mix)], float)
@@ -466,7 +501,7 @@ def build(knobs: Knobs) -> tuple[str, Scenario]:
                           [alt] * (len(mids) + 4), start_s)
 
     # ---- interceptors (intercepted template, or defence=true anywhere) -----
-    n_int = min(3, len(oneway) // 2) if (k.template == "intercepted" or k.defence) else 0
+    n_int = min(3, len(oneway) // 2) if (k.template in ("intercepted", "saturation") or k.defence) else 0
     for i in range(n_int):
         hostile = oneway[2 * i]  # one interceptor per two one-way hostiles
         hlat = np.asarray([p[0] for p in hostile["path_ll"]], float)
@@ -527,8 +562,9 @@ def build(knobs: Knobs) -> tuple[str, Scenario]:
     sens.append(_sensor("CAM-01", "camera", mount="RF-01", mast_m=22.0,
                         params={"fov_deg": 3.0, "width": 1280, "height": 720, "fps": 1, "cue": "rf"}))
     if k.sensor_preset != "minimal":
+        mics = _world_rng(sector, "mics")
         for i in range(2):
-            mic = _clamp(float(rng.uniform(-1200.0, 1200.0)), float(rng.uniform(-1200.0, 1200.0)))
+            mic = _clamp(float(mics.uniform(-1200.0, 1200.0)), float(mics.uniform(-1200.0, 1200.0)))
             sens.append(_sensor(f"ACOUSTIC-{i + 1:02d}", "microphone", pos=_ll(world, mic), mast_m=3.0))
         sens.append(_sensor("RID-01", "remote_id", mount="RF-01", mast_m=RF_MAST_M))
     if k.sensor_preset == "full":
@@ -605,6 +641,15 @@ def _parse_mix(s: str) -> dict[str, float]:
     return out
 
 
+def _seeds(spec: str) -> list[int]:
+    """'1-4' or '1,3,7' -> seeds."""
+    out = []
+    for part in spec.split(","):
+        a, _, b = part.partition("-")
+        out += list(range(int(a), int(b) + 1)) if b else [int(a)]
+    return out
+
+
 def main(argv: list[str] | None = None) -> None:
     ap = argparse.ArgumentParser(prog="mirrorworld.builder",
                                  description="Build a validated scenario YAML from knobs + a seed.")
@@ -624,7 +669,9 @@ def main(argv: list[str] | None = None) -> None:
     ap.add_argument("--birds", type=_onoff, default=None)
     ap.add_argument("--wifi", type=_onoff, default=None)
     ap.add_argument("-o", "--out", default=None, help="output YAML (default scenarios/<name>.yaml)")
-    ap.add_argument("--run", action="store_true", help="then run it with --skip-missing")
+    ap.add_argument("--seeds", default=None, help="sweep, e.g. 1-4 or 1,3,7: same sector and fixed assets, "
+                                                  "one scenario per seed")
+    ap.add_argument("--run", action="store_true", help="then run it with --skip-missing and audit it")
     args = ap.parse_args(argv)
 
     knobs_dict = json.loads(args.knobs_json) if args.knobs_json else {}
@@ -636,17 +683,22 @@ def main(argv: list[str] | None = None) -> None:
             knobs_dict[name] = _parse_mix(val) if name == "mix" else val
     knobs = Knobs(**knobs_dict)
 
-    text, scen = build(knobs)
-    out = Path(args.out) if args.out else Path("scenarios") / f"{scen.name}.yaml"
-    out.write_text(text)
-    print(f"wrote {out}")
-    if args.run:
-        cmd = [sys.executable, "-m", "mirrorworld", "run", str(out), "--skip-missing"]
-        r = subprocess.run(cmd, capture_output=True, text=True)
-        if r.returncode != 0:
-            raise SystemExit(f"run failed: {' '.join(cmd)}\n{r.stdout}{r.stderr}")
-        print(r.stdout.strip())
-        print(f"out dir: out/{scen.name}")
+    seeds = _seeds(args.seeds) if args.seeds else [knobs.seed]
+    if args.out and len(seeds) > 1:
+        raise SystemExit("-o names one file; a --seeds sweep writes scenarios/<name>.yaml per seed")
+    for seed in seeds:
+        text, scen = build(knobs.model_copy(update={"seed": seed}))
+        out = Path(args.out) if args.out else Path("scenarios") / f"{scen.name}.yaml"
+        out.write_text(text)
+        print(f"wrote {out}")
+        if args.run:
+            for cmd in ([sys.executable, "-m", "mirrorworld", "run", str(out), "--skip-missing"],
+                        [sys.executable, "-m", "mirrorworld", "audit", f"out/{scen.name}"]):
+                r = subprocess.run(cmd, capture_output=True, text=True)
+                if r.returncode != 0:
+                    raise SystemExit(f"failed: {' '.join(cmd)}\n{r.stdout}{r.stderr}")
+                print(r.stdout.strip().splitlines()[-1] if r.stdout.strip() else "")
+            print(f"out dir: out/{scen.name}")
 
 
 if __name__ == "__main__":

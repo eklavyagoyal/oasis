@@ -48,7 +48,10 @@ DEFAULTS = dict(fs=16000, ambient_dba=35.0, max_window_min=10.0, detect_snr_db=6
                 frame_s=1.0, int_s=30.0)
 LABEL = {"hostile": "target", "unknown": "target", "friendly": "friendly", "neutral": "clutter"}
 FAMILY = {"dji_mavic3": "multirotor", "fpv_analog": "FPV", "fpv_fiber": "FPV",
-          "shahed136": "two-stroke engine", "geese": "birds"}
+          "interceptor": "FPV", "octopus": "FPV", "jedi": "FPV",
+          "shahed136": "two-stroke engine", "gerbera": "two-stroke engine", "orlan10": "two-stroke engine",
+          "zala": "electric fixed-wing", "supercam": "electric fixed-wing", "lancet": "electric fixed-wing",
+          "geese": "birds"}  # detector class names; tests/test_microphone.py checks every sounding type has one
 TRACK_LOSS_DB = 2.5     # AM sidebands + imperfect frequency fit: coherence never reaches theory
 N_HARM = 10
 R_EARTH = 6371e3

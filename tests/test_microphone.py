@@ -184,3 +184,10 @@ if __name__ == "__main__":
     test_tone_tracker()
     test_wav_bwf()
     print("all microphone self-checks passed")
+
+
+from mirrorworld.catalog import CATALOG  # noqa: E402
+from mirrorworld.sensors.microphone import FAMILY  # noqa: E402
+missing = sorted(k for k, v in CATALOG.items() if v.get("sound") and k not in FAMILY)
+assert not missing, f"catalog types with sound but no detector family: {missing}"
+print("every sounding catalog type has a detector family")
