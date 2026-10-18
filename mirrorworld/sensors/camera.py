@@ -478,7 +478,7 @@ def run(sensors, ctx):
                     key_rows.append([d["record_id"], "", "false_alarm", "", "", ""])
                 else:
                     bx, by, bw, bh = r["true_bbox"]
-                    key_rows.append([d["record_id"], r["object_id"], LABEL[r["side"]],
+                    key_rows.append([d["record_id"], r["object_id"], LABEL[ctx.objects[r["object_id"]].side],
                                      round(r["range_m"], 1), round(r["pixels_on_object"], 2),
                                      f"{bx:.1f},{by:.1f},{bw:.1f},{bh:.1f}"])
             for r in rows:

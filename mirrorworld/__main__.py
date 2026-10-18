@@ -31,6 +31,7 @@ class Context:
 
     def __post_init__(self):
         self._sensors = {s.id: s for s in self.cfg.sensors}
+        self._tracks = {}  # object id -> (t, {x, y, z, vx, vy, vz}) cache for state()
 
     def rng(self, name: str) -> np.random.Generator:
         return np.random.default_rng([self.cfg.seed, zlib.crc32(name.encode())])
@@ -41,15 +42,14 @@ class Context:
     def state(self, object_id: str, t) -> dict:
         """x, y, z, vx, vy, vz at arbitrary t, linearly interpolated; NaN outside the span."""
         tt = np.asarray(t, dtype=np.float64)
-        rows = self.truth[self.truth["object_id"] == object_id].sort_values("t")
         cols = {"x": "x_m", "y": "y_m", "z": "z_m", "vx": "vx", "vy": "vy", "vz": "vz"}
-        if rows.empty:
+        if object_id not in self._tracks:  # filter the truth table once per object, not once per call
+            rows = self.truth[self.truth["object_id"] == object_id].sort_values("t")
+            self._tracks[object_id] = (rows["t"].to_numpy(), {k: rows[c].to_numpy() for k, c in cols.items()})
+        ts, vals = self._tracks[object_id]
+        if not ts.size:
             return {k: np.full(tt.shape, np.nan) for k in cols}
-        ts = rows["t"].to_numpy()
-        return {
-            k: np.interp(tt, ts, rows[c].to_numpy(), left=np.nan, right=np.nan)
-            for k, c in cols.items()
-        }
+        return {k: np.interp(tt, ts, vals[k], left=np.nan, right=np.nan) for k in cols}
 
     def sensor_xyz(self, sensor: Sensor) -> np.ndarray:
         site = sensor
