@@ -33,8 +33,8 @@ objects:
   - {id: shahed_am, type: shahed136, side: hostile, start_s: 481, path: [[49.3020, 31.0920, 1200], [49.4380, 31.3080, 1200]]}
 
   # ---- all day: clutter (village wireless-internet relays on the real water towers) ----
-  - {id: wifi_korsun, type: wifi_ap, side: neutral, pos: [49.4168, 31.2526], alt_agl_m: 25}
-  - {id: wifi_stebliv, type: wifi_ap, side: neutral, pos: [49.4076, 31.1119], alt_agl_m: 20}
+  - {id: wifi_1, type: wifi_ap, side: neutral, pos: [49.4168, 31.2526], alt_agl_m: 25}
+  - {id: wifi_2, type: wifi_ap, side: neutral, pos: [49.4076, 31.1119], alt_agl_m: 20}
 
   # ---- act 2: dusk ----
   # hostile recon Mavic: at the brief's truth point at 14:02:07Z (t=18427), then drops to 40 m for a

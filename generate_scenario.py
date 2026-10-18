@@ -185,10 +185,11 @@ def generate(config):
     if not isinstance(seed, int) or isinstance(seed, bool):
         raise ValueError("seed must be an integer")
     r = resolve(config, catalog, presets, random.Random(seed))
-    name = f"{r['sector']}-{r['preset']}-s{seed}".replace("_", "-")
+    text = scenario_yaml(r, seed)
+    name = yaml.safe_load(text)["name"]  # coordinates + preset + seed: no place names anywhere
     yaml_path = ROOT / "scenarios" / "generated" / f"{name}.yaml"
     yaml_path.parent.mkdir(parents=True, exist_ok=True)
-    yaml_path.write_text(scenario_yaml(r, seed))
+    yaml_path.write_text(text)
     out = ROOT / "out" / name
     run_oasis(yaml_path, out)
     return summarise(out, r, seed)

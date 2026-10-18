@@ -86,6 +86,8 @@ def build(out: Path | str) -> dict:
     w = cfg.weather
     scenario = {
         "name": cfg.name,
+        "label": config.coord_label(cfg.area.lat, cfg.area.lon),  # shown instead of any place name
+        "region": "Ukraine",
         "start": iso(cfg.start, 0.0),
         "duration_s": _f(cfg.duration_s, 3),
         "area": {"lat": cfg.area.lat, "lon": cfg.area.lon, "size_km": cfg.area.size_km},
