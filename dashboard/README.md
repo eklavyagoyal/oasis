@@ -38,8 +38,8 @@ The product name is OASIS. Keep `window.MW`, relative asset paths and Vite `base
 
 ## Live preview
 
-- HTTPS: https://eklavyas-macbook-pro.tailbc1933.ts.net:8444/
-- DNS-independent tailnet fallback: http://100.79.203.26:8080/
+- HTTPS: https://<machine>.<tailnet>.ts.net:8444/
+- DNS-independent tailnet fallback: http://<tailnet-ip>:8080/
 
 Both require access to the team's tailnet. The current Mac deployment is a background static server managed by launchd, serving `../mw-dashboard-ui/dist/` from this branch's worktree. Rebuild in that worktree to update these URLs. See the root README for start/stop instructions. A local build does not deploy to another machine automatically.
 
