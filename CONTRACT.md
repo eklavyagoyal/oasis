@@ -69,6 +69,24 @@ Run order: `rf_df` first (camera reads `fused/fixes.csv`), then the remaining ty
 Shared physics: `rf_df.path_loss_db(world, tx_xyz, rx_xyz, f_mhz)` (free space + terrain diffraction). Use it for anything radio (e.g. Remote ID).
 Platform numbers (size, speed, links, sound) live in `mirrorworld/catalog.py`. Tune them there.
 
+## Hero scenario facts (`scenarios/ros-valley.yaml`, already runs: ~8 s)
+- **When**: Wed 4 Nov 2026, 08:55–14:35Z, as two acts. Sunset is ~14:29Z.
+- **Receivers**: RF1 is on the real 58 m Stebliv mast (antenna at 40 m). RF2 is on the real 52 m Selyshche mast (35 m). They're 7.7 km apart. EO1 and RID1 are mounted on RF1's mast.
+- **Act 1** (t 0–1500):
+  - `farmer_mavic` (neutral, honest Remote ID).
+  - `shahed_am` crosses the area centre at 1,200 m around **t≈699 = 09:06:39Z**, which is the real Sentinel-2A pass (S2 never covers this spot on 3 Nov).
+- **Act 2** (t 18000–20400):
+  - `mavic_1` is at the brief's truth point at **14:02:07.000Z (t=18427)**. Its 40 m leg at about t 19131–19256 is hidden from RF2 but seen by RF1, routed with `World.min_visible_agl`.
+  - `pilot_1` stands where both masts see the ground, so fixes on its controller uplink find the pilot (~360 m median).
+  - Jammer at t 19850–19970: RF1 loses all 2.4 GHz links; RF2 is terrain-shielded from it.
+  - `fpv_1` hits RF2 at t≈20311.
+- **RF answer key**: per-record `los`, `path_loss_db`, `diffraction_db`, `shadow_db`, `fading_db`, `sinr_db` and `wild_bearing`, so you can see *why* each record looks the way it does.
+- **Terrain-shadow map**: `ctx.world.min_visible_agl(site_xyz, x, y)` returns the lowest AGL a target needs to be seen from a sensor. Use it for the viewer overlay (lane B) and for auto-siting and routing in prompt mode (lane D).
+- **Research notes** (numbers + sources): `docs/research/`.
+  - `geo-data.md` covers Sentinel-2 tiles, band delays, TLE ids, sun, weather and OSM.
+  - `rf-emitters-formats.md` covers emitters, SigMF and CoT/ATAK.
+  - `rf-physics.md` covers propagation and direction-finding.
+
 ## Lanes
 **A: core + RF.** Owner: Eklavya + Claude.
 - Files: `pyproject.toml`, `mirrorworld/{__main__,config,catalog,world,truth}.py`, `mirrorworld/sensors/rf_df.py`, `scenarios/`.
@@ -107,7 +125,12 @@ Platform numbers (size, speed, links, sound) live in `mirrorworld/catalog.py`. T
 - **Satellite**:
   - Find the real pass from TLEs (skyfield + CelesTrak) and use a real Sentinel-2 L2A background (Earth Search STAC COGs).
   - Insert objects sub-pixel along with their sun-cast shadow. Sample each band at its own acquisition time, so moving objects smear into colour fringes.
-  - **If there's no pass in the window, write nothing and note it in `run.json`, including the nearest pass times.** We'll add a morning act around a real pass.
+  - **If there's no pass in the window, write nothing and note it in `run.json`, including the nearest pass times.** (The hero already has a morning act around a real pass.)
+- Facts from `docs/research/geo-data.md`:
+  - Use MGRS tile **36UUV**: 35UQQ silently cuts ~570 m off the east edge.
+  - Inter-band delays after B02: **B03 +0.527 s, B04 +1.005 s, B08 +0.264 s**.
+  - NORAD ids: S2A 40697, S2B 42063, S2C 60989.
+  - skyfield + CelesTrak matched real S2 image times within ~7 s.
 
 **D: real sound + lying sensors + humans + prompt.** Files: `mirrorworld/sensors/{microphone,remote_id,telemetry,reports}.py`, `mirrorworld/prompt.py`.
 - **Microphone**: per-mic WAV at 16 kHz.
@@ -116,6 +139,7 @@ Platform numbers (size, speed, links, sound) live in `mirrorworld/catalog.py`. T
   - Rural ambient noise, BWF time reference. Only write audio around activity (files ≤ 10 min).
   - Detections CSV uses *arrival* times.
 - **remote_id**: objects whose `remote_id` resolves true broadcast a 1 Hz ASTM F3411-style JSON message (serial, `gnss_*` position so spoofing shows, speed, operator position). A message is received only when `path_loss_db` closes the BLE/Wi-Fi link.
+  - For DJI, the real-world equivalent is **DroneID**: an unencrypted ~640 ms burst inside OcuSync that carries drone *and* pilot GPS.
 - **telemetry**: our own (friendly) drones' logs, 5 Hz MAVLink-like CSV built from `gnss_*`. Spoofing shows up as drift and jumps.
 - **reports**:
   - Observers and ePPO-style civilians report only what they could actually hear (acoustic level) or see (LOS + angular size).
