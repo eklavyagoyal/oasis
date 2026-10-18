@@ -103,6 +103,7 @@ input[type="range"] { width: 100%; accent-color: var(--amber); }
 #audit { line-height: 1.8; }
 #audit .pass { color: var(--green); }
 #audit .fail { color: var(--red); }
+#audit .skip { color: var(--dim); }
 
 /* cesium widgets */
 #animationContainer { position: absolute; bottom: 32px; left: 12px; width: 110px; height: 110px; z-index: 14; }

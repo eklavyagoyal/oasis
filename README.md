@@ -14,3 +14,10 @@ The summary contains the outcome, event log, sensor observations, and links to
 the truth through the answer key. `run.json` lists the files produced by the
 sensor modules present in that run, so new team modules join the record without
 changing this command.
+
+## Five fixed demos
+
+Run `uv run python run_showcase.py all --serve` to generate five preplanned
+scenarios and browse their replay dashboards at `http://localhost:8765/`.
+See [scenarios/showcase/README.md](scenarios/showcase/README.md) for the
+aircraft, protected sites, and expected outcomes in each one.

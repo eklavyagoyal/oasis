@@ -1,0 +1,206 @@
+# Fixed showcase scenario: Two reconnaissance drones bypass the site; one Shahed is intercepted and one reaches it.
+# Fictional protected site and response events; paths are synthetic.
+name: 03-recon-power
+seed: 301
+start: '2026-11-04T14:01:00Z'
+duration_s: 1200.0
+truth_hz: 2.0
+area:
+  lat: 49.3754
+  lon: 31.1882
+  size_km: 10.0
+weather:
+  wind_from_deg: 6.9
+  wind_mps: 1.6
+  temp_c: 4.2
+  rh_pct: 82.1
+  visibility_km: 19.5
+  cloud_pct: 60.0
+objects:
+- id: SITE-01
+  type: power_station
+  side: friendly
+  pos:
+  - 49.400298
+  - 31.249858
+  start_s: 0.0
+  loop: false
+- id: ADT-01
+  type: ad_team
+  side: friendly
+  pos:
+  - 49.396156
+  - 31.237292
+  start_s: 0.0
+  loop: false
+- id: ADB-01
+  type: ad_battery
+  side: friendly
+  pos:
+  - 49.385741
+  - 31.253118
+  start_s: 0.0
+  loop: false
+- id: shahed_1
+  type: shahed136
+  side: hostile
+  path:
+  - - 49.333132
+    - 31.243446
+    - 362.3
+  - - 49.348151
+    - 31.251236
+    - 362.3
+  - - 49.35672
+    - 31.246373
+    - 362.3
+  - - 49.377527
+    - 31.253118
+    - 362.3
+  - - 49.400298
+    - 31.249858
+    - 5.0
+  speed_mps: 51.7
+  start_s: 598.6
+  end_s: 695.3
+  loop: false
+- id: shahed_2
+  type: shahed136
+  side: hostile
+  path:
+  - - 49.333132
+    - 31.149815
+    - 1484.3
+  - - 49.379375
+    - 31.183305
+    - 1484.3
+  - - 49.382502
+    - 31.213464
+    - 1484.3
+  - - 49.400298
+    - 31.249858
+    - 5.0
+  speed_mps: 48.17
+  start_s: 442.7
+  loop: false
+- id: orlan_1
+  type: orlan10
+  side: hostile
+  path:
+  - - 49.333132
+    - 31.139766
+    - 231.4
+  - - 49.345167
+    - 31.16404
+    - 231.4
+  - - 49.401363
+    - 31.199274
+    - 231.4
+  - - 49.370282
+    - 31.25203
+    - 231.4
+  - - 49.404375
+    - 31.22974
+    - 231.4
+  - - 49.390993
+    - 31.234375
+    - 231.4
+  - - 49.417668
+    - 31.234375
+    - 231.4
+  speed_mps: 30.51
+  start_s: 357.4
+  loop: false
+- id: orlan_2
+  type: orlan10
+  side: hostile
+  path:
+  - - 49.333132
+    - 31.181692
+    - 320.7
+  - - 49.348931
+    - 31.190681
+    - 320.7
+  - - 49.352095
+    - 31.198738
+    - 320.7
+  - - 49.392
+    - 31.19851
+    - 320.7
+  - - 49.401229
+    - 31.234945
+    - 320.7
+  - - 49.392355
+    - 31.241163
+    - 320.7
+  - - 49.417668
+    - 31.241163
+    - 320.7
+  speed_mps: 30.23
+  start_s: 568.3
+  loop: false
+- id: INT-01
+  type: interceptor
+  side: friendly
+  path:
+  - - 49.393596
+    - 31.24139
+    - 15.0
+  - - 49.376254
+    - 31.252705
+    - 362.3
+  speed_mps: 60.0
+  start_s: 660.3
+  end_s: 695.3
+  loop: false
+- id: op_INT-01
+  type: operator
+  side: friendly
+  pos:
+  - 49.393596
+  - 31.24139
+  start_s: 660.3
+  end_s: 695.3
+  loop: false
+  controls: INT-01
+sensors:
+- id: RF-01
+  type: rf_df
+  pos:
+  - 49.392487
+  - 31.193725
+  mast_m: 25.0
+  params:
+    calib_bias_deg: 0.05
+- id: RF-02
+  type: rf_df
+  pos:
+  - 49.365507
+  - 31.127426
+  mast_m: 25.0
+  params:
+    calib_bias_deg: -0.31
+- id: RADAR-01
+  type: radar
+  pos:
+  - 49.378997
+  - 31.202012
+  mast_m: 15.0
+  params: {}
+- id: CAM-01
+  type: camera
+  mount: RF-01
+  mast_m: 22.0
+  params:
+    fov_deg: 3.0
+    width: 1280
+    height: 720
+    fps: 1
+    cue: rf
+- id: C2-01
+  type: c2
+  pos:
+  - 49.396156
+  - 31.237292
+  mast_m: 10.0
+  params: {}

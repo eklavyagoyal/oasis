@@ -700,8 +700,9 @@ function renderAudit() {
   host.innerHTML = rows
     .map(function (r) {
       const ok = r[1] === true || r[1] === "PASS" || r[1] === "pass";
-      const cls = ok ? "pass" : "fail";
-      return '<div class="' + cls + '">' + (ok ? "PASS" : "FAIL") + " · " + esc(r[0]) + "</div>";
+      const skip = r[1] === "SKIP" || r[1] === "skip";
+      const status = skip ? "SKIP" : ok ? "PASS" : "FAIL";
+      return '<div class="' + status.toLowerCase() + '">' + status + " · " + esc(r[0]) + "</div>";
     })
     .join("");
 }

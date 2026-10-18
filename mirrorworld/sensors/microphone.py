@@ -49,6 +49,8 @@ DEFAULTS = dict(fs=16000, ambient_dba=35.0, max_window_min=10.0, detect_snr_db=6
 LABEL = {"hostile": "target", "unknown": "target", "friendly": "friendly", "neutral": "clutter"}
 FAMILY = {"dji_mavic3": "multirotor", "fpv_analog": "FPV", "fpv_fiber": "FPV",
           "shahed136": "two-stroke engine", "geese": "birds"}
+SHAPE_FAMILY = {"quad": "multirotor", "delta": "two-stroke engine",
+                "fixed_wing": "fixed-wing", "flock": "birds"}
 TRACK_LOSS_DB = 2.5     # AM sidebands + imperfect frequency fit: coherence never reaches theory
 N_HARM = 10
 R_EARTH = 6371e3
@@ -510,9 +512,10 @@ def _sensor(sensor, ctx):
     classes = []
     for f0 in sorted({s["sound"]["f0_hz"] for s in sources}):
         types = [s["obj"].type for s in sources if s["sound"]["f0_hz"] == f0]
+        first = types[0]
         classes.append(dict(f0=f0, ks=np.arange(1, N_HARM + 1),
                             vmax=max(CATALOG[ty]["speed_mps"] for ty in types),
-                            family=FAMILY[types[0]]))
+                            family=FAMILY.get(first, SHAPE_FAMILY[CATALOG[first]["shape"]])))
 
     det_rows, key_rows, media = [], [], []
     clips = 0

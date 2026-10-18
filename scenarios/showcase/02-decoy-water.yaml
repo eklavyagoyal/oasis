@@ -1,0 +1,213 @@
+# Fixed showcase scenario: Mixed Shahed and Gerbera tracks: two intercepted, two continue toward fictional water works.
+# Fictional protected site and response events; paths are synthetic.
+name: 02-decoy-water
+seed: 207
+start: '2026-11-04T14:01:00Z'
+duration_s: 1200.0
+truth_hz: 2.0
+area:
+  lat: 49.3754
+  lon: 31.1882
+  size_km: 10.0
+weather:
+  wind_from_deg: 157.1
+  wind_mps: 1.4
+  temp_c: 2.9
+  rh_pct: 86.3
+  visibility_km: 18.4
+  cloud_pct: 60.0
+objects:
+- id: SITE-01
+  type: water_works
+  side: friendly
+  pos:
+  - 49.395733
+  - 31.253118
+  start_s: 0.0
+  loop: false
+- id: ADT-01
+  type: ad_team
+  side: friendly
+  pos:
+  - 49.400037
+  - 31.226929
+  start_s: 0.0
+  loop: false
+- id: ADB-01
+  type: ad_battery
+  side: friendly
+  pos:
+  - 49.400998
+  - 31.232184
+  start_s: 0.0
+  loop: false
+- id: shahed_1
+  type: shahed136
+  side: hostile
+  path:
+  - - 49.417668
+    - 31.218985
+    - 736.1
+  - - 49.403851
+    - 31.227374
+    - 736.1
+  - - 49.407918
+    - 31.246295
+    - 736.1
+  - - 49.398226
+    - 31.236456
+    - 736.1
+  - - 49.395733
+    - 31.253118
+    - 5.0
+  speed_mps: 51.96
+  start_s: 400.4
+  end_s: 493.4
+  loop: false
+- id: shahed_2
+  type: shahed136
+  side: hostile
+  path:
+  - - 49.417668
+    - 31.167944
+    - 1274.6
+  - - 49.402946
+    - 31.210453
+    - 1274.6
+  - - 49.396722
+    - 31.237432
+    - 1274.6
+  - - 49.395733
+    - 31.253118
+    - 5.0
+  speed_mps: 50.11
+  start_s: 449.6
+  loop: false
+- id: gerbera_1
+  type: gerbera
+  side: hostile
+  path:
+  - - 49.417668
+    - 31.15433
+    - 322.4
+  - - 49.414789
+    - 31.194404
+    - 322.4
+  - - 49.40395
+    - 31.216292
+    - 322.4
+  - - 49.395733
+    - 31.253118
+    - 5.0
+  speed_mps: 43.35
+  start_s: 213.9
+  end_s: 331.5
+  loop: false
+- id: gerbera_2
+  type: gerbera
+  side: hostile
+  path:
+  - - 49.417668
+    - 31.185437
+    - 1095.7
+  - - 49.416849
+    - 31.197723
+    - 1095.7
+  - - 49.40387
+    - 31.24573
+    - 1095.7
+  - - 49.395733
+    - 31.253118
+    - 5.0
+  speed_mps: 47.12
+  start_s: 567.9
+  loop: false
+- id: INT-01
+  type: octopus
+  side: friendly
+  path:
+  - - 49.400232
+    - 31.230472
+    - 15.0
+  - - 49.397326
+    - 31.242473
+    - 472.0
+  speed_mps: 60.0
+  start_s: 477.9
+  end_s: 493.4
+  loop: false
+- id: op_INT-01
+  type: operator
+  side: friendly
+  pos:
+  - 49.400232
+  - 31.230472
+  start_s: 477.9
+  end_s: 493.4
+  loop: false
+  controls: INT-01
+- id: INT-02
+  type: octopus
+  side: friendly
+  path:
+  - - 49.402378
+    - 31.224834
+    - 15.0
+  - - 49.403406
+    - 31.218731
+    - 301.4
+  speed_mps: 60.0
+  start_s: 323.9
+  end_s: 331.5
+  loop: false
+- id: op_INT-02
+  type: operator
+  side: friendly
+  pos:
+  - 49.402378
+  - 31.224834
+  start_s: 323.9
+  end_s: 331.5
+  loop: false
+  controls: INT-02
+sensors:
+- id: RF-01
+  type: rf_df
+  pos:
+  - 49.392487
+  - 31.193725
+  mast_m: 25.0
+  params:
+    calib_bias_deg: 0.27
+- id: RF-02
+  type: rf_df
+  pos:
+  - 49.365507
+  - 31.127426
+  mast_m: 25.0
+  params:
+    calib_bias_deg: -0.36
+- id: RADAR-01
+  type: radar
+  pos:
+  - 49.378997
+  - 31.202012
+  mast_m: 15.0
+  params: {}
+- id: CAM-01
+  type: camera
+  mount: RF-01
+  mast_m: 22.0
+  params:
+    fov_deg: 3.0
+    width: 1280
+    height: 720
+    fps: 1
+    cue: rf
+- id: C2-01
+  type: c2
+  pos:
+  - 49.400037
+  - 31.226929
+  mast_m: 10.0
+  params: {}
