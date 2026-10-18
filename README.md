@@ -1,28 +1,20 @@
 # OASIS: live build status
 
-_Updated 15:23 CEST, 18 Oct 2026. Auto-generated on the `status` branch; `main` holds the product._
+_Updated 15:41 CEST, 18 Oct 2026. Auto-generated on the `status` branch; `main` holds the product._
 
 **OASIS** generates synthetic aerial defence scenarios over real Ukrainian terrain: one true world, every sensor's physically faithful recordings, and an answer key tracing each record to its cause.
 
 ## What changed since the last update
 
-- Seed engine: each sector's built world (protected site, air-defence positions, receiver masts, microphones) is now fixed and the seed only changes what moves; two new templates, a saturation raid and a recon-strike.
-- Every run now gets a log book: one timeline of what really happened, what each sensor first recorded and what the command post concluded, ending with the audit.
-- Running the full pipeline found and fixed two crashes (fixed-wing drones in the camera, newer airframes at the microphones) and an audit error (speed of sound assumed 20 °C air).
-- The 3D console is merged into main, with asset-catalog icons for sites, teams, drones and sensor masts.
+- The hero day was re-run: its 10-minute window now passes 9 of 9 applicable independent checks, against 1 for the one-shot LLM dataset.
+- The README now tells the full story: the check-by-check proof, the hero-day timeline, the seed engine with each template's audit, the log book and the known limits.
+- Console markers and labels now scale with zoom, with detail lines only up close, so the overview stays clean.
+- The console is live as a public static site (trimmed media), and the commit history carries no tool attribution.
 
 ## Commits on main since the last update
 
-- README: seed engine, log book and runs page; distance-law numbers from the current audit; the fibre FPV claim matches the data; machine hostnames replaced by placeholders (29d3136)
-- Audit uses the scenario's air temperature for the speed of sound (was a fixed 343 m/s, the 20 C value); reports carry t and, like microphones, stop at the end of the recording window; publish_runs.py gives every run its own console, log book and raw files (8cd871c)
-- Seed engine: the sector's built world (site, AD positions, masts, calibration, mics) is fixed, the seed drives only what moves; saturation and recon-strike templates; --seeds sweeps; log book per run; camera and microphone handle every catalog airframe (569db75)
-- Console: asset-catalog icons for sites, teams, drones and sensor masts; coordinate label and asset layer carried through the exporter (c989323)
-- Console validator: link -1 means no link (false alarm), as in the data contract (ba84ef6)
-- Console: accept site/response objects; the truth layer leaves them to the assets layer (ab48e60)
-- Console: full landscape as dimmed context (no clip), coordinates instead of place names, high-value asset layer, readable type (6214680)
-- Console: never clip the globe; the full landscape renders as dimmed context around the sector (31aa236)
-- Every run must include the signal trace (an rf_df sensor) (b420a2e)
-- Add Mirror World challenge brief to docs (c93cdab)
+- Console: markers and labels scale with zoom (about 1x in the overview, up to 1.7x close in), detail lines only within 12 km, status shown as colour at any zoom, one marker and label per sensor mast (c40657d)
+- README: the full story for the jury: proof table per check against the one-shot LLM (9 pass vs 1 pass), hero-day timeline, seed engine and templates with their audits, log book, console, known limits (c313830)
 
 ## Sensor modules on main
 
@@ -47,12 +39,12 @@ _Updated 15:23 CEST, 18 Oct 2026. Auto-generated on the `status` branch; `main` 
 
 ## Hero audit (independent physics checks)
 
-**8 pass · 1 fail · 1 skip**
+**9 pass · 0 fail · 1 skip**
 
 | check | status | value |
 |---|---|---|
 | Provenance | PASS | 0 |
-| Clock sync | FAIL | 1 |
+| Clock sync | PASS | 0 |
 | Bearing geometry | PASS | 0.948 |
 | Terrain shadow | SKIP | — |
 | Occlusion gaps | PASS | 0.0 |
