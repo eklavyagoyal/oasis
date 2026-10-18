@@ -1,0 +1,12 @@
+# private — never commit
+chat.md
+challenge-2-psylone.pdf
+
+# python
+__pycache__/
+.venv/
+.env
+
+# downloaded data and generated scenarios
+cache/
+out/
