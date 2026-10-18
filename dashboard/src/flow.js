@@ -5,7 +5,7 @@ import { createRecordedLayer } from "./game/layer.js";
 import { counts, exportAll } from "./game/store.js";
 import { validateData, escapeHTML as esc } from "./data.js";
 
-// Navigation only: Eklavya's existing start(), timeline, panels and map stay the simulation UI.
+// Navigation only: the console's existing start(), timeline, panels and map stay the simulation UI.
 export function createFlow({ start, getActive, notify, heroData }) {
   let world = null, busy = false, endShown = false, entry;
   const app = document.querySelector("#app");
@@ -21,7 +21,7 @@ export function createFlow({ start, getActive, notify, heroData }) {
   const notes = document.createElement("dialog");
   notes.className = "oasis-run-result";
   notes.setAttribute("aria-labelledby", "data-notes-title");
-  notes.innerHTML = `<form method="dialog"><button aria-label="Close data notes">CLOSE ×</button></form><h2 id="data-notes-title">What these readings mean</h2><div id="data-notes-context"></div><dl><dt>Bearing / heading</dt><dd>Degrees clockwise from true north. A bearing is the direction from a receiver to a transmitter. It is not a measured GPS position.</dd><dt>Sun elevation</dt><dd>Calculated angle above the horizon for the scenario time and location. Not a live sensor reading.</dd><dt>SNR / power</dt><dd>Model-generated signal-to-noise ratio (dB) and received power (dBm), available only in the Python replay. The browser engine does not generate these measurements.</dd><dt>Terrain relief</dt><dd>The display's vertical exaggeration. It does not change exported physical altitudes.</dd><dt>Position error / uncertainty</dt><dd>Python replay comparisons against synthetic ground truth, not verified field accuracy.</dd></dl><p><a href="https://github.com/eklavyagoyal/mirror-world/blob/oasis-sim/docs/DATA-REALITY.md" target="_blank" rel="noopener noreferrer">Source-by-source data guide ↗</a></p>`;
+  notes.innerHTML = `<form method="dialog"><button aria-label="Close data notes">CLOSE ×</button></form><h2 id="data-notes-title">What these readings mean</h2><div id="data-notes-context"></div><dl><dt>Bearing / heading</dt><dd>Degrees clockwise from true north. A bearing is the direction from a receiver to a transmitter. It is not a measured GPS position.</dd><dt>Sun elevation</dt><dd>Calculated angle above the horizon for the scenario time and location. Not a live sensor reading.</dd><dt>SNR / power</dt><dd>Model-generated signal-to-noise ratio (dB) and received power (dBm), available only in the Python replay. The browser engine does not generate these measurements.</dd><dt>Terrain relief</dt><dd>The display's vertical exaggeration. It does not change exported physical altitudes.</dd><dt>Position error / uncertainty</dt><dd>Python replay comparisons against synthetic ground truth, not verified field accuracy.</dd></dl>`;
   document.body.append(result, notes);
   const button = (id) => controls.querySelector(`#${id}`);
   function updateButtons() {

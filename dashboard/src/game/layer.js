@@ -177,7 +177,7 @@ const finite = (v) => Number.isFinite(v) ? v : null;
 const interp = (a, b, k) => a == null || b == null ? (a ?? b) : a + (b - a) * k;
 
 // Recorded playback reads only game.world + game.record; it never mutates or consults a live sim.
-// Fixed icons are opt-in because Eklavya's existing assets layer already draws dataset assets.
+// Fixed icons are opt-in because the console's existing assets layer already draws dataset assets.
 export function createRecordedLayer(globe, data, { showFixedIcons = false } = {}) {
   const { viewer, scene } = globe;
   const game = data?.game ?? {};
