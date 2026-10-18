@@ -10,8 +10,8 @@ ourselves to ("physically realistic: terrain, bearings, signal strength"). Sent 
 You are an expert in RF direction finding, air-defence sensors and physical simulation.
 Generate a synthetic but **physically realistic** sensor dataset for a drone-detection exercise
 in the Ros river valley near Korsun-Shevchenkivskyi, Cherkasy, Ukraine (rolling farmland, a
-river valley, two real comms masts on opposing ridges). Cover exactly the 5-minute dusk window
-**14:00:00Z–14:05:00Z on Wed 4 Nov 2026**, i.e. `t = 18300..18600` seconds after the
+river valley, two real comms masts on opposing ridges). Cover exactly the 10-minute dusk window
+**14:07:00Z–14:17:00Z on Wed 4 Nov 2026**, i.e. `t = 18720..19320` seconds after the
 08:55:00Z start. Only objects whose `start_s`/`end_s` overlap that window appear.
 
 The scenario (object paths, times, receiver sites, platform numbers) is given below. Please make
