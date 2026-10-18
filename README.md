@@ -1,19 +1,20 @@
 # OASIS: live build status
 
-_Updated 16:40 CEST, 18 Oct 2026. Auto-generated on the `status` branch; `main` holds the product._
+_Updated 17:25 CEST, 18 Oct 2026. Auto-generated on the `status` branch; `main` holds the product._
 
 **OASIS** generates synthetic aerial defence scenarios over real Ukrainian terrain: one true world, every sensor's physically faithful recordings, and an answer key tracing each record to its cause.
 
 ## What changed since the last update
 
-- The README was rewritten and checked against the current runs: the live console flow, the scenario library, the five showcase stories with reproduced outcomes, the airframe markers and the full list of known limits.
-- The entry screen and the scenario titles now describe exactly what they open: physics-engine scenarios, with the hero day spanning 08:55 to 14:35 UTC.
+- The hand-in is self-contained: the pitch deck (pptx and pdf), the full hero dataset without its heavy media, and the scenario, audit and log book of every generated run.
+- The README points to the live console, and the three-minute pitch script sits next to the deck.
+- The third-party licence file and the design references now use neutral names.
 
 ## Commits on main since the last update
 
-- Entry screen: describe the physics-engine scenarios it now opens (c18731e)
-- Neutral wording for the propagation validation credit; the hero's library title matches its 08:55-14:35 UTC window (7054784)
-- README: verified against the current runs; live console flow, scenario library, showcase stories with reproduced outcomes, Blender airframe markers, updated known limits, fresh screenshots (781bad6)
+- Neutral names: third-party licence file and design references (357c366)
+- Live console at oasis.eklavyagoyal.com; the 3-minute pitch script next to the deck (e1c1cae)
+- Self-contained hand-in: the pitch deck (pptx and pdf), the complete hero dataset without heavy media, and the scenario, audit and log book of every generated run (bf9fa22)
 
 ## Sensor modules on main
 
