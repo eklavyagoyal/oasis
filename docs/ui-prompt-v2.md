@@ -46,7 +46,7 @@ A calm, luminous instrument floating over a real landscape at dusk. Deep blue-bl
   - Drape it with `SingleTileImageryProvider` over that rectangle and make it the default basemap.
   - Fall back to tiles only if `texture` is null.
   - Keep its credit visible: restyle the Cesium credits small and unobtrusive, but don't remove attribution.
-- **Relief:** `scene.verticalExaggeration` 2.5 by default, labelled honestly ("relief ×2.5") with a slider 1–4. The ravines and the Ros valley must read in 3D.
+- **Relief:** `scene.verticalExaggeration` 2.5 by default, labelled honestly ("relief ×2.5") with a slider 1–4. The ravines and the river valley must read in 3D.
 - **Light:**
   - The real sun from the scenario clock (`enableLighting`, `SunLight`, atmosphere on, gentle fog). Dusk must look like dusk; the morning act like morning.
   - Add an HDR-ish bloom post-process kept subtle (bloom only bright emissive things: rays, fixes, hostile halos).
