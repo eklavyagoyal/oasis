@@ -792,7 +792,7 @@ clock.onTick.addEventListener(function () {
 });
 
 // ---------------------------------------------------------------- init
-el("scen-name").textContent = "· " + MW.scenario.name + " ·";
+el("scen-name").textContent = "· " + (MW.scenario.label || MW.scenario.name) + " ·";
 buildLegend();
 buildKeyMoments();
 buildFeeds();

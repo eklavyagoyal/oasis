@@ -37,7 +37,7 @@ import yaml
 from pydantic import BaseModel, Field, field_validator
 
 from .catalog import CATALOG
-from .config import Area, Scenario
+from .config import Area, Scenario, coord_slug
 from .world import World
 
 SECTORS = {
@@ -546,7 +546,7 @@ def build(knobs: Knobs) -> tuple[str, Scenario]:
     sens.append(_sensor("C2-01", "c2", pos=_ll(world, adt_xy)))  # last: it reads the other sensors
 
     scen_dict = {
-        "name": f"{sector}-s{k.seed}",
+        "name": f"{coord_slug(*SECTORS[sector]['center'])}-{k.template}-s{k.seed}",
         "seed": k.seed,
         "start": start.isoformat().replace("+00:00", "Z"),
         "duration_s": duration_s,

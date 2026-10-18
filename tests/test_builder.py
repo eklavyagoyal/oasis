@@ -42,7 +42,7 @@ assert text3 != text1, "different seed must give a different scenario"
 # --- validity: parses, validates, everything >= 300 m inside the area ------
 d = yaml.safe_load(text1)
 sc = config.Scenario.model_validate(d)
-assert sc.name == "ros-valley-s1" and sc.seed == 1
+assert sc.name == "49.375N_31.188E-incoming-s1" and sc.seed == 1  # coordinates, never place names
 for who in list(sc.objects) + list(sc.sensors):
     if getattr(who, "pos", None):
         pts = [who.pos]

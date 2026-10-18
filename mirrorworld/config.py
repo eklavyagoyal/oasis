@@ -122,3 +122,13 @@ class Scenario(BaseModel):
 
 def load(path: str | Path) -> Scenario:
     return Scenario.model_validate(yaml.safe_load(Path(path).read_text()))
+
+
+def coord_label(lat: float, lon: float) -> str:
+    """How a place is shown: coordinates, never names."""
+    return f"{abs(lat):.4f}° {'N' if lat >= 0 else 'S'} · {abs(lon):.4f}° {'E' if lon >= 0 else 'W'}"
+
+
+def coord_slug(lat: float, lon: float) -> str:
+    """File/id-safe form of the same, e.g. 49.375N_31.188E."""
+    return f"{abs(lat):.3f}{'N' if lat >= 0 else 'S'}_{abs(lon):.3f}{'E' if lon >= 0 else 'W'}"
