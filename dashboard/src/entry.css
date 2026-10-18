@@ -1,126 +1,63 @@
-/* OASIS entry styles — all selectors remain inside #oasis-entry. */
+/* OSIRIS globe workspace chrome; seed modal below stays unchanged. */
 #oasis-entry {
-  --oasis-gold: #d4af37;
-  --oasis-gold-light: #f0d060;
-  --oasis-cyan: #60d8de;
-  --oasis-bg: rgba(7, 10, 14, .9);
-  --oasis-line: rgba(226, 211, 155, .2);
-  --oasis-muted: #9ca5ad;
-  position: fixed;
-  z-index: 2147483000;
-  inset: 0;
-  overflow: hidden;
-  isolation: isolate;
-  color: #ecf0ef;
-  background: #080b0f;
-  font: 14px/1.5 Inter, ui-sans-serif, system-ui, -apple-system, sans-serif;
-  letter-spacing: .01em;
-  -webkit-font-smoothing: antialiased;
+  --oasis-gold: #d4af37; --oasis-gold-light: #f0d060; --oasis-cyan: #00e5ff;
+  --oasis-line: rgba(212,175,55,.25); --oasis-muted: #707078;
+  position: fixed; z-index: 2147483000; inset: 0; overflow: hidden; isolation: isolate;
+  color: #e8e8ee; background: #04040a; font: 12px/1.5 Inter, sans-serif;
 }
 #oasis-entry[hidden] { display: none !important; }
 #oasis-entry *, #oasis-entry *::before, #oasis-entry *::after { box-sizing: border-box; }
 #oasis-entry button, #oasis-entry input, #oasis-entry select { font: inherit; }
 #oasis-entry button { color: inherit; }
 #oasis-entry :focus-visible { outline: 2px solid var(--oasis-cyan); outline-offset: 3px; }
-#oasis-entry .oasis-map { position: absolute; inset: 0; background: #090c11; }
-#oasis-entry .oasis-shade {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background:
-    linear-gradient(90deg, rgba(5, 8, 12, .92) 0%, rgba(5, 8, 12, .76) 30%, rgba(5, 8, 12, .18) 68%, rgba(5, 8, 12, .32) 100%),
-    linear-gradient(180deg, rgba(4, 7, 10, .72), transparent 22%, transparent 72%, rgba(4, 7, 10, .8));
-}
+#oasis-entry .oasis-map { position: absolute; inset: 0; background: #04040a; }
 #oasis-entry .oasis-topbar {
-  position: absolute;
-  z-index: 2;
-  top: 0;
-  left: 0;
-  right: 0;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 24px;
-  min-height: 86px;
-  padding: 17px clamp(20px, 4vw, 64px);
-  border-bottom: 1px solid rgba(255, 255, 255, .08);
-  background: linear-gradient(180deg, rgba(5, 8, 12, .78), rgba(5, 8, 12, .15));
+  position: absolute; z-index: 2; top: 20px; left: 4.5%; right: 3%; display: flex;
+  align-items: flex-start; justify-content: space-between; gap: 24px; pointer-events: none;
 }
-#oasis-entry .oasis-brand { display: flex; align-items: center; gap: 13px; min-width: 0; }
-#oasis-entry .oasis-mark { width: 38px; height: 38px; flex: none; fill: none; stroke: var(--oasis-gold); stroke-width: 1.15; opacity: .95; }
-#oasis-entry .oasis-mark-core { fill: var(--oasis-gold-light); stroke: none; }
-#oasis-entry .oasis-wordmark { color: var(--oasis-gold-light); font: 700 20px/1.1 'JetBrains Mono', ui-monospace, monospace; letter-spacing: .32em; }
-#oasis-entry .oasis-submark { margin-top: 6px; color: #9da19e; font: 9px/1 'JetBrains Mono', ui-monospace, monospace; letter-spacing: .16em; }
-#oasis-entry .oasis-status-strip { display: flex; align-items: center; justify-content: flex-end; gap: clamp(14px, 2.4vw, 35px); }
-#oasis-entry .oasis-metric { display: grid; gap: 3px; min-width: 72px; text-align: right; font: 9px/1.2 'JetBrains Mono', ui-monospace, monospace; letter-spacing: .12em; }
-#oasis-entry .oasis-metric > span { color: #7f898f; }
-#oasis-entry .oasis-metric time, #oasis-entry .oasis-metric strong { color: #e0e3dc; font-size: 11px; font-weight: 500; font-variant-numeric: tabular-nums; }
-#oasis-entry .oasis-hero {
-  position: absolute;
-  z-index: 1;
-  top: 50%;
-  left: clamp(24px, 9.5vw, 148px);
-  width: min(510px, calc(100vw - 48px));
-  transform: translateY(-43%);
-}
-#oasis-entry .oasis-kicker { display: flex; align-items: center; gap: 10px; color: var(--oasis-cyan); font: 10px/1.4 'JetBrains Mono', ui-monospace, monospace; letter-spacing: .15em; }
-#oasis-entry .oasis-kicker i { width: 3px; height: 3px; border-radius: 50%; background: var(--oasis-gold); }
-#oasis-entry .oasis-kicker-dot, #oasis-entry .oasis-state-dot { width: 6px; height: 6px; flex: none; border-radius: 50%; background: var(--oasis-cyan); box-shadow: 0 0 10px rgba(96, 216, 222, .6); }
-#oasis-entry .oasis-hero h1 { margin: 20px 0 16px; color: #f1f1e9; font: 500 clamp(35px, 4.2vw, 58px)/1.05 Inter, ui-sans-serif, system-ui, sans-serif; letter-spacing: -.045em; }
-#oasis-entry .oasis-hero h1 em { color: var(--oasis-gold-light); font-style: normal; }
-#oasis-entry .oasis-intro { max-width: 430px; margin: 0; color: #b0b9bc; font-size: 14px; line-height: 1.75; }
-#oasis-entry .oasis-hero-actions { display: flex; flex-wrap: wrap; gap: 11px; margin-top: 27px; }
+#oasis-entry .oasis-topbar button { pointer-events: auto; }
+#oasis-entry .oasis-brand { display: flex; align-items: center; gap: 16px; }
+#oasis-entry .oasis-mark { width: 54px; height: 48px; fill: currentColor; stroke: none; color: var(--oasis-gold); filter: drop-shadow(0 0 8px rgba(255,215,0,.25)); }
+#oasis-entry .oasis-wordmark { color: var(--oasis-gold-light); font: 600 27px/1.15 'JetBrains Mono', monospace; letter-spacing: .3em; }
+#oasis-entry .oasis-submark { margin-top: 10px; color: var(--oasis-gold); font: 10px/1.2 'JetBrains Mono', monospace; letter-spacing: .22em; }
+#oasis-entry .oasis-status-strip { display: flex; align-items: center; gap: 20px; padding-top: 5px; }
+#oasis-entry .oasis-metric { display: flex; align-items: center; gap: 8px; color: #77777f; font: 10px 'JetBrains Mono', monospace; letter-spacing: .13em; }
+#oasis-entry .oasis-metric time { color: var(--oasis-cyan); font-weight: 600; }
+#oasis-entry .oasis-metric strong { color: #00e676; font-weight: 500; }
 #oasis-entry .oasis-button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 13px;
-  min-height: 43px;
-  padding: 0 17px;
-  border: 1px solid var(--oasis-line);
-  border-radius: 4px;
-  background: rgba(10, 14, 17, .76);
-  color: #dce1de;
-  cursor: pointer;
-  font: 10px/1.2 'JetBrains Mono', ui-monospace, monospace;
-  letter-spacing: .11em;
-  transition: background-color .18s ease, border-color .18s ease, transform .18s ease;
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  min-height: 36px; padding: 0 14px; border: 1px solid var(--oasis-line); border-radius: 6px;
+  background: rgba(4,4,10,.8); color: #ccc; cursor: pointer;
+  font: 10px 'JetBrains Mono', monospace; letter-spacing: .12em;
 }
-#oasis-entry .oasis-button:hover:not(:disabled), #oasis-entry .oasis-control:hover:not(:disabled) { border-color: rgba(240, 208, 96, .62); background-color: rgba(212, 175, 55, .12); }
-#oasis-entry .oasis-button:active:not(:disabled) { transform: translateY(1px); }
+#oasis-entry .oasis-button:hover:not(:disabled), #oasis-entry .oasis-control:hover:not(:disabled) { border-color: var(--oasis-gold); color: var(--oasis-gold-light); }
 #oasis-entry .oasis-button:disabled { cursor: not-allowed; opacity: .45; }
-#oasis-entry .oasis-button-primary { border-color: rgba(212, 175, 55, .62); background: rgba(212, 175, 55, .16); color: var(--oasis-gold-light); }
-#oasis-entry .oasis-button-primary > span { font-size: 14px; }
-#oasis-entry .oasis-button-secondary { color: #c7cecf; }
-#oasis-entry .oasis-provenance { display: flex; align-items: flex-start; gap: 10px; max-width: 465px; margin-top: 22px; color: #929da2; font-size: 11px; line-height: 1.65; }
-#oasis-entry .oasis-provenance-line { width: 18px; height: 1px; flex: none; margin-top: 8px; background: var(--oasis-cyan); }
-#oasis-entry .oasis-action-status { max-width: 470px; margin: 15px 0 0; color: var(--oasis-cyan); font: 11px/1.5 'JetBrains Mono', ui-monospace, monospace; }
-#oasis-entry .oasis-action-status.is-error { color: #ff9c91; }
-#oasis-entry .oasis-map-controls {
-  position: absolute;
-  z-index: 2;
-  bottom: 35px;
-  left: clamp(24px, 4vw, 64px);
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  padding: 5px;
-  border: 1px solid rgba(222, 225, 220, .13);
-  border-radius: 5px;
-  background: rgba(7, 10, 14, .78);
-  backdrop-filter: blur(14px);
+#oasis-entry .oasis-button-primary { border-color: rgba(212,175,55,.65); background: rgba(212,175,55,.12); color: var(--oasis-gold-light); }
+#oasis-entry .oasis-sector-entry {
+  position: absolute; z-index: 2; left: 50%; bottom: 68px; transform: translateX(-50%);
+  display: flex; align-items: center; flex-wrap: wrap; justify-content: center; gap: 12px;
 }
-#oasis-entry .oasis-control { min-height: 30px; padding: 0 10px; border: 1px solid transparent; border-radius: 3px; background: transparent; color: #aeb6b8; cursor: pointer; font: 9px/1 'JetBrains Mono', ui-monospace, monospace; letter-spacing: .09em; }
-#oasis-entry .oasis-control.is-active { border-color: rgba(212, 175, 55, .42); background: rgba(212, 175, 55, .1); color: var(--oasis-gold-light); }
-#oasis-entry .oasis-control-divider { width: 1px; height: 17px; margin: 0 3px; background: rgba(255, 255, 255, .16); }
-#oasis-entry .oasis-map-readout { position: absolute; z-index: 2; right: clamp(18px, 3vw, 46px); bottom: 35px; max-width: 360px; color: #9da7a9; text-align: right; font: 9px/1.5 'JetBrains Mono', ui-monospace, monospace; letter-spacing: .08em; }
-#oasis-entry .oasis-map-state { display: flex; align-items: center; justify-content: flex-end; gap: 8px; color: var(--oasis-cyan); }
-#oasis-entry .oasis-map-credit { margin-top: 7px; color: #737d81; font-size: 8px; }
-#oasis-entry #oasis-map-warning { max-width: 340px; margin: 8px 0 0 auto; color: #ffb1a7; letter-spacing: 0; text-transform: none; }
-#oasis-entry .maplibregl-ctrl-attrib { border: 1px solid rgba(255, 255, 255, .12) !important; border-radius: 3px !important; background: rgba(7, 10, 14, .72) !important; color: #b5bdbe !important; font: 9px/1.3 'JetBrains Mono', ui-monospace, monospace !important; }
-#oasis-entry .maplibregl-ctrl-attrib a { color: #d5d8d2 !important; }
-#oasis-entry .maplibregl-ctrl-group { overflow: hidden; border: 1px solid rgba(255,255,255,.14) !important; border-radius: 4px !important; background: rgba(7,10,14,.8) !important; }
-#oasis-entry .maplibregl-ctrl-group button { filter: invert(.82); }
+#oasis-entry .oasis-sector-name { color: var(--oasis-gold-light); font: 10px 'JetBrains Mono', monospace; letter-spacing: .22em; }
+#oasis-entry .oasis-action-status { flex-basis: 100%; margin: 0; color: var(--oasis-cyan); font: 10px 'JetBrains Mono', monospace; }
+#oasis-entry .oasis-action-status.is-error { color: #ff9c91; }
+#oasis-entry .oasis-kicker { color: var(--oasis-cyan); font: 10px 'JetBrains Mono', monospace; letter-spacing: .15em; }
+#oasis-entry .oasis-map-controls {
+  position: absolute; z-index: 2; bottom: 64px; left: 5%; display: flex; align-items: center; gap: 4px;
+  padding: 5px; border: 1px solid var(--oasis-line); border-radius: 14px;
+  background: rgba(4,4,10,.88); backdrop-filter: blur(16px);
+}
+#oasis-entry .oasis-control { min-height: 32px; padding: 0 12px; border: 1px solid transparent; border-radius: 8px; background: transparent; color: #8a8a92; cursor: pointer; font: 10px 'JetBrains Mono', monospace; letter-spacing: .14em; }
+#oasis-entry .oasis-control.is-active { border-color: rgba(212,175,55,.45); background: rgba(212,175,55,.1); color: var(--oasis-gold-light); box-shadow: 0 0 12px rgba(212,175,55,.12); }
+#oasis-entry .oasis-control-divider { width: 1px; height: 18px; margin: 0 4px; background: var(--oasis-line); }
+#oasis-entry .oasis-map-readout { position: absolute; z-index: 2; right: 3%; bottom: 18px; max-width: 380px; color: #777; text-align: right; font: 9px 'JetBrains Mono', monospace; letter-spacing: .1em; }
+#oasis-entry .oasis-map-state { color: var(--oasis-cyan); }
+#oasis-entry .oasis-map-credit { display: none; }
+#oasis-entry #oasis-map-warning { max-width: 380px; color: #ff9c91; margin: 6px 0 0; }
+#oasis-entry .maplibregl-ctrl-attrib { background: rgba(4,4,10,.8) !important; color: #999 !important; font: 9px 'JetBrains Mono', monospace !important; }
+#oasis-entry .maplibregl-ctrl-attrib a { color: #999 !important; }
+#oasis-entry .maplibregl-ctrl-top-right { top: 100px; right: 25px; }
+#oasis-entry .maplibregl-ctrl-group { background: rgba(4,4,10,.85) !important; border: 1px solid var(--oasis-line); border-radius: 20px !important; padding: 6px; }
+#oasis-entry .maplibregl-ctrl-group button { filter: invert(.8); }
 #oasis-entry .oasis-modal { position: absolute; z-index: 5; inset: 0; display: grid; place-items: center; padding: 18px; }
 #oasis-entry .oasis-modal[hidden] { display: none !important; }
 #oasis-entry .oasis-modal-backdrop { position: absolute; inset: 0; background: rgba(2, 4, 7, .78); backdrop-filter: blur(8px); }
