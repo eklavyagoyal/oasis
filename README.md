@@ -1,21 +1,28 @@
 # OASIS: live build status
 
-_Updated 14:57 CEST, 18 Oct 2026. Auto-generated on the `status` branch; `main` holds the product._
+_Updated 15:23 CEST, 18 Oct 2026. Auto-generated on the `status` branch; `main` holds the product._
 
 **OASIS** generates synthetic aerial defence scenarios over real Ukrainian terrain: one true world, every sensor's physically faithful recordings, and an answer key tracing each record to its cause.
 
 ## What changed since the last update
 
-- 3D drone models: delta wing, quadcopter and fixed wing rendered from every viewing angle and drawn by the camera at true size and aspect (32 px at 400 m, about 6 px at 2,140 m)
-- High-value assets on the map and in the data: protected sites with 1 km approach and 100 m impact rings, response teams with live status from the command post
-- Console: readable type, surrounding landscape rendered as dimmed context, coordinates instead of place names, real satellite terrain
-- README rewritten for the hand-in with the proof table: OASIS 7 pass vs one-shot LLM 1 pass / 3 fail
+- Seed engine: each sector's built world (protected site, air-defence positions, receiver masts, microphones) is now fixed and the seed only changes what moves; two new templates, a saturation raid and a recon-strike.
+- Every run now gets a log book: one timeline of what really happened, what each sensor first recorded and what the command post concluded, ending with the audit.
+- Running the full pipeline found and fixed two crashes (fixed-wing drones in the camera, newer airframes at the microphones) and an audit error (speed of sound assumed 20 °C air).
+- The 3D console is merged into main, with asset-catalog icons for sites, teams, drones and sensor masts.
 
 ## Commits on main since the last update
 
-- README: 3D drone near/far through the camera model (3c5ad6e)
-- gitignore: baked texture in the console public dir (c46047a)
-- 3D drone sprites rendered in Blender and drawn by the camera at true size and aspect; high-value assets (protected sites, response teams) in the data and on the console; console source; README for the hand-in (0ed36c7)
+- README: seed engine, log book and runs page; distance-law numbers from the current audit; the fibre FPV claim matches the data; machine hostnames replaced by placeholders (29d3136)
+- Audit uses the scenario's air temperature for the speed of sound (was a fixed 343 m/s, the 20 C value); reports carry t and, like microphones, stop at the end of the recording window; publish_runs.py gives every run its own console, log book and raw files (8cd871c)
+- Seed engine: the sector's built world (site, AD positions, masts, calibration, mics) is fixed, the seed drives only what moves; saturation and recon-strike templates; --seeds sweeps; log book per run; camera and microphone handle every catalog airframe (569db75)
+- Console: asset-catalog icons for sites, teams, drones and sensor masts; coordinate label and asset layer carried through the exporter (c989323)
+- Console validator: link -1 means no link (false alarm), as in the data contract (ba84ef6)
+- Console: accept site/response objects; the truth layer leaves them to the assets layer (ab48e60)
+- Console: full landscape as dimmed context (no clip), coordinates instead of place names, high-value asset layer, readable type (6214680)
+- Console: never clip the globe; the full landscape renders as dimmed context around the sector (31aa236)
+- Every run must include the signal trace (an rf_df sensor) (b420a2e)
+- Add Mirror World challenge brief to docs (c93cdab)
 
 ## Sensor modules on main
 
@@ -40,20 +47,22 @@ _Updated 14:57 CEST, 18 Oct 2026. Auto-generated on the `status` branch; `main` 
 
 ## Hero audit (independent physics checks)
 
-**8 pass · 2 fail · 0 skip**
+**8 pass · 1 fail · 1 skip**
 
 | check | status | value |
 |---|---|---|
 | Provenance | PASS | 0 |
 | Clock sync | FAIL | 1 |
-| Bearing geometry | PASS | 0.9484 |
-| Terrain shadow | PASS | 18.14 |
+| Bearing geometry | PASS | 0.948 |
+| Terrain shadow | SKIP | — |
 | Occlusion gaps | PASS | 0.0 |
-| Fix calibration | PASS | 0.4695 |
-| Range law | PASS | 2.127 |
-| Acoustic delay | FAIL | 0.0516 |
+| Fix calibration | PASS | 0.5254 |
+| Range law | PASS | 4.154 |
+| Acoustic delay | PASS | 0.0017 |
 | Spoof visibility | PASS | — |
 | Cross-sensor time | PASS | 1.0 |
+
+One-shot LLM baseline on the same window: **1 pass · 3 fail · 6 skip**
 
 ## Run it
 
