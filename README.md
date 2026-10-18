@@ -17,7 +17,7 @@ Same 10-minute window, same scenario file, same file layout, same 10 independent
 | Bearings vs true geometry | 95% within 2σ; recovers the hidden mast calibration offsets (+0.8°/−0.6°) | biased +29°/−49° |
 | Reported fix uncertainty | honest: 52% of fixes inside CEP50 | "too good": 8 m errors with a 50 m CEP, 100% inside |
 | Terrain occlusion | receivers go silent while a ridge blocks the path | the drone never goes behind terrain |
-| Distance law | fitted path-loss exponent ≈ 2.0 (free space in line of sight) | too little data to test |
+| Distance law | fitted path-loss exponent 1.9 at RF1 and 4.2 at RF2 (inside the physical 1.5–4.5 band) | too little data to test |
 | **Audit** | **7 pass · 0 fail** | **1 pass · 3 fail** |
 
 The auditor (`python -m mirrorworld audit`) never uses OASIS's own propagation model. It works from geometry, the DEM line of sight, causality and statistics, so the comparison isn't circular.
@@ -55,7 +55,7 @@ Prompt mode needs `OPENAI_API_KEY` in `.env`. The LLM only fills scenario intent
 | `radar` | X-band plots with terrain masking, Swerling-1 fluctuation, birds vs drones confusion, clutter, and an alpha-beta tracker with gaps |
 | `camera` | Pan-tilt camera cued by RF fixes or radar tracks. The scene uses the real sun position, a horizon ray-marched from the DEM, and **3D drone models rendered in Blender** (`tools/render_sprites.py`), drawn at true pixel size and viewing angle, then hazed, blurred, noised and JPEG-compressed. Includes simulated detector output. |
 | `satellite` | The real Sentinel-2 pass computed from orbit data, over a real Sentinel-2 L2A background. Movers are inserted at true size with per-band timing smear and a sun-cast shadow. |
-| `microphone` | Per-microphone WAVs with speed-of-sound delay, Doppler, ISO 9613-1 absorption, terrain screening and wind, plus a CFAR tone detector. It catches the radio-silent fibre-optic FPV. |
+| `microphone` | Per-microphone WAVs with speed-of-sound delay, Doppler, ISO 9613-1 absorption, terrain screening and wind, plus a CFAR tone detector. In the hero day the radio-silent fibre-optic FPV is recorded by no sensor at all, and the log book says so. |
 | `remote_id` | DroneID-style broadcasts that leak the pilot's position and carry the drone's *believed* (spoofable) GNSS |
 | `telemetry` | Our own drone's log, which drifts under GNSS spoofing |
 | `reports` | Civilian (ePPO-style) and observer reports in Ukrainian and English, generated only when that person could physically see or hear the object |
@@ -65,7 +65,14 @@ Prompt mode needs `OPENAI_API_KEY` in `.env`. The LLM only fills scenario intent
 - **Hero** (`scenarios/ros-valley.yaml`, area centre 49.3700° N · 31.2000° E): a two-act day on 4 Nov 2026.
   - **Morning:** a Sentinel-2A pass catches a Shahed.
   - **Dusk:** a hostile Mavic at the challenge brief's example point at 14:02:07Z, then a leg routed through a receiver's terrain shadow; pilot geolocation; a 2.4 GHz jammer; a fibre-optic FPV; GNSS spoofing; a protected site; and an FPV that destroys a receiver mast.
-- **Knob builder** (`mirrorworld/builder.py`): three sectors × templates *incoming / intercepted / lost-contact*, with sun-computed times of day, terrain-optimised sensor siting, exact interceptor rendezvous and terrain-shadow routing.
+- **Seed engine** (`mirrorworld/builder.py`): knobs + a seed → a validated scenario.
+  - **The built world is fixed per sector.** The protected site, the air-defence positions, the receiver masts (sited on the DEM for coverage) with their calibration offsets, and the microphones come from the sector alone. They are identical for every seed (`tests/test_builder.py` checks it).
+  - **The seed drives only what moves:** drone types, entry sides, corridors, altitudes, timing, interceptor rendezvous, birds, the jammer window and the weather.
+  - **Templates:** *incoming*, *intercepted* (interceptors launched from the AD team to exact rendezvous points), *lost-contact* (a leg hidden in a receiver's terrain shadow plus a fibre-optic FPV), *saturation* (one-way drones in 2–3 tight waves from one side) and *recon-strike* (a recon UAV orbits the AD battery and a loitering munition follows it in).
+  - Times of day come from the sun.
+  - Sweep: `python -m mirrorworld.builder --template saturation --seeds 1-4 --run` builds, simulates and audits one scenario per seed.
+- **Log book** (`python -m mirrorworld.logbook out/<name>`): one time-ordered account per run, in three voices. TRUTH is what happened, SENSOR is the first record each sensor made of each object, and C2 is what the command post concluded. It ends with the outcome per hostile and the audit.
+- **Runs page** (`scripts/publish_runs.py <built console>`): every run gets its own console, its log book and its raw files, behind one index.
 - **Asset catalog** (`data/assets.json`, `data/scenario_presets.json`) feeds `generate_scenario.py`. The archetypes are Geran-2/Shahed, Gerbera, Orlan-10, ZALA, Supercam and Lancet, and the response assets are interceptor drones, ground teams and air-defence markers, with fictional protected sites.
 
 ## The console
