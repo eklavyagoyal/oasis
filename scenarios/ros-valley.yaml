@@ -81,10 +81,16 @@ objects:
   - {id: pilot_2, type: operator, side: hostile, pos: [49.3040, 31.3000], start_s: 19700, controls: fpv_1}
   - {id: jammer_1, type: jammer, side: friendly, pos: [49.3550, 31.2150], alt_agl_m: 15, start_s: 19850, end_s: 19970}
 
+  # protected site and a response team near the Mavic's route (C2-01 watches the approach)
+  - {id: SITE-01, type: power_station, side: friendly, pos: [49.3820, 31.2050]}
+  - {id: ADT-01, type: ad_team, side: friendly, pos: [49.3700, 31.2150]}
+
 sensors:
   - {id: RF1, type: rf_df, pos: [49.3926, 31.1109], mast_m: 40, params: {calib_bias_deg: 0.8}}  # 58 m Stebliv mast
   - {id: RF2, type: rf_df, pos: [49.3311, 31.1597], mast_m: 35, destroyed_by: fpv_1, params: {calib_bias_deg: -0.6}}  # 52 m Selyshche mast
+  - {id: RADAR-01, type: radar, pos: [49.3650, 31.2100], mast_m: 15}  # small 3D surveillance radar on the plateau
   - {id: EO1, type: camera, mount: RF1, mast_m: 38, params: {fov_deg: 3.0, width: 1280, height: 720, fps: 1, cue: rf}}
+  - {id: CAM-02, type: camera, mount: RADAR-01, mast_m: 14, params: {fov_deg: 3.0, width: 1280, height: 720, fps: 1, cue: radar}}
   - {id: MIC1, type: microphone, pos: [49.3800, 31.1950], mast_m: 3}
   - {id: MIC2, type: microphone, pos: [49.3550, 31.2300], mast_m: 3}
   - {id: RID1, type: remote_id, mount: RF1, mast_m: 40}
@@ -92,3 +98,4 @@ sensors:
   - {id: SAT1, type: satellite, pos: [49.3700, 31.2000], params: {platform: SENTINEL-2A}}
   - {id: HUM1, type: reports, pos: [49.4100, 31.2400], params: {eppo_civilians: 25}}
   - {id: IQ1, type: rf_iq, mount: RF1, mast_m: 40, params: {center_mhz: 2440, times_s: [18427, 18600, 19180, 19900]}}
+  - {id: C2-01, type: c2, pos: [49.3700, 31.2150]}  # last: it reads every other sensor's output

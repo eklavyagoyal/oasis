@@ -553,7 +553,7 @@ def check_spoof(sc):
 
 
 def check_camera(sc):
-    """Every camera frame must have an RF fix within 5 s that cued it."""
+    """Every camera frame must have a cue (RF fix or radar track) within 5 s."""
     cams = [s.id for s in sc.cfg.sensors if s.type == "camera"]
     if not cams:
         return _result("cross_sensor_time", "Cross-sensor time", "SKIP", None, "every frame within 5 s of a fix",
@@ -566,7 +566,13 @@ def check_camera(sc):
     if "t" not in fixes.columns or fixes.empty:
         return _result("cross_sensor_time", "Cross-sensor time", "SKIP", None, "every frame within 5 s of a fix",
                        "no fixes to cue from")
-    ft = np.sort(fixes["t"].to_numpy(float))
+    cue_t = [fixes["t"].to_numpy(float)]  # a frame may be cued by an RF fix or a confirmed radar track
+    for rid in [s.id for s in sc.cfg.sensors if s.type == "radar"]:
+        tp = sc.root / "sensors" / rid / "tracks.csv"
+        if tp.exists():
+            tr = pd.read_csv(tp)
+            cue_t.append(tr.loc[tr["state"] == "CONFIRMED", "t"].to_numpy(float))
+    ft = np.sort(np.concatenate(cue_t))
     total, uncued = 0, 0
     for sid in cams:
         folder = sc.root / "sensors" / sid
