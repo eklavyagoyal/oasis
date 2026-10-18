@@ -19,6 +19,23 @@ from mirrorworld import logbook  # noqa: E402
 from mirrorworld.config import coord_label, load  # noqa: E402
 
 HERO = "ros-valley"
+TEMPLATE_TITLES = {"incoming": "Incoming mixed raid", "intercepted": "Interceptors against one-way drones",
+                   "lost-contact": "Lost contact: terrain shadow and a fibre FPV", "saturation": "Saturation raid in waves",
+                   "recon-strike": "Recon orbit, then a loitering strike"}
+SHOWCASE_TITLES = {"01": "Shahed raid on a power station", "02": "Decoys over the water works",
+                   "03": "Recon and strike on a power station", "04": "Low FPVs at the water works",
+                   "05": "Lost contact near the hospital"}
+
+
+def title(name: str) -> str:
+    if name == HERO:
+        return "Hero day: a full raid day, dawn to dusk"
+    if name.startswith("showcase-"):
+        return SHOWCASE_TITLES.get(name.split("-")[1], name)
+    for key, value in TEMPLATE_TITLES.items():
+        if f"-{key}-" in name:
+            return value
+    return name
 STYLE = """<style>
 :root{color-scheme:dark;--bg:#07090c;--fg:#d8dee6;--dim:#7d8794;--line:#1c232c;--acc:#e8b04a}
 body{background:var(--bg);color:var(--fg);font:14px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace;margin:0;padding:24px 16px}
@@ -94,7 +111,8 @@ def publish(out: Path, site: Path) -> dict:
         for r in pd.read_csv(site_key, keep_default_na=False).to_dict("records"):
             fate = "intercepted" if r.get("ended_at_rendezvous") == "yes" else r.get("truth_status", "")
             fates[fate] = fates.get(fate, 0) + 1
-    return {"name": out.name, "label": coord_label(cfg.area.lat, cfg.area.lon), "seed": cfg.seed,
+    return {"name": out.name, "title": title(out.name), "hero": out.name == HERO,
+            "label": coord_label(cfg.area.lat, cfg.area.lon), "seed": cfg.seed,
             "start": f"{cfg.start:%d %b %Y %H:%M} UTC", "minutes": round(cfg.duration_s / 60),
             "hostiles": sum(o.side == "hostile" and bool(o.path) for o in cfg.objects),
             "types": sorted({o.type for o in cfg.objects if o.side == "hostile" and o.path}),
@@ -128,6 +146,7 @@ def main():
             "book and the independent audit.</p><table><tr><th>run</th><th>air picture</th><th>truth outcome at the "
             f"site</th><th>audit</th><th>open</th></tr>{rows}</table>")
     (site / "runs" / "index.html").write_text(page("OASIS runs", body))
+    (site / "runs" / "index.json").write_text(json.dumps(runs, indent=1))  # the console's scenario library
     print(f"index: {site / 'runs' / 'index.html'} ({len(runs)} runs)")
 
 
