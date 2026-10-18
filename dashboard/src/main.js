@@ -22,9 +22,10 @@ import { renderAudit } from "./panels/audit.js";
 import { createTimeline } from "./timeline.js";
 import { createPresentation } from "./present.js";
 import { createCommands } from "./commands.js";
+import { createFlow } from "./flow.js";
 const $ = (s) => document.querySelector(s),
   C = window.Cesium;
-let active = null,
+let active = null, flow = null, heroData = null,
   toastTimer,
   firstLoad = true;
 function notify(message, ms = 5000) {
@@ -35,7 +36,7 @@ function notify(message, ms = 5000) {
     $("#toast").hidden = true;
   }, ms);
 }
-function start(data, { skipOpening = false, onFrame = null } = {}) {
+function start(data, { skipOpening = false, onFrame = null, createOverlay = null } = {}) {
   active?.destroy();
   const summary = summarize(data);
   const state = createState(data),
@@ -71,11 +72,15 @@ function start(data, { skipOpening = false, onFrame = null } = {}) {
     globe.time(state.t);
     changed();
   };
-  const truth = createTruth(globe, state),
-    sensors = createSensors(globe, state),
+  const noopLayer = { update() {} };
+  const recorded = data.game ? createOverlay?.(globe, data) : null;
+  const truth = data.game
+      ? { entities: new Map(), update() {}, updateReticle() { $("#selection-reticle").hidden = true; } }
+      : createTruth(globe, state),
+    sensors = data.game ? noopLayer : createSensors(globe, state),
     rf = createRF(globe, state),
     shadow = createShadow(globe, state, notify),
-    assets = createAssets(globe, state);
+    assets = data.game ? noopLayer : createAssets(globe, state);
   const select = (id) => {
     state.selected = id;
     state.selectedFix = null;
@@ -145,6 +150,13 @@ function start(data, { skipOpening = false, onFrame = null } = {}) {
       notify("Switch to God or Delta mode to follow a truth object.");
       return;
     }
+    if (data.game) {
+      const object = data.objects.find((o) => o.id === state.selected);
+      const position = object && sample(object, state.t);
+      if (position) globe.flyTo(position.lon, position.lat, position.alt);
+      else notify("Selected generated track is inactive at this time.");
+      return;
+    }
     const entity = truth.entities.get(state.selected);
     if (!entity || !entity.position.getValue(globe.viewer.clock.currentTime)) {
       notify("Selected object is inactive at this time.");
@@ -206,6 +218,19 @@ function start(data, { skipOpening = false, onFrame = null } = {}) {
   $("#system-state").textContent = data.game
     ? "BROWSER MODEL · SYNTHETIC TRACKS / ESTIMATED HP"
     : "PYTHON SENSOR MODEL · SYNTHETIC RECORDINGS";
+  document.querySelectorAll("[data-model-layer]").forEach((node) => node.remove());
+  if (data.game) {
+    state.modelLinks = true;
+    state.modelLabels = true;
+    for (const [key, text] of [["modelCoverage", "Model range rings"], ["modelLinks", "Model detection links"], ["modelLabels", "Asset labels / estimated HP"]]) {
+      const label = document.createElement("label");
+      label.className = "layer-row"; label.dataset.modelLayer = key;
+      label.innerHTML = `<span>${esc(text)}</span><input type="checkbox"><span class="switch"></span>`;
+      const input = label.querySelector("input"); input.checked = !!state[key];
+      input.onchange = () => { state[key] = input.checked; changed(); };
+      $("#layer-controls").append(label);
+    }
+  }
   const receiverRoot = $("#receiver-controls");
   receiverRoot.replaceChildren();
   for (const id of Object.keys(data.rf)) {
@@ -401,10 +426,10 @@ function start(data, { skipOpening = false, onFrame = null } = {}) {
       id = picked?.id;
     if (
       typeof id?.id === "string" &&
-      id.id.startsWith("truth:") &&
+      (id.id.startsWith("truth:") || id.id.startsWith("recorded-track:") || id.id.startsWith("recorded-fixed:")) &&
       state.mode !== "operator"
     ) {
-      select(id.id.slice(6));
+      select(id.id.slice(id.id.indexOf(":") + 1));
       setTab("inspector");
     } else if (id?.type === "fix") {
       state.selectedFix = id.index;
@@ -511,6 +536,16 @@ function start(data, { skipOpening = false, onFrame = null } = {}) {
     inspector.update();
     feeds.update();
     timeline.update();
+    if (data.game) {
+      const record = data.game.record;
+      const activeContacts = record.detections.filter((d) => d.t_start <= state.t && state.t < d.t_end);
+      $("#detection-rate").textContent = `${activeContacts.length} MODEL CONTACTS`;
+      const events = record.events.filter((e) => e.t <= state.t && (state.mode !== "operator" || e.kind === "detect")).slice(-6).reverse();
+      $("#event-ticker").innerHTML = events.length
+        ? events.map((e) => `<div class="detection"><time>${timeLabel(data, e.t).slice(3)}</time><span>${esc(e.text)}</span></div>`).join("")
+        : '<div class="no-observation">No model events yet. RF angles and signal power are not generated in browser runs.</div>';
+      return;
+    }
     if (state.mode === "god") {
       $("#event-ticker").innerHTML =
         '<div class="no-observation">Sensor observations hidden in God mode.</div>';
@@ -533,7 +568,7 @@ function start(data, { skipOpening = false, onFrame = null } = {}) {
           .slice(0, 6)
           .map(
             (d) =>
-              `<div class="detection"><time>${timeLabel(data, d.t).slice(3)}</time><span class="sensor-tag">${esc(d.id)}</span><span class="signal-class">${esc(data.classes[d.cls])}</span><span class="bearing">${Math.round(d.brg)}°</span></div>`,
+              `<div class="detection"><time>${timeLabel(data, d.t).slice(3)}</time><span class="sensor-tag">${esc(d.id)}</span><span class="signal-class">${esc(data.classes[d.cls])}</span><span class="bearing" title="Model-generated bearing, clockwise from true north">${Math.round(d.brg)}° T</span></div>`,
           )
           .join("")
       : '<div class="no-observation">No recent RF detections.</div>';
@@ -581,6 +616,7 @@ function start(data, { skipOpening = false, onFrame = null } = {}) {
       rf.update();
       assets.update();
       shadow.update();
+      recorded?.update(state.t, { coverage: !!state.modelCoverage, links: state.modelLinks !== false, labels: state.modelLabels !== false, truth: state.truth, mode: state.mode });
       globe.scene.requestRender();
       lastLayers = now;
     }
@@ -626,6 +662,7 @@ function start(data, { skipOpening = false, onFrame = null } = {}) {
       feeds.destroy();
       timeline.destroy();
       shadow.destroy();
+      recorded?.destroy();
       handler.destroy();
       globe.destroy();
     },
@@ -640,7 +677,8 @@ async function loadFile(file) {
   }
   try {
     const data = parseDataFile(await file.text());
-    start(data);
+    start(data, { skipOpening: true });
+    flow?.loaded();
     notify(
       `Loaded ${data.scenario.label || data.scenario.name}. Media resolves relative to this page.`,
     );
@@ -679,7 +717,8 @@ try {
     throw new Error(
       "Cesium assets are missing. Run npm install and npm run build.",
     );
-  start(validateData(window.MW));
+  heroData = validateData(window.MW);
+  start(heroData, { skipOpening: true });
 } catch (error) {
   console.warn("OASIS initialization:", error.message);
   $("#loading").hidden = true;
@@ -689,3 +728,4 @@ try {
   $("#system-state").textContent = "AWAITING VALID SCENARIO";
   notify(error.message, 12000);
 }
+flow = createFlow({ start, getActive: () => active, notify, heroData });

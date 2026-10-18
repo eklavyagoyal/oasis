@@ -52,8 +52,8 @@ export function createEntry({ onGenerate, onReplay, onExport, getCounts, onBaked
 
     <main class="oasis-hero">
       <div class="oasis-kicker"><span class="oasis-kicker-dot"></span>UKRAINE SECTOR <i></i> SEED-DRIVEN EXERCISE</div>
-      <h1>Shape the run.<br><em>Study the response.</em></h1>
-      <p class="oasis-intro">Set a repeatable airspace-defence scenario over Ukraine. Keep the world fixed, change the run, and compare outcomes.</p>
+      <h1>OASIS</h1>
+      <p class="oasis-intro">SYNTHETIC SCENARIO GENERATOR / UKRAINE</p>
       <div class="oasis-hero-actions">
         <button class="oasis-button oasis-button-primary" id="enter-simulation" type="button">ENTER SIMULATION <span aria-hidden="true">↗</span></button>
         <button class="oasis-button oasis-button-secondary" id="replay-hero" type="button">REPLAY HERO</button>
@@ -394,6 +394,7 @@ export function createEntry({ onGenerate, onReplay, onExport, getCounts, onBaked
     setActionStatus('Opening the original replay…');
     try {
       await onReplay();
+      replayButton.disabled = false;
       hide();
     } catch (error) {
       setActionStatus(errorMessage(error), true);
