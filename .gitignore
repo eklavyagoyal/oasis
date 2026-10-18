@@ -7,6 +7,15 @@ __pycache__/
 .venv/
 .env
 
+# Next application, local worktrees and generated console
+/.next/
+/public/simulation/
+/.worktrees/
+next-env.d.ts
+*.tsbuildinfo
+.env.*
+!.env.example
+
 # downloaded data and generated scenarios
 /cache
 /out

@@ -1,10 +1,11 @@
 import type { NextConfig } from "next";
+import { fileURLToPath } from "node:url";
 
 const nextConfig: NextConfig = {
   turbopack: {
     rules: {
       'maplibre-gl.mjs': {
-        loaders: [`${__dirname}/tools/maplibre-url-loader.cjs`],
+        loaders: [fileURLToPath(new URL('./tools/maplibre-url-loader.cjs', import.meta.url))],
         as: '*.js',
       },
     },
