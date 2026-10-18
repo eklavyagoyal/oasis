@@ -1,6 +1,6 @@
 """Vectorised terrain path loss: ITU-R P.526-16 sec. 4.5 / P.1812 sec. 4.3.4 delta-Bullington.
 
-Validated against eeveetza's Py1812 reference port: max difference 1.4e-14 dB over 8,897 random
+Validated against the open Py1812 reference implementation of ITU-R P.1812: max difference 1.4e-14 dB over 8,897 random
 links on real Copernicus terrain (0.43-5.8 GHz, 0.3-30 km, 2-2000 m AGL), ~16 us per link.
 Link arrays are (N,), profile arrays (N, M) with d[:, 0] = 0 (station T) and d[:, -1] = dtot (station R).
 ITU units: distances km, heights m amsl, f GHz.

@@ -29,7 +29,7 @@ SHOWCASE_TITLES = {"01": "Shahed raid on a power station", "02": "Decoys over th
 
 def title(name: str) -> str:
     if name == HERO:
-        return "Hero day: a full raid day, dawn to dusk"
+        return "Hero day: a satellite pass, then the dusk raid"
     if name.startswith("showcase-"):
         return SHOWCASE_TITLES.get(name.split("-")[1], name)
     for key, value in TEMPLATE_TITLES.items():
