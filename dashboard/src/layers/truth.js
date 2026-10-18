@@ -23,7 +23,8 @@ function glyph(o) {
 }
 export function createTruth(globe, state) {
   const { viewer, scene } = globe,
-    data = state.data;
+    // sites and response teams are drawn by the assets layer
+    data = { ...state.data, objects: state.data.objects.filter((o) => !['site', 'response'].includes(o.kind)) };
   const source = new C.CustomDataSource("ground truth");
   viewer.dataSources.add(source);
   const entities = new Map(),

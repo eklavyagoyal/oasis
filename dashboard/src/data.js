@@ -115,7 +115,7 @@ export function validateData(value) {
       typeof o.id !== "string" ||
       ids.has(o.id) ||
       typeof o.type !== "string" ||
-      !["drone", "bird", "operator", "emitter"].includes(o.kind) ||
+      !["drone", "bird", "operator", "emitter", "site", "response"].includes(o.kind) ||
       !["hostile", "friendly", "neutral", "unknown"].includes(o.side)
     )
       fail("object identity/type");
