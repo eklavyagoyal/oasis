@@ -1,0 +1,32 @@
+{
+  "version": 1,
+  "coordinate_system": "sector-local kilometres; origin at southwest corner of a 10 x 10 km tile",
+  "sensors": [
+    {"type": "rf_receiver", "label": "RF receiver", "records": ["bearing_deg", "relative_strength_db", "uncertainty_deg"]},
+    {"type": "radar", "label": "Radar", "records": ["bearing_deg", "range_km", "uncertainty_km"]},
+    {"type": "eo_ir_camera", "label": "EO/IR camera", "records": ["bearing_deg", "confidence"]},
+    {"type": "acoustic", "label": "Acoustic sensor", "optional": true, "records": ["bearing_deg", "uncertainty_deg"]}
+  ],
+  "drones": [
+    {"type": "geran_shahed", "label": "Geran-2 / Shahed-type", "affiliation": "russian", "role": "one-way attack"},
+    {"type": "gerbera", "label": "Gerbera", "affiliation": "russian", "role": "decoy"},
+    {"type": "orlan_10", "label": "Orlan-10", "affiliation": "russian", "role": "reconnaissance"},
+    {"type": "zala", "label": "ZALA", "affiliation": "russian", "role": "reconnaissance"},
+    {"type": "supercam", "label": "Supercam", "affiliation": "russian", "role": "reconnaissance"},
+    {"type": "lancet", "label": "Lancet", "affiliation": "russian", "role": "loitering munition", "optional": true}
+  ],
+  "responses": [
+    {"type": "interceptor_drone", "label": "Ukrainian interceptor drone", "affiliation": "ukrainian"},
+    {"type": "octopus", "label": "Octopus interceptor drone", "affiliation": "ukrainian"},
+    {"type": "jedi", "label": "JEDI interceptor drone", "affiliation": "ukrainian"},
+    {"type": "handheld_team", "label": "Ground air-defence team", "affiliation": "ukrainian"},
+    {"type": "patriot", "label": "Patriot", "affiliation": "ukrainian", "display_only": true},
+    {"type": "iris_t", "label": "IRIS-T", "affiliation": "ukrainian", "display_only": true},
+    {"type": "nasams", "label": "NASAMS", "affiliation": "ukrainian", "display_only": true}
+  ],
+  "sites": [
+    {"type": "power_station", "label": "Fictional power station", "affiliation": "civilian"},
+    {"type": "water_works", "label": "Fictional water works", "affiliation": "civilian"},
+    {"type": "hospital", "label": "Fictional hospital", "affiliation": "civilian"}
+  ]
+}

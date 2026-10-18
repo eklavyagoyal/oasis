@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "sectors": ["central_valley", "kharkiv_ne", "border_sector"],
+  "default_assets": {
+    "sensors": [
+      {"id": "RF-01", "type": "rf_receiver", "position_km": [2.0, 3.0]},
+      {"id": "RF-02", "type": "rf_receiver", "position_km": [7.0, 4.0]},
+      {"id": "RADAR-01", "type": "radar", "position_km": [4.0, 7.0]},
+      {"id": "CAM-01", "type": "eo_ir_camera", "position_km": [2.0, 3.0]}
+    ],
+    "response": {"id": "RESP-01", "type": "interceptor_drone", "position_km": [6.0, 3.0]},
+    "site": {"id": "SITE-01", "type": "power_station", "position_km": [8.0, 2.0]}
+  },
+  "presets": {
+    "incoming": {"description": "Aircraft reaches the protected-site boundary.", "duration_seconds": 120},
+    "intercepted": {"description": "A response is recorded and the aircraft track ends.", "duration_seconds": 120},
+    "lost_contact": {"description": "Sensor records stop while ground truth continues.", "duration_seconds": 120}
+  }
+}
