@@ -298,6 +298,8 @@ def build(out: Path | str) -> dict:
                 if kind == "event":
                     add(float(r["t"]), path, "media")
                 elif kind in ("image", "audio", "iq"):
+                    if path.startswith(("/", "~")) or "\\" in path or ".." in Path(path).parts:
+                        raise ValueError(f"{mc}: media path {path!r} must be a plain relative path")
                     media.append({"sensor": s.id, "kind": kind, "t": _f(r["t"], 3),
                                   "src": f"../sensors/{s.id}/{path}"})
         for png in sorted(folder.glob("snap_*.png")):  # rf_iq recorder snapshots
@@ -355,8 +357,24 @@ def export(out: Path | str) -> Path:
     return dst
 
 
+class _Static(http.server.SimpleHTTPRequestHandler):
+    """Static files only, no directory listings, and only for local or tailnet host names
+    (a DNS-rebinding guard; `tailscale serve` forwards the *.ts.net Host header)."""
+
+    def send_head(self):
+        host = (self.headers.get("Host") or "").rsplit(":", 1)[0].lower()
+        if host not in ("localhost", "127.0.0.1") and not host.endswith(".ts.net"):
+            self.send_error(403, "host not allowed")
+            return None
+        return super().send_head()
+
+    def list_directory(self, path):
+        self.send_error(403, "directory listing disabled")
+        return None
+
+
 def serve(out: Path | str, port: int) -> None:
-    handler = functools.partial(http.server.SimpleHTTPRequestHandler, directory=str(Path(out).resolve()))
+    handler = functools.partial(_Static, directory=str(Path(out).resolve()))
     httpd = http.server.ThreadingHTTPServer(("127.0.0.1", port), handler)
     print(f"serving http://localhost:{port}/dashboard/", flush=True)
     try:
