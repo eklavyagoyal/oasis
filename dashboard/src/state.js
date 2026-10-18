@@ -10,7 +10,7 @@ export function createState(data) {
     speed: 20,
     mode: "delta",
     selected:
-      data.objects.find((o) => o.id === "mavic_1")?.id ?? data.objects[0]?.id,
+      data.objects.find((o) => o.id === "mavic_1")?.id ?? data.objects.find((o) => o.kind === "drone")?.id ?? data.objects[0]?.id,
     selectedFix: null,
     densityFiltered: true,
     follow: false,

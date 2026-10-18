@@ -1,0 +1,46 @@
+/* Only new flow controls and summary; Night Glass's existing layout stays intact. */
+.oasis-flow-controls {
+  position: fixed;
+  top: 96px;
+  right: 24px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 4px;
+  max-width: 440px;
+  padding: 4px;
+  border: 1px solid var(--hairline);
+  border-radius: 10px;
+  background: var(--glass-strong);
+  backdrop-filter: blur(20px);
+}
+.oasis-flow-controls button { padding: 8px 10px; font: 10px var(--mono); }
+.oasis-flow-controls button:first-child { color: var(--accent); }
+body.cinema .oasis-flow-controls { display: none; }
+.oasis-run-result {
+  color: var(--text);
+  width: min(650px, calc(100vw - 32px));
+  max-height: calc(100dvh - 40px);
+  overflow: auto;
+  padding: 28px;
+  background: var(--glass-strong);
+}
+.oasis-run-result::backdrop { background: rgba(0,0,0,.65); backdrop-filter: blur(8px); }
+.oasis-run-result h2 { margin: 12px 0; font: 500 26px var(--sans); }
+.oasis-run-result p, .oasis-run-result dd { color: var(--text-2); }
+.oasis-run-result form { display: flex; justify-content: flex-end; }
+.oasis-run-result button { padding: 10px; font: 11px var(--mono); }
+.oasis-run-result dl { margin: 20px 0; }
+.oasis-run-result dt { color: var(--text); font-weight: 500; }
+.oasis-run-result dd { margin: 4px 0 16px; }
+#run-result-numbers { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 12px; }
+#run-result-numbers div { border-bottom: 1px solid var(--hairline); }
+#run-result-numbers dd { color: var(--accent); font: 24px var(--mono); }
+.oasis-result-actions { display: flex; flex-wrap: wrap; gap: 8px; }
+.oasis-result-actions button:first-child { color: var(--accent); border: 1px solid var(--hairline); }
+.oasis-run-result a { text-decoration: underline; }
+@media (max-width: 760px) {
+  .oasis-flow-controls { top: 108px; right: 12px; left: 12px; max-width: none; justify-content: flex-start; }
+  .oasis-flow-controls button { padding: 7px; font-size: 9px; }
+  .oasis-run-result { padding: 18px; }
+}

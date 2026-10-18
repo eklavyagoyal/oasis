@@ -45,4 +45,4 @@ All child progress goes to ignored `.agent-notes/{entry,engine,data}.md` in each
 1. Latest base + recovered engine and contract, no UI replacement.
 2. OSIRIS-derived entry and seed screen connected to original replay.
 3. Generation, recorded playback, storage, same-world rerun, summary, provenance corrections.
-4. Final build/fixes and static Vercel config.
+4. Final build/fixes only. Existing site is http://oasis.eklavyagoyal.com/; no deployment, Vercel setup or domain changes.
