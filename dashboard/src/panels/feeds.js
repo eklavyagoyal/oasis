@@ -1,3 +1,4 @@
+import { theme } from "../theme.js";
 import { timeLabel } from "../data.js";
 const $ = (s) => document.querySelector(s);
 const names = {
@@ -14,7 +15,8 @@ export function createFeeds(state, notify) {
     byType[type] = data.media.filter(
       (m) =>
         data.sensors.find((s) => s.id === m.sensor)?.type === sensorType &&
-        m.kind !== "event",
+        m.kind !== "event" &&
+        (type !== "satellite" || !/_zoom\.[^/]+$/.test(m.src)),
     );
   }
   let signature = "",
@@ -37,12 +39,19 @@ export function createFeeds(state, notify) {
   const image = $("#feed-image");
   function empty(message) {
     image.hidden = true;
+    $("#satellite-inset").hidden = true;
     $("#feed-empty").hidden = false;
     $("#feed-empty-message").textContent = message;
     $("#feed-hud").hidden = true;
     $("#feed-zoom").hidden = true;
     $("#iq-cursor").hidden = true;
   }
+  $("#satellite-zoom").onerror = () => {
+    $("#satellite-inset").hidden = true;
+    notify(
+      "Satellite detail image unavailable; the full chip remains visible.",
+    );
+  };
   image.onerror = () => {
     clearTimeout(imageTimeout);
     if (
@@ -71,6 +80,17 @@ export function createFeeds(state, notify) {
       $("#feed-empty").hidden = true;
       $("#feed-zoom").hidden = false;
       $("#feed-hud").hidden = state.feed === "iq";
+      const zoom =
+        state.feed === "satellite"
+          ? data.media.find(
+              (m) =>
+                m.sensor === current.sensor &&
+                m.t === current.t &&
+                /_zoom\.[^/]+$/.test(m.src),
+            )
+          : null;
+      $("#satellite-inset").hidden = !zoom;
+      if (zoom) $("#satellite-zoom").src = zoom.src;
     }
   };
   $("#feed-zoom").onclick = () => {
@@ -187,6 +207,7 @@ export function createFeeds(state, notify) {
       abortController?.abort();
       mediaFailure = "";
       clearTimeout(imageTimeout);
+      $("#satellite-inset").hidden = true;
       $("#feed-name").textContent = names[state.feed];
       $("#feed-state").textContent = current ? "RECORDED" : "NO SIGNAL";
       $("#feed-state").className = current ? "cyan" : "muted";
@@ -270,7 +291,7 @@ export function createFeeds(state, notify) {
     const ctx = canvas.getContext("2d");
     ctx.clearRect(0, 0, w, h);
     if (!analyser || !sourceNode) {
-      ctx.strokeStyle = "#38535d";
+      ctx.strokeStyle = theme("text-3");
       ctx.beginPath();
       ctx.moveTo(12, h / 2);
       ctx.lineTo(w - 12, h / 2);
@@ -280,7 +301,7 @@ export function createFeeds(state, notify) {
     const values = new Uint8Array(analyser.frequencyBinCount);
     analyser.getByteFrequencyData(values);
     const bw = (w - 24) / values.length;
-    ctx.fillStyle = "#39e6ff";
+    ctx.fillStyle = theme("signal");
     values.forEach((value, i) => {
       const bh = (value / 255) * (h - 45);
       ctx.fillRect(12 + i * bw, h - 30 - bh, Math.max(1, bw - 1), bh);
@@ -298,6 +319,7 @@ export function createFeeds(state, notify) {
       audioContext
         ?.close()
         .catch((e) => notify(`Audio shutdown failed: ${e.message}`));
+      $("#satellite-zoom").onerror = null;
       image.onload = null;
       image.onerror = null;
     },

@@ -10,6 +10,7 @@ export function createCommands(state, actions) {
       run: () => actions.setMode(mode),
     })),
     { label: "Present · guided briefing", run: () => actions.present() },
+    { label: "Replay opening sequence", run: () => actions.opening() },
     { label: "Play / pause", run: () => actions.togglePlay() },
     { label: "Reset camera", run: () => actions.home() },
     { label: "Audit scorecard", run: () => actions.setTab("audit") },
