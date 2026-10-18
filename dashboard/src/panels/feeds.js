@@ -7,6 +7,12 @@ const names = {
   satellite: "SATELLITE CHIP",
   microphone: "ACOUSTIC MONITOR",
 };
+const mediaKinds = {
+  camera: "image",
+  iq: "iq",
+  satellite: "image",
+  microphone: "audio",
+};
 export function createFeeds(state, notify) {
   const data = state.data,
     byType = {};
@@ -15,10 +21,22 @@ export function createFeeds(state, notify) {
     byType[type] = data.media.filter(
       (m) =>
         data.sensors.find((s) => s.id === m.sensor)?.type === sensorType &&
-        m.kind !== "event" &&
+        m.kind === mediaKinds[type] &&
         (type !== "satellite" || !/_zoom\.[^/]+$/.test(m.src)),
     );
+    const tab = $(`[data-feed="${type}"]`);
+    if (tab) tab.hidden = byType[type].length === 0;
   }
+  const firstAvailable = Object.keys(names).find((type) => byType[type].length);
+  if (!byType[state.feed]?.length && firstAvailable) state.feed = firstAvailable;
+  document.querySelectorAll("[data-feed]").forEach((tab) => {
+    const selected = tab.dataset.feed === state.feed;
+    tab.classList.toggle("active", selected);
+    tab.setAttribute("aria-selected", String(selected));
+  });
+  const selectedTab = $(`[data-feed="${state.feed}"]`);
+  if (selectedTab)
+    $("#feed-panel").setAttribute("aria-labelledby", selectedTab.id || "tab-feeds");
   let signature = "",
     current = null,
     audioContext,
@@ -63,7 +81,7 @@ export function createFeeds(state, notify) {
       empty("Referenced capture could not be loaded");
       mediaFailure = "MISSING MEDIA";
       $("#feed-state").textContent = mediaFailure;
-      notify(`Cannot load capture: ${current?.src ?? "unknown path"}`);
+      notify(`Cannot load media: ${current?.src ?? "unknown path"}`);
     }
   };
   image.onload = () => {
@@ -80,6 +98,15 @@ export function createFeeds(state, notify) {
       $("#feed-empty").hidden = true;
       $("#feed-zoom").hidden = false;
       $("#feed-hud").hidden = state.feed === "iq";
+      const caption = $("#feed-hud .feed-hud-bottom");
+      if (caption)
+        caption.textContent = data.game
+          ? "BROWSER SIMULATION MEDIA"
+          : state.feed === "camera"
+            ? "SYNTHETIC EO RENDER"
+            : state.feed === "satellite"
+              ? "SENTINEL BACKGROUND · MODELED OBJECTS"
+              : "SYNTHETIC IQ SPECTROGRAM";
       const zoom =
         state.feed === "satellite"
           ? data.media.find(
@@ -187,10 +214,14 @@ export function createFeeds(state, notify) {
     }
   }
   $("#audio-play").onclick = async () => {
+    const audioLabel =
+      data.game || data.provenance?.dem_sources?.length
+        ? "SYNTHETIC AUDIO"
+        : "AUDIO";
     audioEnabled = !audioEnabled;
     $("#audio-play").textContent = audioEnabled
-      ? "Ⅱ DISABLE AUDIO"
-      : "▷ ENABLE AUDIO";
+      ? `Ⅱ STOP ${audioLabel}`
+      : `▷ PLAY ${audioLabel}`;
     if (audioEnabled) await loadAudio(current);
     else stopAudio();
   };
@@ -209,7 +240,13 @@ export function createFeeds(state, notify) {
       clearTimeout(imageTimeout);
       $("#satellite-inset").hidden = true;
       $("#feed-name").textContent = names[state.feed];
-      $("#feed-state").textContent = current ? "RECORDED" : "NO SIGNAL";
+      $("#feed-state").textContent = current
+        ? "MEDIA AVAILABLE"
+        : state.mode === "god"
+          ? "HIDDEN"
+          : options.length
+            ? "NO CAPTURE AT PLAYHEAD"
+            : "UNAVAILABLE";
       $("#feed-state").className = current ? "cyan" : "muted";
       $("#audio-canvas").hidden = state.feed !== "microphone" || !current;
       $("#audio-play").hidden = state.feed !== "microphone" || !current;
@@ -222,8 +259,8 @@ export function createFeeds(state, notify) {
           state.mode === "god"
             ? "Sensor feeds hidden in God mode"
             : options.length
-              ? "No capture at or before this time"
-              : "No capture in this dataset",
+              ? "No supplied media at or before this time"
+              : `No ${names[state.feed].toLowerCase()} media supplied in this dataset`,
         );
         stopAudio();
       } else if (state.feed === "microphone") {
@@ -236,16 +273,16 @@ export function createFeeds(state, notify) {
         stopAudio();
         image.hidden = true;
         $("#feed-empty").hidden = false;
-        $("#feed-empty-message").textContent = "Loading recorded capture";
+        $("#feed-empty-message").textContent = "Loading supplied media";
         image.loading = "eager";
-        image.alt = `${names[state.feed]} from ${current.sensor} at ${timeLabel(data, current.t)} UTC`;
+        image.alt = `${names[state.feed]} media from ${current.sensor} at ${timeLabel(data, current.t)} UTC`;
         image.src = current.src;
         imageTimeout = setTimeout(() => {
           empty("Capture request timed out");
           mediaFailure = "MEDIA TIMEOUT";
           $("#feed-state").textContent = mediaFailure;
           notify(
-            "Capture request exceeded 15 seconds. Try selecting the feed again.",
+            "Media request exceeded 15 seconds. Try selecting the feed again.",
           );
         }, 15000);
         $("#feed-timestamp").textContent =
@@ -269,8 +306,8 @@ export function createFeeds(state, notify) {
                 ? `PLAYING / ${state.speed}×`
                 : "PAUSED"
           : age < 2
-            ? "AT PLAYHEAD"
-            : "RECORDED / HELD");
+            ? "MEDIA AT PLAYHEAD"
+            : "MEDIA / HELD");
       if (
         state.feed === "iq" &&
         !matchMedia("(prefers-reduced-motion: reduce)").matches
