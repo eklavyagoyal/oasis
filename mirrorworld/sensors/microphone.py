@@ -99,7 +99,9 @@ def screen_loss_db(world, p, mic, c, freqs, n_prof=160):
     """
     p = np.atleast_2d(np.asarray(p, float))
     freqs = np.atleast_1d(np.asarray(freqs, float))
-    los = np.asarray(world.los(p, np.broadcast_to(np.asarray(mic, float), p.shape))).reshape(-1)
+    good = np.isfinite(p).all(1)  # sources off air (before launch / after impact) are silent anyway
+    p = np.where(good[:, None], p, np.asarray(mic, float) + [1.0, 0.0, 0.0])
+    los = np.asarray(world.los(p, np.broadcast_to(np.asarray(mic, float), p.shape))).reshape(-1) & good
     D = np.maximum(np.hypot(mic[0] - p[:, 0], mic[1] - p[:, 1]), 1.0)
     prof = world.profile(p[:, 0], p[:, 1], mic[0], mic[1], n_prof)          # (N, n)
     ts = np.linspace(0.0, 1.0, n_prof)
@@ -251,7 +253,7 @@ def predict(world, env, mic, state_fn, spec, t_grid, chunk=2048):
     wind = wind_gain_db(cos_theta, r)
     att = (20 * np.log10(r)[:, None] + spec["alpha"][None, :] * r[:, None] / 1000.0
            + screen + wind[:, None])                       # (T, N_HARM) dB
-    power_k = (spec["amp"] ** 2 / 2.0)[:, None] * 10 ** (-att / 10.0)
+    power_k = (spec["amp"] ** 2 / 2.0)[:, None] * 10 ** (-att.T / 10.0)  # (N_HARM, T)
     power_bb = spec["bb_var"] * 10 ** (-att[:, 0] / 10.0)
     aw = 10 ** (a_weight_db(spec["freqs"]) / 10.0)
     level_tot = 10 * np.log10(power_k.sum(0) + power_bb + 1e-300)
