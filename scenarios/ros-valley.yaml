@@ -91,8 +91,8 @@ sensors:
   - {id: RADAR-01, type: radar, pos: [49.3650, 31.2100], mast_m: 15}  # small 3D surveillance radar on the plateau
   - {id: EO1, type: camera, mount: RF1, mast_m: 38, params: {fov_deg: 3.0, width: 1280, height: 720, fps: 1, cue: rf}}
   - {id: CAM-02, type: camera, mount: RADAR-01, mast_m: 14, params: {fov_deg: 3.0, width: 1280, height: 720, fps: 1, cue: radar}}
-  - {id: MIC1, type: microphone, pos: [49.3800, 31.1950], mast_m: 3}
-  - {id: MIC2, type: microphone, pos: [49.3550, 31.2300], mast_m: 3}
+  - {id: MIC1, type: microphone, pos: [49.3800, 31.1950], mast_m: 3, params: {fs: 8000}}
+  - {id: MIC2, type: microphone, pos: [49.3550, 31.2300], mast_m: 3, params: {fs: 8000}}
   - {id: RID1, type: remote_id, mount: RF1, mast_m: 40}
   - {id: TEL1, type: telemetry, pos: [49.3380, 31.1750], params: {objects: [recon_1]}}
   - {id: SAT1, type: satellite, pos: [49.3700, 31.2000], params: {platform: SENTINEL-2A}}
