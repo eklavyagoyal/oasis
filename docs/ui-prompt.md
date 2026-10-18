@@ -73,7 +73,7 @@ Prefer `MW.events` when present.
 - **Accessible:** full keyboard control, visible focus, text contrast ≥ 4.5:1, honour `prefers-reduced-motion`.
 
 ## Visual direction
-**References:** *Blade Runner 2049* / *Oblivion* UI restraint; real C2 consoles (Anduril Lattice, Palantir Gotham); Bilawal Sidhu's God's Eye View (github.com/bilawalsidhu/gods-eye-view, MIT); osirisai.live. Then go **past** them: calmer, sharper, more cinematic. **Avoid:**
+**References:** *Blade Runner 2049* / *Oblivion* UI restraint; real C2 consoles (Anduril Lattice, Palantir Gotham); the open-source God's Eye View globe console (MIT); osirisai.live. Then go **past** them: calmer, sharper, more cinematic. **Avoid:**
 - SaaS cards
 - rounded pastel widgets
 - purple-blue AI gradients
