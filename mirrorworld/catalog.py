@@ -119,3 +119,27 @@ CATALOG = {
         ],
     },
 }
+
+# Variants from data/assets.json: same physics as their base archetype, their own label.
+CATALOG["lancet"] = {  # loitering munition archetype; control reported in 867-872 / 902-928 MHz
+    "kind": "drone", "shape": "fixed_wing", "span_m": 1.0, "speed_mps": 30, "remote_id": False, "rcs_m2": 0.03,
+    "sound": {"f0_hz": 210, "level_db_1m": 80},
+    "links": [{"name": "datalink", "tx": "self", "band_mhz": (867.0, 872.0), "bw_mhz": 0.5, "eirp_dbm": 27,
+               "duty": 0.5, "hop": True, "sig_class": "ZALA datalink"}],
+}
+for _type, _base, _label in [
+    ("octopus", "interceptor", "Octopus interceptor drone"), ("jedi", "interceptor", "JEDI interceptor drone"),
+    ("handheld_team", "ad_team", "Ground air-defence team"),
+    ("patriot", "ad_battery", "Patriot"), ("iris_t", "ad_battery", "IRIS-T"), ("nasams", "ad_battery", "NASAMS"),
+    ("power_station", "site", "Fictional power station"), ("water_works", "site", "Fictional water works"),
+    ("hospital", "site", "Fictional hospital"),
+]:
+    CATALOG[_type] = {**CATALOG[_base], "label": _label, **({"display_only": True} if _type in ("patriot", "iris_t", "nasams") else {})}
+
+# Names used by data/assets.json and data/scenario_presets.json -> OASIS names.
+ALIASES = {
+    "geran_shahed": "shahed136", "orlan_10": "orlan10", "interceptor_drone": "interceptor",
+    "rf_receiver": "rf_df", "eo_ir_camera": "camera", "acoustic": "microphone",
+    "central_valley": "ros-valley", "kharkiv_ne": "kupiansk-oskil", "border_sector": "vovchansk-border",
+    "lost_contact": "lost-contact",
+}
