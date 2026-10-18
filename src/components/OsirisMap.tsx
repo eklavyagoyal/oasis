@@ -23,6 +23,7 @@ import RainBar from '@/components/RainBar';
 import { DOCK } from '@/components/TimeBox';
 import LiveNewsPreviews, { type PreviewFeed } from '@/components/LiveNewsPreviews';
 import { attachTerrain, type TerrainStatus } from '@/lib/map-terrain';
+import ukraineBoundary from '@/lib/ukraine.json';
 
 import { applyMapProjection } from '@/lib/map-projection';
 
@@ -442,6 +443,10 @@ function OsirisMap({ data, activeLayers, onEntityClick, onMouseCoords, onRightCl
 
       const sources = ['flights','military','jets','private-fl','satellites','earthquakes','gdelt','day-night','cctv','fires','weather','infrastructure','maritime','maritime-choke','maritime-ships','live-news','conflict-zones', 'war-alerts-targets', 'war-alerts-lines', 'balloons', 'radiation', 'ip-sweep-devices', 'ip-sweep-pulse', 'ip-sweep-connections', 'scan-targets', 'sdk-entities', 'sdk-links', 'malware-nodes', 'malware-new', 'network-mesh', 'cyber-heads', 'gdelt-events', 'cf-outages', 'cf-attacks', 'alert-pins'];
       sources.forEach(s => map.addSource(s, { type: 'geojson', data: EMPTY_FC }));
+      map.addSource('ukraine-boundary', {
+        type: 'geojson',
+        data: ukraineBoundary as any,
+      });
 
       // ── FLIGHT ROUTE VISUALIZATION SOURCES & LAYERS ──
 
@@ -485,6 +490,18 @@ function OsirisMap({ data, activeLayers, onEntityClick, onMouseCoords, onRightCl
 
       // Day/Night
       map.addLayer({ id: 'day-night-fill', type: 'fill', source: 'day-night', paint: { 'fill-color': isGhost ? '#0D0030' : '#000022', 'fill-opacity': 0.35 }});
+
+      // Persistent country focus: translucent fill preserves the basemap, while
+      // operational markers remain above it. No click handler means existing
+      // feature interactions and satellite picking continue to work normally.
+      map.addLayer({ id: 'ukraine-highlight-fill', type: 'fill', source: 'ukraine-boundary', paint: {
+        'fill-color': '#D4AF37', 'fill-opacity': 0.12,
+      }});
+      map.addLayer({ id: 'ukraine-highlight-outline', type: 'line', source: 'ukraine-boundary', layout: {
+        'line-join': 'round',
+      }, paint: {
+        'line-color': '#F4C95D', 'line-width': 1.5, 'line-opacity': 0.95,
+      }});
 
       // Earthquakes — amber threat spectrum
       map.addLayer({ id: 'eq-circles', type: 'circle', source: 'earthquakes', paint: {
