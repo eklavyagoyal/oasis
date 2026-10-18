@@ -70,6 +70,34 @@ def _runs(los: np.ndarray):
 
 
 # ---------------------------------------------------------------- build
+def _assets(cfg, out: Path) -> list:
+    """High-value assets: protected sites and response teams, with C2's status timeline (what our side
+    knew) and, for sites, the truth outcome per hostile (the answer key)."""
+    from .catalog import CATALOG
+
+    c2 = [s.id for s in cfg.sensors if s.type == "c2"]
+    st = [pd.read_csv(out / "sensors" / i / "status.csv") for i in c2 if (out / "sensors" / i / "status.csv").exists()]
+    st = pd.concat(st, ignore_index=True) if st else pd.DataFrame(columns=["asset_id", "t", "status", "note"])
+    truth = [pd.read_csv(out / "answer_key" / f"{i}_site.csv") for i in c2 if (out / "answer_key" / f"{i}_site.csv").exists()]
+    truth = pd.concat(truth, ignore_index=True) if truth else pd.DataFrame(columns=["object_id", "site_id"])
+    assets = []
+    for o in cfg.objects:
+        kind = CATALOG[o.type]["kind"]
+        if kind not in ("site", "response") or o.pos is None:
+            continue
+        rows = st[st["asset_id"] == o.id].sort_values("t")
+        a = {"id": o.id, "type": o.type, "kind": kind, "label": CATALOG[o.type].get("label", o.type),
+             "lat": o.pos[0], "lon": o.pos[1], "side": o.side,
+             "status": {"t": [_f(v, 1) for v in rows["t"]], "s": [str(v) for v in rows["status"]],
+                        "note": [str(v) for v in rows["note"].fillna("")]}}
+        if kind == "site":
+            tr = truth[truth["site_id"] == o.id] if "site_id" in truth else truth.iloc[0:0]
+            a["truth"] = [{"object": r["object_id"], "status": r.get("truth_status"),
+                           "min_dist_m": _f(r.get("true_min_dist_site_m"), 1)} for _, r in tr.iterrows()]
+        assets.append(a)
+    return assets
+
+
 def build(out: Path | str) -> dict:
     """Build the whole MW payload from an out/<name>/ run directory."""
     out = Path(out)
@@ -329,6 +357,7 @@ def build(out: Path | str) -> dict:
     return _clean({
         "scenario": scenario,
         "terrain": terrain,
+        "assets": _assets(cfg, out),
         "objects": objects,
         "sensors": sensors,
         "classes": classes,
