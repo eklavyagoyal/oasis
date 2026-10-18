@@ -15,7 +15,8 @@ export const ALT_AGL = {
 export const ONE_WAY = new Set(['shahed136', 'gerbera', 'lancet', 'fpv_analog', 'fpv_fiber']);
 export const SILENT = new Set(['gerbera', 'fpv_fiber']);  // no radio links in catalog.py: RF can't hear them
 export const DEFAULTS = {
-  worldSeed: 7, scenarioSeed: 1, tileKm: 10, drones: 6, entry: 'random', waveSpanS: 240,
+  worldSeed: 7, scenarioSeed: 1, tileKm: 10, durationS: 3600,
+  start: '2026-01-01T00:00:00.000Z', drones: 6, entry: 'random', waveSpanS: 240,
   mix: ['shahed136', 'gerbera', 'orlan10', 'fpv_analog'], defence: true, radar: true, acoustic: true,
 };
 const PREFIX = {
@@ -45,21 +46,27 @@ export function rng(seed, name = '') {
 // ---- tile: a size x size km square cut out of the loaded DEM; x east / y north in metres from its centre ----
 // Exact centre from `site` (or cfg.lat/cfg.lon) when the DEM was fetched for that site; otherwise a seeded random offset (replay DEM).
 export function makeTile(grid, cfg, site) {
-  const r = rng(cfg.worldSeed, 'tile'), cosLat = Math.cos(((grid.south + grid.north) / 2) * Math.PI / 180);
-  const demW = (grid.east - grid.west) * M_PER_DEG * cosLat, demH = (grid.north - grid.south) * M_PER_DEG;
-  const size = Math.min(cfg.tileKm * 1000, demW, demH);
   const c = site || (Number.isFinite(cfg.lat) && Number.isFinite(cfg.lon) ? cfg : null);
   let lat, lon;
   if (c) ({ lat, lon } = c);
   else {
-    const dx = r.range(-(demW - size) / 2, (demW - size) / 2), dy = r.range(-(demH - size) / 2, (demH - size) / 2);
-    lat = (grid.south + grid.north) / 2 + dy / M_PER_DEG;
-    lon = (grid.west + grid.east) / 2 + dx / (M_PER_DEG * cosLat);
+    const r = rng(cfg.worldSeed, 'tile');
+    lat = r.range(grid.south, grid.north);
+    lon = r.range(grid.west, grid.east);
   }
-  const T = { grid, lat, lon, size, sizeKm: size / 1000, cosLat };
+  if (lat < grid.south || lat > grid.north || lon < grid.west || lon > grid.east)
+    throw new Error('Tile center is outside the supplied terrain grid.');
+  const mPerLon = M_PER_DEG * Math.cos((lat * Math.PI) / 180);
+  const availableW = 2 * Math.min((lon - grid.west) * mPerLon, (grid.east - lon) * mPerLon);
+  const availableH = 2 * Math.min((lat - grid.south) * M_PER_DEG, (grid.north - lat) * M_PER_DEG);
+  const size = Math.min(cfg.tileKm * 1000, availableW, availableH);
+  if (!Number.isFinite(size) || size <= 0) throw new Error('Terrain grid has no usable area around the selected tile center.');
+  const tileCosLat = Math.cos((lat * Math.PI) / 180);
+  const T = { grid, lat, lon, size, sizeKm: size / 1000, cosLat: tileCosLat };
   const half = size / 2;
   [T.west, T.south] = toLL(T, -half, -half);
   [T.east, T.north] = toLL(T, half, half);
+  T.requestedSizeKm = cfg.tileKm;
   return T;
 }
 export const toLL = (T, x, y) => [T.lon + x / (M_PER_DEG * T.cosLat), T.lat + y / M_PER_DEG];  // [lon, lat]
@@ -75,7 +82,7 @@ export function los(T, a, b, steps = 32) {  // terrain line of sight between {x,
 function entity(type, x, y, T, n) {
   const s = STATS[type], cat = CAT[type], ground = heightAt(T, x, y);
   return {
-    id: `${PREFIX[type] || type.toUpperCase()}-${n}`, type, cat, side: s.side === 'civilian' ? 'civilian' : 'friendly',
+    id: `${PREFIX[type] || type.toUpperCase()}-${n}`, type, cat, side: s.side === 'civilian' ? 'civilian' : 'friendly', synthetic: true,
     x, y, ground, z: ground + (cat === 'sensors' ? SENSOR_MAST_M : 2), hp: s.hp, hpMax: s.hp, alive: true, state: 'IDLE',
   };
 }
@@ -83,7 +90,7 @@ function entity(type, x, y, T, n) {
 // ---- world: fixed assets on real terrain. Sensors on high ground, village and bridge low, defence near what it protects ----
 // `features` (optional): [{type, lat, lon, name}] from world.js#loadFeatures. Real ones go first (real: true), the rest is procedural.
 export function populate(T, cfg, features) {
-  const r = rng(cfg.worldSeed, 'place'), half = T.size / 2 - 300, counts = {}, out = [];
+  const r = rng(cfg.worldSeed, 'place'), half = Math.max(0, T.size / 2 - Math.min(300, T.size * 0.05)), counts = {}, out = [];
   const add = (type, x, y, extra) => {
     x = Math.max(-half, Math.min(half, x));
     y = Math.max(-half, Math.min(half, y));
@@ -95,10 +102,10 @@ export function populate(T, cfg, features) {
   const real = {};  // type -> [{x, y, name}] inside the tile
   for (const f of features || []) {
     const x = (f.lon - T.lon) * M_PER_DEG * T.cosLat, y = (f.lat - T.lat) * M_PER_DEG;
-    if (Math.abs(x) <= half && Math.abs(y) <= half) (real[f.type] = real[f.type] || []).push({ x, y, name: f.name || '' });
+    if (Math.abs(x) <= half && Math.abs(y) <= half) (real[f.type] = real[f.type] || []).push({ x, y, name: f.name || '', osm: f.osm });
   }
   const R = (t) => real[t] || [];
-  const tag = (p) => ({ real: true, ...(p.name ? { name: p.name } : {}) });
+  const tag = (p) => ({ real: true, synthetic: false, ...(p.name ? { name: p.name } : {}), ...(p.osm ? { source: p.osm } : {}) });
   const cands = [];  // 30 x 30 jittered candidate sites
   for (let i = 0; i < 30; i++)
     for (let j = 0; j < 30; j++) {
@@ -134,7 +141,7 @@ export function populate(T, cfg, features) {
   // Village in the lowest third, substation next to it, bridge at the lowest point (river), fuel depot low.
   const rv = [...R('village')].sort((a, b) => Math.hypot(a.x, a.y) - Math.hypot(b.x, b.y));  // nearest real village
   const village = rv[0] || r.pick(low.slice(0, Math.floor(low.length / 3)));
-  for (let i = 0, nh = r.int(4, 8); i < nh; i++) add('village_house', ...near(village, 40, 400), village.name ? { real: false, name: village.name } : {});
+  for (let i = 0, nh = r.int(4, 8); i < nh; i++) add('village_house', ...near(village, 40, 400), village.name ? { real: false, synthetic: true, name: village.name } : {});
   const subs = R('substation').slice(0, 2).map((p) => add('substation', p.x, p.y, tag(p)));
   const sub = subs[0] || add('substation', ...near(village, 500, 900));
   const br = R('bridge').slice(0, 2);
