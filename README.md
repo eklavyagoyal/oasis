@@ -1,19 +1,19 @@
 # OASIS: live build status
 
-_Updated 16:27 CEST, 18 Oct 2026. Auto-generated on the `status` branch; `main` holds the product._
+_Updated 16:40 CEST, 18 Oct 2026. Auto-generated on the `status` branch; `main` holds the product._
 
 **OASIS** generates synthetic aerial defence scenarios over real Ukrainian terrain: one true world, every sensor's physically faithful recordings, and an answer key tracing each record to its cause.
 
 ## What changed since the last update
 
-- The console now opens onto a scenario library of eleven audited physics runs (the hero day, five seed-engine templates and five showcase stories) instead of a simplified browser approximation.
-- Drones on the map are drawn as their Blender-rendered airframes, turned to their heading.
-- Readability pass: graded imagery, dark backgrounds behind every map label and halos on overlay text, so everything reads on any terrain.
+- The README was rewritten and checked against the current runs: the live console flow, the scenario library, the five showcase stories with reproduced outcomes, the airframe markers and the full list of known limits.
+- The entry screen and the scenario titles now describe exactly what they open: physics-engine scenarios, with the hero day spanning 08:55 to 14:35 UTC.
 
 ## Commits on main since the last update
 
-- Runs page: titles per scenario and runs/index.json for the console's scenario library (0a5d816)
-- Console: readable on any terrain (graded imagery, dark pills behind map labels, halo on overlay text); drones drawn as their Blender airframe inside the badge, turned to heading; Enter simulation opens a library of the audited physics runs instead of the browser approximation (7776acd)
+- Entry screen: describe the physics-engine scenarios it now opens (c18731e)
+- Neutral wording for the propagation validation credit; the hero's library title matches its 08:55-14:35 UTC window (7054784)
+- README: verified against the current runs; live console flow, scenario library, showcase stories with reproduced outcomes, Blender airframe markers, updated known limits, fresh screenshots (781bad6)
 
 ## Sensor modules on main
 
