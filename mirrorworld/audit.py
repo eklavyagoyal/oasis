@@ -630,10 +630,10 @@ def _md(audit, baseline, base_note):
     out += ["", f"**{s['pass']} pass, {s['fail']} fail, {s['skip']} skip.**", ""]
     if baseline is not None:
         b = {c["id"]: c for c in baseline["checks"]}
-        out += ["## Mirror World vs one-shot LLM", "",
+        out += ["## OASIS vs one-shot LLM", "",
                 f"One-shot baseline: `{base_note}` (same window, same layout, one LLM call).",
                 "",
-                "| check | Mirror World | one-shot LLM |",
+                "| check | OASIS | one-shot LLM |",
                 "|---|---|---|"]
         for c in audit["checks"]:
             o = b.get(c["id"])
@@ -641,7 +641,7 @@ def _md(audit, baseline, base_note):
             theirs = f"{o['status']} ({_fmt(o['value'])})" if o else "—"
             out.append(f"| {c['name']} | {mine} | {theirs} |")
         bs, ss = baseline["summary"], audit["summary"]
-        out += ["", f"Mirror World: {ss['pass']} pass / {ss['fail']} fail / {ss['skip']} skip. "
+        out += ["", f"OASIS: {ss['pass']} pass / {ss['fail']} fail / {ss['skip']} skip. "
                 f"One-shot LLM: {bs['pass']} pass / {bs['fail']} fail / {bs['skip']} skip.", ""]
     elif base_note:
         out += [f"_Baseline not run: {base_note}_", ""]

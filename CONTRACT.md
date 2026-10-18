@@ -1,4 +1,4 @@
-# Mirror World: team contract (read first)
+# OASIS: team contract (read first)
 
 There's one world state on one clock, observed by many sensors. Every sensor output depends only on the truth, the real terrain, the weather and the seed.
 Sensor files never contain truth. The **answer key** maps every record back to the object that produced it.

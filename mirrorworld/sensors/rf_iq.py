@@ -292,7 +292,7 @@ def run(sensors, ctx):
             iq.tofile(folder / f"{stem}.sigmf-data")
             glob = {
                 "core:datatype": "ci16_le", "core:sample_rate": fs, "core:version": "1.2.0",
-                "core:hw": "Mirror World synthetic SDR",
+                "core:hw": "OASIS synthetic SDR",
                 "core:description": f"SYNTHETIC {s.id} wideband snapshot at {center:g} MHz; "
                                     f"noise floor {noise_dbm:.1f} dBm; ci16 full scale = {fs_dbm:.1f} dBm",
                 "core:extensions": [{"name": "mirror", "version": "0.1.0", "optional": True}],
