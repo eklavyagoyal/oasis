@@ -38,6 +38,7 @@ function damage(S, e, hp, by) {
       collide(S, 'debris', e.id, null, e.x, e.y);
       blast(S, e.x, e.y, (STATS[e.type].damage?.payload_hp || 0) * RULES.debris_fraction, 40, `${e.id} debris`);
     }
+    if (e.cat === 'attackers') recordTerminal(S, e, e.state);
   }
 }
 
@@ -76,6 +77,7 @@ function moveDrone(S, d) {
   const last = d.path[d.path.length - 1], toEnd = Math.hypot(last[0] - d.x, last[1] - d.y);
   const agl = ONE_WAY.has(d.type) && d.wp === d.path.length - 1 ? d.agl * Math.min(1, toEnd / 1500) : d.agl;
   d.z = heightAt(S.T, d.x, d.y) + agl;
+  if (!d.alive) recordTerminal(S, d, d.state);
 }
 
 // Which sensors can see which drone right now: range + terrain line of sight (+ radio emission for RF).
@@ -126,7 +128,9 @@ function defend(S) {
       const busy = new Set(S.interceptors.filter((i) => i.alive).map((i) => i.target));
       const tgt = inRange.find((d) => !busy.has(d)) ;
       if (!tgt) continue;
-      S.interceptors.push({ id: `INT-${++S.launches}`, type: 'interceptor', x: e.x, y: e.y, z: e.z + 20, target: tgt, alive: true, t0: S.t, speed: st.speed_mps });
+      const interceptor = { id: `INT-${++S.launches}`, type: 'interceptor', x: e.x, y: e.y, z: e.z + 20, target: tgt, alive: true, t0: S.t, speed: st.speed_mps };
+      S.interceptors.push(interceptor);
+      appendTrack(S, interceptor, null, 'CHASE');
       e.ammo--; e.ready = S.t + st.reload_s;
       log(S, 'launch', `${e.id} launches INT-${S.launches} at ${tgt.id}`, { id: e.id, target: tgt.id });
       continue;
@@ -142,6 +146,7 @@ function defend(S) {
           log(S, 'jammed', `${e.id} jams ${d.id} (p=${p} roll ${roll.toFixed(2)}): link lost`, { id: d.id, by: e.id, p, roll });
           collide(S, 'jam_crash', d.id, e.id, d.x, d.y);
           blast(S, d.x, d.y, STATS[d.type].damage?.payload_hp || 0, STATS[d.type].damage?.blast_radius_m || 0, `${d.id} crash`);
+          recordTerminal(S, d, d.state);
         }
       } else {
         log(S, 'engage', `${e.id} ${hit ? 'hits' : 'misses'} ${d.id} (p=${p} roll ${roll.toFixed(2)})`, { id: d.id, by: e.id, p, roll, hit });
@@ -159,7 +164,7 @@ function chase(S) {
   for (const i of S.interceptors) {
     if (!i.alive) continue;
     const d = i.target;
-    if (!d.alive || S.t - i.t0 > 600) { i.alive = false; continue; }  // target gone or out of battery
+    if (!d.alive || S.t - i.t0 > 600) { i.alive = false; recordTerminal(S, i, 'SPENT'); continue; }  // target gone or out of battery
     const gap = dist3(i, d), stepM = i.speed * DT;
     if (gap <= Math.max(15, stepM)) {
       const p = pk(st, d.type), roll = S.dice(), hit = roll < p;
@@ -168,6 +173,7 @@ function chase(S) {
       log(S, 'engage', `${i.id} ${hit ? 'collides with' : 'misses'} ${d.id} (p=${p} roll ${roll.toFixed(2)})`, { id: d.id, by: i.id, p, roll, hit });
       S.fx.push({ kind: 'boom', x: d.x, y: d.y, z: d.z, r: hit ? 50 : 20, t0: S.t, small: !hit });
       if (hit) damage(S, d, st.damage_on_hit, i.id);
+      recordTerminal(S, i, 'SPENT');
       continue;
     }
     i.x += ((d.x - i.x) / gap) * stepM; i.y += ((d.y - i.y) / gap) * stepM; i.z += ((d.z - i.z) / gap) * stepM;
@@ -178,7 +184,11 @@ export function step(S) {
   if (S.done) return;
   S.t += DT;
   for (const d of S.drones) if (d.alive && S.t >= d.t0) {
-    if (d.state === 'PENDING') { d.state = 'INBOUND'; log(S, 'launch', `${d.id} enters from ${d.entrySide}`, { id: d.id }); }
+    if (d.state === 'PENDING') {
+      d.state = 'INBOUND';
+      log(S, 'launch', `${d.id} enters from ${d.entrySide}`, { id: d.id });
+      appendTrack(S, d, r1(d.hp), d.state);
+    }
     moveDrone(S, d);
   }
   if (S.t >= S.nextScan) { scan(S); trackLinks(S); S.nextScan = S.t + 1; }
@@ -215,16 +225,30 @@ function row(S, e, hp, state) {
   const [lon, lat] = toLL(S.T, e.x, e.y);
   return { t: S.t, id: e.id, x: r1(e.x), y: r1(e.y), z: r1(e.z), lat: r6(lat), lon: r6(lon), alt: r1(e.z), agl: r1(e.z - heightAt(S.T, e.x, e.y)), hp, state };
 }
+function appendTrack(S, e, hp, state) {
+  const track = row(S, e, hp, state);
+  if (e.lastTrackT === S.t && Number.isInteger(e.lastTrackIndex)) {
+    S.rec.tracks[e.lastTrackIndex] = track;
+    return;
+  }
+  e.lastTrackIndex = S.rec.tracks.push(track) - 1;
+  e.lastTrackT = S.t;
+}
+function recordTerminal(S, e, state) {
+  if (e.tracked) return;
+  appendTrack(S, e, e.hp ?? null, state ?? e.state ?? 'SPENT');
+  e.tracked = true;
+}
 function recordTracks(S) {
   for (const d of S.drones) {
     if (S.t < d.t0 || d.tracked) continue;
-    if (!d.alive) d.tracked = true;  // one last row at the point it ended
-    S.rec.tracks.push(row(S, d, r1(d.hp), d.state));
+    if (!d.alive) { recordTerminal(S, d, d.state); continue; }
+    if (d.lastTrackT !== S.t) appendTrack(S, d, r1(d.hp), d.state);
   }
   for (const i of S.interceptors) {
     if (i.tracked) continue;
-    if (!i.alive) i.tracked = true;
-    S.rec.tracks.push(row(S, i, null, i.alive ? 'CHASE' : 'SPENT'));
+    if (!i.alive) { recordTerminal(S, i, 'SPENT'); continue; }
+    if (i.lastTrackT !== S.t) appendTrack(S, i, null, 'CHASE');
   }
 }
 
@@ -245,7 +269,7 @@ export function record(S, meta = {}) {
       first_detected_t: d.firstSeen ?? null, detected_by: [...d.seenBy], end_t: d.endT ?? null,
       agl_cruise: r1(d.agl), speed: d.speed, path: d.path.map(([x, y]) => [r1(x), r1(y)]),
     })),
-    tracks, detections, collisions, damage: dmg, events: S.events,
+    tracks: [...tracks].sort((a, b) => a.t - b.t || a.id.localeCompare(b.id)), detections, collisions, damage: dmg, events: S.events,
     summary: summary(S, meta, false),
   };
 }
@@ -265,7 +289,7 @@ export function summary(S, meta, withEvents = true) {
     defence: { shots: S.shots, hits: S.hits, interceptors_launched: S.launches },
     counts: { tracks: S.rec.tracks.length, detections: S.rec.detections.length, collisions: S.rec.collisions.length, damage: S.rec.damage.length },
     detection: {
-      mean_time_to_detect_s: seen.length ? Math.round(seen.reduce((a, d) => a + d.firstSeen - d.t0, 0) / seen.length) : null,
+      mean_time_to_detect_s: seen.length ? Math.round(seen.reduce((a, d) => a + Math.max(0, d.firstSeen - d.t0), 0) / seen.length) : null,
     },
     fixed_assets: S.fixed.map((e) => ({ id: e.id, type: e.type, hp: Math.round(e.hp), hp_max: e.hpMax, alive: e.alive })),
     ...(withEvents ? { events: S.events } : {}),
