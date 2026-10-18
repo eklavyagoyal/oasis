@@ -1,0 +1,94 @@
+# Hero scenario: the brief's own example place, done properly, as a two-act day.
+# Ros river valley SW of Korsun-Shevchenkivskyi (Cherkasy oblast), Wed 4 Nov 2026.
+# Receivers sit on two real OSM comms masts (58 m Stebliv, 52 m Selyshche), 7.7 km apart.
+# t = seconds after 08:55:00Z.
+#   Act 1, morning (08:55-09:20)
+#     0-1200     farmer's Mavic (neutral) sprays fields, broadcasting honest Remote ID
+#     ~699       Sentinel-2A passes at ~09:06:39Z while a Shahed crosses at 1,200 m: colour-smeared in the image
+#   Act 2, dusk (13:55-14:35, sunset ~14:29)
+#     18102-     hostile Mavic passes the brief's example truth point at 14:02:07Z, then slips low through RF2's terrain shadow
+#     18300-     friendly recon Mavic patrols near RF2; Russian EW spoofs its GNSS 19250-19500
+#     18600-     goose flock crosses the valley (clutter for eyes and ears)
+#     18900-     fiber-optic FPV creeps along the Ros at 10 m: RF-silent
+#     19700-     Shahed crosses at 1,200 m; its modem leaks the odd LTE burst
+#     19795-     analog FPV + ELRS; 2.4 GHz barrage jammer 19850-19970 (868 MHz control survives it)
+#     ~20311     the FPV hits RF2's mast: RF2 goes dark
+name: ros-valley
+seed: 7
+start: 2026-11-04T08:55:00Z
+duration_s: 20400
+truth_hz: 2
+area: {lat: 49.37, lon: 31.20, size_km: 16}
+weather: {wind_from_deg: 270, wind_mps: 3.5, temp_c: 4, rh_pct: 85, visibility_km: 12, cloud_pct: 40}
+
+objects:
+  # ---- act 1: morning ----
+  - id: farmer_mavic
+    type: dji_mavic3
+    side: neutral
+    end_s: 1200
+    loop: true
+    path: [[49.3780, 31.1300, 40], [49.3820, 31.1450, 40], [49.3760, 31.1500, 40], [49.3720, 31.1350, 40]]
+  - {id: farmer, type: operator, side: neutral, pos: [49.3745, 31.1280], end_s: 1200, controls: farmer_mavic}
+  - {id: shahed_am, type: shahed136, side: hostile, start_s: 481, path: [[49.3020, 31.0920, 1200], [49.4380, 31.3080, 1200]]}
+
+  # ---- all day: clutter (village wireless-internet relays on the real water towers) ----
+  - {id: wifi_korsun, type: wifi_ap, side: neutral, pos: [49.4168, 31.2526], alt_agl_m: 25}
+  - {id: wifi_stebliv, type: wifi_ap, side: neutral, pos: [49.4076, 31.1119], alt_agl_m: 20}
+
+  # ---- act 2: dusk ----
+  # hostile recon Mavic: at the brief's truth point at 14:02:07Z (t=18427), then drops to 40 m for a
+  # 1.5 km leg that the visibility map says RF2 cannot see but RF1 can (~125 s, the brief's "two minutes")
+  - id: mavic_1
+    type: dji_mavic3
+    side: hostile
+    start_s: 18212.5
+    path:
+      - [49.3550, 31.2050, 60]
+      - [49.3754, 31.1882, 120]
+      - [49.3950, 31.2400, 120]
+      - [49.4126, 31.2901, 40]
+      - [49.4261, 31.2905, 40]
+      - [49.4000, 31.2600, 100]
+      - [49.3550, 31.2050, 60]
+  - {id: pilot_1, type: operator, side: hostile, pos: [49.3538, 31.2021], start_s: 17950, controls: mavic_1}
+
+  - id: recon_1
+    type: dji_mavic3
+    side: friendly
+    start_s: 18300
+    loop: true
+    path: [[49.3450, 31.1700, 80], [49.3500, 31.1900, 80], [49.3400, 31.2000, 80], [49.3350, 31.1800, 80]]
+    gnss_spoof: {start_s: 19250, end_s: 19500, drift_mps: 8, drift_deg: 60}
+  - {id: op_ua, type: operator, side: friendly, pos: [49.3380, 31.1750], start_s: 18200, controls: recon_1}
+
+  - {id: geese_1, type: geese, side: neutral, start_s: 18600, path: [[49.4350, 31.3000, 300], [49.3050, 31.1000, 250]]}
+
+  - id: fpv_fiber_1
+    type: fpv_fiber
+    side: hostile
+    start_s: 18900
+    path: [[49.4150, 31.2700, 10], [49.4130, 31.1900, 10], [49.4080, 31.1350, 10]]
+
+  - {id: shahed_1, type: shahed136, side: hostile, start_s: 19700, path: [[49.3000, 31.3000, 1200], [49.4400, 31.1000, 1200]]}
+
+  - id: fpv_1
+    type: fpv_analog
+    side: hostile
+    start_s: 19795
+    speed_mps: 20
+    path: [[49.3050, 31.2950, 40], [49.3200, 31.2500, 40], [49.3250, 31.2000, 30], [49.3311, 31.1597, 36]]
+  - {id: pilot_2, type: operator, side: hostile, pos: [49.3040, 31.3000], start_s: 19700, controls: fpv_1}
+  - {id: jammer_1, type: jammer, side: friendly, pos: [49.3550, 31.2150], alt_agl_m: 15, start_s: 19850, end_s: 19970}
+
+sensors:
+  - {id: RF1, type: rf_df, pos: [49.3926, 31.1109], mast_m: 40, params: {calib_bias_deg: 0.8}}  # 58 m Stebliv mast
+  - {id: RF2, type: rf_df, pos: [49.3311, 31.1597], mast_m: 35, destroyed_by: fpv_1, params: {calib_bias_deg: -0.6}}  # 52 m Selyshche mast
+  - {id: EO1, type: camera, mount: RF1, mast_m: 38, params: {fov_deg: 3.0, width: 1280, height: 720, fps: 1, cue: rf}}
+  - {id: MIC1, type: microphone, pos: [49.3800, 31.1950], mast_m: 3}
+  - {id: MIC2, type: microphone, pos: [49.3550, 31.2300], mast_m: 3}
+  - {id: RID1, type: remote_id, mount: RF1, mast_m: 40}
+  - {id: TEL1, type: telemetry, pos: [49.3380, 31.1750], params: {objects: [recon_1]}}
+  - {id: SAT1, type: satellite, pos: [49.3700, 31.2000], params: {platform: SENTINEL-2A}}
+  - {id: HUM1, type: reports, pos: [49.4100, 31.2400], params: {eppo_civilians: 25}}
+  - {id: IQ1, type: rf_iq, mount: RF1, mast_m: 40, params: {center_mhz: 2440, times_s: [18427, 18600, 19180, 19900]}}
