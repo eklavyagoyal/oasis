@@ -13,12 +13,22 @@ export function createPresentation(state, globe, actions) {
       : data.fixes.t.find((t, i) => data.fixes.obj[i] === oi && t > 18000);
   };
   const rf = data.sensors.filter((s) => s.type === "rf_df"),
+    gameRun = Boolean(data.game),
+    hasRfData = Object.values(data.rf ?? {}).some((r) => r.t?.length),
+    hasPositionFixes = data.fixes.t.length > 0,
+    mediaSensor = { camera: "camera", iq: "rf_iq", satellite: "satellite", microphone: "microphone" },
+    mediaKind = { camera: "image", iq: "iq", satellite: "image", microphone: "audio" },
     hasMedia = (type) =>
       data.media.some(
-        (m) => data.sensors.find((s) => s.id === m.sensor)?.type === type,
+        (m) =>
+          data.sensors.find((s) => s.id === m.sensor)?.type === mediaSensor[type] &&
+          m.kind === mediaKind[type],
       );
+  const defaultFeed = ["camera", "iq", "satellite", "microphone"].find(hasMedia) ?? state.feed;
   const satellite = data.media.find(
-    (m) => data.sensors.find((s) => s.id === m.sensor)?.type === "satellite",
+    (m) =>
+      data.sensors.find((s) => s.id === m.sensor)?.type === "satellite" &&
+      m.kind === "image",
   );
   const terrainLoss = data.audit?.checks.find(
     (c) => c.id === "terrain_shadow",
@@ -47,17 +57,27 @@ export function createPresentation(state, globe, actions) {
     `${a.summary.pass}/${a.summary.pass + a.summary.fail + a.summary.skip}`;
   const beats = [
     {
-      title: "One world. Real terrain.",
-      text: "The world comes first. Every sensor observes the same landscape, weather and moving objects.",
-      stat: [`${data.terrain.nx} × ${data.terrain.ny}`, "DEM SAMPLES"],
+      title: "One world. DEM terrain.",
+      text: gameRun
+        ? "DEM elevations anchor this browser simulation. Asset positions, routes and detections are generated, not observed operations."
+        : "The same DEM supports the simulated truth tracks and sensor models. OASIS sensor observations are generated, not field measurements.",
+      stat: [`${data.terrain.nx} × ${data.terrain.ny}`, "DEM GRID CELLS"],
       t: event(/occlusion/, 19180),
       mode: "god",
       wide: true,
     },
     {
       title: "The landscape decides what is visible.",
-      text: "The red terrain is hidden from the selected receiver at 40 metres above ground. Visibility is computed from this exact elevation model.",
-      stat: ["40 m AGL", `${rf.length} DIRECTION FINDERS`],
+      text: gameRun
+        ? "Browser detection intervals use a simplified range + terrain line-of-sight rule. They contain no RF bearing, SNR, received-power or uncertainty measurements."
+        : Object.keys(data.shadow).length
+          ? "Red cells require more than the selected 40 m AGL for modeled line of sight to the selected receiver. The shadow raster is DEM-derived, not a live coverage measurement."
+          : "No terrain-shadow grid was supplied for this run; no coverage area is inferred.",
+      stat: gameRun
+        ? ["RANGE + LOS", "SIMULATED DETECTION RULE"]
+        : Object.keys(data.shadow).length
+          ? ["40 m AGL", `${Object.keys(data.shadow).length} SHADOW GRIDS`]
+          : ["—", "SHADOW GRID / NOT SUPPLIED"],
       t: event(/occlusion/, 19180),
       mode: "delta",
       shadow: true,
@@ -66,11 +86,11 @@ export function createPresentation(state, globe, actions) {
     {
       title: "A different perspective from orbit.",
       text: hasMedia("satellite")
-        ? "The recorded satellite chip shares the scenario clock. Compare the sensor image with the actual flight path."
-        : "No satellite capture was supplied in this dataset. The morning truth track is available; the satellite feed remains NO SIGNAL.",
+        ? "The chip uses a real Sentinel-2 background from a different acquisition day with modeled object stamps at the scenario pass time; it is not a contemporaneous satellite observation."
+        : "No SAT1 image was supplied. The DEM or basemap is not a satellite capture of this scenario.",
       stat: satellite
-        ? [timeLabel(data, satellite.t), "SATELLITE CAPTURE / UTC"]
-        : ["—", "SATELLITE FEED / NOT SUPPLIED"],
+        ? [timeLabel(data, satellite.t), "MODELED PASS STAMP / UTC"]
+        : ["—", "SATELLITE MEDIA / NOT SUPPLIED"],
       t: event(/satellite|sentinel/i, 699),
       mode: "delta",
       feed: "satellite",
@@ -78,11 +98,14 @@ export function createPresentation(state, globe, actions) {
     },
     {
       title: "An observation is not a position.",
-      text: "Measured bearings cross to produce a fix. Delta mode connects that estimate to the object that actually produced the signal.",
-      stat: [
-        fixError("mavic_1", Math.min(18427, duration)),
-        "FIX ERROR AT CHAPTER START",
-      ],
+      text: gameRun
+        ? "The browser engine records simplified range + line-of-sight detection intervals. It generates no RF bearings or position fixes."
+        : hasRfData && hasPositionFixes
+          ? "Generated RF bearings with modeled error are crossed to form estimated fixes. The displayed error is computed against this run's simulated truth."
+          : "No RF bearing or position-fix records were supplied; no estimate or error score is inferred.",
+      stat: hasPositionFixes && !gameRun
+        ? [fixError("mavic_1", Math.min(18427, duration)), "SYNTHETIC FIX ERROR VS TRUTH"]
+        : ["—", gameRun ? "BEARING / FIX NOT GENERATED" : "POSITION FIX / NOT SUPPLIED"],
       t: Math.min(18427, duration),
       mode: "delta",
       object: "mavic_1",
@@ -90,10 +113,16 @@ export function createPresentation(state, globe, actions) {
     },
     {
       title: "Behind the ridge.",
-      text: "The receiver’s terrain shadow intersects the flight path. Power and detection records show what the receiver could actually observe.",
+      text: gameRun
+        ? "Browser detections use range + terrain line of sight only. No dBm/SNR readings or RF power audit are supplied."
+        : hasRfData
+          ? "Received power and LOS flags are generated by the RF model from the DEM, propagation, fading and noise; they are not hardware readings."
+          : "No RF power or detection records were supplied for this run.",
       stat: [
-        Number.isFinite(terrainLoss) ? `+${terrainLoss.toFixed(1)} dB` : "—",
-        "AUDIT NLOS − LOS EXCESS",
+        !gameRun && Number.isFinite(terrainLoss) ? `${terrainLoss.toFixed(1)} dB` : "—",
+        !gameRun && Number.isFinite(terrainLoss)
+          ? "AUDIT NLOS − LOS MEDIAN EXCESS"
+          : "RF POWER AUDIT / NOT SUPPLIED",
       ],
       t: event(/occlusion.*RF2|RF2.*terrain/i, 19180) + 15,
       mode: "delta",
@@ -105,12 +134,12 @@ export function createPresentation(state, globe, actions) {
       title: "The controller has its own signal.",
       text:
         firstFix("pilot_1") != null
-          ? "Crossed bearings on a controller signal can be compared with the operator’s position in the answer key."
-          : "No controller position fix was supplied. Ground truth alone cannot establish a sensor detection.",
+          ? "Generated bearing estimates on a modeled controller signal can be compared with the operator track in this run's answer key."
+          : "No controller position fix was supplied. Ground truth alone does not establish a sensor detection.",
       stat: [
         fixError("pilot_1", firstFix("pilot_1") ?? 0),
         firstFix("pilot_1") != null
-          ? "CONTROLLER FIX ERROR"
+          ? "SYNTHETIC FIX ERROR VS TRUTH"
           : "CONTROLLER FIX / NOT SUPPLIED",
       ],
       t: firstFix("pilot_1") ?? Math.min(19400, duration),
@@ -120,14 +149,15 @@ export function createPresentation(state, globe, actions) {
     {
       title: "The spectrum changes the picture.",
       text: object("jammer_1")
-        ? "Replay the jammer interval and compare the recorded spectrum with the bearings that remain. Missing observations are part of the dataset."
+        ? gameRun
+          ? "Jammer effects are simulated combat rules. This browser run supplies no IQ capture or RF bearing measurements."
+          : hasMedia("iq")
+            ? "IQ spectrograms are synthetic outputs from modeled emissions and noise, not SDR recordings. RF bearings are also model-generated."
+            : "A jammer object is present, but no IQ media was supplied; no spectrum observation is available."
         : "This scenario does not include a jammer object. No jamming effect has been invented.",
-      stat: object("jammer_1")
-        ? [
-            String(data.media.filter((m) => m.kind === "iq").length),
-            "RECORDED IQ CAPTURES",
-          ]
-        : ["—", "JAMMER / NOT SUPPLIED"],
+      stat: object("jammer_1") && hasMedia("iq")
+        ? [String(data.media.filter((m) => m.kind === "iq").length), "SYNTHETIC IQ SPECTROGRAMS"]
+        : ["—", object("jammer_1") ? "IQ MEDIA / NOT SUPPLIED" : "JAMMER / NOT SUPPLIED"],
       t: event(/jammer/, 19900) + 50,
       mode: "delta",
       object: "jammer_1",
@@ -136,11 +166,11 @@ export function createPresentation(state, globe, actions) {
     {
       title: "Radio silence is not an empty sky.",
       text: hasMedia("microphone")
-        ? "A fiber-optic platform can produce no radio observations while still producing an acoustic record. Compare both sensor channels."
-        : "The fiber-optic truth track is visible. No microphone recording was supplied, so the acoustic channel remains NO SIGNAL.",
+        ? "Audio is a synthetic acoustic rendering from the scenario's sound and propagation model, not a field microphone recording. The fiber platform has no modeled RF link."
+        : "The fiber track is radio-silent in the model, but no microphone audio was exported. This run supplies no acoustic evidence.",
       stat: [
-        fiberRecords == null ? "—" : String(fiberRecords),
-        "RF RECORDS FOR FIBER TRACK",
+        gameRun || fiberRecords == null ? "—" : String(fiberRecords),
+        gameRun ? "RF MEASUREMENTS / NOT SUPPLIED" : "SIMULATED RF ROWS / FIBER TRACK",
       ],
       t: event(/fiber/, 18900) + 30,
       mode: "delta",
@@ -149,32 +179,36 @@ export function createPresentation(state, globe, actions) {
     },
     {
       title: "A receiver goes dark.",
-      text: rf.some((s) => s.dead_t != null)
-        ? "At the recorded destruction time the receiver stops observing. Its mast turns grey and its detection strip ends."
-        : "No receiver destruction time was supplied for this scenario.",
+      text: gameRun
+        ? "Browser-game asset health comes from catalog HP and simulated damage rules; it is not live sensor health telemetry."
+        : rf.some((s) => s.dead_t != null)
+          ? "A configured scenario destruction event ends the receiver's modeled observation stream. This is not live sensor-health telemetry."
+          : "No receiver failure time was supplied for this scenario.",
       stat: [
-        rf.find((s) => s.dead_t != null)?.id ?? "—",
-        rf.some((s) => s.dead_t != null)
-          ? "RECEIVER / OFFLINE"
-          : "NO DESTRUCTION EVENT",
+        gameRun ? "—" : rf.find((s) => s.dead_t != null)?.id ?? "—",
+        gameRun
+          ? "FIELD HEALTH / NOT SUPPLIED"
+          : rf.some((s) => s.dead_t != null)
+            ? "SIMULATED RECEIVER FAILURE"
+            : "NO DESTRUCTION EVENT",
       ],
       t: event(/destroyed/, 20312) + 1,
       mode: "delta",
       wide: true,
     },
     {
-      title: "Proof, not plausibility.",
+      title: "Checks, not proof.",
       text: data.audit
-        ? "Independent checks test the observations against geometry, timing and provenance. Expand each result to inspect its evidence."
-        : "The observations are ready to inspect. No audit or one-shot baseline was supplied; the scorecard reports that absence explicitly.",
+        ? "The run audit checks generated records against this run's geometry, truth and model. It is not field validation. Expand each result for its evidence."
+        : "No audit result was supplied; this run is not audited. No one-shot baseline score or measurement score is inferred.",
       stat: data.audit
         ? [
             auditScore(data.audit),
             data.audit.baseline
-              ? `PASS · BASELINE ${auditScore(data.audit.baseline)}`
-              : "PASS · BASELINE NOT SUPPLIED",
+              ? `RUN CHECKS · BASELINE ${auditScore(data.audit.baseline)}`
+              : "RUN CHECKS · NO BASELINE",
           ]
-        : ["—", "AUDIT / NOT SUPPLIED"],
+        : ["—", "NOT AUDITED"],
       t: Math.min(18427, duration),
       mode: "delta",
       audit: true,
@@ -231,7 +265,7 @@ export function createPresentation(state, globe, actions) {
     state.follow = false;
     actions.setMode(beat.mode);
     actions.seek(Math.min(duration, beat.t));
-    actions.setFeed(beat.feed ?? (hasMedia("camera") ? "camera" : "iq"));
+    actions.setFeed(beat.feed ?? defaultFeed);
     actions.setTab(beat.audit ? "audit" : "feeds");
     if (beat.object && object(beat.object)) actions.select(beat.object);
     const p = beat.object ? sample(object(beat.object), state.t) : null;
